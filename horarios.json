@@ -1,0 +1,3241 @@
+[
+ {
+  "id": 1,
+  "asignatura": "APRENDIZAJE,MOTIVAC.Y COGNIC. II",
+  "grupo": "6101",
+  "profesor": "BACHA MENDEZ GUSTAVO",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "08:00",
+    "fin": "11:00",
+    "min_inicio": 480,
+    "min_fin": 660,
+    "salon": "A 101"
+   },
+   {
+    "dia": "VIERNES",
+    "inicio": "10:00",
+    "fin": "12:00",
+    "min_inicio": 600,
+    "min_fin": 720,
+    "salon": "A 101"
+   }
+  ]
+ },
+ {
+  "id": 2,
+  "asignatura": "DESAR.ACTUALS.EN COGNIC.COMPOR.II",
+  "grupo": "6101",
+  "profesor": "VELAZQUEZ MARTINEZ DAVID NATHANAEL",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "A 310"
+   }
+  ]
+ },
+ {
+  "id": 3,
+  "asignatura": "TALLER DE INVESTIGACION II",
+  "grupo": "6101",
+  "profesor": "GARCIA CABRERO BENILDE",
+  "creditos": 10,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "11:00",
+    "fin": "13:00",
+    "min_inicio": 660,
+    "min_fin": 780,
+    "salon": "B 17"
+   },
+   {
+    "dia": "SABADO",
+    "inicio": "08:00",
+    "fin": "16:00",
+    "min_inicio": 480,
+    "min_fin": 960,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 4,
+  "asignatura": "APRENDIZAJE,MOTIVAC.Y COGNIC. II",
+  "grupo": "6102",
+  "profesor": "REYES CONTRERAS RAUL",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "15:00",
+    "fin": "17:30",
+    "min_inicio": 900,
+    "min_fin": 1050,
+    "salon": "URIDES 3 EDIF C"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "15:00",
+    "fin": "17:30",
+    "min_inicio": 900,
+    "min_fin": 1050,
+    "salon": "URIDES 3 EDIF C"
+   }
+  ]
+ },
+ {
+  "id": 5,
+  "asignatura": "DESAR.ACTUALS.EN COGNIC.COMPOR.II",
+  "grupo": "6102",
+  "profesor": "CANSINO ORTIZ CARMEN SELENE",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 6,
+  "asignatura": "INVESTIGAC.Y ANALISIS DE DATOS II",
+  "grupo": "6102",
+  "profesor": "SANCHEZ CARRASCO LIVIA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "08:00",
+    "fin": "10:00",
+    "min_inicio": 480,
+    "min_fin": 600,
+    "salon": "B 12"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "08:00",
+    "fin": "10:00",
+    "min_inicio": 480,
+    "min_fin": 600,
+    "salon": "B 12"
+   }
+  ]
+ },
+ {
+  "id": 7,
+  "asignatura": "TALLER DE INVESTIGACION II",
+  "grupo": "6102",
+  "profesor": "ZAMORA AREVALO OSCAR",
+  "creditos": 10,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "12:00",
+    "fin": "14:00",
+    "min_inicio": 720,
+    "min_fin": 840,
+    "salon": "AULA PENDIENTE"
+   },
+   {
+    "dia": "SABADO",
+    "inicio": "08:00",
+    "fin": "16:00",
+    "min_inicio": 480,
+    "min_fin": 960,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 8,
+  "asignatura": "APRENDIZAJE,MOTIVAC.Y COGNIC. II",
+  "grupo": "6103",
+  "profesor": "BOUZAS RIANO ARTURO",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "A 101"
+   },
+   {
+    "dia": "VIERNES",
+    "inicio": "12:00",
+    "fin": "14:00",
+    "min_inicio": 720,
+    "min_fin": 840,
+    "salon": "A 101"
+   }
+  ]
+ },
+ {
+  "id": 9,
+  "asignatura": "DESAR.ACTUALS.EN COGNIC.COMPOR.II",
+  "grupo": "6103",
+  "profesor": "ROLDAN GARCIA DANIELA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "EDIF C SALON 3"
+   }
+  ]
+ },
+ {
+  "id": 10,
+  "asignatura": "INVESTIGAC.Y ANALISIS DE DATOS II",
+  "grupo": "6103",
+  "profesor": "CUEVAS RENAUD CORINA MARGARITA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "12:00",
+    "fin": "14:00",
+    "min_inicio": 720,
+    "min_fin": 840,
+    "salon": "B 12"
+   },
+   {
+    "dia": "VIERNES",
+    "inicio": "09:00",
+    "fin": "11:00",
+    "min_inicio": 540,
+    "min_fin": 660,
+    "salon": "B 12"
+   }
+  ]
+ },
+ {
+  "id": 11,
+  "asignatura": "TALLER DE INVESTIGACION II",
+  "grupo": "6103",
+  "profesor": "ERAZO NANEZ LEYDY ALEEN VAZQUEZ LIRA RAMSES",
+  "creditos": 10,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "16:00",
+    "fin": "21:00",
+    "min_inicio": 960,
+    "min_fin": 1260,
+    "salon": "A 211"
+   },
+   {
+    "dia": "SABADO",
+    "inicio": "08:00",
+    "fin": "13:00",
+    "min_inicio": 480,
+    "min_fin": 780,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 12,
+  "asignatura": "DESAR.ACTUALS.EN COGNIC.COMPOR.II",
+  "grupo": "6104",
+  "profesor": "AMAYA MORA DAVID",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "10:00",
+    "fin": "13:00",
+    "min_inicio": 600,
+    "min_fin": 780,
+    "salon": "A 311"
+   }
+  ]
+ },
+ {
+  "id": 13,
+  "asignatura": "INVESTIGAC.Y ANALISIS DE DATOS II",
+  "grupo": "6104",
+  "profesor": "ROMERO SANCHEZ PATRICIA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "17:00",
+    "fin": "19:00",
+    "min_inicio": 1020,
+    "min_fin": 1140,
+    "salon": "B 12"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "17:00",
+    "fin": "19:00",
+    "min_inicio": 1020,
+    "min_fin": 1140,
+    "salon": "B 12"
+   }
+  ]
+ },
+ {
+  "id": 14,
+  "asignatura": "TALLER DE INVESTIGACION II",
+  "grupo": "6104",
+  "profesor": "DURON FIGUEROA RAUL",
+  "creditos": 10,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "10:00",
+    "fin": "12:00",
+    "min_inicio": 600,
+    "min_fin": 720,
+    "salon": "AULA PENDIENTE"
+   },
+   {
+    "dia": "LUNES",
+    "inicio": "10:00",
+    "fin": "12:00",
+    "min_inicio": 600,
+    "min_fin": 720,
+    "salon": "AULA PENDIENTE"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "08:00",
+    "fin": "10:00",
+    "min_inicio": 480,
+    "min_fin": 600,
+    "salon": "AULA PENDIENTE"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "10:00",
+    "fin": "12:00",
+    "min_inicio": 600,
+    "min_fin": 720,
+    "salon": "AULA PENDIENTE"
+   },
+   {
+    "dia": "VIERNES",
+    "inicio": "10:00",
+    "fin": "12:00",
+    "min_inicio": 600,
+    "min_fin": 720,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 15,
+  "asignatura": "DESAR.ACTUALS.EN COGNIC.COMPOR.II",
+  "grupo": "6105",
+  "profesor": "TOVAR Y ROMO ANGEL EUGENIO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "EDIF C SALON 2"
+   }
+  ]
+ },
+ {
+  "id": 16,
+  "asignatura": "INVESTIGAC.Y ANALISIS DE DATOS II",
+  "grupo": "6105",
+  "profesor": "REYES CORTES ANA MARIA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "11:00",
+    "fin": "13:00",
+    "min_inicio": 660,
+    "min_fin": 780,
+    "salon": "AULA PENDIENTE"
+   },
+   {
+    "dia": "VIERNES",
+    "inicio": "11:00",
+    "fin": "13:00",
+    "min_inicio": 660,
+    "min_fin": 780,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 17,
+  "asignatura": "TALLER DE INVESTIGACION II",
+  "grupo": "6105",
+  "profesor": "ORDUNA TRUJILLO OSCAR VLADIMIR",
+  "creditos": 10,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "09:00",
+    "fin": "11:00",
+    "min_inicio": 540,
+    "min_fin": 660,
+    "salon": "AULA PENDIENTE"
+   },
+   {
+    "dia": "LUNES",
+    "inicio": "09:00",
+    "fin": "11:00",
+    "min_inicio": 540,
+    "min_fin": 660,
+    "salon": "AULA PENDIENTE"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "09:00",
+    "fin": "11:00",
+    "min_inicio": 540,
+    "min_fin": 660,
+    "salon": "AULA PENDIENTE"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "09:00",
+    "fin": "11:00",
+    "min_inicio": 540,
+    "min_fin": 660,
+    "salon": "AULA PENDIENTE"
+   },
+   {
+    "dia": "VIERNES",
+    "inicio": "09:00",
+    "fin": "11:00",
+    "min_inicio": 540,
+    "min_fin": 660,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 18,
+  "asignatura": "DESAR.ACTUALS.EN COGNIC.COMPOR.II",
+  "grupo": "6106",
+  "profesor": "SANCHEZ SOSA JUAN JOSE",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "19:00",
+    "fin": "22:00",
+    "min_inicio": 1140,
+    "min_fin": 1320,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 19,
+  "asignatura": "INVESTIGAC.Y ANALISIS DE DATOS II",
+  "grupo": "6106",
+  "profesor": "MENEZ DIAZ JUDITH MARINA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "10:00",
+    "fin": "12:00",
+    "min_inicio": 600,
+    "min_fin": 720,
+    "salon": "B 12"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "10:30",
+    "fin": "12:30",
+    "min_inicio": 630,
+    "min_fin": 750,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 20,
+  "asignatura": "TALLER DE INVESTIGACION II",
+  "grupo": "6106",
+  "profesor": "CANSINO ORTIZ CARMEN SELENE",
+  "creditos": 10,
+  "sesiones": [
+   {
+    "dia": "SABADO",
+    "inicio": "08:00",
+    "fin": "18:00",
+    "min_inicio": 480,
+    "min_fin": 1080,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 21,
+  "asignatura": "DESAR.ACTUALS.EN COGNIC.COMPOR.II",
+  "grupo": "6107",
+  "profesor": "LE CORRE MATHIEU MICHEL",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 314"
+   }
+  ]
+ },
+ {
+  "id": 22,
+  "asignatura": "TALLER DE INVESTIGACION II",
+  "grupo": "6107",
+  "profesor": "MENEZ DIAZ JUDITH MARINA",
+  "creditos": 10,
+  "sesiones": [
+   {
+    "dia": "SABADO",
+    "inicio": "08:00",
+    "fin": "18:00",
+    "min_inicio": 480,
+    "min_fin": 1080,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 23,
+  "asignatura": "TALLER DE INVESTIGACION II",
+  "grupo": "6108",
+  "profesor": "ESCOBAR HERNANDEZ ROGELIO",
+  "creditos": 10,
+  "sesiones": [
+   {
+    "dia": "SABADO",
+    "inicio": "08:00",
+    "fin": "18:00",
+    "min_inicio": 480,
+    "min_fin": 1080,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 24,
+  "asignatura": "TALLER DE INVESTIGACION II",
+  "grupo": "6109",
+  "profesor": "AVILA SANTIBANEZ RAUL",
+  "creditos": 10,
+  "sesiones": [
+   {
+    "dia": "SABADO",
+    "inicio": "08:00",
+    "fin": "18:00",
+    "min_inicio": 480,
+    "min_fin": 1080,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 25,
+  "asignatura": "TALLER DE INVESTIGACION II",
+  "grupo": "6110",
+  "profesor": "ALVA CANTO ELDA ALICIA",
+  "creditos": 10,
+  "sesiones": [
+   {
+    "dia": "SABADO",
+    "inicio": "09:00",
+    "fin": "19:00",
+    "min_inicio": 540,
+    "min_fin": 1140,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 26,
+  "asignatura": "TALLER DE INVESTIGACION II",
+  "grupo": "6111",
+  "profesor": "BOUZAS RIANO ARTURO",
+  "creditos": 10,
+  "sesiones": [
+   {
+    "dia": "SABADO",
+    "inicio": "08:00",
+    "fin": "18:00",
+    "min_inicio": 480,
+    "min_fin": 1080,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 27,
+  "asignatura": "CONFLICTO, CONFORMIDAD Y CONSENSO",
+  "grupo": "6201",
+  "profesor": "FALCON MANZANO DIEGO GABRIELA CEJA",
+  "creditos": 13,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 308"
+   },
+   {
+    "dia": "SABADO",
+    "inicio": "09:00",
+    "fin": "16:00",
+    "min_inicio": 540,
+    "min_fin": 960,
+    "salon": "A 303"
+   }
+  ]
+ },
+ {
+  "id": 28,
+  "asignatura": "ESTADISTICA INFERENC.EN PSICOLOGIA",
+  "grupo": "6201",
+  "profesor": "VALENCIA CAMARGO MARIA FERNANDA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "A 302"
+   }
+  ]
+ },
+ {
+  "id": 29,
+  "asignatura": "FUENTES DE INFORMACION",
+  "grupo": "6201",
+  "profesor": "FLORES MORALES ROGELIO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "08:00",
+    "fin": "11:00",
+    "min_inicio": 480,
+    "min_fin": 660,
+    "salon": "A 302"
+   }
+  ]
+ },
+ {
+  "id": 30,
+  "asignatura": "INVESTIGACION SOCIAL",
+  "grupo": "6201",
+  "profesor": "JURADO CARDENAS RAUL",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "07:00",
+    "fin": "10:00",
+    "min_inicio": 420,
+    "min_fin": 600,
+    "salon": "A 107"
+   }
+  ]
+ },
+ {
+  "id": 31,
+  "asignatura": "PSICOLOGIA DE LA VIDA COTIDIANA",
+  "grupo": "6201",
+  "profesor": "SOTO RAMIREZ JUAN",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 302"
+   }
+  ]
+ },
+ {
+  "id": 32,
+  "asignatura": "CONFLICTO, CONFORMIDAD Y CONSENSO",
+  "grupo": "6202",
+  "profesor": "GARCIA MERAZ MELISSA",
+  "creditos": 13,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "A 309"
+   },
+   {
+    "dia": "VIERNES",
+    "inicio": "09:00",
+    "fin": "16:00",
+    "min_inicio": 540,
+    "min_fin": 960,
+    "salon": "URIDES 1 EDIF C"
+   }
+  ]
+ },
+ {
+  "id": 33,
+  "asignatura": "ESTADISTICA INFERENC.EN PSICOLOGIA",
+  "grupo": "6202",
+  "profesor": "GARCIA MERAZ MELISSA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 109"
+   }
+  ]
+ },
+ {
+  "id": 34,
+  "asignatura": "FUENTES DE INFORMACION",
+  "grupo": "6202",
+  "profesor": "ORTIZ HERNANDEZ CITLALI QUETZALLI",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 107"
+   }
+  ]
+ },
+ {
+  "id": 35,
+  "asignatura": "INVESTIGACION SOCIAL",
+  "grupo": "6202",
+  "profesor": "SANCHEZ ARAGON ROZZANA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 207"
+   }
+  ]
+ },
+ {
+  "id": 36,
+  "asignatura": "PSICOLOGIA DE LA VIDA COTIDIANA",
+  "grupo": "6202",
+  "profesor": "FLORES MORALES ROGELIO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "08:00",
+    "fin": "11:00",
+    "min_inicio": 480,
+    "min_fin": 660,
+    "salon": "A 109"
+   }
+  ]
+ },
+ {
+  "id": 37,
+  "asignatura": "CONFLICTO, CONFORMIDAD Y CONSENSO",
+  "grupo": "6203",
+  "profesor": "DOMINGUEZ ZUNIGA TANIA FABIOLA",
+  "creditos": 13,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "08:00",
+    "fin": "15:00",
+    "min_inicio": 480,
+    "min_fin": 900,
+    "salon": "A 308"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "10:00",
+    "fin": "13:00",
+    "min_inicio": 600,
+    "min_fin": 780,
+    "salon": "URIDES 1 EDIF C"
+   }
+  ]
+ },
+ {
+  "id": 38,
+  "asignatura": "ESTADISTICA INFERENC.EN PSICOLOGIA",
+  "grupo": "6203",
+  "profesor": "DOMINGUEZ ESPINOSA ALEJANDRA DEL CARMEN",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "17:00",
+    "fin": "20:00",
+    "min_inicio": 1020,
+    "min_fin": 1200,
+    "salon": "A 110"
+   }
+  ]
+ },
+ {
+  "id": 39,
+  "asignatura": "FUENTES DE INFORMACION",
+  "grupo": "6203",
+  "profesor": "FLORES MORALES ROGELIO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "A 302"
+   }
+  ]
+ },
+ {
+  "id": 40,
+  "asignatura": "INVESTIGACION SOCIAL",
+  "grupo": "6203",
+  "profesor": "ARMENTA HURTARTE CAROLINA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "17:00",
+    "fin": "20:00",
+    "min_inicio": 1020,
+    "min_fin": 1200,
+    "salon": "A 105"
+   }
+  ]
+ },
+ {
+  "id": 41,
+  "asignatura": "PSICOLOGIA DE LA VIDA COTIDIANA",
+  "grupo": "6203",
+  "profesor": "VARELA MACEDO VICTORIA MAGDALENA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "A 206"
+   }
+  ]
+ },
+ {
+  "id": 42,
+  "asignatura": "ESTADISTICA INFERENC.EN PSICOLOGIA",
+  "grupo": "6204",
+  "profesor": "DOMINGUEZ ESPINOSA ALEJANDRA DEL CARMEN",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "17:00",
+    "fin": "20:00",
+    "min_inicio": 1020,
+    "min_fin": 1200,
+    "salon": "A 208"
+   }
+  ]
+ },
+ {
+  "id": 43,
+  "asignatura": "INVESTIGACION SOCIAL",
+  "grupo": "6204",
+  "profesor": "SANCHEZ ARAGON ROZZANA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 207"
+   }
+  ]
+ },
+ {
+  "id": 44,
+  "asignatura": "PSICOLOGIA DE LA VIDA COTIDIANA",
+  "grupo": "6204",
+  "profesor": "RAMOS BELTRAN IGNACIO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "A 206"
+   }
+  ]
+ },
+ {
+  "id": 45,
+  "asignatura": "ESTADISTICA INFERENC.EN PSICOLOGIA",
+  "grupo": "6205",
+  "profesor": "SOLER ANGUIANO FRANCISCO LEONARDO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 110"
+   }
+  ]
+ },
+ {
+  "id": 46,
+  "asignatura": "INVESTIGACION SOCIAL",
+  "grupo": "6205",
+  "profesor": "LANDEROS MUGICA KARINA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 47,
+  "asignatura": "PSICOLOGIA DE LA VIDA COTIDIANA",
+  "grupo": "6205",
+  "profesor": "MEDINA LIBERTY JOSE ADRIAN ALFREDO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 109"
+   }
+  ]
+ },
+ {
+  "id": 48,
+  "asignatura": "EVALUACION NEUROPSICOLOGICA",
+  "grupo": "6301",
+  "profesor": "RAMIREZ FLORES MAURA JAZMIN",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "11:00",
+    "fin": "13:00",
+    "min_inicio": 660,
+    "min_fin": 780,
+    "salon": "A 201"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "10:00",
+    "fin": "12:00",
+    "min_inicio": 600,
+    "min_fin": 720,
+    "salon": "A 204"
+   }
+  ]
+ },
+ {
+  "id": 49,
+  "asignatura": "PSICOFISIOLOGIA DEL SUEO",
+  "grupo": "6301",
+  "profesor": "AYALA GUERRERO FRUCTUOSO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "10:00",
+    "fin": "13:00",
+    "min_inicio": 600,
+    "min_fin": 780,
+    "salon": "A 002"
+   }
+  ]
+ },
+ {
+  "id": 50,
+  "asignatura": "PSICOFISIOLOGIA DE LA ATENCION",
+  "grupo": "6301",
+  "profesor": "SOLIS VIVANCO RODOLFO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "14:00",
+    "fin": "17:00",
+    "min_inicio": 840,
+    "min_fin": 1020,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 51,
+  "asignatura": "TEMAS SELECTOS EN PSICOBIOLOGIA II",
+  "grupo": "6301",
+  "profesor": "GUTIERREZ OSPINA GABRIEL",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 002"
+   }
+  ]
+ },
+ {
+  "id": 52,
+  "asignatura": "TECNICAS DE IMAGENOLOGIA CEREBRAL",
+  "grupo": "6301",
+  "profesor": "MUNOZ DELGADO JAIRO IGNACIO",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "12:00",
+    "fin": "16:00",
+    "min_inicio": 720,
+    "min_fin": 960,
+    "salon": "A 003"
+   }
+  ]
+ },
+ {
+  "id": 53,
+  "asignatura": "PSICOFARMACOLOGIA Y ADICCION",
+  "grupo": "6301",
+  "profesor": "RAMOS LANGUREN LAURA ELISA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "12:00",
+    "fin": "13:30",
+    "min_inicio": 720,
+    "min_fin": 810,
+    "salon": "A 207"
+   },
+   {
+    "dia": "LUNES",
+    "inicio": "13:00",
+    "fin": "14:30",
+    "min_inicio": 780,
+    "min_fin": 870,
+    "salon": "A 107"
+   }
+  ]
+ },
+ {
+  "id": 54,
+  "asignatura": "EVALUACION NEUROPSICOLOGICA",
+  "grupo": "6302",
+  "profesor": "GALAN LOPEZ ITZEL GRACIELA",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "08:00",
+    "fin": "10:00",
+    "min_inicio": 480,
+    "min_fin": 600,
+    "salon": "A 107"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "08:00",
+    "fin": "10:00",
+    "min_inicio": 480,
+    "min_fin": 600,
+    "salon": "A 306"
+   }
+  ]
+ },
+ {
+  "id": 55,
+  "asignatura": "PSICOFISIOLOGIA DEL SUEO",
+  "grupo": "6302",
+  "profesor": "VALENCIA FLORES MATILDE",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "10:00",
+    "fin": "13:00",
+    "min_inicio": 600,
+    "min_fin": 780,
+    "salon": "A 205"
+   }
+  ]
+ },
+ {
+  "id": 56,
+  "asignatura": "TEMAS SELECTOS EN PSICOBIOLOGIA II",
+  "grupo": "6302",
+  "profesor": "GONZALEZ SANTOYO ISAAC",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "10:00",
+    "fin": "13:00",
+    "min_inicio": 600,
+    "min_fin": 780,
+    "salon": "A 202"
+   }
+  ]
+ },
+ {
+  "id": 57,
+  "asignatura": "PSICOFARMACOLOGIA Y ADICCION",
+  "grupo": "6302",
+  "profesor": "CASASOLA CASTRO CESAR",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "11:00",
+    "fin": "12:30",
+    "min_inicio": 660,
+    "min_fin": 750,
+    "salon": "A 302"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "11:00",
+    "fin": "12:30",
+    "min_inicio": 660,
+    "min_fin": 750,
+    "salon": "A 301"
+   }
+  ]
+ },
+ {
+  "id": 58,
+  "asignatura": "EVALUACION NEUROPSICOLOGICA",
+  "grupo": "6303",
+  "profesor": "TORRES KNOOP ISABEL",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "18:00",
+    "fin": "20:00",
+    "min_inicio": 1080,
+    "min_fin": 1200,
+    "salon": "B 07"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "18:00",
+    "fin": "20:00",
+    "min_inicio": 1080,
+    "min_fin": 1200,
+    "salon": "B 07"
+   }
+  ]
+ },
+ {
+  "id": 59,
+  "asignatura": "PSICOFISIOLOGIA DE LA ATENCION",
+  "grupo": "6303",
+  "profesor": "GALICIA CASTILLO OSCAR RICARDO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "19:30",
+    "fin": "21:00",
+    "min_inicio": 1170,
+    "min_fin": 1260,
+    "salon": "A 104"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "19:30",
+    "fin": "21:00",
+    "min_inicio": 1170,
+    "min_fin": 1260,
+    "salon": "A 104"
+   }
+  ]
+ },
+ {
+  "id": 60,
+  "asignatura": "TEMAS SELECTOS EN PSICOBIOLOGIA II",
+  "grupo": "6303",
+  "profesor": "CANSINO ORTIZ CARMEN SELENE",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "A 308"
+   }
+  ]
+ },
+ {
+  "id": 61,
+  "asignatura": "TECNICAS DE IMAGENOLOGIA CEREBRAL",
+  "grupo": "6303",
+  "profesor": "MUNOZ TORRES ZEIDY VANESSA",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "15:30",
+    "fin": "19:30",
+    "min_inicio": 930,
+    "min_fin": 1170,
+    "salon": "A 002"
+   }
+  ]
+ },
+ {
+  "id": 62,
+  "asignatura": "PSICOFARMACOLOGIA Y ADICCION",
+  "grupo": "6303",
+  "profesor": "SANCHEZ CASTILLO HUGO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "16:30",
+    "fin": "18:00",
+    "min_inicio": 990,
+    "min_fin": 1080,
+    "salon": "A 304"
+   },
+   {
+    "dia": "LUNES",
+    "inicio": "16:30",
+    "fin": "18:00",
+    "min_inicio": 990,
+    "min_fin": 1080,
+    "salon": "A 107"
+   }
+  ]
+ },
+ {
+  "id": 63,
+  "asignatura": "EVALUACION NEUROPSICOLOGICA",
+  "grupo": "6304",
+  "profesor": "GALAN LOPEZ ITZEL GRACIELA",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "12:00",
+    "fin": "14:00",
+    "min_inicio": 720,
+    "min_fin": 840,
+    "salon": "A 211"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "12:00",
+    "fin": "14:00",
+    "min_inicio": 720,
+    "min_fin": 840,
+    "salon": "A 211"
+   }
+  ]
+ },
+ {
+  "id": 64,
+  "asignatura": "PSICOFISIOLOGIA DEL SUEO",
+  "grupo": "6304",
+  "profesor": "PROFESOR PENDIENTE",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "16:00",
+    "fin": "19:00",
+    "min_inicio": 960,
+    "min_fin": 1140,
+    "salon": "A 102"
+   }
+  ]
+ },
+ {
+  "id": 65,
+  "asignatura": "PSICOFISIOLOGIA DE LA ATENCION",
+  "grupo": "6304",
+  "profesor": "PEREZ FERRARA DAVID ALEJANDRO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "18:00",
+    "fin": "19:30",
+    "min_inicio": 1080,
+    "min_fin": 1170,
+    "salon": "A 304"
+   },
+   {
+    "dia": "VIERNES",
+    "inicio": "16:00",
+    "fin": "17:30",
+    "min_inicio": 960,
+    "min_fin": 1050,
+    "salon": "A 304"
+   }
+  ]
+ },
+ {
+  "id": 66,
+  "asignatura": "TEMAS SELECTOS EN PSICOBIOLOGIA II",
+  "grupo": "6304",
+  "profesor": "CRUZ PEREZ FELIPE",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "16:00",
+    "fin": "19:00",
+    "min_inicio": 960,
+    "min_fin": 1140,
+    "salon": "A 002"
+   }
+  ]
+ },
+ {
+  "id": 67,
+  "asignatura": "TEMAS SELECTOS EN PSICOBIOLOGIA II",
+  "grupo": "6305",
+  "profesor": "LAGARDE LOZANO B. MARGARITA REGINA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "10:00",
+    "fin": "13:00",
+    "min_inicio": 600,
+    "min_fin": 780,
+    "salon": "A 002"
+   }
+  ]
+ },
+ {
+  "id": 68,
+  "asignatura": "TEMAS SELECTOS EN PSICOBIOLOGIA II",
+  "grupo": "6306",
+  "profesor": "CALIXTO GONZALEZ JAIME EDUARDO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 206"
+   }
+  ]
+ },
+ {
+  "id": 69,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6401",
+  "profesor": "BECERRIL PEREZ MARIA SANTOS",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "08:00",
+    "fin": "11:00",
+    "min_inicio": 480,
+    "min_fin": 660,
+    "salon": "A 201"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "08:00",
+    "fin": "11:00",
+    "min_inicio": 480,
+    "min_fin": 660,
+    "salon": "A 301"
+   }
+  ]
+ },
+ {
+  "id": 70,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6401",
+  "profesor": "MONDRAGON GOMEZ RAQUEL",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "08:00",
+    "fin": "12:00",
+    "min_inicio": 480,
+    "min_fin": 720,
+    "salon": "A 314"
+   }
+  ]
+ },
+ {
+  "id": 71,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6402",
+  "profesor": "RUIZ GONZALEZ VERONICA",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "08:00",
+    "fin": "11:00",
+    "min_inicio": 480,
+    "min_fin": 660,
+    "salon": "B 17"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "08:00",
+    "fin": "11:00",
+    "min_inicio": 480,
+    "min_fin": 660,
+    "salon": "A 207"
+   }
+  ]
+ },
+ {
+  "id": 72,
+  "asignatura": "PSICODINAMICA DE GRUPOS",
+  "grupo": "6402",
+  "profesor": "MORA GUTIERREZ GERARDO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "07:00",
+    "fin": "11:00",
+    "min_inicio": 420,
+    "min_fin": 660,
+    "salon": "A 314"
+   }
+  ]
+ },
+ {
+  "id": 73,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6402",
+  "profesor": "RAMIREZ CAMACHO MARIA DEL CARMEN",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "12:00",
+    "fin": "14:00",
+    "min_inicio": 720,
+    "min_fin": 840,
+    "salon": "A 105"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "13:00",
+    "fin": "15:00",
+    "min_inicio": 780,
+    "min_fin": 900,
+    "salon": "A 304"
+   }
+  ]
+ },
+ {
+  "id": 74,
+  "asignatura": "EPIDEMIOLOGIA Y SALUD PUBLICA",
+  "grupo": "6403",
+  "profesor": "CUEVAS RENAUD CORINA MARGARITA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 202"
+   }
+  ]
+ },
+ {
+  "id": 75,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6403",
+  "profesor": "SOMARRIBA ROCHA LAURA ANGELA",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 102"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 101"
+   }
+  ]
+ },
+ {
+  "id": 76,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6403",
+  "profesor": "SOMARRIBA ROCHA LAURA ANGELA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "09:00",
+    "fin": "11:00",
+    "min_inicio": 540,
+    "min_fin": 660,
+    "salon": "A 101"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "09:00",
+    "fin": "11:00",
+    "min_inicio": 540,
+    "min_fin": 660,
+    "salon": "A 101"
+   }
+  ]
+ },
+ {
+  "id": 77,
+  "asignatura": "EPIDEMIOLOGIA Y SALUD PUBLICA",
+  "grupo": "6404",
+  "profesor": "PROFESOR PENDIENTE",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 102"
+   }
+  ]
+ },
+ {
+  "id": 78,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6404",
+  "profesor": "CHAVEZ MURGUIA ALEJANDRA",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 110"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 102"
+   }
+  ]
+ },
+ {
+  "id": 79,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6404",
+  "profesor": "VALENZUELA VALLEJO JORGE ALFONSO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "12:00",
+    "fin": "14:00",
+    "min_inicio": 720,
+    "min_fin": 840,
+    "salon": "EDIF C SALON 4"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "12:30",
+    "fin": "14:30",
+    "min_inicio": 750,
+    "min_fin": 870,
+    "salon": "A 301"
+   }
+  ]
+ },
+ {
+  "id": 80,
+  "asignatura": "EPIDEMIOLOGIA Y SALUD PUBLICA",
+  "grupo": "6405",
+  "profesor": "OROZCO ZAVALA RICARDO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 314"
+   }
+  ]
+ },
+ {
+  "id": 81,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6405",
+  "profesor": "MONJARAS RODRIGUEZ MARIA TERESA",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "A 312"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "A 309"
+   }
+  ]
+ },
+ {
+  "id": 82,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6405",
+  "profesor": "RODRIGUEZ SERRANO AIDEE ELENA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "07:00",
+    "fin": "09:00",
+    "min_inicio": 420,
+    "min_fin": 540,
+    "salon": "B 07"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "07:00",
+    "fin": "09:00",
+    "min_inicio": 420,
+    "min_fin": 540,
+    "salon": "A 203"
+   }
+  ]
+ },
+ {
+  "id": 83,
+  "asignatura": "EPIDEMIOLOGIA Y SALUD PUBLICA",
+  "grupo": "6406",
+  "profesor": "GONZALEZ ALCANTARA KARLA EDITH",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 211"
+   }
+  ]
+ },
+ {
+  "id": 84,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6406",
+  "profesor": "PEREZ AGUERO MARIA CRISTINA",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 114"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 114"
+   }
+  ]
+ },
+ {
+  "id": 85,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6406",
+  "profesor": "PEREZ ESPINOSA JORGE ROGELIO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "08:00",
+    "fin": "12:00",
+    "min_inicio": 480,
+    "min_fin": 720,
+    "salon": "A 202"
+   }
+  ]
+ },
+ {
+  "id": 86,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6407",
+  "profesor": "SOTO CRISTOBAL GABRIEL",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "08:00",
+    "fin": "11:00",
+    "min_inicio": 480,
+    "min_fin": 660,
+    "salon": "A 310"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "08:00",
+    "fin": "11:00",
+    "min_inicio": 480,
+    "min_fin": 660,
+    "salon": "A 310"
+   }
+  ]
+ },
+ {
+  "id": 87,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6407",
+  "profesor": "YUSSIF ROFFE DALILA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "10:00",
+    "fin": "14:00",
+    "min_inicio": 600,
+    "min_fin": 840,
+    "salon": "A 308"
+   }
+  ]
+ },
+ {
+  "id": 88,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6408",
+  "profesor": "ARENAS LANDGRAVE PAULINA",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "A 002"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "A 002"
+   }
+  ]
+ },
+ {
+  "id": 89,
+  "asignatura": "PSICODINAMICA DE GRUPOS",
+  "grupo": "6408",
+  "profesor": "DE LA VEGA MORALES ROCIO IVONNE",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "15:00",
+    "fin": "19:00",
+    "min_inicio": 900,
+    "min_fin": 1140,
+    "salon": "A 205"
+   }
+  ]
+ },
+ {
+  "id": 90,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6408",
+  "profesor": "PEREZ ESPINOSA JORGE ROGELIO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "15:00",
+    "fin": "19:00",
+    "min_inicio": 900,
+    "min_fin": 1140,
+    "salon": "A 003"
+   }
+  ]
+ },
+ {
+  "id": 91,
+  "asignatura": "EPIDEMIOLOGIA Y SALUD PUBLICA",
+  "grupo": "6409",
+  "profesor": "PROFESOR PENDIENTE",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "B 07"
+   }
+  ]
+ },
+ {
+  "id": 92,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6409",
+  "profesor": "CHAPA ROMERO ANA CELIA",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "A 202"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "B 17"
+   }
+  ]
+ },
+ {
+  "id": 93,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6409",
+  "profesor": "CERVANTES BAZAN KARLA ALEJANDRA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "15:00",
+    "fin": "19:00",
+    "min_inicio": 900,
+    "min_fin": 1140,
+    "salon": "A 110"
+   }
+  ]
+ },
+ {
+  "id": 94,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6410",
+  "profesor": "RUIZ GONZALEZ VERONICA",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "08:00",
+    "fin": "11:00",
+    "min_inicio": 480,
+    "min_fin": 660,
+    "salon": "A 211"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "08:00",
+    "fin": "11:00",
+    "min_inicio": 480,
+    "min_fin": 660,
+    "salon": "A 201"
+   }
+  ]
+ },
+ {
+  "id": 95,
+  "asignatura": "PSICODINAMICA DE GRUPOS",
+  "grupo": "6410",
+  "profesor": "MARQUEZ VERDUZCO DAVID",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "15:00",
+    "fin": "19:00",
+    "min_inicio": 900,
+    "min_fin": 1140,
+    "salon": "A 211"
+   }
+  ]
+ },
+ {
+  "id": 96,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6410",
+  "profesor": "ESPINOZA SALGADO FATIMA SAGRARIO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "16:00",
+    "fin": "20:00",
+    "min_inicio": 960,
+    "min_fin": 1200,
+    "salon": "A 109"
+   }
+  ]
+ },
+ {
+  "id": 97,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6411",
+  "profesor": "HERNANDEZ TREJO LAURA AMADA",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 309"
+   },
+   {
+    "dia": "VIERNES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 309"
+   }
+  ]
+ },
+ {
+  "id": 98,
+  "asignatura": "PSICODINAMICA DE GRUPOS",
+  "grupo": "6411",
+  "profesor": "MORALES CHAMBERT BRENDA CONCEPCION",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "15:00",
+    "fin": "17:00",
+    "min_inicio": 900,
+    "min_fin": 1020,
+    "salon": "A 302"
+   },
+   {
+    "dia": "LUNES",
+    "inicio": "15:00",
+    "fin": "17:00",
+    "min_inicio": 900,
+    "min_fin": 1020,
+    "salon": "B 07"
+   }
+  ]
+ },
+ {
+  "id": 99,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6411",
+  "profesor": "JUAN MANUEL SANTIAGO MALDONADO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "08:00",
+    "fin": "12:00",
+    "min_inicio": 480,
+    "min_fin": 720,
+    "salon": "EDIF C SALON 1"
+   }
+  ]
+ },
+ {
+  "id": 100,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6412",
+  "profesor": "CABRERA ZAMORA INGRID MARISSA",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "A 205"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "A 207"
+   }
+  ]
+ },
+ {
+  "id": 101,
+  "asignatura": "PSICODINAMICA DE GRUPOS",
+  "grupo": "6412",
+  "profesor": "RICARDO TRUJILLO CORREA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "16:00",
+    "fin": "20:00",
+    "min_inicio": 960,
+    "min_fin": 1200,
+    "salon": "A 203"
+   }
+  ]
+ },
+ {
+  "id": 102,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6413",
+  "profesor": "PADILLA MARQUEZ XOCHITL BERENICE",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "16:00",
+    "fin": "19:00",
+    "min_inicio": 960,
+    "min_fin": 1140,
+    "salon": "A 301"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "16:00",
+    "fin": "19:00",
+    "min_inicio": 960,
+    "min_fin": 1140,
+    "salon": "A 110"
+   }
+  ]
+ },
+ {
+  "id": 103,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6413",
+  "profesor": "REYES GONZALEZ JOSE LUIS",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "16:00",
+    "fin": "20:00",
+    "min_inicio": 960,
+    "min_fin": 1200,
+    "salon": "A 110"
+   }
+  ]
+ },
+ {
+  "id": 104,
+  "asignatura": "PSICODIAGNOSTICO II",
+  "grupo": "6414",
+  "profesor": "HERNANDEZ ESTRADA LIZBETH",
+  "creditos": 9,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "16:00",
+    "fin": "19:00",
+    "min_inicio": 960,
+    "min_fin": 1140,
+    "salon": "A 312"
+   },
+   {
+    "dia": "VIERNES",
+    "inicio": "16:00",
+    "fin": "19:00",
+    "min_inicio": 960,
+    "min_fin": 1140,
+    "salon": "A 204"
+   }
+  ]
+ },
+ {
+  "id": 105,
+  "asignatura": "TEORIA Y TECNICA DE LA ENTREVIS. II",
+  "grupo": "6414",
+  "profesor": "ESPINOZA SALGADO FATIMA SAGRARIO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "16:00",
+    "fin": "20:00",
+    "min_inicio": 960,
+    "min_fin": 1200,
+    "salon": "A 114"
+   }
+  ]
+ },
+ {
+  "id": 106,
+  "asignatura": "INVESTIG.CUANTITATIVA EN EDUCACION",
+  "grupo": "6501",
+  "profesor": "ALATORRE RICO JAVIER",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "10:00",
+    "fin": "13:00",
+    "min_inicio": 600,
+    "min_fin": 780,
+    "salon": "A 203"
+   }
+  ]
+ },
+ {
+  "id": 107,
+  "asignatura": "INVESTIGACION EN EDUCACION",
+  "grupo": "6501",
+  "profesor": "ALATORRE RICO JAVIER",
+  "creditos": 15,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "09:00",
+    "fin": "14:00",
+    "min_inicio": 540,
+    "min_fin": 840,
+    "salon": "A 201"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "09:00",
+    "fin": "14:00",
+    "min_inicio": 540,
+    "min_fin": 840,
+    "salon": "A 201"
+   }
+  ]
+ },
+ {
+  "id": 108,
+  "asignatura": "INVESTIG.CUANTITATIVA EN EDUCACION",
+  "grupo": "6502",
+  "profesor": "RIGO LEMINI MARCO ANTONIO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 304"
+   }
+  ]
+ },
+ {
+  "id": 109,
+  "asignatura": "INVESTIGACION EN EDUCACION",
+  "grupo": "6502",
+  "profesor": "MORALES GARDUNO CECILIA",
+  "creditos": 15,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "08:00",
+    "fin": "13:00",
+    "min_inicio": 480,
+    "min_fin": 780,
+    "salon": "UDEMAT EDIF A"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "08:00",
+    "fin": "13:00",
+    "min_inicio": 480,
+    "min_fin": 780,
+    "salon": "UDEMAT EDIF A"
+   }
+  ]
+ },
+ {
+  "id": 110,
+  "asignatura": "PROGRAMAS DE INTERVEN. PSICOEDUCAT.",
+  "grupo": "6502",
+  "profesor": "MORALES GARDUNO CECILIA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 304"
+   }
+  ]
+ },
+ {
+  "id": 111,
+  "asignatura": "INVESTIGACION EN EDUCACION",
+  "grupo": "6503",
+  "profesor": "DELGADO CERVANTES NORMA GEORGINA",
+  "creditos": 15,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "09:00",
+    "fin": "14:00",
+    "min_inicio": 540,
+    "min_fin": 840,
+    "salon": "EDIF C SALA TUT 1"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "09:00",
+    "fin": "14:00",
+    "min_inicio": 540,
+    "min_fin": 840,
+    "salon": "A 205"
+   }
+  ]
+ },
+ {
+  "id": 112,
+  "asignatura": "PARADIGMAS PSICOEDUC.CONTEMPORAN",
+  "grupo": "6503",
+  "profesor": "MARTINEZ ROMERO RINA MARIA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "11:30",
+    "fin": "14:30",
+    "min_inicio": 690,
+    "min_fin": 870,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 113,
+  "asignatura": "PROGRAMAS DE INTERVEN. PSICOEDUCAT.",
+  "grupo": "6503",
+  "profesor": "DIAZ BARRIGA ARCEO FRIDA",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "16:00",
+    "fin": "19:00",
+    "min_inicio": 960,
+    "min_fin": 1140,
+    "salon": "A 204"
+   }
+  ]
+ },
+ {
+  "id": 114,
+  "asignatura": "INVESTIGACION EN EDUCACION",
+  "grupo": "6504",
+  "profesor": "RUBIO JIMENEZ ANA LUISA",
+  "creditos": 15,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "09:00",
+    "fin": "14:00",
+    "min_inicio": 540,
+    "min_fin": 840,
+    "salon": "URIDES 1 EDIF C"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "09:00",
+    "fin": "14:00",
+    "min_inicio": 540,
+    "min_fin": 840,
+    "salon": "EDIF C SALA TUT 1"
+   }
+  ]
+ },
+ {
+  "id": 115,
+  "asignatura": "INVESTIGACION EN EDUCACION",
+  "grupo": "6505",
+  "profesor": "TORREBLANCA NAVARRO OMAR",
+  "creditos": 15,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "10:00",
+    "fin": "15:00",
+    "min_inicio": 600,
+    "min_fin": 900,
+    "salon": "ESCENARIO"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "10:00",
+    "fin": "15:00",
+    "min_inicio": 600,
+    "min_fin": 900,
+    "salon": "ESCENARIO"
+   }
+  ]
+ },
+ {
+  "id": 116,
+  "asignatura": "INVESTIGACION EN EDUCACION",
+  "grupo": "6506",
+  "profesor": "LOPEZ RAMIREZ JOSE LUIS",
+  "creditos": 15,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "09:00",
+    "fin": "14:00",
+    "min_inicio": 540,
+    "min_fin": 840,
+    "salon": "AULA PENDIENTE"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "09:00",
+    "fin": "14:00",
+    "min_inicio": 540,
+    "min_fin": 840,
+    "salon": "AULA PENDIENTE"
+   }
+  ]
+ },
+ {
+  "id": 117,
+  "asignatura": "ADMINISTRACION DE PERSONAL",
+  "grupo": "6601",
+  "profesor": "CASALES LEON ANGEL GABINO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "SABADO",
+    "inicio": "09:00",
+    "fin": "13:00",
+    "min_inicio": 540,
+    "min_fin": 780,
+    "salon": "A 205"
+   }
+  ]
+ },
+ {
+  "id": 118,
+  "asignatura": "INTEGRACION DE PERSONAL I",
+  "grupo": "6601",
+  "profesor": "PACHECO LAPIEDRA ROSA",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 301"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 207"
+   }
+  ]
+ },
+ {
+  "id": 119,
+  "asignatura": "ADMINISTRACION DE PERSONAL",
+  "grupo": "6602",
+  "profesor": "PUENTE LOMELIN ARTURO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "10:00",
+    "fin": "14:00",
+    "min_inicio": 600,
+    "min_fin": 840,
+    "salon": "A 301"
+   }
+  ]
+ },
+ {
+  "id": 120,
+  "asignatura": "INTEGRACION DE PERSONAL I",
+  "grupo": "6602",
+  "profesor": "PACHECO LAPIEDRA ROSA",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "A 301"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "A 110"
+   }
+  ]
+ },
+ {
+  "id": 121,
+  "asignatura": "CAPACITAC.Y DESARR.DE PERSONAL II",
+  "grupo": "6603",
+  "profesor": "MARTINEZ PEREZ ADRIANA GUADALUPE",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "10:00",
+    "fin": "13:00",
+    "min_inicio": 600,
+    "min_fin": 780,
+    "salon": "A 205"
+   },
+   {
+    "dia": "VIERNES",
+    "inicio": "10:00",
+    "fin": "13:00",
+    "min_inicio": 600,
+    "min_fin": 780,
+    "salon": "EDIF C SALON 2"
+   }
+  ]
+ },
+ {
+  "id": 122,
+  "asignatura": "INTEGRACION DE PERSONAL I",
+  "grupo": "6603",
+  "profesor": "VALLE GOMEZ MIRNA ROCIO",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "B 17"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "B 17"
+   }
+  ]
+ },
+ {
+  "id": 123,
+  "asignatura": "ADMINISTRACION DE PERSONAL",
+  "grupo": "6604",
+  "profesor": "LOZADA VAZQUEZ RICARDO ALBERTO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "11:00",
+    "fin": "13:00",
+    "min_inicio": 660,
+    "min_fin": 780,
+    "salon": "A 302"
+   },
+   {
+    "dia": "LUNES",
+    "inicio": "09:00",
+    "fin": "11:00",
+    "min_inicio": 540,
+    "min_fin": 660,
+    "salon": "A 110"
+   }
+  ]
+ },
+ {
+  "id": 124,
+  "asignatura": "CAPACITAC.Y DESARR.DE PERSONAL II",
+  "grupo": "6604",
+  "profesor": "SOUZA COLIN ERIKA",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "B 07"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "B 07"
+   }
+  ]
+ },
+ {
+  "id": 125,
+  "asignatura": "INTEGRACION DE PERSONAL I",
+  "grupo": "6604",
+  "profesor": "RODRIGUEZ RODRIGUEZ CLARA IVONNE",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "AULA PENDIENTE"
+   },
+   {
+    "dia": "VIERNES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 201"
+   }
+  ]
+ },
+ {
+  "id": 126,
+  "asignatura": "ADMINISTRACION DE PERSONAL",
+  "grupo": "6605",
+  "profesor": "MARTINEZ PEREZ ADRIANA GUADALUPE",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "10:00",
+    "fin": "14:00",
+    "min_inicio": 600,
+    "min_fin": 840,
+    "salon": "A 304"
+   }
+  ]
+ },
+ {
+  "id": 127,
+  "asignatura": "ADMINISTRACION DE PERSONAL",
+  "grupo": "6606",
+  "profesor": "LOZADA VAZQUEZ RICARDO ALBERTO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "16:00",
+    "fin": "20:00",
+    "min_inicio": 960,
+    "min_fin": 1200,
+    "salon": "A 205"
+   }
+  ]
+ },
+ {
+  "id": 128,
+  "asignatura": "CAPACITAC.Y DESARR.DE PERSONAL II",
+  "grupo": "6606",
+  "profesor": "ESLAVA GUEVARA ADELINA",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "17:00",
+    "fin": "20:00",
+    "min_inicio": 1020,
+    "min_fin": 1200,
+    "salon": "A 101"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "17:00",
+    "fin": "20:00",
+    "min_inicio": 1020,
+    "min_fin": 1200,
+    "salon": "A 101"
+   }
+  ]
+ },
+ {
+  "id": 129,
+  "asignatura": "ADMINISTRACION DE PERSONAL",
+  "grupo": "6607",
+  "profesor": "MARTINEZ PEREZ ADRIANA GUADALUPE",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "16:00",
+    "fin": "20:00",
+    "min_inicio": 960,
+    "min_fin": 1200,
+    "salon": "B 17"
+   }
+  ]
+ },
+ {
+  "id": 130,
+  "asignatura": "CAPACITAC.Y DESARR.DE PERSONAL II",
+  "grupo": "6607",
+  "profesor": "SOUZA COLIN ERIKA",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "16:00",
+    "fin": "19:00",
+    "min_inicio": 960,
+    "min_fin": 1140,
+    "salon": "A 207"
+   },
+   {
+    "dia": "MIERCOLES",
+    "inicio": "16:00",
+    "fin": "19:00",
+    "min_inicio": 960,
+    "min_fin": 1140,
+    "salon": "A 205"
+   }
+  ]
+ },
+ {
+  "id": 131,
+  "asignatura": "INTEGRACION DE PERSONAL I",
+  "grupo": "6607",
+  "profesor": "RIVERA GARCIA JORGE LUIS",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "13:00",
+    "fin": "16:00",
+    "min_inicio": 780,
+    "min_fin": 960,
+    "salon": "A 204"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "A 304"
+   }
+  ]
+ },
+ {
+  "id": 132,
+  "asignatura": "ADMINISTRACION DE PERSONAL",
+  "grupo": "6608",
+  "profesor": "VILLAVICENCIO CARRANZA MIGUEL ALEJANDRO",
+  "creditos": 6,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "15:00",
+    "fin": "19:00",
+    "min_inicio": 900,
+    "min_fin": 1140,
+    "salon": "B 17"
+   }
+  ]
+ },
+ {
+  "id": 133,
+  "asignatura": "CAPACITAC.Y DESARR.DE PERSONAL II",
+  "grupo": "6608",
+  "profesor": "MARTINEZ MEJIA EMMANUEL",
+  "creditos": 8,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "B 07"
+   },
+   {
+    "dia": "MARTES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "B 07"
+   }
+  ]
+ },
+ {
+  "id": 134,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6701",
+  "profesor": "CABRERA ZAMORA INGRID MARISSA",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "09:00",
+    "fin": "11:00",
+    "min_inicio": 540,
+    "min_fin": 660,
+    "salon": "A 206"
+   }
+  ]
+ },
+ {
+  "id": 135,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6701",
+  "profesor": "CHAVARRIA LUNA SALVADOR",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "LUNES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 206"
+   }
+  ]
+ },
+ {
+  "id": 136,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6702",
+  "profesor": "MERAZ RIOS PATRICIA",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "10:00",
+    "fin": "12:00",
+    "min_inicio": 600,
+    "min_fin": 720,
+    "salon": "A 109"
+   }
+  ]
+ },
+ {
+  "id": 137,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6702",
+  "profesor": "JARITZI CAMACHO",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 307"
+   }
+  ]
+ },
+ {
+  "id": 138,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6703",
+  "profesor": "LOZADA VAZQUEZ RICARDO ALBERTO",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "10:00",
+    "fin": "12:00",
+    "min_inicio": 600,
+    "min_fin": 720,
+    "salon": "A 206"
+   }
+  ]
+ },
+ {
+  "id": 139,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6703",
+  "profesor": "TZOMPANTZI MIGUEL CLAUDIO ARTURO",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "12:00",
+    "fin": "15:00",
+    "min_inicio": 720,
+    "min_fin": 900,
+    "salon": "A 206"
+   }
+  ]
+ },
+ {
+  "id": 140,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6704",
+  "profesor": "DE LA CRUZ FLORES GABRIELA",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "13:30",
+    "fin": "15:30",
+    "min_inicio": 810,
+    "min_fin": 930,
+    "salon": "A 108"
+   }
+  ]
+ },
+ {
+  "id": 141,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6704",
+  "profesor": "HERNANDEZ CRESPO TANIA JIMENA",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "10:30",
+    "fin": "13:30",
+    "min_inicio": 630,
+    "min_fin": 810,
+    "salon": "A 108"
+   }
+  ]
+ },
+ {
+  "id": 142,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6705",
+  "profesor": "ALBERTO LOPEZ",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "13:00",
+    "fin": "15:00",
+    "min_inicio": 780,
+    "min_fin": 900,
+    "salon": "A 107"
+   }
+  ]
+ },
+ {
+  "id": 143,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6705",
+  "profesor": "ERIKA TORRES",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "10:00",
+    "fin": "13:00",
+    "min_inicio": 600,
+    "min_fin": 780,
+    "salon": "A 210"
+   }
+  ]
+ },
+ {
+  "id": 144,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6706",
+  "profesor": "BRUNO VELAZQUEZ",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "12:30",
+    "fin": "14:30",
+    "min_inicio": 750,
+    "min_fin": 870,
+    "salon": "A 302"
+   }
+  ]
+ },
+ {
+  "id": 145,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6706",
+  "profesor": "COLMENARES VAZQUEZ LIGIA",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "09:30",
+    "fin": "12:30",
+    "min_inicio": 570,
+    "min_fin": 750,
+    "salon": "A 302"
+   }
+  ]
+ },
+ {
+  "id": 146,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6707",
+  "profesor": "CARRILLO URIBE ALEJANDRO",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "08:00",
+    "fin": "10:00",
+    "min_inicio": 480,
+    "min_fin": 600,
+    "salon": "A 307"
+   }
+  ]
+ },
+ {
+  "id": 147,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6707",
+  "profesor": "COLMENARES VAZQUEZ LIGIA",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "VIERNES",
+    "inicio": "10:00",
+    "fin": "13:00",
+    "min_inicio": 600,
+    "min_fin": 780,
+    "salon": "A 108"
+   }
+  ]
+ },
+ {
+  "id": 148,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6708",
+  "profesor": "ERIKA TORRES",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "15:00",
+    "fin": "17:00",
+    "min_inicio": 900,
+    "min_fin": 1020,
+    "salon": "A 107"
+   }
+  ]
+ },
+ {
+  "id": 149,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6708",
+  "profesor": "HERNANDEZ CRESPO TANIA JIMENA",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "17:00",
+    "fin": "20:00",
+    "min_inicio": 1020,
+    "min_fin": 1200,
+    "salon": "A 107"
+   }
+  ]
+ },
+ {
+  "id": 150,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6709",
+  "profesor": "HERRERA ORTIZ MIGUEL",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "16:00",
+    "fin": "18:00",
+    "min_inicio": 960,
+    "min_fin": 1080,
+    "salon": "A 206"
+   }
+  ]
+ },
+ {
+  "id": 151,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6709",
+  "profesor": "CHAPA ROMERO ANA CELIA",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "11:00",
+    "fin": "14:00",
+    "min_inicio": 660,
+    "min_fin": 840,
+    "salon": "A 301"
+   }
+  ]
+ },
+ {
+  "id": 152,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6710",
+  "profesor": "BUZO CASANOVA ENRIQUE RICARDO",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "07:00",
+    "fin": "09:00",
+    "min_inicio": 420,
+    "min_fin": 540,
+    "salon": "A 307"
+   }
+  ]
+ },
+ {
+  "id": 153,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6710",
+  "profesor": "NAVARRO CORONA CLAUDIA IVETTE",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "09:00",
+    "fin": "12:00",
+    "min_inicio": 540,
+    "min_fin": 720,
+    "salon": "A 206"
+   }
+  ]
+ },
+ {
+  "id": 154,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6711",
+  "profesor": "JAQUELINE MARCUE",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "13:00",
+    "fin": "15:00",
+    "min_inicio": 780,
+    "min_fin": 900,
+    "salon": "A 302"
+   }
+  ]
+ },
+ {
+  "id": 155,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6711",
+  "profesor": "HERNANDEZ CRESPO TANIA JIMENA",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "JUEVES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "A 301"
+   }
+  ]
+ },
+ {
+  "id": 156,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6712",
+  "profesor": "TREJO MORALES MARTHA PATRICIA",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "18:00",
+    "fin": "20:00",
+    "min_inicio": 1080,
+    "min_fin": 1200,
+    "salon": "A 109"
+   }
+  ]
+ },
+ {
+  "id": 157,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6712",
+  "profesor": "NAVARRO CORONA CLAUDIA IVETTE",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "MARTES",
+    "inicio": "15:00",
+    "fin": "18:00",
+    "min_inicio": 900,
+    "min_fin": 1080,
+    "salon": "A 206"
+   }
+  ]
+ },
+ {
+  "id": 158,
+  "asignatura": "ETICA PROFESIONAL",
+  "grupo": "6713",
+  "profesor": "ERIKA TORRES",
+  "creditos": 4,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "15:00",
+    "fin": "17:00",
+    "min_inicio": 900,
+    "min_fin": 1020,
+    "salon": "A 108"
+   }
+  ]
+ },
+ {
+  "id": 159,
+  "asignatura": "APORTES DESDE EPISTEM. FEMINIST. PSIC.",
+  "grupo": "6713",
+  "profesor": "RODRIGUEZ SERRANO AIDEE ELENA",
+  "creditos": 5,
+  "sesiones": [
+   {
+    "dia": "MIERCOLES",
+    "inicio": "17:00",
+    "fin": "20:00",
+    "min_inicio": 1020,
+    "min_fin": 1200,
+    "salon": "A 108"
+   }
+  ]
+ }
+]
