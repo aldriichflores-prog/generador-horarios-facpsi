@@ -13,8 +13,6 @@
         .card-header { background-color: #fff; border-bottom: 2px solid #f0f0f0; font-weight: 600; }
         .btn-unam { background-color: #002B7A; color: white; border: none; }
         .btn-unam:hover { background-color: #D59F0F; color: #002B7A; font-weight: bold; }
-        .btn-outline-unam { color: #002B7A; border-color: #002B7A; }
-        .btn-outline-unam:hover { background-color: #002B7A; color: white; }
         .nav-pills .nav-link.active { background-color: #D59F0F; color: #002B7A; font-weight: bold; }
         .nav-pills .nav-link { color: #002B7A; }
         .choque { background-color: #ffe6e6; color: #dc3545; opacity: 0.8; }
@@ -27,6 +25,15 @@
 <div class="header-unam text-center mb-4">
     <h1 class="fw-bold"><i class="bi bi-mortarboard-fill"></i> Generador de Horarios</h1>
     <p class="mb-0 text-white">Facultad de Psicología - 6to Semestre</p>
+</div>
+
+<div id="error-pantalla" class="container" style="display:none;">
+    <div class="alert alert-danger text-center shadow">
+        <h4 class="alert-heading"><i class="bi bi-exclamation-triangle-fill"></i> Error cargando datos</h4>
+        <p id="mensaje-error">...</p>
+        <hr>
+        <p class="mb-0 small">Asegúrate de que el archivo <strong>horarios.json</strong> está en la misma carpeta y se llama exactamente así (minúsculas).</p>
+    </div>
 </div>
 
 <div class="container pb-5" id="app">
@@ -47,28 +54,23 @@
     <div id="vista-manual" class="row">
         <div class="col-12 mb-3">
             <div class="instrucciones-box">
-                <strong><i class="bi bi-info-circle-fill"></i> ¿Cómo funciona el Modo Manual?</strong>
-                <ul class="mb-0 ps-3 small">
-                    <li>Ideal si ya sabes con qué profesores quieres cursar.</li>
-                    <li>Busca la materia, selecciona el grupo y agrégalo.</li>
-                    <li>El sistema te avisará si intentas meter un grupo que choca con lo que ya tienes.</li>
-                </ul>
+                <strong><i class="bi bi-info-circle-fill"></i> ¿Cómo funciona?</strong>
+                <span class="small ms-2">Busca tu materia, elige el grupo y arma tu horario paso a paso.</span>
             </div>
         </div>
 
         <div class="col-md-5">
             <div class="card h-100">
-                <div class="card-header text-primary"><i class="bi bi-search"></i> Catálogo de Materias</div>
+                <div class="card-header text-primary"><i class="bi bi-search"></i> Catálogo</div>
                 <div class="card-body">
-                    <input type="text" id="buscador" class="form-control mb-3" placeholder="Escribe para buscar (Ej: Clinica, Etica...)" onkeyup="filtrarMaterias()">
-                    <div id="lista-materias" class="list-group" style="max-height: 350px; overflow-y: auto;">
-                        </div>
+                    <input type="text" id="buscador" class="form-control mb-3" placeholder="Ej: Clinica, Etica..." onkeyup="filtrarMaterias()">
+                    <div id="lista-materias" class="list-group" style="max-height: 350px; overflow-y: auto;"></div>
                 </div>
             </div>
-
-            <div class="card mt-3 border-warning" id="panel-grupos" style="display:none;">
+            
+            <div class="card mt-3 border-warning shadow" id="panel-grupos" style="display:none;">
                 <div class="card-header bg-warning text-dark d-flex justify-content-between">
-                    <span><i class="bi bi-people-fill"></i> Elige un Grupo</span>
+                    <span><i class="bi bi-people-fill"></i> Elige Grupo</span>
                     <button class="btn-close" onclick="document.getElementById('panel-grupos').style.display='none'"></button>
                 </div>
                 <div class="card-body p-0">
@@ -80,19 +82,17 @@
         <div class="col-md-7">
             <div class="card h-100">
                 <div class="card-header d-flex justify-content-between align-items-center bg-light">
-                    <span>📅 Tu Horario Preliminar</span>
+                    <span>📅 Tu Horario</span>
                     <span id="creditos-badge" class="badge bg-secondary">0 Créditos</span>
                 </div>
                 <div class="card-body">
                     <div id="mi-horario">
                         <div class="text-center text-muted mt-5">
-                            <i class="bi bi-backpack display-4"></i>
-                            <p class="mt-2">No has inscrito materias aún.</p>
+                            <i class="bi bi-backpack display-4"></i><p class="mt-2">Mochila vacía.</p>
                         </div>
                     </div>
-                    
                     <div class="alert alert-danger mt-3 py-2" id="alerta-etica" style="display:block;">
-                        <i class="bi bi-exclamation-triangle-fill"></i> <strong>Requisito Faltante:</strong> No has agregado "ETICA PROFESIONAL".
+                        <i class="bi bi-exclamation-octagon-fill"></i> Faltante: <strong>ETICA PROFESIONAL</strong>
                     </div>
                 </div>
             </div>
@@ -100,16 +100,10 @@
     </div>
 
     <div id="vista-auto" class="row" style="display:none;">
-        
         <div class="col-12 mb-3">
             <div class="instrucciones-box">
-                <strong><i class="bi bi-lightbulb-fill"></i> ¿Cómo funciona el Explorador?</strong>
-                <ol class="mb-0 ps-3 small">
-                    <li><strong>Selecciona una materia</strong> de la lista.</li>
-                    <li>Marca <strong>varios profesores</strong> que te interesen (Candidatos).</li>
-                    <li>Repite con todas las materias que quieras cursar.</li>
-                    <li>Presiona <strong>"Generar Combinaciones"</strong> y el sistema encontrará los horarios perfectos sin choques.</li>
-                </ol>
+                <strong><i class="bi bi-lightbulb-fill"></i> Modo Explorador:</strong>
+                <span class="small ms-2">Elige materias, marca varios profesores y el sistema encontrará combinaciones sin choques.</span>
             </div>
         </div>
 
@@ -117,17 +111,15 @@
             <div class="card mb-3">
                 <div class="card-header text-primary"><i class="bi bi-basket-fill"></i> Configurar Candidatos</div>
                 <div class="card-body">
-                    <label class="form-label fw-bold">1. Elige Materia:</label>
+                    <label class="form-label fw-bold">1. Materia:</label>
                     <select id="select-materia-auto" class="form-select mb-3" onchange="cargarProfesAuto()">
                         <option value="">-- Selecciona --</option>
                     </select>
                     
                     <div id="area-profes-auto" style="display:none;">
-                        <label class="form-label fw-bold text-success">2. Marca los profesores que te interesan:</label>
+                        <label class="form-label fw-bold text-success">2. Profesores:</label>
                         <div id="lista-checks-profes" class="border rounded p-2 mb-3 bg-white" style="max-height: 250px; overflow-y: auto;"></div>
-                        <button class="btn btn-outline-primary w-100" onclick="agregarABolsa()">
-                            <i class="bi bi-plus-circle"></i> Confirmar Selección
-                        </button>
+                        <button class="btn btn-outline-primary w-100" onclick="agregarABolsa()">Confirmar Selección</button>
                     </div>
                 </div>
             </div>
@@ -138,11 +130,11 @@
                     <span id="contador-bolsa" class="badge bg-primary rounded-pill">0</span>
                 </div>
                 <ul id="lista-bolsa" class="list-group list-group-flush">
-                    <li class="list-group-item text-muted small text-center">Aún no seleccionas materias.</li>
+                    <li class="list-group-item text-muted small text-center">Sin selección.</li>
                 </ul>
                 <div class="card-body">
                     <button class="btn btn-unam w-100 py-2 fs-5 shadow" onclick="generarCombinaciones()">
-                        <i class="bi bi-cpu-fill"></i> GENERAR HORARIOS
+                        <i class="bi bi-cpu-fill"></i> GENERAR
                     </button>
                 </div>
             </div>
@@ -150,46 +142,54 @@
 
         <div class="col-md-8">
             <div class="card h-100">
-                <div class="card-header bg-white">
-                    <h5 class="mb-0 text-primary"><i class="bi bi-list-stars"></i> Resultados Generados</h5>
-                </div>
-                <div class="bg-light p-2 small border-bottom">
+                <div class="card-header bg-white"><h5 class="mb-0 text-primary"><i class="bi bi-list-stars"></i> Resultados</h5></div>
+                <div class="bg-light p-2 small border-bottom text-center">
                     <span class="me-3"><i class="bi bi-circle-fill text-success"></i> Óptimo</span>
-                    <span class="me-3"><i class="bi bi-circle-fill text-danger"></i> Exceso Créditos</span>
-                    <span class="me-3"><i class="bi bi-clock-history text-danger"></i> Horas Muertas (Huecos)</span>
+                    <span class="me-3"><i class="bi bi-circle-fill text-danger"></i> Exceso</span>
+                    <span><i class="bi bi-clock text-danger"></i> Huecos</span>
                 </div>
-                
                 <div class="card-body bg-light" id="resultados-auto" style="min-height: 400px; overflow-y: auto;">
-                    <div class="text-center text-muted mt-5">
-                        <i class="bi bi-arrow-left-circle display-4"></i>
-                        <p class="mt-3">Configura tus candidatos a la izquierda y presiona Generar.</p>
-                    </div>
+                    <div class="text-center text-muted mt-5"><i class="bi bi-arrow-left-circle display-4"></i><p class="mt-3">Configura y Genera.</p></div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <script>
     let BD = [];
     let miHorario = [];
-    let candidatos = {}; // Renombrado de 'bolsa' a 'candidatos'
+    let candidatos = {};
     const OBLIGATORIA = "ETICA PROFESIONAL";
+    const ARCHIVO_DATOS = 'horarios.json'; // <--- ASEGURATE QUE ESTO COINCIDA CON TU ARCHIVO
 
-    // CARGAR DATOS
-    fetch('horarios.json')
-        .then(response => response.json())
+    // --- CARGA DE DATOS CON DIAGNÓSTICO ---
+    fetch(ARCHIVO_DATOS)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP Error ${response.status}: No se encontró el archivo '${ARCHIVO_DATOS}'.`);
+            }
+            return response.json();
+        })
         .then(data => {
+            if(!Array.isArray(data) || data.length === 0) {
+                throw new Error("El archivo JSON está vacío o tiene un formato incorrecto.");
+            }
             BD = data;
+            console.log("Datos cargados correctamente:", BD.length);
+            // Iniciar Interfaz
             llenarBuscadorManual();
             llenarSelectAuto();
         })
-        .catch(err => alert("Error: No se encontró horarios.json."));
+        .catch(err => {
+            console.error(err);
+            document.getElementById('app').style.display = 'none';
+            document.getElementById('error-pantalla').style.display = 'block';
+            document.getElementById('mensaje-error').innerText = err.message + 
+                " \n\nSOLUCIÓN: Verifica en GitHub que el archivo se llame exactamente 'horarios.json' (todo minúsculas) y que contenga datos.";
+        });
 
-    // --- FUNCIONES COMUNES ---
-    
-    // Convertir minutos (480) a texto (08:00)
+    // --- UTILIDADES ---
     function minsAHora(mins) {
         let h = Math.floor(mins / 60);
         let m = mins % 60;
@@ -219,7 +219,6 @@
     }
 
     // --- MODO MANUAL ---
-
     function filtrarMaterias() {
         const texto = document.getElementById('buscador').value.toUpperCase();
         const lista = document.getElementById('lista-materias');
@@ -258,7 +257,7 @@
                 </div>
                 <div class="small text-primary mb-1">${curso.profesor}</div>
                 <div>${horarioTxt}</div>
-                ${choca ? '<div class="text-danger small mt-1"><i class="bi bi-x-circle"></i> Choque de horario</div>' : ''}
+                ${choca ? '<div class="text-danger small mt-1"><i class="bi bi-x-circle"></i> Choque</div>' : ''}
             `;
             if (!choca) btn.onclick = () => inscribir(curso);
             lista.appendChild(btn);
@@ -312,7 +311,6 @@
     function borrarMateria(idx) { miHorario.splice(idx,1); actualizarVistaHorario(); filtrarMaterias(); }
 
     // --- MODO AUTOMATICO ---
-
     function llenarSelectAuto() {
         const sel = document.getElementById('select-materia-auto');
         const nombres = [...new Set(BD.map(c => c.asignatura))].sort();
@@ -332,7 +330,6 @@
         
         if(!nombre) { div.style.display='none'; return; }
         div.style.display='block';
-
         const cursos = BD.filter(c => c.asignatura === nombre).sort((a,b) => a.grupo - b.grupo);
         
         cursos.forEach(c => {
@@ -357,7 +354,6 @@
         
         const ids = Array.from(checks).map(c => parseInt(c.value));
         candidatos[nombre] = BD.filter(c => ids.includes(c.id));
-        
         renderCandidatos();
         document.getElementById('select-materia-auto').value = "";
         document.getElementById('area-profes-auto').style.display='none';
@@ -371,10 +367,9 @@
         countBadge.innerText = keys.length;
 
         if(keys.length === 0) {
-            ul.innerHTML = '<li class="list-group-item text-muted small text-center">Aún no seleccionas materias.</li>';
+            ul.innerHTML = '<li class="list-group-item text-muted small text-center">Sin selección.</li>';
             return;
         }
-
         keys.forEach(mat => {
             const li = document.createElement('li');
             li.className = 'list-group-item d-flex justify-content-between align-items-center py-2';
@@ -393,9 +388,9 @@
 
     async function generarCombinaciones() {
         const resDiv = document.getElementById('resultados-auto');
-        resDiv.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary"></div><p class="mt-2">Analizando combinaciones...</p></div>';
+        resDiv.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary"></div><p class="mt-2">Calculando...</p></div>';
         
-        await new Promise(r => setTimeout(r, 100)); // UI refresh
+        await new Promise(r => setTimeout(r, 100));
 
         const materias = Object.keys(candidatos);
         if(materias.length === 0) { resDiv.innerHTML = '<div class="alert alert-warning">Selecciona candidatos primero.</div>'; return; }
@@ -408,7 +403,6 @@
         const validos = [];
 
         for (let comb of rawCombs) {
-            // Check Choques
             let esValido = true;
             for(let i=0; i<comb.length; i++) {
                 for(let j=i+1; j<comb.length; j++) {
@@ -418,10 +412,9 @@
             }
             if(!esValido) continue;
 
-            // Calcular Huecos y Datos
             let totalCreds = 0;
             let diasSet = new Set();
-            let agenda = {}; // { LUN: [[420, 480], [600, 720]] }
+            let agenda = {};
 
             comb.forEach(c => {
                 totalCreds += c.creditos;
@@ -432,9 +425,8 @@
                 });
             });
 
-            // Detectar Huecos (Gaps) exactos
             let minutosHueco = 0;
-            let detallesHueco = []; // ["LUN 11:00-13:00", "MIE ..."]
+            let detallesHueco = [];
 
             for (let dia in agenda) {
                 let lapsos = agenda[dia].sort((a,b) => a[0] - b[0]);
@@ -442,51 +434,33 @@
                     let finAnterior = lapsos[k][1];
                     let inicioSiguiente = lapsos[k+1][0];
                     let dif = inicioSiguiente - finAnterior;
-                    
                     if(dif > 0) {
                         minutosHueco += dif;
                         detallesHueco.push(`${dia.substr(0,3)} ${minsAHora(finAnterior)}-${minsAHora(inicioSiguiente)}`);
                     }
                 }
             }
-
-            validos.push({ 
-                cursos: comb, 
-                creditos: totalCreds, 
-                dias: diasSet.size, 
-                huecos: minutosHueco,
-                listaHuecos: detallesHueco 
-            });
-            
+            validos.push({ cursos: comb, creditos: totalCreds, dias: diasSet.size, huecos: minutosHueco, listaHuecos: detallesHueco });
             if(validos.length >= 100) break;
         }
 
-        // Ordenar: Menos dias -> Menos huecos
         validos.sort((a,b) => a.dias - b.dias || a.huecos - b.huecos);
 
-        // Renderizar
         if(validos.length === 0) {
-            resDiv.innerHTML = '<div class="alert alert-danger text-center"><i class="bi bi-emoji-frown"></i> Ups, todas las combinaciones chocan. Intenta con otros profesores.</div>';
+            resDiv.innerHTML = '<div class="alert alert-danger text-center">Todas las combinaciones chocan :(</div>';
             return;
         }
 
-        resDiv.innerHTML = `<div class="alert alert-success py-2"><i class="bi bi-check-circle-fill"></i> Se encontraron <strong>${validos.length}</strong> opciones posibles.</div>`;
+        resDiv.innerHTML = `<div class="alert alert-success py-2">Encontramos <strong>${validos.length}</strong> opciones.</div>`;
 
         validos.slice(0, 30).forEach((val, i) => {
             const card = document.createElement('div');
             card.className = 'card mb-3 border shadow-sm';
             
-            // Construir badges de huecos
-            let htmlHuecos = '';
-            if(val.listaHuecos.length > 0) {
-                htmlHuecos = '<div class="mt-2 small border-top pt-1 text-danger fw-bold"><i class="bi bi-clock-history"></i> Huecos detectados: ' + 
-                             val.listaHuecos.map(h => `<span class="hueco-badge">${h}</span>`).join('') + 
-                             '</div>';
-            } else {
-                htmlHuecos = '<div class="mt-2 small border-top pt-1 text-success fw-bold"><i class="bi bi-stars"></i> Horario Compacto (Sin huecos)</div>';
-            }
+            let htmlHuecos = val.listaHuecos.length > 0 
+                ? '<div class="mt-2 small border-top pt-1 text-danger fw-bold"><i class="bi bi-clock"></i> Huecos: ' + val.listaHuecos.map(h => `<span class="hueco-badge">${h}</span>`).join('') + '</div>'
+                : '<div class="mt-2 small border-top pt-1 text-success fw-bold"><i class="bi bi-stars"></i> Horario Compacto</div>';
 
-            // Construir tabla
             let filas = val.cursos.map(c => `
                 <tr>
                     <td class="fw-bold text-primary" style="font-size:0.9em;">${c.asignatura}</td>
@@ -500,7 +474,7 @@
                 <div class="card-header bg-white d-flex justify-content-between align-items-center py-2">
                     <span class="badge bg-primary rounded-pill">Opción ${i+1}</span>
                     <div>
-                        <span class="badge bg-light text-dark border me-1"><i class="bi bi-calendar3"></i> ${val.dias} Días</span>
+                        <span class="badge bg-light text-dark border me-1">${val.dias} Días</span>
                         <span class="badge ${val.creditos>41?'bg-danger':(val.creditos>=37?'bg-success':'bg-warning text-dark')}">${val.creditos} Cr</span>
                     </div>
                 </div>
@@ -511,9 +485,7 @@
                             <tbody>${filas}</tbody>
                         </table>
                     </div>
-                    <div class="px-3 pb-2">
-                        ${htmlHuecos}
-                    </div>
+                    <div class="px-3 pb-2">${htmlHuecos}</div>
                 </div>
             `;
             resDiv.appendChild(card);
