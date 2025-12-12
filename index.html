@@ -3,70 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador UNAM 🦁</title>
+    <title>Generador de Horarios - Psicología UNAM</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
-        body { background-color: #f8f9fa; }
-        .card-header { background-color: #002B7A; color: white; font-weight: bold; }
-        .btn-unam { background-color: #D59F0F; color: white; font-weight: bold; }
-        .btn-unam:hover { background-color: #b58500; color: white; }
-        .materia-tag { font-size: 0.85em; background: #e9ecef; padding: 2px 6px; border-radius: 4px; }
-        .choque { background-color: #ffe6e6; color: #dc3545; }
-        .optimo { color: #198754; font-weight: bold; }
+        body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .header-unam { background: linear-gradient(90deg, #002B7A 0%, #001e57 100%); color: #D59F0F; padding: 20px 0; border-bottom: 5px solid #D59F0F; }
+        .card { border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 10px; }
+        .card-header { background-color: #fff; border-bottom: 2px solid #f0f0f0; font-weight: 600; }
+        .btn-unam { background-color: #002B7A; color: white; border: none; }
+        .btn-unam:hover { background-color: #D59F0F; color: #002B7A; font-weight: bold; }
+        .btn-outline-unam { color: #002B7A; border-color: #002B7A; }
+        .btn-outline-unam:hover { background-color: #002B7A; color: white; }
+        .nav-pills .nav-link.active { background-color: #D59F0F; color: #002B7A; font-weight: bold; }
+        .nav-pills .nav-link { color: #002B7A; }
+        .choque { background-color: #ffe6e6; color: #dc3545; opacity: 0.8; }
+        .hueco-badge { font-size: 0.8em; color: #dc3545; background: #fff5f5; padding: 2px 6px; border-radius: 4px; border: 1px solid #ffcccc; margin-right: 5px; display: inline-block; margin-top: 2px;}
+        .instrucciones-box { background-color: #e7f1ff; border-left: 5px solid #002B7A; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
-<div class="container py-4" id="app">
-    <div class="row mb-4">
-        <div class="col text-center">
-            <h1 class="display-6 fw-bold text-primary">🦁 Generador de Horarios UNAM</h1>
-            <p class="text-muted">Psicología - 6to Semestre</p>
-        </div>
-    </div>
+<div class="header-unam text-center mb-4">
+    <h1 class="fw-bold"><i class="bi bi-mortarboard-fill"></i> Generador de Horarios</h1>
+    <p class="mb-0 text-white">Facultad de Psicología - 6to Semestre</p>
+</div>
 
-    <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab">
-        <li class="nav-item">
-            <button class="nav-link active" id="tab-manual" onclick="cambiarModo('manual')">🛠️ Constructor Manual</button>
+<div class="container pb-5" id="app">
+
+    <ul class="nav nav-pills mb-4 justify-content-center" id="pills-tab">
+        <li class="nav-item mx-2">
+            <button class="nav-link active px-4 py-2" id="tab-manual" onclick="cambiarModo('manual')">
+                <i class="bi bi-tools"></i> Armado Manual
+            </button>
         </li>
-        <li class="nav-item">
-            <button class="nav-link" id="tab-auto" onclick="cambiarModo('auto')">🧪 Explorador (Automático)</button>
+        <li class="nav-item mx-2">
+            <button class="nav-link px-4 py-2" id="tab-auto" onclick="cambiarModo('auto')">
+                <i class="bi bi-magic"></i> Explorador Automático
+            </button>
         </li>
     </ul>
 
     <div id="vista-manual" class="row">
+        <div class="col-12 mb-3">
+            <div class="instrucciones-box">
+                <strong><i class="bi bi-info-circle-fill"></i> ¿Cómo funciona el Modo Manual?</strong>
+                <ul class="mb-0 ps-3 small">
+                    <li>Ideal si ya sabes con qué profesores quieres cursar.</li>
+                    <li>Busca la materia, selecciona el grupo y agrégalo.</li>
+                    <li>El sistema te avisará si intentas meter un grupo que choca con lo que ya tienes.</li>
+                </ul>
+            </div>
+        </div>
+
         <div class="col-md-5">
-            <div class="card shadow-sm">
-                <div class="card-header">1. Buscar Materia</div>
+            <div class="card h-100">
+                <div class="card-header text-primary"><i class="bi bi-search"></i> Catálogo de Materias</div>
                 <div class="card-body">
-                    <input type="text" id="buscador" class="form-control mb-3" placeholder="Ej: Clinica, Etica..." onkeyup="filtrarMaterias()">
-                    <div id="lista-materias" class="list-group" style="max-height: 300px; overflow-y: auto;">
+                    <input type="text" id="buscador" class="form-control mb-3" placeholder="Escribe para buscar (Ej: Clinica, Etica...)" onkeyup="filtrarMaterias()">
+                    <div id="lista-materias" class="list-group" style="max-height: 350px; overflow-y: auto;">
                         </div>
                 </div>
             </div>
 
-            <div class="card shadow-sm mt-3" id="panel-grupos" style="display:none;">
-                <div class="card-header bg-secondary text-white">2. Elegir Grupo</div>
+            <div class="card mt-3 border-warning" id="panel-grupos" style="display:none;">
+                <div class="card-header bg-warning text-dark d-flex justify-content-between">
+                    <span><i class="bi bi-people-fill"></i> Elige un Grupo</span>
+                    <button class="btn-close" onclick="document.getElementById('panel-grupos').style.display='none'"></button>
+                </div>
                 <div class="card-body p-0">
-                    <div id="lista-grupos" class="list-group list-group-flush" style="max-height: 400px; overflow-y: auto;">
-                        </div>
+                    <div id="lista-grupos" class="list-group list-group-flush" style="max-height: 400px; overflow-y: auto;"></div>
                 </div>
             </div>
         </div>
 
         <div class="col-md-7">
-            <div class="card shadow">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span>📅 Tu Horario</span>
-                    <span id="creditos-badge" class="badge bg-light text-dark">0 Créditos</span>
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center bg-light">
+                    <span>📅 Tu Horario Preliminar</span>
+                    <span id="creditos-badge" class="badge bg-secondary">0 Créditos</span>
                 </div>
                 <div class="card-body">
                     <div id="mi-horario">
-                        <p class="text-center text-muted mt-5">Tu mochila está vacía.<br>Selecciona materias de la izquierda.</p>
+                        <div class="text-center text-muted mt-5">
+                            <i class="bi bi-backpack display-4"></i>
+                            <p class="mt-2">No has inscrito materias aún.</p>
+                        </div>
                     </div>
                     
-                    <div class="alert alert-warning mt-3" id="alerta-etica" style="display:block;">
-                        🛑 <strong>Falta:</strong> ETICA PROFESIONAL
+                    <div class="alert alert-danger mt-3 py-2" id="alerta-etica" style="display:block;">
+                        <i class="bi bi-exclamation-triangle-fill"></i> <strong>Requisito Faltante:</strong> No has agregado "ETICA PROFESIONAL".
                     </div>
                 </div>
             </div>
@@ -74,34 +100,70 @@
     </div>
 
     <div id="vista-auto" class="row" style="display:none;">
+        
+        <div class="col-12 mb-3">
+            <div class="instrucciones-box">
+                <strong><i class="bi bi-lightbulb-fill"></i> ¿Cómo funciona el Explorador?</strong>
+                <ol class="mb-0 ps-3 small">
+                    <li><strong>Selecciona una materia</strong> de la lista.</li>
+                    <li>Marca <strong>varios profesores</strong> que te interesen (Candidatos).</li>
+                    <li>Repite con todas las materias que quieras cursar.</li>
+                    <li>Presiona <strong>"Generar Combinaciones"</strong> y el sistema encontrará los horarios perfectos sin choques.</li>
+                </ol>
+            </div>
+        </div>
+
         <div class="col-md-4">
-            <div class="card shadow-sm">
-                <div class="card-header">1. Configurar Bolsa</div>
+            <div class="card mb-3">
+                <div class="card-header text-primary"><i class="bi bi-basket-fill"></i> Configurar Candidatos</div>
                 <div class="card-body">
-                    <label>Agregar Materia a la Bolsa:</label>
-                    <select id="select-materia-auto" class="form-select mb-2" onchange="cargarProfesAuto()">
+                    <label class="form-label fw-bold">1. Elige Materia:</label>
+                    <select id="select-materia-auto" class="form-select mb-3" onchange="cargarProfesAuto()">
                         <option value="">-- Selecciona --</option>
                     </select>
                     
-                    <div id="area-profes-auto" class="border rounded p-2 mb-3 bg-light" style="max-height: 300px; overflow-y: auto; display:none;">
-                        </div>
+                    <div id="area-profes-auto" style="display:none;">
+                        <label class="form-label fw-bold text-success">2. Marca los profesores que te interesan:</label>
+                        <div id="lista-checks-profes" class="border rounded p-2 mb-3 bg-white" style="max-height: 250px; overflow-y: auto;"></div>
+                        <button class="btn btn-outline-primary w-100" onclick="agregarABolsa()">
+                            <i class="bi bi-plus-circle"></i> Confirmar Selección
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                    <button class="btn btn-outline-primary w-100 mb-3" onclick="agregarABolsa()">📥 Agregar a la Bolsa</button>
-                    
-                    <hr>
-                    <h5>📦 Tu Bolsa:</h5>
-                    <ul id="lista-bolsa" class="list-group mb-3"></ul>
-                    
-                    <button class="btn btn-unam w-100 py-2" onclick="generarCombinaciones()">🚀 GENERAR HORARIOS</button>
+            <div class="card">
+                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                    <span>📋 Mis Candidatos</span>
+                    <span id="contador-bolsa" class="badge bg-primary rounded-pill">0</span>
+                </div>
+                <ul id="lista-bolsa" class="list-group list-group-flush">
+                    <li class="list-group-item text-muted small text-center">Aún no seleccionas materias.</li>
+                </ul>
+                <div class="card-body">
+                    <button class="btn btn-unam w-100 py-2 fs-5 shadow" onclick="generarCombinaciones()">
+                        <i class="bi bi-cpu-fill"></i> GENERAR HORARIOS
+                    </button>
                 </div>
             </div>
         </div>
 
         <div class="col-md-8">
-            <div class="card shadow">
-                <div class="card-header">Resultados Generados</div>
-                <div class="card-body" id="resultados-auto">
-                    <p class="text-muted text-center mt-5">Configura tu bolsa y dale a "Generar".</p>
+            <div class="card h-100">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0 text-primary"><i class="bi bi-list-stars"></i> Resultados Generados</h5>
+                </div>
+                <div class="bg-light p-2 small border-bottom">
+                    <span class="me-3"><i class="bi bi-circle-fill text-success"></i> Óptimo</span>
+                    <span class="me-3"><i class="bi bi-circle-fill text-danger"></i> Exceso Créditos</span>
+                    <span class="me-3"><i class="bi bi-clock-history text-danger"></i> Horas Muertas (Huecos)</span>
+                </div>
+                
+                <div class="card-body bg-light" id="resultados-auto" style="min-height: 400px; overflow-y: auto;">
+                    <div class="text-center text-muted mt-5">
+                        <i class="bi bi-arrow-left-circle display-4"></i>
+                        <p class="mt-3">Configura tus candidatos a la izquierda y presiona Generar.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,318 +172,35 @@
 </div>
 
 <script>
-    let BD = []; // Aquí vivirá el JSON
+    let BD = [];
     let miHorario = [];
-    let bolsa = {}; // { "NombreMateria": [curso1, curso2] }
+    let candidatos = {}; // Renombrado de 'bolsa' a 'candidatos'
     const OBLIGATORIA = "ETICA PROFESIONAL";
 
-    // 1. CARGAR DATOS AL INICIO
+    // CARGAR DATOS
     fetch('horarios.json')
         .then(response => response.json())
         .then(data => {
             BD = data;
-            console.log("Datos cargados:", BD.length);
             llenarBuscadorManual();
             llenarSelectAuto();
         })
-        .catch(err => alert("Error cargando horarios.json. Asegúrate de correr el script de Python primero."));
+        .catch(err => alert("Error: No se encontró horarios.json."));
 
-    // --- FUNCIONES MODO MANUAL ---
-
-    function filtrarMaterias() {
-        const texto = document.getElementById('buscador').value.toUpperCase();
-        const lista = document.getElementById('lista-materias');
-        lista.innerHTML = '';
-
-        // Obtener nombres únicos
-        const nombres = [...new Set(BD.map(c => c.asignatura))].sort();
-
-        nombres.forEach(nombre => {
-            if (nombre.includes(texto)) {
-                // Verificar si ya está inscrita
-                if (miHorario.some(c => c.asignatura === nombre)) return;
-
-                const item = document.createElement('button');
-                item.className = 'list-group-item list-group-item-action';
-                item.innerText = nombre;
-                if(nombre === OBLIGATORIA) item.innerHTML += ' <span class="badge bg-warning text-dark">Obligatoria</span>';
-                
-                item.onclick = () => mostrarGrupos(nombre);
-                lista.appendChild(item);
-            }
-        });
+    // --- FUNCIONES COMUNES ---
+    
+    // Convertir minutos (480) a texto (08:00)
+    function minsAHora(mins) {
+        let h = Math.floor(mins / 60);
+        let m = mins % 60;
+        return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`;
     }
 
-    function mostrarGrupos(asignatura) {
-        document.getElementById('panel-grupos').style.display = 'block';
-        const lista = document.getElementById('lista-grupos');
-        lista.innerHTML = '';
-
-        const cursos = BD.filter(c => c.asignatura === asignatura).sort((a,b) => a.grupo - b.grupo);
-
-        cursos.forEach(curso => {
-            const choca = hayChoque(curso, miHorario);
-            const btn = document.createElement('button');
-            btn.className = `list-group-item list-group-item-action ${choca ? 'choque' : ''}`;
-            
-            let horarioTexto = curso.sesiones.map(s => `${s.dia.substr(0,3)} ${s.inicio}`).join(', ');
-            
-            btn.innerHTML = `
-                <div class="d-flex w-100 justify-content-between">
-                    <h6 class="mb-1">Gpo ${curso.grupo}</h6>
-                    <small>${curso.creditos} cr</small>
-                </div>
-                <p class="mb-1">${curso.profesor}</p>
-                <small>${horarioTexto}</small>
-            `;
-
-            if (!choca) {
-                btn.onclick = () => inscribir(curso);
-            } else {
-                btn.style.cursor = "not-allowed";
-                btn.title = "Choque de horario";
-            }
-            lista.appendChild(btn);
-        });
-    }
-
-    function inscribir(curso) {
-        miHorario.push(curso);
-        actualizarVistaHorario();
-        filtrarMaterias(); // Actualizar lista
-        document.getElementById('panel-grupos').style.display = 'none';
-        document.getElementById('buscador').value = '';
-    }
-
-    function borrarMateria(index) {
-        miHorario.splice(index, 1);
-        actualizarVistaHorario();
-        filtrarMaterias();
-    }
-
-    function actualizarVistaHorario() {
-        const contenedor = document.getElementById('mi-horario');
-        contenedor.innerHTML = '';
-        
-        let totalCreditos = 0;
-        let tieneEtica = false;
-
-        if (miHorario.length === 0) {
-            contenedor.innerHTML = '<p class="text-center text-muted mt-5">Tu mochila está vacía.</p>';
-        } else {
-            miHorario.forEach((curso, idx) => {
-                totalCreditos += curso.creditos;
-                if(curso.asignatura === OBLIGATORIA) tieneEtica = true;
-
-                const card = document.createElement('div');
-                card.className = 'card mb-2 border-start border-4 border-primary';
-                let horarioTxt = curso.sesiones.map(s => `${s.dia.substr(0,3)} ${s.inicio}-${s.fin}`).join(' | ');
-                
-                card.innerHTML = `
-                    <div class="card-body p-2 d-flex justify-content-between align-items-center">
-                        <div>
-                            <h6 class="mb-0 fw-bold">${curso.asignatura}</h6>
-                            <small class="text-muted">${curso.profesor} (Gpo ${curso.grupo})</small><br>
-                            <small class="text-primary">${horarioTxt}</small>
-                        </div>
-                        <button class="btn btn-sm btn-outline-danger" onclick="borrarMateria(${idx})">×</button>
-                    </div>
-                `;
-                contenedor.appendChild(card);
-            });
-        }
-
-        // Actualizar Badges
-        const badge = document.getElementById('creditos-badge');
-        badge.innerText = `${totalCreditos} / 41 Créditos`;
-        badge.className = totalCreditos > 41 ? 'badge bg-danger' : (totalCreditos >= 37 ? 'badge bg-success' : 'badge bg-warning text-dark');
-
-        const alertaEtica = document.getElementById('alerta-etica');
-        alertaEtica.style.display = tieneEtica ? 'none' : 'block';
-    }
-
-    // --- FUNCIONES MODO AUTOMATICO ---
-
-    function llenarSelectAuto() {
-        const sel = document.getElementById('select-materia-auto');
-        const nombres = [...new Set(BD.map(c => c.asignatura))].sort();
-        nombres.forEach(n => {
-            const opt = document.createElement('option');
-            opt.value = n;
-            opt.innerText = n;
-            sel.appendChild(opt);
-        });
-    }
-
-    function cargarProfesAuto() {
-        const nombre = document.getElementById('select-materia-auto').value;
-        const div = document.getElementById('area-profes-auto');
-        div.innerHTML = '';
-        if(!nombre) { div.style.display='none'; return; }
-        
-        div.style.display='block';
-        const cursos = BD.filter(c => c.asignatura === nombre).sort((a,b) => a.grupo - b.grupo);
-
-        cursos.forEach(c => {
-            const label = document.createElement('label');
-            label.className = 'd-block mb-1 small';
-            label.style.cursor = 'pointer';
-            
-            const check = document.createElement('input');
-            check.type = 'checkbox';
-            check.value = c.id;
-            check.className = 'me-2 check-profe';
-            
-            let hor = c.sesiones.map(s => `${s.dia.substr(0,3)} ${s.inicio}`).join(' ');
-            label.appendChild(check);
-            label.appendChild(document.createTextNode(`${c.grupo} - ${c.profesor.substr(0,20)}... [${hor}]`));
-            
-            div.appendChild(label);
-        });
-    }
-
-    function agregarABolsa() {
-        const nombre = document.getElementById('select-materia-auto').value;
-        if(!nombre) return;
-
-        // Obtener checkboxes marcados
-        const checks = document.querySelectorAll('.check-profe:checked');
-        if(checks.length === 0) { alert("Selecciona al menos un profesor."); return; }
-
-        const ids = Array.from(checks).map(c => parseInt(c.value));
-        const cursosSel = BD.filter(c => ids.includes(c.id));
-
-        bolsa[nombre] = cursosSel;
-        renderBolsa();
-        
-        // Limpiar
-        document.getElementById('select-materia-auto').value = "";
-        document.getElementById('area-profes-auto').style.display='none';
-    }
-
-    function renderBolsa() {
-        const ul = document.getElementById('lista-bolsa');
-        ul.innerHTML = '';
-        Object.keys(bolsa).forEach(mat => {
-            const li = document.createElement('li');
-            li.className = 'list-group-item d-flex justify-content-between align-items-center py-1';
-            li.innerHTML = `
-                <small>${mat} <span class="badge bg-secondary">${bolsa[mat].length} opc.</span></small>
-                <button class="btn btn-sm text-danger" onclick="borrarDeBolsa('${mat}')">×</button>
-            `;
-            ul.appendChild(li);
-        });
-    }
-
-    function borrarDeBolsa(mat) {
-        delete bolsa[mat];
-        renderBolsa();
-    }
-
-    // --- EL GENERADOR DE COMBINACIONES (JS) ---
-    async function generarCombinaciones() {
-        const resultadosDiv = document.getElementById('resultados-auto');
-        resultadosDiv.innerHTML = '<div class="text-center"><div class="spinner-border text-primary"></div><p>Calculando...</p></div>';
-        
-        // Pequeño delay para que la UI no se congele
-        await new Promise(r => setTimeout(r, 100));
-
-        const materias = Object.keys(bolsa);
-        if(materias.length === 0) { resultadosDiv.innerHTML = '<p class="text-danger">Bolsa vacía.</p>'; return; }
-
-        const listas = Object.values(bolsa);
-        
-        // Producto cartesiano
-        const cartesian = (...a) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
-        let combinaciones = cartesian(...listas);
-        
-        // Si solo hay 1 materia, cartesian devuelve array de cursos, hay que envolverlos
-        if (materias.length === 1) combinaciones = combinaciones.map(c => [c]);
-
-        const validos = [];
-        
-        for (let comb of combinaciones) {
-            if (!horarioEsValido(comb)) continue;
-            
-            // Calcular métricas
-            let huecos = 0;
-            let creditos = 0;
-            let diasSet = new Set();
-            let agenda = {};
-
-            comb.forEach(curso => {
-                creditos += curso.creditos;
-                curso.sesiones.forEach(s => {
-                    diasSet.add(s.dia);
-                    if(!agenda[s.dia]) agenda[s.dia] = [];
-                    agenda[s.dia].push([s.min_inicio, s.min_fin]);
-                });
-            });
-
-            // Huecos
-            for (let dia in agenda) {
-                let lapsos = agenda[dia].sort((a,b) => a[0] - b[0]);
-                for(let k=0; k<lapsos.length-1; k++) {
-                    let dif = lapsos[k+1][0] - lapsos[k][1];
-                    if(dif > 0) huecos += dif;
-                }
-            }
-
-            validos.push({ cursos: comb, creditos, huecos, dias: diasSet.size });
-            if (validos.length >= 100) break; // Limite
-        }
-
-        // Ordenar
-        validos.sort((a,b) => a.dias - b.dias || a.huecos - b.huecos);
-
-        // Renderizar
-        resultadosDiv.innerHTML = '';
-        if(validos.length === 0) {
-            resultadosDiv.innerHTML = '<div class="alert alert-danger">Todas las combinaciones chocan :(</div>';
-            return;
-        }
-
-        resultadosDiv.innerHTML = `<p class="text-success fw-bold">Se encontraron ${validos.length} opciones.</p>`;
-
-        validos.slice(0, 20).forEach((val, i) => {
-            const div = document.createElement('div');
-            div.className = 'card mb-3 shadow-sm';
-            
-            let contenidoCursos = val.cursos.map(c => `
-                <tr>
-                    <td><small>${c.asignatura}</small></td>
-                    <td><small>${c.profesor}</small></td>
-                    <td><small>${c.grupo}</small></td>
-                    <td><small>${c.sesiones.map(s=>s.dia.substr(0,3) + ' ' + s.inicio).join(' ')}</small></td>
-                </tr>
-            `).join('');
-
-            div.innerHTML = `
-                <div class="card-header bg-white d-flex justify-content-between">
-                    <strong>Opción ${i+1}</strong>
-                    <span class="badge ${val.creditos > 41 ? 'bg-danger' : 'bg-success'}">${val.creditos} Cr</span>
-                    <span class="badge bg-info text-dark">${val.dias} Días</span>
-                </div>
-                <div class="card-body p-0">
-                    <table class="table table-sm table-striped mb-0" style="font-size:0.85em;">
-                        ${contenidoCursos}
-                    </table>
-                </div>
-            `;
-            resultadosDiv.appendChild(div);
-        });
-    }
-
-    // --- UTILIDADES ---
     function cambiarModo(modo) {
-        document.getElementById('tab-manual').className = `nav-link ${modo==='manual'?'active':''}`;
-        document.getElementById('tab-auto').className = `nav-link ${modo==='auto'?'active':''}`;
+        document.getElementById('tab-manual').className = `nav-link px-4 py-2 ${modo==='manual'?'active':''}`;
+        document.getElementById('tab-auto').className = `nav-link px-4 py-2 ${modo==='auto'?'active':''}`;
         document.getElementById('vista-manual').style.display = modo==='manual'?'flex':'none';
         document.getElementById('vista-auto').style.display = modo==='auto'?'flex':'none';
-    }
-
-    function llenarBuscadorManual() {
-        filtrarMaterias(); // Llenar lista inicial
     }
 
     function hayChoque(cursoNuevo, listaAgendada) {
@@ -439,16 +218,308 @@
         return false;
     }
 
-    function horarioEsValido(listaCursos) {
-        for (let i = 0; i < listaCursos.length; i++) {
-            for (let j = i + 1; j < listaCursos.length; j++) {
-                if (hayChoque(listaCursos[i], [listaCursos[j]])) return false;
+    // --- MODO MANUAL ---
+
+    function filtrarMaterias() {
+        const texto = document.getElementById('buscador').value.toUpperCase();
+        const lista = document.getElementById('lista-materias');
+        lista.innerHTML = '';
+        const nombres = [...new Set(BD.map(c => c.asignatura))].sort();
+
+        nombres.forEach(nombre => {
+            if (nombre.includes(texto)) {
+                if (miHorario.some(c => c.asignatura === nombre)) return;
+                const btn = document.createElement('button');
+                btn.className = 'list-group-item list-group-item-action d-flex justify-content-between align-items-center';
+                btn.innerHTML = `<span>${nombre}</span>`;
+                if(nombre === OBLIGATORIA) btn.innerHTML += ' <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i></span>';
+                btn.onclick = () => mostrarGrupos(nombre);
+                lista.appendChild(btn);
             }
+        });
+    }
+
+    function mostrarGrupos(asignatura) {
+        document.getElementById('panel-grupos').style.display = 'block';
+        const lista = document.getElementById('lista-grupos');
+        lista.innerHTML = '';
+        const cursos = BD.filter(c => c.asignatura === asignatura).sort((a,b) => a.grupo - b.grupo);
+
+        cursos.forEach(curso => {
+            const choca = hayChoque(curso, miHorario);
+            const btn = document.createElement('button');
+            btn.className = `list-group-item list-group-item-action ${choca ? 'choque' : ''}`;
+            let horarioTxt = curso.sesiones.map(s => `<span class="badge bg-light text-dark border">${s.dia.substr(0,3)} ${s.inicio}</span>`).join(' ');
+            
+            btn.innerHTML = `
+                <div class="d-flex w-100 justify-content-between">
+                    <strong>Gpo ${curso.grupo}</strong>
+                    <span class="small text-muted">${curso.creditos} cr</span>
+                </div>
+                <div class="small text-primary mb-1">${curso.profesor}</div>
+                <div>${horarioTxt}</div>
+                ${choca ? '<div class="text-danger small mt-1"><i class="bi bi-x-circle"></i> Choque de horario</div>' : ''}
+            `;
+            if (!choca) btn.onclick = () => inscribir(curso);
+            lista.appendChild(btn);
+        });
+    }
+
+    function inscribir(curso) {
+        miHorario.push(curso);
+        actualizarVistaHorario();
+        filtrarMaterias();
+        document.getElementById('panel-grupos').style.display = 'none';
+        document.getElementById('buscador').value = '';
+    }
+
+    function actualizarVistaHorario() {
+        const contenedor = document.getElementById('mi-horario');
+        contenedor.innerHTML = '';
+        let totalCreditos = 0;
+        let tieneEtica = false;
+
+        if (miHorario.length === 0) {
+            contenedor.innerHTML = '<div class="text-center text-muted mt-5"><i class="bi bi-backpack display-4"></i><p>Vacío</p></div>';
+        } else {
+            miHorario.forEach((curso, idx) => {
+                totalCreditos += curso.creditos;
+                if(curso.asignatura === OBLIGATORIA) tieneEtica = true;
+                const div = document.createElement('div');
+                div.className = 'card mb-2 border-start border-4 border-primary shadow-sm';
+                let horarioTxt = curso.sesiones.map(s => `${s.dia.substr(0,3)} ${s.inicio}`).join(' | ');
+                
+                div.innerHTML = `
+                    <div class="card-body p-2 d-flex justify-content-between align-items-center">
+                        <div style="overflow:hidden;">
+                            <h6 class="mb-0 text-truncate" title="${curso.asignatura}">${curso.asignatura}</h6>
+                            <small class="text-muted">${curso.profesor} (${curso.grupo})</small><br>
+                            <small class="text-primary fw-bold">${horarioTxt}</small>
+                        </div>
+                        <button class="btn btn-sm text-danger fs-5" onclick="borrarMateria(${idx})">&times;</button>
+                    </div>
+                `;
+                contenedor.appendChild(div);
+            });
         }
-        return true;
+        
+        const badge = document.getElementById('creditos-badge');
+        badge.innerText = `${totalCreditos} Créditos`;
+        badge.className = `badge ${totalCreditos > 41 ? 'bg-danger' : (totalCreditos >= 37 ? 'bg-success' : 'bg-secondary')}`;
+        document.getElementById('alerta-etica').style.display = tieneEtica ? 'none' : 'block';
+    }
+
+    function borrarMateria(idx) { miHorario.splice(idx,1); actualizarVistaHorario(); filtrarMaterias(); }
+
+    // --- MODO AUTOMATICO ---
+
+    function llenarSelectAuto() {
+        const sel = document.getElementById('select-materia-auto');
+        const nombres = [...new Set(BD.map(c => c.asignatura))].sort();
+        nombres.forEach(n => {
+            const opt = document.createElement('option');
+            opt.value = n;
+            opt.innerText = n;
+            sel.appendChild(opt);
+        });
+    }
+
+    function cargarProfesAuto() {
+        const nombre = document.getElementById('select-materia-auto').value;
+        const div = document.getElementById('area-profes-auto');
+        const lista = document.getElementById('lista-checks-profes');
+        lista.innerHTML = '';
+        
+        if(!nombre) { div.style.display='none'; return; }
+        div.style.display='block';
+
+        const cursos = BD.filter(c => c.asignatura === nombre).sort((a,b) => a.grupo - b.grupo);
+        
+        cursos.forEach(c => {
+            let hor = c.sesiones.map(s => `${s.dia.substr(0,3)} ${s.inicio}`).join(' ');
+            const divCheck = document.createElement('div');
+            divCheck.className = 'form-check border-bottom py-1';
+            divCheck.innerHTML = `
+                <input class="form-check-input check-profe" type="checkbox" value="${c.id}" id="chk_${c.id}">
+                <label class="form-check-label small w-100" for="chk_${c.id}" style="cursor:pointer;">
+                    <strong>${c.profesor}</strong> <span class="text-muted">(Gpo ${c.grupo})</span><br>
+                    <span class="text-primary">${hor}</span>
+                </label>
+            `;
+            lista.appendChild(divCheck);
+        });
+    }
+
+    function agregarABolsa() {
+        const nombre = document.getElementById('select-materia-auto').value;
+        const checks = document.querySelectorAll('.check-profe:checked');
+        if(checks.length === 0) { alert("Selecciona al menos un profesor."); return; }
+        
+        const ids = Array.from(checks).map(c => parseInt(c.value));
+        candidatos[nombre] = BD.filter(c => ids.includes(c.id));
+        
+        renderCandidatos();
+        document.getElementById('select-materia-auto').value = "";
+        document.getElementById('area-profes-auto').style.display='none';
+    }
+
+    function renderCandidatos() {
+        const ul = document.getElementById('lista-bolsa');
+        const countBadge = document.getElementById('contador-bolsa');
+        ul.innerHTML = '';
+        const keys = Object.keys(candidatos);
+        countBadge.innerText = keys.length;
+
+        if(keys.length === 0) {
+            ul.innerHTML = '<li class="list-group-item text-muted small text-center">Aún no seleccionas materias.</li>';
+            return;
+        }
+
+        keys.forEach(mat => {
+            const li = document.createElement('li');
+            li.className = 'list-group-item d-flex justify-content-between align-items-center py-2';
+            li.innerHTML = `
+                <div style="line-height:1.2;">
+                    <small class="fw-bold d-block text-truncate" style="max-width:180px;">${mat}</small>
+                    <span class="badge bg-light text-dark border">${candidatos[mat].length} profes</span>
+                </div>
+                <button class="btn btn-sm text-danger" onclick="borrarDeCandidatos('${mat}')"><i class="bi bi-trash"></i></button>
+            `;
+            ul.appendChild(li);
+        });
+    }
+
+    function borrarDeCandidatos(mat) { delete candidatos[mat]; renderCandidatos(); }
+
+    async function generarCombinaciones() {
+        const resDiv = document.getElementById('resultados-auto');
+        resDiv.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary"></div><p class="mt-2">Analizando combinaciones...</p></div>';
+        
+        await new Promise(r => setTimeout(r, 100)); // UI refresh
+
+        const materias = Object.keys(candidatos);
+        if(materias.length === 0) { resDiv.innerHTML = '<div class="alert alert-warning">Selecciona candidatos primero.</div>'; return; }
+
+        const listas = Object.values(candidatos);
+        const cartesian = (...a) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
+        let rawCombs = cartesian(...listas);
+        if (materias.length === 1) rawCombs = rawCombs.map(c => [c]);
+
+        const validos = [];
+
+        for (let comb of rawCombs) {
+            // Check Choques
+            let esValido = true;
+            for(let i=0; i<comb.length; i++) {
+                for(let j=i+1; j<comb.length; j++) {
+                    if(hayChoque(comb[i], [comb[j]])) { esValido = false; break; }
+                }
+                if(!esValido) break;
+            }
+            if(!esValido) continue;
+
+            // Calcular Huecos y Datos
+            let totalCreds = 0;
+            let diasSet = new Set();
+            let agenda = {}; // { LUN: [[420, 480], [600, 720]] }
+
+            comb.forEach(c => {
+                totalCreds += c.creditos;
+                c.sesiones.forEach(s => {
+                    diasSet.add(s.dia);
+                    if(!agenda[s.dia]) agenda[s.dia] = [];
+                    agenda[s.dia].push([s.min_inicio, s.min_fin]);
+                });
+            });
+
+            // Detectar Huecos (Gaps) exactos
+            let minutosHueco = 0;
+            let detallesHueco = []; // ["LUN 11:00-13:00", "MIE ..."]
+
+            for (let dia in agenda) {
+                let lapsos = agenda[dia].sort((a,b) => a[0] - b[0]);
+                for(let k=0; k<lapsos.length-1; k++) {
+                    let finAnterior = lapsos[k][1];
+                    let inicioSiguiente = lapsos[k+1][0];
+                    let dif = inicioSiguiente - finAnterior;
+                    
+                    if(dif > 0) {
+                        minutosHueco += dif;
+                        detallesHueco.push(`${dia.substr(0,3)} ${minsAHora(finAnterior)}-${minsAHora(inicioSiguiente)}`);
+                    }
+                }
+            }
+
+            validos.push({ 
+                cursos: comb, 
+                creditos: totalCreds, 
+                dias: diasSet.size, 
+                huecos: minutosHueco,
+                listaHuecos: detallesHueco 
+            });
+            
+            if(validos.length >= 100) break;
+        }
+
+        // Ordenar: Menos dias -> Menos huecos
+        validos.sort((a,b) => a.dias - b.dias || a.huecos - b.huecos);
+
+        // Renderizar
+        if(validos.length === 0) {
+            resDiv.innerHTML = '<div class="alert alert-danger text-center"><i class="bi bi-emoji-frown"></i> Ups, todas las combinaciones chocan. Intenta con otros profesores.</div>';
+            return;
+        }
+
+        resDiv.innerHTML = `<div class="alert alert-success py-2"><i class="bi bi-check-circle-fill"></i> Se encontraron <strong>${validos.length}</strong> opciones posibles.</div>`;
+
+        validos.slice(0, 30).forEach((val, i) => {
+            const card = document.createElement('div');
+            card.className = 'card mb-3 border shadow-sm';
+            
+            // Construir badges de huecos
+            let htmlHuecos = '';
+            if(val.listaHuecos.length > 0) {
+                htmlHuecos = '<div class="mt-2 small border-top pt-1 text-danger fw-bold"><i class="bi bi-clock-history"></i> Huecos detectados: ' + 
+                             val.listaHuecos.map(h => `<span class="hueco-badge">${h}</span>`).join('') + 
+                             '</div>';
+            } else {
+                htmlHuecos = '<div class="mt-2 small border-top pt-1 text-success fw-bold"><i class="bi bi-stars"></i> Horario Compacto (Sin huecos)</div>';
+            }
+
+            // Construir tabla
+            let filas = val.cursos.map(c => `
+                <tr>
+                    <td class="fw-bold text-primary" style="font-size:0.9em;">${c.asignatura}</td>
+                    <td style="font-size:0.85em;">${c.profesor}</td>
+                    <td class="text-center" style="font-size:0.85em;">${c.grupo}</td>
+                    <td class="text-end" style="font-size:0.8em;">${c.sesiones.map(s=>s.dia.substr(0,3)+' '+s.inicio).join('<br>')}</td>
+                </tr>
+            `).join('');
+
+            card.innerHTML = `
+                <div class="card-header bg-white d-flex justify-content-between align-items-center py-2">
+                    <span class="badge bg-primary rounded-pill">Opción ${i+1}</span>
+                    <div>
+                        <span class="badge bg-light text-dark border me-1"><i class="bi bi-calendar3"></i> ${val.dias} Días</span>
+                        <span class="badge ${val.creditos>41?'bg-danger':(val.creditos>=37?'bg-success':'bg-warning text-dark')}">${val.creditos} Cr</span>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped mb-0 align-middle">
+                            <thead class="table-light small"><tr><th>Materia</th><th>Profesor</th><th>Gpo</th><th class="text-end">Horario</th></tr></thead>
+                            <tbody>${filas}</tbody>
+                        </table>
+                    </div>
+                    <div class="px-3 pb-2">
+                        ${htmlHuecos}
+                    </div>
+                </div>
+            `;
+            resDiv.appendChild(card);
+        });
     }
 </script>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
