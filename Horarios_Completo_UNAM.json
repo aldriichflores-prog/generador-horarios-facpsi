@@ -12,6 +12,8 @@
         "dia":"JUEVES",
         "hora_inicio":"07:30",
         "hora_fin":"09:30",
+        "min_inicio":450,
+        "min_fin":570,
         "salon":"A 104"
     },
     {
@@ -27,6 +29,8 @@
         "dia":"VIERNES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"A 104"
     },
     {
@@ -42,6 +46,8 @@
         "dia":"JUEVES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 307"
     },
     {
@@ -57,6 +63,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 306"
     },
     {
@@ -72,6 +80,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:30",
         "hora_fin":"11:00",
+        "min_inicio":570,
+        "min_fin":660,
         "salon":"A 208"
     },
     {
@@ -87,6 +97,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:30",
         "hora_fin":"11:00",
+        "min_inicio":570,
+        "min_fin":660,
         "salon":"A 208"
     },
     {
@@ -102,6 +114,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"09:30",
+        "min_inicio":480,
+        "min_fin":570,
         "salon":"A 208"
     },
     {
@@ -117,6 +131,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"08:00",
         "hora_fin":"09:30",
+        "min_inicio":480,
+        "min_fin":570,
         "salon":"A 306"
     },
     {
@@ -132,6 +148,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:30",
         "hora_fin":"12:30",
+        "min_inicio":570,
+        "min_fin":750,
         "salon":"A 106"
     },
     {
@@ -147,6 +165,8 @@
         "dia":"VIERNES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 305"
     },
     {
@@ -162,6 +182,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 105"
     },
     {
@@ -177,6 +199,8 @@
         "dia":"JUEVES",
         "hora_inicio":"07:30",
         "hora_fin":"09:30",
+        "min_inicio":450,
+        "min_fin":570,
         "salon":"A 208"
     },
     {
@@ -192,6 +216,8 @@
         "dia":"VIERNES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"A 208"
     },
     {
@@ -207,6 +233,8 @@
         "dia":"JUEVES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 208"
     },
     {
@@ -222,6 +250,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 106"
     },
     {
@@ -237,6 +267,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:30",
         "hora_fin":"11:00",
+        "min_inicio":570,
+        "min_fin":660,
         "salon":"A 104"
     },
     {
@@ -252,6 +284,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:30",
         "hora_fin":"11:00",
+        "min_inicio":570,
+        "min_fin":660,
         "salon":"A 104"
     },
     {
@@ -267,6 +301,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"09:30",
+        "min_inicio":480,
+        "min_fin":570,
         "salon":"A 303"
     },
     {
@@ -282,6 +318,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"08:00",
         "hora_fin":"09:30",
+        "min_inicio":480,
+        "min_fin":570,
         "salon":"A 303"
     },
     {
@@ -297,6 +335,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:30",
         "hora_fin":"12:30",
+        "min_inicio":570,
+        "min_fin":750,
         "salon":"A 306"
     },
     {
@@ -312,6 +352,8 @@
         "dia":"VIERNES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 209"
     },
     {
@@ -327,6 +369,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 208"
     },
     {
@@ -342,6 +386,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 305"
     },
     {
@@ -357,6 +403,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 305"
     },
     {
@@ -372,6 +420,8 @@
         "dia":"JUEVES",
         "hora_inicio":"10:30",
         "hora_fin":"13:30",
+        "min_inicio":630,
+        "min_fin":810,
         "salon":"A 305"
     },
     {
@@ -387,6 +437,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 303"
     },
     {
@@ -402,6 +454,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"10:30",
+        "min_inicio":540,
+        "min_fin":630,
         "salon":"A 305"
     },
     {
@@ -417,6 +471,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"10:30",
+        "min_inicio":540,
+        "min_fin":630,
         "salon":"A 305"
     },
     {
@@ -432,6 +488,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:30",
         "hora_fin":"10:00",
+        "min_inicio":510,
+        "min_fin":600,
         "salon":"A 105"
     },
     {
@@ -447,6 +505,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"08:30",
         "hora_fin":"10:00",
+        "min_inicio":510,
+        "min_fin":600,
         "salon":"A 105"
     },
     {
@@ -462,6 +522,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:30",
         "hora_fin":"13:30",
+        "min_inicio":630,
+        "min_fin":810,
         "salon":"A 305"
     },
     {
@@ -477,6 +539,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 305"
     },
     {
@@ -492,6 +556,8 @@
         "dia":"VIERNES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"A 303"
     },
     {
@@ -507,6 +573,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 104"
     },
     {
@@ -522,6 +590,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 104"
     },
     {
@@ -537,6 +607,8 @@
         "dia":"JUEVES",
         "hora_inicio":"10:30",
         "hora_fin":"13:30",
+        "min_inicio":630,
+        "min_fin":810,
         "salon":"A 106"
     },
     {
@@ -552,6 +624,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 104"
     },
     {
@@ -567,6 +641,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"10:30",
+        "min_inicio":540,
+        "min_fin":630,
         "salon":"A 307"
     },
     {
@@ -582,6 +658,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"10:30",
+        "min_inicio":540,
+        "min_fin":630,
         "salon":"A 203"
     },
     {
@@ -597,6 +675,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:30",
         "hora_fin":"10:00",
+        "min_inicio":510,
+        "min_fin":600,
         "salon":"A 104"
     },
     {
@@ -612,6 +692,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"08:30",
         "hora_fin":"10:00",
+        "min_inicio":510,
+        "min_fin":600,
         "salon":"A 104"
     },
     {
@@ -627,6 +709,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:30",
         "hora_fin":"13:30",
+        "min_inicio":630,
+        "min_fin":810,
         "salon":"A 203"
     },
     {
@@ -642,6 +726,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 104"
     },
     {
@@ -657,6 +743,8 @@
         "dia":"VIERNES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"A 209"
     },
     {
@@ -672,6 +760,8 @@
         "dia":"JUEVES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 210"
     },
     {
@@ -687,6 +777,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 209"
     },
     {
@@ -702,6 +794,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 307"
     },
     {
@@ -717,6 +811,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 106"
     },
     {
@@ -732,6 +828,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:30",
         "hora_fin":"10:00",
+        "min_inicio":510,
+        "min_fin":600,
         "salon":"A 108"
     },
     {
@@ -747,6 +845,8 @@
         "dia":"VIERNES",
         "hora_inicio":"08:30",
         "hora_fin":"10:00",
+        "min_inicio":510,
+        "min_fin":600,
         "salon":"A 203"
     },
     {
@@ -762,6 +862,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"11:30",
+        "min_inicio":600,
+        "min_fin":690,
         "salon":"A 305"
     },
     {
@@ -777,6 +879,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"11:00",
         "hora_fin":"12:30",
+        "min_inicio":660,
+        "min_fin":750,
         "salon":"A 208"
     },
     {
@@ -792,6 +896,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"A 208"
     },
     {
@@ -807,6 +913,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 208"
     },
     {
@@ -822,6 +930,8 @@
         "dia":"JUEVES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 105"
     },
     {
@@ -837,6 +947,8 @@
         "dia":"JUEVES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 105"
     },
     {
@@ -852,6 +964,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 303"
     },
     {
@@ -867,6 +981,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 106"
     },
     {
@@ -882,6 +998,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 306"
     },
     {
@@ -897,6 +1015,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:30",
         "hora_fin":"10:00",
+        "min_inicio":510,
+        "min_fin":600,
         "salon":"A 210"
     },
     {
@@ -912,6 +1032,8 @@
         "dia":"VIERNES",
         "hora_inicio":"08:30",
         "hora_fin":"10:00",
+        "min_inicio":510,
+        "min_fin":600,
         "salon":"A 210"
     },
     {
@@ -927,6 +1049,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"11:30",
+        "min_inicio":600,
+        "min_fin":690,
         "salon":"A 105"
     },
     {
@@ -942,6 +1066,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"11:00",
         "hora_fin":"12:30",
+        "min_inicio":660,
+        "min_fin":750,
         "salon":"A 105"
     },
     {
@@ -957,6 +1083,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"A 210"
     },
     {
@@ -972,6 +1100,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 110"
     },
     {
@@ -987,6 +1117,8 @@
         "dia":"JUEVES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 209"
     },
     {
@@ -1002,6 +1134,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"17:00",
+        "min_inicio":900,
+        "min_fin":1020,
         "salon":"A 210"
     },
     {
@@ -1017,6 +1151,8 @@
         "dia":"VIERNES",
         "hora_inicio":"15:00",
         "hora_fin":"17:00",
+        "min_inicio":900,
+        "min_fin":1020,
         "salon":"A 210"
     },
     {
@@ -1032,6 +1168,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 209"
     },
     {
@@ -1047,6 +1185,8 @@
         "dia":"VIERNES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 303"
     },
     {
@@ -1062,6 +1202,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:30",
         "hora_fin":"17:00",
+        "min_inicio":930,
+        "min_fin":1020,
         "salon":"A 108"
     },
     {
@@ -1077,6 +1219,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:30",
         "hora_fin":"19:00",
+        "min_inicio":1050,
+        "min_fin":1140,
         "salon":"A 307"
     },
     {
@@ -1092,6 +1236,8 @@
         "dia":"JUEVES",
         "hora_inicio":"17:00",
         "hora_fin":"18:30",
+        "min_inicio":1020,
+        "min_fin":1110,
         "salon":"A 108"
     },
     {
@@ -1107,6 +1253,8 @@
         "dia":"MARTES",
         "hora_inicio":"16:00",
         "hora_fin":"17:30",
+        "min_inicio":960,
+        "min_fin":1050,
         "salon":"A 106"
     },
     {
@@ -1122,6 +1270,8 @@
         "dia":"LUNES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"A 203"
     },
     {
@@ -1137,6 +1287,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 210"
     },
     {
@@ -1152,6 +1304,8 @@
         "dia":"MARTES",
         "hora_inicio":"14:00",
         "hora_fin":"16:00",
+        "min_inicio":840,
+        "min_fin":960,
         "salon":"A 305"
     },
     {
@@ -1167,6 +1321,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"17:00",
+        "min_inicio":900,
+        "min_fin":1020,
         "salon":"A 203"
     },
     {
@@ -1182,6 +1338,8 @@
         "dia":"VIERNES",
         "hora_inicio":"15:00",
         "hora_fin":"17:00",
+        "min_inicio":900,
+        "min_fin":1020,
         "salon":"A 106"
     },
     {
@@ -1197,6 +1355,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 305"
     },
     {
@@ -1212,6 +1372,8 @@
         "dia":"VIERNES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 305"
     },
     {
@@ -1227,6 +1389,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:30",
         "hora_fin":"17:00",
+        "min_inicio":930,
+        "min_fin":1020,
         "salon":"A 107"
     },
     {
@@ -1242,6 +1406,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:30",
         "hora_fin":"19:00",
+        "min_inicio":1050,
+        "min_fin":1140,
         "salon":"A 106"
     },
     {
@@ -1257,6 +1423,8 @@
         "dia":"JUEVES",
         "hora_inicio":"17:00",
         "hora_fin":"18:30",
+        "min_inicio":1020,
+        "min_fin":1110,
         "salon":"A 306"
     },
     {
@@ -1272,6 +1440,8 @@
         "dia":"MARTES",
         "hora_inicio":"16:00",
         "hora_fin":"17:30",
+        "min_inicio":960,
+        "min_fin":1050,
         "salon":"A 305"
     },
     {
@@ -1287,6 +1457,8 @@
         "dia":"LUNES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"A 208"
     },
     {
@@ -1302,6 +1474,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 203"
     },
     {
@@ -1317,6 +1491,8 @@
         "dia":"MARTES",
         "hora_inicio":"14:00",
         "hora_fin":"16:00",
+        "min_inicio":840,
+        "min_fin":960,
         "salon":"A 210"
     },
     {
@@ -1332,6 +1508,8 @@
         "dia":"JUEVES",
         "hora_inicio":"17:30",
         "hora_fin":"19:30",
+        "min_inicio":1050,
+        "min_fin":1170,
         "salon":"A 107"
     },
     {
@@ -1347,6 +1525,8 @@
         "dia":"LUNES",
         "hora_inicio":"17:00",
         "hora_fin":"19:00",
+        "min_inicio":1020,
+        "min_fin":1140,
         "salon":"A 303"
     },
     {
@@ -1362,6 +1542,8 @@
         "dia":"SABADO",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 106 11:00 A 14:00 A 106"
     },
     {
@@ -1377,6 +1559,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:30",
         "hora_fin":"19:00",
+        "min_inicio":1050,
+        "min_fin":1140,
         "salon":"A 108"
     },
     {
@@ -1392,6 +1576,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"18:00",
         "hora_fin":"19:30",
+        "min_inicio":1080,
+        "min_fin":1170,
         "salon":"A 107"
     },
     {
@@ -1407,6 +1593,8 @@
         "dia":"JUEVES",
         "hora_inicio":"16:00",
         "hora_fin":"17:30",
+        "min_inicio":960,
+        "min_fin":1050,
         "salon":"A 105"
     },
     {
@@ -1422,6 +1610,8 @@
         "dia":"MARTES",
         "hora_inicio":"16:00",
         "hora_fin":"17:30",
+        "min_inicio":960,
+        "min_fin":1050,
         "salon":"A 307"
     },
     {
@@ -1437,6 +1627,8 @@
         "dia":"LUNES",
         "hora_inicio":"14:00",
         "hora_fin":"17:00",
+        "min_inicio":840,
+        "min_fin":1020,
         "salon":"A 105"
     },
     {
@@ -1452,6 +1644,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"16:00",
         "hora_fin":"18:00",
+        "min_inicio":960,
+        "min_fin":1080,
         "salon":"A 105"
     },
     {
@@ -1467,6 +1661,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"14:00",
         "hora_fin":"16:00",
+        "min_inicio":840,
+        "min_fin":960,
         "salon":"A 305"
     },
     {
@@ -1482,6 +1678,8 @@
         "dia":"LUNES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"A 305"
     },
     {
@@ -1497,6 +1695,8 @@
         "dia":"MARTES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"A 305"
     },
     {
@@ -1512,6 +1712,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 104"
     },
     {
@@ -1527,6 +1729,8 @@
         "dia":"MARTES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 104"
     },
     {
@@ -1542,6 +1746,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"16:30",
+        "min_inicio":900,
+        "min_fin":990,
         "salon":"A 306"
     },
     {
@@ -1557,6 +1763,8 @@
         "dia":"VIERNES",
         "hora_inicio":"15:30",
         "hora_fin":"17:00",
+        "min_inicio":930,
+        "min_fin":1020,
         "salon":"A 303"
     },
     {
@@ -1572,6 +1780,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:30",
         "hora_fin":"18:00",
+        "min_inicio":990,
+        "min_fin":1080,
         "salon":"A 108"
     },
     {
@@ -1587,6 +1797,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"16:30",
         "hora_fin":"18:00",
+        "min_inicio":990,
+        "min_fin":1080,
         "salon":"A 106"
     },
     {
@@ -1602,6 +1814,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"14:30",
         "hora_fin":"16:30",
+        "min_inicio":870,
+        "min_fin":990,
         "salon":"A 306"
     },
     {
@@ -1617,6 +1831,8 @@
         "dia":"VIERNES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 209"
     },
     {
@@ -1632,6 +1848,8 @@
         "dia":"JUEVES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"A 303"
     },
     {
@@ -1647,6 +1865,8 @@
         "dia":"LUNES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"A 210"
     },
     {
@@ -1662,6 +1882,8 @@
         "dia":"MARTES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"A 210"
     },
     {
@@ -1677,6 +1899,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 209"
     },
     {
@@ -1692,6 +1916,8 @@
         "dia":"MARTES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 105"
     },
     {
@@ -1707,6 +1933,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"16:30",
+        "min_inicio":900,
+        "min_fin":990,
         "salon":"A 104"
     },
     {
@@ -1722,6 +1950,8 @@
         "dia":"VIERNES",
         "hora_inicio":"15:30",
         "hora_fin":"17:00",
+        "min_inicio":930,
+        "min_fin":1020,
         "salon":"A 104"
     },
     {
@@ -1737,6 +1967,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:30",
         "hora_fin":"18:00",
+        "min_inicio":990,
+        "min_fin":1080,
         "salon":"A 306"
     },
     {
@@ -1752,6 +1984,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"16:30",
         "hora_fin":"18:00",
+        "min_inicio":990,
+        "min_fin":1080,
         "salon":"A 305"
     },
     {
@@ -1767,6 +2001,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"14:30",
         "hora_fin":"16:30",
+        "min_inicio":870,
+        "min_fin":990,
         "salon":"A 106"
     },
     {
@@ -1782,6 +2018,8 @@
         "dia":"VIERNES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 210"
     },
     {
@@ -1797,6 +2035,8 @@
         "dia":"JUEVES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"A 305"
     },
     {
@@ -1812,6 +2052,8 @@
         "dia":"JUEVES",
         "hora_inicio":"13:00",
         "hora_fin":"15:00",
+        "min_inicio":780,
+        "min_fin":900,
         "salon":"A 107"
     },
     {
@@ -1827,6 +2069,8 @@
         "dia":"MARTES",
         "hora_inicio":"13:00",
         "hora_fin":"15:00",
+        "min_inicio":780,
+        "min_fin":900,
         "salon":"A 107"
     },
     {
@@ -1842,6 +2086,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 208"
     },
     {
@@ -1857,6 +2103,8 @@
         "dia":"MARTES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 306"
     },
     {
@@ -1872,6 +2120,8 @@
         "dia":"LUNES",
         "hora_inicio":"17:00",
         "hora_fin":"18:30",
+        "min_inicio":1020,
+        "min_fin":1110,
         "salon":"A 104"
     },
     {
@@ -1887,6 +2137,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"13:30",
         "hora_fin":"15:00",
+        "min_inicio":810,
+        "min_fin":900,
         "salon":"A 203"
     },
     {
@@ -1902,6 +2154,8 @@
         "dia":"LUNES",
         "hora_inicio":"18:30",
         "hora_fin":"20:00",
+        "min_inicio":1110,
+        "min_fin":1200,
         "salon":"A 209"
     },
     {
@@ -1917,6 +2171,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"18:00",
         "hora_fin":"19:30",
+        "min_inicio":1080,
+        "min_fin":1170,
         "salon":"A 209"
     },
     {
@@ -1932,6 +2188,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"17:00",
+        "min_inicio":900,
+        "min_fin":1020,
         "salon":"A 303"
     },
     {
@@ -1947,6 +2205,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 107"
     },
     {
@@ -1962,6 +2222,8 @@
         "dia":"LUNES",
         "hora_inicio":"13:00",
         "hora_fin":"15:00",
+        "min_inicio":780,
+        "min_fin":900,
         "salon":"A 303"
     },
     {
@@ -1977,6 +2239,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 101"
     },
     {
@@ -1992,6 +2256,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 101"
     },
     {
@@ -2007,6 +2273,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 310"
     },
     {
@@ -2022,6 +2290,8 @@
         "dia":"LUNES",
         "hora_inicio":"11:00",
         "hora_fin":"13:00",
+        "min_inicio":660,
+        "min_fin":780,
         "salon":"B 17"
     },
     {
@@ -2037,6 +2307,8 @@
         "dia":"SABADO",
         "hora_inicio":"08:00",
         "hora_fin":"16:00",
+        "min_inicio":480,
+        "min_fin":960,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2052,6 +2324,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"17:30",
+        "min_inicio":900,
+        "min_fin":1050,
         "salon":"URIDES 3 EDIF C"
     },
     {
@@ -2067,6 +2341,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:00",
         "hora_fin":"17:30",
+        "min_inicio":900,
+        "min_fin":1050,
         "salon":"URIDES 3 EDIF C"
     },
     {
@@ -2082,6 +2358,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2097,6 +2375,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"B 12"
     },
     {
@@ -2112,6 +2392,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"B 12"
     },
     {
@@ -2127,6 +2409,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2142,6 +2426,8 @@
         "dia":"SABADO",
         "hora_inicio":"08:00",
         "hora_fin":"16:00",
+        "min_inicio":480,
+        "min_fin":960,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2157,6 +2443,8 @@
         "dia":"JUEVES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 101"
     },
     {
@@ -2172,6 +2460,8 @@
         "dia":"VIERNES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 101"
     },
     {
@@ -2187,6 +2477,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"EDIF C SALON 3"
     },
     {
@@ -2202,6 +2494,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"B 12"
     },
     {
@@ -2217,6 +2511,8 @@
         "dia":"VIERNES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"B 12"
     },
     {
@@ -2232,6 +2528,8 @@
         "dia":"JUEVES",
         "hora_inicio":"16:00",
         "hora_fin":"21:00",
+        "min_inicio":960,
+        "min_fin":1260,
         "salon":"A 211"
     },
     {
@@ -2247,6 +2545,8 @@
         "dia":"SABADO",
         "hora_inicio":"08:00",
         "hora_fin":"13:00",
+        "min_inicio":480,
+        "min_fin":780,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2262,6 +2562,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 311"
     },
     {
@@ -2277,6 +2579,8 @@
         "dia":"LUNES",
         "hora_inicio":"17:00",
         "hora_fin":"19:00",
+        "min_inicio":1020,
+        "min_fin":1140,
         "salon":"B 12"
     },
     {
@@ -2292,6 +2596,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"17:00",
         "hora_fin":"19:00",
+        "min_inicio":1020,
+        "min_fin":1140,
         "salon":"B 12"
     },
     {
@@ -2307,6 +2613,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2322,6 +2630,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2337,6 +2647,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2352,6 +2664,8 @@
         "dia":"JUEVES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2367,6 +2681,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2382,6 +2698,8 @@
         "dia":"MARTES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"EDIF C SALON 2"
     },
     {
@@ -2397,6 +2715,8 @@
         "dia":"JUEVES",
         "hora_inicio":"11:00",
         "hora_fin":"13:00",
+        "min_inicio":660,
+        "min_fin":780,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2412,6 +2732,8 @@
         "dia":"VIERNES",
         "hora_inicio":"11:00",
         "hora_fin":"13:00",
+        "min_inicio":660,
+        "min_fin":780,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2427,6 +2749,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2442,6 +2766,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2457,6 +2783,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2472,6 +2800,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2487,6 +2817,8 @@
         "dia":"VIERNES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2502,6 +2834,8 @@
         "dia":"MARTES",
         "hora_inicio":"19:00",
         "hora_fin":"22:00",
+        "min_inicio":1140,
+        "min_fin":1320,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2517,6 +2851,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"B 12"
     },
     {
@@ -2532,6 +2868,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:30",
         "hora_fin":"12:30",
+        "min_inicio":630,
+        "min_fin":750,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2547,6 +2885,8 @@
         "dia":"SABADO",
         "hora_inicio":"08:00",
         "hora_fin":"18:00",
+        "min_inicio":480,
+        "min_fin":1080,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2562,6 +2902,8 @@
         "dia":"VIERNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 314"
     },
     {
@@ -2577,6 +2919,8 @@
         "dia":"SABADO",
         "hora_inicio":"08:00",
         "hora_fin":"18:00",
+        "min_inicio":480,
+        "min_fin":1080,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2592,6 +2936,8 @@
         "dia":"SABADO",
         "hora_inicio":"08:00",
         "hora_fin":"18:00",
+        "min_inicio":480,
+        "min_fin":1080,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2607,6 +2953,8 @@
         "dia":"SABADO",
         "hora_inicio":"08:00",
         "hora_fin":"18:00",
+        "min_inicio":480,
+        "min_fin":1080,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2622,6 +2970,8 @@
         "dia":"SABADO",
         "hora_inicio":"09:00",
         "hora_fin":"19:00",
+        "min_inicio":540,
+        "min_fin":1140,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2637,6 +2987,8 @@
         "dia":"SABADO",
         "hora_inicio":"08:00",
         "hora_fin":"18:00",
+        "min_inicio":480,
+        "min_fin":1080,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2652,6 +3004,8 @@
         "dia":"MARTES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 308"
     },
     {
@@ -2667,6 +3021,8 @@
         "dia":"SABADO",
         "hora_inicio":"09:00",
         "hora_fin":"16:00",
+        "min_inicio":540,
+        "min_fin":960,
         "salon":"A 303"
     },
     {
@@ -2682,6 +3038,8 @@
         "dia":"VIERNES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 302"
     },
     {
@@ -2697,6 +3055,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 302"
     },
     {
@@ -2712,6 +3072,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"07:00",
         "hora_fin":"10:00",
+        "min_inicio":420,
+        "min_fin":600,
         "salon":"A 107"
     },
     {
@@ -2727,6 +3089,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 302"
     },
     {
@@ -2742,6 +3106,8 @@
         "dia":"JUEVES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 309"
     },
     {
@@ -2757,6 +3123,8 @@
         "dia":"VIERNES",
         "hora_inicio":"09:00",
         "hora_fin":"16:00",
+        "min_inicio":540,
+        "min_fin":960,
         "salon":"URIDES 1 EDIF C"
     },
     {
@@ -2772,6 +3140,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 109"
     },
     {
@@ -2787,6 +3157,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 107"
     },
     {
@@ -2802,6 +3174,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 207"
     },
     {
@@ -2817,6 +3191,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 109"
     },
     {
@@ -2832,6 +3208,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"URIDES 1 EDIF C"
     },
     {
@@ -2847,6 +3225,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"15:00",
+        "min_inicio":480,
+        "min_fin":900,
         "salon":"A 308"
     },
     {
@@ -2862,6 +3242,8 @@
         "dia":"JUEVES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 110"
     },
     {
@@ -2877,6 +3259,8 @@
         "dia":"MARTES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 302"
     },
     {
@@ -2892,6 +3276,8 @@
         "dia":"LUNES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 105"
     },
     {
@@ -2907,6 +3293,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 206"
     },
     {
@@ -2922,6 +3310,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 208"
     },
     {
@@ -2937,6 +3327,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 207"
     },
     {
@@ -2952,6 +3344,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 206"
     },
     {
@@ -2967,6 +3361,8 @@
         "dia":"MARTES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 110"
     },
     {
@@ -2982,6 +3378,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -2997,6 +3395,8 @@
         "dia":"JUEVES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 109"
     },
     {
@@ -3012,6 +3412,8 @@
         "dia":"LUNES",
         "hora_inicio":"11:00",
         "hora_fin":"13:00",
+        "min_inicio":660,
+        "min_fin":780,
         "salon":"A 201"
     },
     {
@@ -3027,6 +3429,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 204"
     },
     {
@@ -3042,6 +3446,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 002"
     },
     {
@@ -3057,6 +3463,8 @@
         "dia":"MARTES",
         "hora_inicio":"14:00",
         "hora_fin":"17:00",
+        "min_inicio":840,
+        "min_fin":1020,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -3072,6 +3480,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 002"
     },
     {
@@ -3087,6 +3497,8 @@
         "dia":"VIERNES",
         "hora_inicio":"12:00",
         "hora_fin":"16:00",
+        "min_inicio":720,
+        "min_fin":960,
         "salon":"A 003"
     },
     {
@@ -3102,6 +3514,8 @@
         "dia":"LUNES",
         "hora_inicio":"13:00",
         "hora_fin":"14:30",
+        "min_inicio":780,
+        "min_fin":870,
         "salon":"A 107"
     },
     {
@@ -3117,6 +3531,8 @@
         "dia":"JUEVES",
         "hora_inicio":"12:00",
         "hora_fin":"13:30",
+        "min_inicio":720,
+        "min_fin":810,
         "salon":"A 207"
     },
     {
@@ -3132,6 +3548,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"A 306"
     },
     {
@@ -3147,6 +3565,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"A 107"
     },
     {
@@ -3162,6 +3582,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 205"
     },
     {
@@ -3177,6 +3599,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 202"
     },
     {
@@ -3192,6 +3616,8 @@
         "dia":"LUNES",
         "hora_inicio":"11:00",
         "hora_fin":"12:30",
+        "min_inicio":660,
+        "min_fin":750,
         "salon":"A 302"
     },
     {
@@ -3207,6 +3633,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"11:00",
         "hora_fin":"12:30",
+        "min_inicio":660,
+        "min_fin":750,
         "salon":"A 301"
     },
     {
@@ -3222,6 +3650,8 @@
         "dia":"LUNES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"B 07"
     },
     {
@@ -3237,6 +3667,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"B 07"
     },
     {
@@ -3252,6 +3684,8 @@
         "dia":"MARTES",
         "hora_inicio":"19:30",
         "hora_fin":"21:00",
+        "min_inicio":1170,
+        "min_fin":1260,
         "salon":"A 104"
     },
     {
@@ -3267,6 +3701,8 @@
         "dia":"JUEVES",
         "hora_inicio":"19:30",
         "hora_fin":"21:00",
+        "min_inicio":1170,
+        "min_fin":1260,
         "salon":"A 104"
     },
     {
@@ -3282,6 +3718,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 308"
     },
     {
@@ -3297,6 +3735,8 @@
         "dia":"MARTES",
         "hora_inicio":"15:30",
         "hora_fin":"19:30",
+        "min_inicio":930,
+        "min_fin":1170,
         "salon":"A 002"
     },
     {
@@ -3312,6 +3752,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:30",
         "hora_fin":"18:00",
+        "min_inicio":990,
+        "min_fin":1080,
         "salon":"A 107"
     },
     {
@@ -3327,6 +3769,8 @@
         "dia":"JUEVES",
         "hora_inicio":"16:30",
         "hora_fin":"18:00",
+        "min_inicio":990,
+        "min_fin":1080,
         "salon":"A 304"
     },
     {
@@ -3342,6 +3786,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 211"
     },
     {
@@ -3357,6 +3803,8 @@
         "dia":"JUEVES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 211"
     },
     {
@@ -3372,6 +3820,8 @@
         "dia":"JUEVES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 102"
     },
     {
@@ -3387,6 +3837,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"18:00",
         "hora_fin":"19:30",
+        "min_inicio":1080,
+        "min_fin":1170,
         "salon":"A 304"
     },
     {
@@ -3402,6 +3854,8 @@
         "dia":"VIERNES",
         "hora_inicio":"16:00",
         "hora_fin":"17:30",
+        "min_inicio":960,
+        "min_fin":1050,
         "salon":"A 304"
     },
     {
@@ -3417,6 +3871,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 002"
     },
     {
@@ -3432,6 +3888,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 002"
     },
     {
@@ -3447,6 +3905,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 206"
     },
     {
@@ -3462,6 +3922,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 201"
     },
     {
@@ -3477,6 +3939,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 301"
     },
     {
@@ -3492,6 +3956,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"12:00",
+        "min_inicio":480,
+        "min_fin":720,
         "salon":"A 314"
     },
     {
@@ -3507,6 +3973,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 207"
     },
     {
@@ -3522,6 +3990,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"B 17"
     },
     {
@@ -3537,6 +4007,8 @@
         "dia":"VIERNES",
         "hora_inicio":"07:00",
         "hora_fin":"11:00",
+        "min_inicio":420,
+        "min_fin":660,
         "salon":"A 314"
     },
     {
@@ -3552,6 +4024,8 @@
         "dia":"LUNES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 105"
     },
     {
@@ -3567,6 +4041,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"13:00",
         "hora_fin":"15:00",
+        "min_inicio":780,
+        "min_fin":900,
         "salon":"A 304"
     },
     {
@@ -3582,6 +4058,8 @@
         "dia":"JUEVES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 202"
     },
     {
@@ -3597,6 +4075,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 102"
     },
     {
@@ -3612,6 +4092,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 101"
     },
     {
@@ -3627,6 +4109,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 101"
     },
     {
@@ -3642,6 +4126,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 101"
     },
     {
@@ -3657,6 +4143,8 @@
         "dia":"VIERNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 102"
     },
     {
@@ -3672,6 +4160,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 102"
     },
     {
@@ -3687,6 +4177,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 110"
     },
     {
@@ -3702,6 +4194,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"EDIF C SALON 4"
     },
     {
@@ -3717,6 +4211,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:30",
         "hora_fin":"14:30",
+        "min_inicio":750,
+        "min_fin":870,
         "salon":"A 301"
     },
     {
@@ -3732,6 +4228,8 @@
         "dia":"LUNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 314"
     },
     {
@@ -3747,6 +4245,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 309"
     },
     {
@@ -3762,6 +4262,8 @@
         "dia":"JUEVES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 312"
     },
     {
@@ -3777,6 +4279,8 @@
         "dia":"MARTES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"A 203"
     },
     {
@@ -3792,6 +4296,8 @@
         "dia":"JUEVES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"B 07"
     },
     {
@@ -3807,6 +4313,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 211"
     },
     {
@@ -3822,6 +4330,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 114"
     },
     {
@@ -3837,6 +4347,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 114"
     },
     {
@@ -3852,6 +4364,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:00",
         "hora_fin":"12:00",
+        "min_inicio":480,
+        "min_fin":720,
         "salon":"A 202"
     },
     {
@@ -3867,6 +4381,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 310"
     },
     {
@@ -3882,6 +4398,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 310"
     },
     {
@@ -3897,6 +4415,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"14:00",
+        "min_inicio":600,
+        "min_fin":840,
         "salon":"A 308"
     },
     {
@@ -3912,6 +4432,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 002"
     },
     {
@@ -3927,6 +4449,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 002"
     },
     {
@@ -3942,6 +4466,8 @@
         "dia":"VIERNES",
         "hora_inicio":"15:00",
         "hora_fin":"19:00",
+        "min_inicio":900,
+        "min_fin":1140,
         "salon":"A 205"
     },
     {
@@ -3957,6 +4483,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"19:00",
+        "min_inicio":900,
+        "min_fin":1140,
         "salon":"A 003"
     },
     {
@@ -3972,6 +4500,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"B 07"
     },
     {
@@ -3987,6 +4517,8 @@
         "dia":"LUNES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 202"
     },
     {
@@ -4002,6 +4534,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"B 17"
     },
     {
@@ -4017,6 +4551,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"19:00",
+        "min_inicio":900,
+        "min_fin":1140,
         "salon":"A 110"
     },
     {
@@ -4032,6 +4568,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 211"
     },
     {
@@ -4047,6 +4585,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 201"
     },
     {
@@ -4062,6 +4602,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"19:00",
+        "min_inicio":900,
+        "min_fin":1140,
         "salon":"A 211"
     },
     {
@@ -4077,6 +4619,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"16:00",
         "hora_fin":"20:00",
+        "min_inicio":960,
+        "min_fin":1200,
         "salon":"A 109"
     },
     {
@@ -4092,6 +4636,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 309"
     },
     {
@@ -4107,6 +4653,8 @@
         "dia":"VIERNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 309"
     },
     {
@@ -4122,6 +4670,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"17:00",
+        "min_inicio":900,
+        "min_fin":1020,
         "salon":"B 07"
     },
     {
@@ -4137,6 +4687,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:00",
         "hora_fin":"17:00",
+        "min_inicio":900,
+        "min_fin":1020,
         "salon":"A 302"
     },
     {
@@ -4152,6 +4704,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:00",
         "hora_fin":"12:00",
+        "min_inicio":480,
+        "min_fin":720,
         "salon":"EDIF C SALON 1"
     },
     {
@@ -4167,6 +4721,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 207"
     },
     {
@@ -4182,6 +4738,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 205"
     },
     {
@@ -4197,6 +4755,8 @@
         "dia":"MARTES",
         "hora_inicio":"16:00",
         "hora_fin":"20:00",
+        "min_inicio":960,
+        "min_fin":1200,
         "salon":"A 203"
     },
     {
@@ -4212,6 +4772,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 301"
     },
     {
@@ -4227,6 +4789,8 @@
         "dia":"MARTES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 110"
     },
     {
@@ -4242,6 +4806,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"16:00",
         "hora_fin":"20:00",
+        "min_inicio":960,
+        "min_fin":1200,
         "salon":"A 110"
     },
     {
@@ -4257,6 +4823,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 312"
     },
     {
@@ -4272,6 +4840,8 @@
         "dia":"VIERNES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 204"
     },
     {
@@ -4287,6 +4857,8 @@
         "dia":"JUEVES",
         "hora_inicio":"16:00",
         "hora_fin":"20:00",
+        "min_inicio":960,
+        "min_fin":1200,
         "salon":"A 114"
     },
     {
@@ -4302,6 +4874,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 203"
     },
     {
@@ -4317,6 +4891,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"A 201"
     },
     {
@@ -4332,6 +4908,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"A 201"
     },
     {
@@ -4347,6 +4925,8 @@
         "dia":"VIERNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 304"
     },
     {
@@ -4362,6 +4942,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"13:00",
+        "min_inicio":480,
+        "min_fin":780,
         "salon":"UDEMAT EDIF A"
     },
     {
@@ -4377,6 +4959,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"13:00",
+        "min_inicio":480,
+        "min_fin":780,
         "salon":"UDEMAT EDIF A"
     },
     {
@@ -4392,6 +4976,8 @@
         "dia":"LUNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 304"
     },
     {
@@ -4407,6 +4993,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"A 205"
     },
     {
@@ -4422,6 +5010,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"EDIF C SALA TUT 1"
     },
     {
@@ -4437,6 +5027,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"11:30",
         "hora_fin":"14:30",
+        "min_inicio":690,
+        "min_fin":870,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -4452,6 +5044,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 204"
     },
     {
@@ -4467,6 +5061,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"EDIF C SALA TUT 1"
     },
     {
@@ -4482,6 +5078,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"URIDES 1 EDIF C"
     },
     {
@@ -4497,6 +5095,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:00",
         "hora_fin":"15:00",
+        "min_inicio":600,
+        "min_fin":900,
         "salon":"ESCENARIO"
     },
     {
@@ -4512,6 +5112,8 @@
         "dia":"JUEVES",
         "hora_inicio":"10:00",
         "hora_fin":"15:00",
+        "min_inicio":600,
+        "min_fin":900,
         "salon":"ESCENARIO"
     },
     {
@@ -4527,6 +5129,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -4542,6 +5146,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -4557,6 +5163,8 @@
         "dia":"SABADO",
         "hora_inicio":"09:00",
         "hora_fin":"13:00",
+        "min_inicio":540,
+        "min_fin":780,
         "salon":"A 205"
     },
     {
@@ -4572,6 +5180,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 301"
     },
     {
@@ -4587,6 +5197,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 207"
     },
     {
@@ -4602,6 +5214,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"14:00",
+        "min_inicio":600,
+        "min_fin":840,
         "salon":"A 301"
     },
     {
@@ -4617,6 +5231,8 @@
         "dia":"LUNES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 301"
     },
     {
@@ -4632,6 +5248,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 110"
     },
     {
@@ -4647,6 +5265,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 205"
     },
     {
@@ -4662,6 +5282,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"EDIF C SALON 2"
     },
     {
@@ -4677,6 +5299,8 @@
         "dia":"MARTES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"B 17"
     },
     {
@@ -4692,6 +5316,8 @@
         "dia":"JUEVES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"B 17"
     },
     {
@@ -4707,6 +5333,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 110"
     },
     {
@@ -4722,6 +5350,8 @@
         "dia":"JUEVES",
         "hora_inicio":"11:00",
         "hora_fin":"13:00",
+        "min_inicio":660,
+        "min_fin":780,
         "salon":"A 302"
     },
     {
@@ -4737,6 +5367,8 @@
         "dia":"LUNES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"B 07"
     },
     {
@@ -4752,6 +5384,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"B 07"
     },
     {
@@ -4767,6 +5401,8 @@
         "dia":"MARTES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -4782,6 +5418,8 @@
         "dia":"VIERNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 201"
     },
     {
@@ -4797,6 +5435,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:00",
         "hora_fin":"14:00",
+        "min_inicio":600,
+        "min_fin":840,
         "salon":"A 304"
     },
     {
@@ -4812,6 +5452,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:00",
         "hora_fin":"20:00",
+        "min_inicio":960,
+        "min_fin":1200,
         "salon":"A 205"
     },
     {
@@ -4827,6 +5469,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 101"
     },
     {
@@ -4842,6 +5486,8 @@
         "dia":"JUEVES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 101"
     },
     {
@@ -4857,6 +5503,8 @@
         "dia":"JUEVES",
         "hora_inicio":"16:00",
         "hora_fin":"20:00",
+        "min_inicio":960,
+        "min_fin":1200,
         "salon":"B 17"
     },
     {
@@ -4872,6 +5520,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 207"
     },
     {
@@ -4887,6 +5537,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 205"
     },
     {
@@ -4902,6 +5554,8 @@
         "dia":"MARTES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 304"
     },
     {
@@ -4917,6 +5571,8 @@
         "dia":"JUEVES",
         "hora_inicio":"13:00",
         "hora_fin":"16:00",
+        "min_inicio":780,
+        "min_fin":960,
         "salon":"A 204"
     },
     {
@@ -4932,6 +5588,8 @@
         "dia":"VIERNES",
         "hora_inicio":"15:00",
         "hora_fin":"19:00",
+        "min_inicio":900,
+        "min_fin":1140,
         "salon":"B 17"
     },
     {
@@ -4947,6 +5605,8 @@
         "dia":"MARTES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"B 07"
     },
     {
@@ -4962,6 +5622,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"B 07"
     },
     {
@@ -4977,6 +5639,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 206"
     },
     {
@@ -4992,6 +5656,8 @@
         "dia":"LUNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 206"
     },
     {
@@ -5007,6 +5673,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 109"
     },
     {
@@ -5022,6 +5690,8 @@
         "dia":"VIERNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 307"
     },
     {
@@ -5037,6 +5707,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 206"
     },
     {
@@ -5052,6 +5724,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 206"
     },
     {
@@ -5067,6 +5741,8 @@
         "dia":"JUEVES",
         "hora_inicio":"13:30",
         "hora_fin":"15:30",
+        "min_inicio":810,
+        "min_fin":930,
         "salon":"A 108"
     },
     {
@@ -5082,6 +5758,8 @@
         "dia":"JUEVES",
         "hora_inicio":"10:30",
         "hora_fin":"13:30",
+        "min_inicio":630,
+        "min_fin":810,
         "salon":"A 108"
     },
     {
@@ -5097,6 +5775,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"13:00",
         "hora_fin":"15:00",
+        "min_inicio":780,
+        "min_fin":900,
         "salon":"A 107"
     },
     {
@@ -5112,6 +5792,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 210"
     },
     {
@@ -5127,6 +5809,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:30",
         "hora_fin":"14:30",
+        "min_inicio":750,
+        "min_fin":870,
         "salon":"A 302"
     },
     {
@@ -5142,6 +5826,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:30",
         "hora_fin":"12:30",
+        "min_inicio":570,
+        "min_fin":750,
         "salon":"A 302"
     },
     {
@@ -5157,6 +5843,8 @@
         "dia":"VIERNES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"A 307"
     },
     {
@@ -5172,6 +5860,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 108"
     },
     {
@@ -5187,6 +5877,8 @@
         "dia":"MARTES",
         "hora_inicio":"15:00",
         "hora_fin":"17:00",
+        "min_inicio":900,
+        "min_fin":1020,
         "salon":"A 107"
     },
     {
@@ -5202,6 +5894,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 107"
     },
     {
@@ -5217,6 +5911,8 @@
         "dia":"JUEVES",
         "hora_inicio":"16:00",
         "hora_fin":"18:00",
+        "min_inicio":960,
+        "min_fin":1080,
         "salon":"A 206"
     },
     {
@@ -5232,6 +5928,8 @@
         "dia":"MARTES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 301"
     },
     {
@@ -5247,6 +5945,8 @@
         "dia":"JUEVES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"A 307"
     },
     {
@@ -5262,6 +5962,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 206"
     },
     {
@@ -5277,6 +5979,8 @@
         "dia":"JUEVES",
         "hora_inicio":"13:00",
         "hora_fin":"15:00",
+        "min_inicio":780,
+        "min_fin":900,
         "salon":"A 302"
     },
     {
@@ -5292,6 +5996,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 301"
     },
     {
@@ -5307,6 +6013,8 @@
         "dia":"MARTES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"A 109"
     },
     {
@@ -5322,6 +6030,8 @@
         "dia":"MARTES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 206"
     },
     {
@@ -5337,6 +6047,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"17:00",
+        "min_inicio":900,
+        "min_fin":1020,
         "salon":"A 108"
     },
     {
@@ -5352,6 +6064,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 108"
     },
     {
@@ -5367,6 +6081,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 311"
     },
     {
@@ -5382,6 +6098,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"15:00",
+        "min_inicio":480,
+        "min_fin":900,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5397,6 +6115,8 @@
         "dia":"SABADO",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5412,6 +6132,8 @@
         "dia":"VIERNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"B 07"
     },
     {
@@ -5427,6 +6149,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 311"
     },
     {
@@ -5442,6 +6166,8 @@
         "dia":"VIERNES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"A 205"
     },
     {
@@ -5457,6 +6183,8 @@
         "dia":"LUNES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5472,6 +6200,8 @@
         "dia":"MARTES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5487,6 +6217,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5502,6 +6234,8 @@
         "dia":"JUEVES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5517,6 +6251,8 @@
         "dia":"VIERNES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5532,6 +6268,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 312"
     },
     {
@@ -5547,6 +6285,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 310"
     },
     {
@@ -5562,6 +6302,8 @@
         "dia":"SABADO",
         "hora_inicio":"08:00",
         "hora_fin":"18:00",
+        "min_inicio":480,
+        "min_fin":1080,
         "salon":"A 304"
     },
     {
@@ -5577,6 +6319,8 @@
         "dia":"JUEVES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 310"
     },
     {
@@ -5592,6 +6336,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 313"
     },
     {
@@ -5607,6 +6353,8 @@
         "dia":"JUEVES",
         "hora_inicio":"10:00",
         "hora_fin":"17:00",
+        "min_inicio":600,
+        "min_fin":1020,
         "salon":"B 12"
     },
     {
@@ -5622,6 +6370,8 @@
         "dia":"LUNES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5637,6 +6387,8 @@
         "dia":"MARTES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5652,6 +6404,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5667,6 +6421,8 @@
         "dia":"JUEVES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5682,6 +6438,8 @@
         "dia":"VIERNES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5697,6 +6455,8 @@
         "dia":"LUNES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5712,6 +6472,8 @@
         "dia":"MARTES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5727,6 +6489,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5742,6 +6506,8 @@
         "dia":"JUEVES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5757,6 +6523,8 @@
         "dia":"VIERNES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5772,6 +6540,8 @@
         "dia":"SABADO",
         "hora_inicio":"08:00",
         "hora_fin":"18:00",
+        "min_inicio":480,
+        "min_fin":1080,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5787,6 +6557,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 312"
     },
     {
@@ -5802,6 +6574,8 @@
         "dia":"VIERNES",
         "hora_inicio":"11:00",
         "hora_fin":"15:00",
+        "min_inicio":660,
+        "min_fin":900,
         "salon":"A 308"
     },
     {
@@ -5817,6 +6591,8 @@
         "dia":"JUEVES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 302"
     },
     {
@@ -5832,6 +6608,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"17:30",
         "hora_fin":"20:30",
+        "min_inicio":1050,
+        "min_fin":1230,
         "salon":"A 303"
     },
     {
@@ -5847,6 +6625,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"15:00",
+        "min_inicio":600,
+        "min_fin":900,
         "salon":"URIDES 3 EDIF C"
     },
     {
@@ -5862,6 +6642,8 @@
         "dia":"JUEVES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"EDIF C SALON 3"
     },
     {
@@ -5877,6 +6659,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"14:00",
+        "min_inicio":600,
+        "min_fin":840,
         "salon":"A 001"
     },
     {
@@ -5892,6 +6676,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 001"
     },
     {
@@ -5907,6 +6693,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 207"
     },
     {
@@ -5922,6 +6710,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:00",
         "hora_fin":"20:00",
+        "min_inicio":600,
+        "min_fin":1200,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -5937,6 +6727,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 207"
     },
     {
@@ -5952,6 +6744,8 @@
         "dia":"LUNES",
         "hora_inicio":"13:00",
         "hora_fin":"16:00",
+        "min_inicio":780,
+        "min_fin":960,
         "salon":"A 302"
     },
     {
@@ -5967,6 +6761,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"URIDES 2 EDIF C"
     },
     {
@@ -5982,6 +6778,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"15:00",
+        "min_inicio":600,
+        "min_fin":900,
         "salon":"A 107"
     },
     {
@@ -5997,6 +6795,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 203"
     },
     {
@@ -6012,6 +6812,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:00",
         "hora_fin":"16:00",
+        "min_inicio":600,
+        "min_fin":960,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -6027,6 +6829,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"18:30",
+        "min_inicio":900,
+        "min_fin":1110,
         "salon":"URIDES 2 EDIF C"
     },
     {
@@ -6042,6 +6846,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:30",
         "hora_fin":"13:00",
+        "min_inicio":570,
+        "min_fin":780,
         "salon":"URIDES 3 EDIF C"
     },
     {
@@ -6057,6 +6863,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 303"
     },
     {
@@ -6072,6 +6880,8 @@
         "dia":"MARTES",
         "hora_inicio":"13:00",
         "hora_fin":"16:00",
+        "min_inicio":780,
+        "min_fin":960,
         "salon":"A 003"
     },
     {
@@ -6087,6 +6897,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"15:00",
+        "min_inicio":600,
+        "min_fin":900,
         "salon":"A 312"
     },
     {
@@ -6102,6 +6914,8 @@
         "dia":"JUEVES",
         "hora_inicio":"10:00",
         "hora_fin":"15:00",
+        "min_inicio":600,
+        "min_fin":900,
         "salon":"EDIF C SALON 1"
     },
     {
@@ -6117,6 +6931,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"15:00",
+        "min_inicio":600,
+        "min_fin":900,
         "salon":"A 202"
     },
     {
@@ -6132,6 +6948,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -6147,6 +6965,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:00",
         "hora_fin":"15:00",
+        "min_inicio":540,
+        "min_fin":900,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -6162,6 +6982,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 304"
     },
     {
@@ -6177,6 +6999,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"16:00",
+        "min_inicio":600,
+        "min_fin":960,
         "salon":"A 109"
     },
     {
@@ -6192,6 +7016,8 @@
         "dia":"VIERNES",
         "hora_inicio":"07:00",
         "hora_fin":"10:00",
+        "min_inicio":420,
+        "min_fin":600,
         "salon":"A 101"
     },
     {
@@ -6207,6 +7033,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -6222,6 +7050,8 @@
         "dia":"VIERNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"B 17"
     },
     {
@@ -6237,6 +7067,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 204"
     },
     {
@@ -6252,6 +7084,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 304"
     },
     {
@@ -6267,6 +7101,8 @@
         "dia":"MARTES",
         "hora_inicio":"13:00",
         "hora_fin":"16:00",
+        "min_inicio":780,
+        "min_fin":960,
         "salon":"A 109"
     },
     {
@@ -6282,6 +7118,8 @@
         "dia":"VIERNES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 207"
     },
     {
@@ -6297,6 +7135,8 @@
         "dia":"LUNES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"B 05"
     },
     {
@@ -6312,6 +7152,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"B 05"
     },
     {
@@ -6327,6 +7169,8 @@
         "dia":"MARTES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 003"
     },
     {
@@ -6342,6 +7186,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 101"
     },
     {
@@ -6357,6 +7203,8 @@
         "dia":"LUNES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 102"
     },
     {
@@ -6372,6 +7220,8 @@
         "dia":"VIERNES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 102"
     },
     {
@@ -6387,6 +7237,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"A 002"
     },
     {
@@ -6402,6 +7254,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"A 106"
     },
     {
@@ -6417,6 +7271,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:00",
         "hora_fin":"12:00",
+        "min_inicio":480,
+        "min_fin":720,
         "salon":"A 107"
     },
     {
@@ -6432,6 +7288,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 102"
     },
     {
@@ -6447,6 +7305,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 003"
     },
     {
@@ -6462,6 +7322,8 @@
         "dia":"VIERNES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 003"
     },
     {
@@ -6477,6 +7339,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 312"
     },
     {
@@ -6492,6 +7356,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 113"
     },
     {
@@ -6507,6 +7373,8 @@
         "dia":"VIERNES",
         "hora_inicio":"11:00",
         "hora_fin":"15:00",
+        "min_inicio":660,
+        "min_fin":900,
         "salon":"A 110"
     },
     {
@@ -6522,6 +7390,8 @@
         "dia":"LUNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 310"
     },
     {
@@ -6537,6 +7407,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 310"
     },
     {
@@ -6552,6 +7424,8 @@
         "dia":"JUEVES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 204"
     },
     {
@@ -6567,6 +7441,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"14:00",
+        "min_inicio":480,
+        "min_fin":840,
         "salon":"A 313"
     },
     {
@@ -6582,6 +7458,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"11:00",
+        "min_inicio":600,
+        "min_fin":660,
         "salon":"EDIF C SALON 3 11:00 A 14:00 EDIF C SALON 3"
     },
     {
@@ -6597,6 +7475,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"EDIF C SALON 2"
     },
     {
@@ -6612,6 +7492,8 @@
         "dia":"MARTES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 101"
     },
     {
@@ -6627,6 +7509,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 101"
     },
     {
@@ -6642,6 +7526,8 @@
         "dia":"VIERNES",
         "hora_inicio":"08:00",
         "hora_fin":"12:00",
+        "min_inicio":480,
+        "min_fin":720,
         "salon":"A 207"
     },
     {
@@ -6657,6 +7543,8 @@
         "dia":"SABADO",
         "hora_inicio":"08:00",
         "hora_fin":"14:00",
+        "min_inicio":480,
+        "min_fin":840,
         "salon":"A 211"
     },
     {
@@ -6672,6 +7560,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 310"
     },
     {
@@ -6687,6 +7577,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 309"
     },
     {
@@ -6702,6 +7594,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 314"
     },
     {
@@ -6717,6 +7611,8 @@
         "dia":"JUEVES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 314"
     },
     {
@@ -6732,6 +7628,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"08:00",
         "hora_fin":"12:00",
+        "min_inicio":480,
+        "min_fin":720,
         "salon":"A 313"
     },
     {
@@ -6747,6 +7645,8 @@
         "dia":"LUNES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 101"
     },
     {
@@ -6762,6 +7662,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"12:00",
+        "min_inicio":480,
+        "min_fin":720,
         "salon":"A 001"
     },
     {
@@ -6777,6 +7679,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 313"
     },
     {
@@ -6792,6 +7696,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 313"
     },
     {
@@ -6807,6 +7713,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 313"
     },
     {
@@ -6822,6 +7730,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"EDIF C SALON 3"
     },
     {
@@ -6837,6 +7747,8 @@
         "dia":"JUEVES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 102"
     },
     {
@@ -6852,6 +7764,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 003"
     },
     {
@@ -6867,6 +7781,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 211"
     },
     {
@@ -6882,6 +7798,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"12:00",
+        "min_inicio":480,
+        "min_fin":720,
         "salon":"A 312"
     },
     {
@@ -6897,6 +7815,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 211"
     },
     {
@@ -6912,6 +7832,8 @@
         "dia":"SABADO",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 101"
     },
     {
@@ -6927,6 +7849,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 211"
     },
     {
@@ -6942,6 +7866,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 309"
     },
     {
@@ -6957,6 +7883,8 @@
         "dia":"VIERNES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 211"
     },
     {
@@ -6972,6 +7900,8 @@
         "dia":"LUNES",
         "hora_inicio":"13:00",
         "hora_fin":"15:00",
+        "min_inicio":780,
+        "min_fin":900,
         "salon":"A 308"
     },
     {
@@ -6987,6 +7917,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"13:00",
         "hora_fin":"15:00",
+        "min_inicio":780,
+        "min_fin":900,
         "salon":"A 002"
     },
     {
@@ -7002,6 +7934,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"B 17"
     },
     {
@@ -7017,6 +7951,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 211"
     },
     {
@@ -7032,6 +7968,8 @@
         "dia":"LUNES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 207"
     },
     {
@@ -7047,6 +7985,8 @@
         "dia":"VIERNES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"B 07"
     },
     {
@@ -7062,6 +8002,8 @@
         "dia":"MARTES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 003"
     },
     {
@@ -7077,6 +8019,8 @@
         "dia":"JUEVES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 003"
     },
     {
@@ -7092,6 +8036,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 110"
     },
     {
@@ -7107,6 +8053,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 205"
     },
     {
@@ -7122,6 +8070,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"A 312"
     },
     {
@@ -7137,6 +8087,8 @@
         "dia":"LUNES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 308"
     },
     {
@@ -7152,6 +8104,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:00",
         "hora_fin":"19:00",
+        "min_inicio":1020,
+        "min_fin":1140,
         "salon":"A 308"
     },
     {
@@ -7167,6 +8121,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:00",
         "hora_fin":"21:00",
+        "min_inicio":900,
+        "min_fin":1260,
         "salon":"A 314"
     },
     {
@@ -7182,6 +8138,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"19:00",
+        "min_inicio":900,
+        "min_fin":1140,
         "salon":"A 301"
     },
     {
@@ -7197,6 +8155,8 @@
         "dia":"JUEVES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"ESCENARIO"
     },
     {
@@ -7212,6 +8172,8 @@
         "dia":"VIERNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"EDIF C SALON 3"
     },
     {
@@ -7227,6 +8189,8 @@
         "dia":"LUNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"EDIF C SALON 3"
     },
     {
@@ -7242,6 +8206,8 @@
         "dia":"VIERNES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 204"
     },
     {
@@ -7257,6 +8223,8 @@
         "dia":"VIERNES",
         "hora_inicio":"08:00",
         "hora_fin":"13:00",
+        "min_inicio":480,
+        "min_fin":780,
         "salon":"A 206"
     },
     {
@@ -7272,6 +8240,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"19:00",
+        "min_inicio":900,
+        "min_fin":1140,
         "salon":"A 001"
     },
     {
@@ -7287,6 +8257,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 310"
     },
     {
@@ -7302,6 +8274,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"A 102"
     },
     {
@@ -7317,6 +8291,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -7332,6 +8308,8 @@
         "dia":"JUEVES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 110"
     },
     {
@@ -7347,6 +8325,8 @@
         "dia":"VIERNES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 101"
     },
     {
@@ -7362,6 +8342,8 @@
         "dia":"LUNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 110"
     },
     {
@@ -7377,6 +8359,8 @@
         "dia":"MARTES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -7392,6 +8376,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"12:00",
+        "min_inicio":480,
+        "min_fin":720,
         "salon":"EDIF C SALON 4"
     },
     {
@@ -7407,6 +8393,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:00",
         "hora_fin":"18:00",
+        "min_inicio":960,
+        "min_fin":1080,
         "salon":"A 203"
     },
     {
@@ -7422,6 +8410,8 @@
         "dia":"MARTES",
         "hora_inicio":"16:00",
         "hora_fin":"20:00",
+        "min_inicio":960,
+        "min_fin":1200,
         "salon":"A 102"
     },
     {
@@ -7437,6 +8427,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 309"
     },
     {
@@ -7452,6 +8444,8 @@
         "dia":"VIERNES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"A 109"
     },
     {
@@ -7467,6 +8461,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"17:00",
+        "min_inicio":900,
+        "min_fin":1020,
         "salon":"A 101"
     },
     {
@@ -7482,6 +8478,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 003"
     },
     {
@@ -7497,6 +8495,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:00",
         "hora_fin":"19:00",
+        "min_inicio":1020,
+        "min_fin":1140,
         "salon":"A 113"
     },
     {
@@ -7512,6 +8512,8 @@
         "dia":"JUEVES",
         "hora_inicio":"17:00",
         "hora_fin":"19:00",
+        "min_inicio":1020,
+        "min_fin":1140,
         "salon":"A 001"
     },
     {
@@ -7527,6 +8529,8 @@
         "dia":"VIERNES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 309"
     },
     {
@@ -7542,6 +8546,8 @@
         "dia":"SABADO",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 309"
     },
     {
@@ -7557,6 +8563,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 302"
     },
     {
@@ -7572,6 +8580,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:00",
         "hora_fin":"19:00",
+        "min_inicio":1020,
+        "min_fin":1140,
         "salon":"A 309"
     },
     {
@@ -7587,6 +8597,8 @@
         "dia":"JUEVES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 309"
     },
     {
@@ -7602,6 +8614,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 308"
     },
     {
@@ -7617,6 +8631,8 @@
         "dia":"JUEVES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 310"
     },
     {
@@ -7632,6 +8648,8 @@
         "dia":"LUNES",
         "hora_inicio":"17:00",
         "hora_fin":"19:00",
+        "min_inicio":1020,
+        "min_fin":1140,
         "salon":"A 112"
     },
     {
@@ -7647,6 +8665,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"17:00",
+        "min_inicio":900,
+        "min_fin":1020,
         "salon":"A 304"
     },
     {
@@ -7662,6 +8682,8 @@
         "dia":"MARTES",
         "hora_inicio":"14:00",
         "hora_fin":"17:00",
+        "min_inicio":840,
+        "min_fin":1020,
         "salon":"A 308"
     },
     {
@@ -7677,6 +8699,8 @@
         "dia":"VIERNES",
         "hora_inicio":"15:00",
         "hora_fin":"17:00",
+        "min_inicio":900,
+        "min_fin":1020,
         "salon":"A 310"
     },
     {
@@ -7692,6 +8716,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"ESCENARIO"
     },
     {
@@ -7707,6 +8733,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 309"
     },
     {
@@ -7722,6 +8750,8 @@
         "dia":"VIERNES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 309"
     },
     {
@@ -7737,6 +8767,8 @@
         "dia":"MARTES",
         "hora_inicio":"13:00",
         "hora_fin":"15:00",
+        "min_inicio":780,
+        "min_fin":900,
         "salon":"A 002"
     },
     {
@@ -7752,6 +8784,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"13:00",
         "hora_fin":"15:00",
+        "min_inicio":780,
+        "min_fin":900,
         "salon":"A 205"
     },
     {
@@ -7767,6 +8801,8 @@
         "dia":"MARTES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"A 205"
     },
     {
@@ -7782,6 +8818,8 @@
         "dia":"JUEVES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"A 205"
     },
     {
@@ -7797,6 +8835,8 @@
         "dia":"LUNES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 311"
     },
     {
@@ -7812,6 +8852,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"13:00",
+        "min_inicio":540,
+        "min_fin":780,
         "salon":"A 311"
     },
     {
@@ -7827,6 +8869,8 @@
         "dia":"LUNES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 101"
     },
     {
@@ -7842,6 +8886,8 @@
         "dia":"VIERNES",
         "hora_inicio":"09:00",
         "hora_fin":"14:00",
+        "min_inicio":540,
+        "min_fin":840,
         "salon":"A 310"
     },
     {
@@ -7857,6 +8903,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"13:00",
         "hora_fin":"16:00",
+        "min_inicio":780,
+        "min_fin":960,
         "salon":"A 102"
     },
     {
@@ -7872,6 +8920,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 102"
     },
     {
@@ -7887,6 +8937,8 @@
         "dia":"MARTES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 204"
     },
     {
@@ -7902,6 +8954,8 @@
         "dia":"VIERNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 204"
     },
     {
@@ -7917,6 +8971,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 314"
     },
     {
@@ -7932,6 +8988,8 @@
         "dia":"JUEVES",
         "hora_inicio":"14:00",
         "hora_fin":"17:00",
+        "min_inicio":840,
+        "min_fin":1020,
         "salon":"A 001"
     },
     {
@@ -7947,6 +9005,8 @@
         "dia":"LUNES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -7962,6 +9022,8 @@
         "dia":"LUNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 204"
     },
     {
@@ -7977,6 +9039,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"14:00",
+        "min_inicio":480,
+        "min_fin":840,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -7992,6 +9056,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"14:00",
+        "min_inicio":480,
+        "min_fin":840,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -8007,6 +9073,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 304"
     },
     {
@@ -8022,6 +9090,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 204"
     },
     {
@@ -8037,6 +9107,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"UDEMAT EDIF A"
     },
     {
@@ -8052,6 +9124,8 @@
         "dia":"JUEVES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"UDEMAT EDIF A"
     },
     {
@@ -8067,6 +9141,8 @@
         "dia":"SABADO",
         "hora_inicio":"10:00",
         "hora_fin":"16:00",
+        "min_inicio":600,
+        "min_fin":960,
         "salon":"A 204"
     },
     {
@@ -8082,6 +9158,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 307"
     },
     {
@@ -8097,6 +9175,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 201"
     },
     {
@@ -8112,6 +9192,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"15:00",
+        "min_inicio":540,
+        "min_fin":900,
         "salon":"SAL. JUNTAS 2 EDIF B"
     },
     {
@@ -8127,6 +9209,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"15:00",
+        "min_inicio":540,
+        "min_fin":900,
         "salon":"SAL. JUNTAS 2 EDIF B"
     },
     {
@@ -8142,6 +9226,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 102"
     },
     {
@@ -8157,6 +9243,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 204"
     },
     {
@@ -8172,6 +9260,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 202"
     },
     {
@@ -8187,6 +9277,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"15:00",
+        "min_inicio":540,
+        "min_fin":900,
         "salon":"URIDES 2 EDIF C"
     },
     {
@@ -8202,6 +9294,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"15:00",
+        "min_inicio":540,
+        "min_fin":900,
         "salon":"URIDES 2 EDIF C"
     },
     {
@@ -8217,6 +9311,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 205"
     },
     {
@@ -8232,6 +9328,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 204"
     },
     {
@@ -8247,6 +9345,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"14:00",
+        "min_inicio":480,
+        "min_fin":840,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -8262,6 +9362,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"14:00",
+        "min_inicio":480,
+        "min_fin":840,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -8277,6 +9379,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"14:00",
+        "min_inicio":480,
+        "min_fin":840,
         "salon":"SAL. JUNTAS 1 EDIF B"
     },
     {
@@ -8292,6 +9396,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"14:00",
+        "min_inicio":480,
+        "min_fin":840,
         "salon":"SAL. JUNTAS 1 EDIF B"
     },
     {
@@ -8307,6 +9413,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"15:00",
+        "min_inicio":540,
+        "min_fin":900,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -8322,6 +9430,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"15:00",
+        "min_inicio":540,
+        "min_fin":900,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -8337,6 +9447,8 @@
         "dia":"MARTES",
         "hora_inicio":"14:00",
         "hora_fin":"20:00",
+        "min_inicio":840,
+        "min_fin":1200,
         "salon":"ESCENARIO"
     },
     {
@@ -8352,6 +9464,8 @@
         "dia":"JUEVES",
         "hora_inicio":"14:00",
         "hora_fin":"20:00",
+        "min_inicio":840,
+        "min_fin":1200,
         "salon":"ESCENARIO"
     },
     {
@@ -8367,6 +9481,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"15:00",
+        "min_inicio":540,
+        "min_fin":900,
         "salon":"URIDES 3 EDIF C"
     },
     {
@@ -8382,6 +9498,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"15:00",
+        "min_inicio":540,
+        "min_fin":900,
         "salon":"URIDES 3 EDIF C"
     },
     {
@@ -8397,6 +9515,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"14:00",
+        "min_inicio":480,
+        "min_fin":840,
         "salon":"ESCENARIO"
     },
     {
@@ -8412,6 +9532,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"14:00",
+        "min_inicio":480,
+        "min_fin":840,
         "salon":"ESCENARIO"
     },
     {
@@ -8427,6 +9549,8 @@
         "dia":"VIERNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 113"
     },
     {
@@ -8442,6 +9566,8 @@
         "dia":"JUEVES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 314"
     },
     {
@@ -8457,6 +9583,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 314"
     },
     {
@@ -8472,6 +9600,8 @@
         "dia":"VIERNES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 211"
     },
     {
@@ -8487,6 +9617,8 @@
         "dia":"JUEVES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 205"
     },
     {
@@ -8502,6 +9634,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 301"
     },
     {
@@ -8517,6 +9651,8 @@
         "dia":"MARTES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"EDIF C SALON 4"
     },
     {
@@ -8532,6 +9668,8 @@
         "dia":"LUNES",
         "hora_inicio":"10:00",
         "hora_fin":"13:00",
+        "min_inicio":600,
+        "min_fin":780,
         "salon":"A 307"
     },
     {
@@ -8547,6 +9685,8 @@
         "dia":"MARTES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 301"
     },
     {
@@ -8562,6 +9702,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"07:00",
         "hora_fin":"10:00",
+        "min_inicio":420,
+        "min_fin":600,
         "salon":"A 204"
     },
     {
@@ -8577,6 +9719,8 @@
         "dia":"JUEVES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 301"
     },
     {
@@ -8592,6 +9736,8 @@
         "dia":"MARTES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 207"
     },
     {
@@ -8607,6 +9753,8 @@
         "dia":"VIERNES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"B 17"
     },
     {
@@ -8622,6 +9770,8 @@
         "dia":"LUNES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"A 204"
     },
     {
@@ -8637,6 +9787,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"B 07"
     },
     {
@@ -8652,6 +9804,8 @@
         "dia":"LUNES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"A 211"
     },
     {
@@ -8667,6 +9821,8 @@
         "dia":"JUEVES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 102"
     },
     {
@@ -8682,6 +9838,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"11:00",
         "hora_fin":"14:00",
+        "min_inicio":660,
+        "min_fin":840,
         "salon":"EDIF C SALON 1"
     },
     {
@@ -8697,6 +9855,8 @@
         "dia":"MARTES",
         "hora_inicio":"12:00",
         "hora_fin":"15:00",
+        "min_inicio":720,
+        "min_fin":900,
         "salon":"EDIF C SALON 1"
     },
     {
@@ -8712,6 +9872,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:00",
         "hora_fin":"11:00",
+        "min_inicio":480,
+        "min_fin":660,
         "salon":"A 304"
     },
     {
@@ -8727,6 +9889,8 @@
         "dia":"VIERNES",
         "hora_inicio":"09:00",
         "hora_fin":"12:00",
+        "min_inicio":540,
+        "min_fin":720,
         "salon":"A 302"
     },
     {
@@ -8742,6 +9906,8 @@
         "dia":"LUNES",
         "hora_inicio":"07:00",
         "hora_fin":"10:00",
+        "min_inicio":420,
+        "min_fin":600,
         "salon":"A 314"
     },
     {
@@ -8757,6 +9923,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 302"
     },
     {
@@ -8772,6 +9940,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"EDIF C SALON 3"
     },
     {
@@ -8787,6 +9957,8 @@
         "dia":"MARTES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 314"
     },
     {
@@ -8802,6 +9974,8 @@
         "dia":"JUEVES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 201"
     },
     {
@@ -8817,6 +9991,8 @@
         "dia":"VIERNES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 314"
     },
     {
@@ -8832,6 +10008,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"B 17"
     },
     {
@@ -8847,6 +10025,8 @@
         "dia":"MARTES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"B 17"
     },
     {
@@ -8862,6 +10042,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"A 202"
     },
     {
@@ -8877,6 +10059,8 @@
         "dia":"JUEVES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 202"
     },
     {
@@ -8892,6 +10076,8 @@
         "dia":"LUNES",
         "hora_inicio":"15:00",
         "hora_fin":"18:00",
+        "min_inicio":900,
+        "min_fin":1080,
         "salon":"A 202"
     },
     {
@@ -8907,6 +10093,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"16:00",
         "hora_fin":"19:00",
+        "min_inicio":960,
+        "min_fin":1140,
         "salon":"A 202"
     },
     {
@@ -8922,6 +10110,8 @@
         "dia":"JUEVES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"EDIF C SALON 4"
     },
     {
@@ -8937,6 +10127,8 @@
         "dia":"MARTES",
         "hora_inicio":"17:00",
         "hora_fin":"20:00",
+        "min_inicio":1020,
+        "min_fin":1200,
         "salon":"EDIF C SALON 4"
     },
     {
@@ -8952,6 +10144,8 @@
         "dia":"LUNES",
         "hora_inicio":"17:00",
         "hora_fin":"19:00",
+        "min_inicio":1020,
+        "min_fin":1140,
         "salon":"A 109"
     },
     {
@@ -8967,6 +10161,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"09:00",
         "hora_fin":"11:00",
+        "min_inicio":540,
+        "min_fin":660,
         "salon":"A 109"
     },
     {
@@ -8982,6 +10178,8 @@
         "dia":"LUNES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"A 106"
     },
     {
@@ -8997,6 +10195,8 @@
         "dia":"MIERCOLES",
         "hora_inicio":"10:00",
         "hora_fin":"12:00",
+        "min_inicio":600,
+        "min_fin":720,
         "salon":"A 107"
     },
     {
@@ -9012,6 +10212,8 @@
         "dia":"LUNES",
         "hora_inicio":"16:00",
         "hora_fin":"18:00",
+        "min_inicio":960,
+        "min_fin":1080,
         "salon":"A 106"
     },
     {
@@ -9027,6 +10229,8 @@
         "dia":"MARTES",
         "hora_inicio":"18:00",
         "hora_fin":"20:00",
+        "min_inicio":1080,
+        "min_fin":1200,
         "salon":"A 306"
     },
     {
@@ -9042,6 +10246,8 @@
         "dia":"LUNES",
         "hora_inicio":"08:00",
         "hora_fin":"10:00",
+        "min_inicio":480,
+        "min_fin":600,
         "salon":"A 305"
     },
     {
@@ -9057,6 +10263,8 @@
         "dia":"JUEVES",
         "hora_inicio":"16:00",
         "hora_fin":"18:00",
+        "min_inicio":960,
+        "min_fin":1080,
         "salon":"A 109"
     },
     {
@@ -9072,6 +10280,8 @@
         "dia":"MARTES",
         "hora_inicio":"16:00",
         "hora_fin":"18:00",
+        "min_inicio":960,
+        "min_fin":1080,
         "salon":"A 109"
     },
     {
@@ -9087,6 +10297,8 @@
         "dia":"JUEVES",
         "hora_inicio":"13:00",
         "hora_fin":"15:00",
+        "min_inicio":780,
+        "min_fin":900,
         "salon":"AULA PENDIENTE"
     },
     {
@@ -9102,6 +10314,8 @@
         "dia":"VIERNES",
         "hora_inicio":"16:00",
         "hora_fin":"18:00",
+        "min_inicio":960,
+        "min_fin":1080,
         "salon":"A 108"
     },
     {
@@ -9117,6 +10331,8 @@
         "dia":"MARTES",
         "hora_inicio":"07:00",
         "hora_fin":"09:00",
+        "min_inicio":420,
+        "min_fin":540,
         "salon":"A 104"
     },
     {
@@ -9132,6 +10348,8 @@
         "dia":"LUNES",
         "hora_inicio":"12:00",
         "hora_fin":"14:00",
+        "min_inicio":720,
+        "min_fin":840,
         "salon":"A 306"
     }
 ]
