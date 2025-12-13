@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador Horarios UNAM - 6to Semestre</title>
+    <title>Generador Horarios UNAM - Multisemestre</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
     <style>
         body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
         .header-main { background-color: #002B7A; color: white; padding: 2rem 0; border-bottom: 6px solid #D59F0F; }
@@ -13,10 +14,26 @@
         .card-header { background-color: #f8f9fa; border-bottom: 2px solid #e9ecef; font-weight: 600; color: #002B7A; }
         .btn-unam { background-color: #002B7A; color: white; font-weight: 500; }
         .btn-unam:hover { background-color: #001e57; color: white; }
-        .choque { background-color: #ffe6e6; color: #dc3545; cursor: not-allowed; }
+        .choque { background-color: #ffe6e6; color: #dc3545; cursor: not-allowed; opacity: 0.9; }
         .footer-warning { background-color: #fff3cd; color: #856404; padding: 15px; text-align: center; border-top: 1px solid #ffeeba; margin-top: auto; }
         .nav-pills .nav-link.active { background-color: #D59F0F; color: #002B7A; font-weight: bold; }
         .nav-pills .nav-link { color: #002B7A; }
+        
+        /* Estilos para las observaciones */
+        .obs-text { 
+            font-size: 0.85em; 
+            background-color: #e7f1ff; 
+            border-left: 4px solid #0d6efd; 
+            padding: 8px; 
+            margin-top: 8px; 
+            border-radius: 4px; 
+            display: none; /* Oculto por defecto */
+            color: #000;
+        }
+        .btn-obs { font-size: 0.75em; padding: 2px 8px; margin-top: 4px; border-radius: 10px;}
+        
+        /* Cursor puntero para elementos clickeables */
+        .cursor-pointer { cursor: pointer; }
     </style>
 </head>
 <body>
@@ -24,60 +41,33 @@
 <div class="header-main text-center mb-4">
     <div class="container">
         <h1 class="display-6 fw-bold">Generador de Horarios FacPsi</h1>
-        <p class="lead mb-1">Psicología UNAM - <span class="text-gold fw-bold">6to Semestre (2025-2)</span></p>
+        <p class="lead mb-3">Psicología UNAM <span class="text-gold fw-bold">(2025-2)</span></p>
+        
+        <div class="d-flex justify-content-center align-items-center gap-2 mb-3">
+            <label class="fw-bold text-white">Selecciona tu Semestre:</label>
+            <select id="semestre-selector" class="form-select w-auto fw-bold text-primary shadow" onchange="cambiarSemestre()">
+                <option value="2">2do Semestre</option>
+                <option value="6">6to Semestre</option>
+                <option value="8" selected>8vo Semestre</option>
+            </select>
+        </div>
+
         <p class="small opacity-75 mx-auto" style="max-width: 600px;">
-            Optimiza tu proceso de inscripción. Esta herramienta te permite visualizar empalmes, calcular créditos automáticamente y encontrar la combinación perfecta de profesores antes de entrar al sistema oficial.
+            Herramienta para visualizar empalmes, calcular créditos y ver observaciones antes de la inscripción oficial.
         </p>
     </div>
 </div>
 
 <div class="container pb-4" id="app">
 
-    <div class="accordion mb-4 shadow-sm" id="accordionGuia">
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGuia">
-                    <i class="bi bi-info-circle me-2"></i> Guía de Uso y Preguntas Frecuentes
-                </button>
-            </h2>
-            <div id="collapseGuia" class="accordion-collapse collapse" data-bs-parent="#accordionGuia">
-                <div class="accordion-body bg-light">
-                    <div class="row">
-                        <div class="col-md-6 border-end">
-                            <h6 class="text-primary fw-bold">Caso A: "Ya sé qué profesores quiero"</h6>
-                            <p class="small">Usa el <strong>Generador Manual</strong>.</p>
-                            <ol class="small">
-                                <li>Busca la materia en la izquierda.</li>
-                                <li>Selecciona el grupo específico.</li>
-                                <li>El sistema bloqueará en rojo si intentas meter otro grupo que choque en horario.</li>
-                            </ol>
-                        </div>
-                        <div class="col-md-6">
-                            <h6 class="text-primary fw-bold">Caso B: "Tengo varias opciones y quiero ver qué queda"</h6>
-                            <p class="small">Usa el <strong>Explorador Automático</strong>.</p>
-                            <ol class="small">
-                                <li>Ve a la pestaña Explorador.</li>
-                                <li>Elige una materia y marca 3 o 4 profesores que te interesen (Candidatos).</li>
-                                <li>Repite con todas las materias.</li>
-                                <li>Dale a "Generar" y el sistema calculará matemáticamente los horarios que NO chocan.</li>
-                            </ol>
-                        </div>
-                    </div>
-                    <hr>
-                    <p class="small mb-0 text-muted"><strong>Nota:</strong> Tus selecciones se guardan automáticamente en este navegador por si cierras la página por error.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <ul class="nav nav-pills mb-4 justify-content-center" id="pills-tab">
         <li class="nav-item">
-            <button class="nav-link active px-4" id="tab-manual" onclick="cambiarModo('manual')">
+            <button class="nav-link active px-4 shadow-sm" id="tab-manual" onclick="cambiarModo('manual')">
                 <i class="bi bi-pencil-square"></i> Generador Manual
             </button>
         </li>
         <li class="nav-item">
-            <button class="nav-link px-4" id="tab-auto" onclick="cambiarModo('auto')">
+            <button class="nav-link px-4 shadow-sm" id="tab-auto" onclick="cambiarModo('auto')">
                 <i class="bi bi-cpu"></i> Explorador (Automático)
             </button>
         </li>
@@ -89,17 +79,17 @@
                 <div class="card-header"><i class="bi bi-search"></i> 1. Buscar Materia</div>
                 <div class="card-body">
                     <input type="text" id="buscador" class="form-control mb-3" placeholder="Escribe nombre de materia..." onkeyup="filtrarMaterias()">
-                    <div id="lista-materias" class="list-group" style="max-height: 300px; overflow-y: auto;"></div>
+                    <div id="lista-materias" class="list-group" style="max-height: 500px; overflow-y: auto;"></div>
                 </div>
             </div>
 
             <div class="card shadow mt-3 border-primary" id="panel-grupos" style="display:none;">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                    <span>2. Elegir Grupo</span>
+                    <span id="titulo-panel-grupos" class="fw-bold">Materia Seleccionada</span>
                     <button type="button" class="btn-close btn-close-white" onclick="cerrarPanelGrupos()"></button>
                 </div>
                 <div class="card-body p-0">
-                    <div id="lista-grupos" class="list-group list-group-flush" style="max-height: 300px; overflow-y: auto;"></div>
+                    <div id="lista-grupos" class="list-group list-group-flush" style="max-height: 400px; overflow-y: auto;"></div>
                 </div>
             </div>
         </div>
@@ -114,15 +104,7 @@
                     <div id="mi-horario">
                         <div class="text-center text-muted mt-5">
                             <i class="bi bi-backpack display-1 opacity-25"></i>
-                            <p class="mt-2">No has seleccionado materias.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="alert alert-danger mt-3 d-flex align-items-center" id="alerta-etica" style="display:block;">
-                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                        <div>
-                            <strong>Requisito Faltante:</strong> ETICA PROFESIONAL
-                            <div class="small">Es obligatorio inscribir esta materia en 6to semestre.</div>
+                            <p class="mt-2">Tu mochila está vacía.</p>
                         </div>
                     </div>
                     
@@ -139,15 +121,17 @@
             <div class="card shadow-sm mb-3">
                 <div class="card-header"><i class="bi bi-funnel"></i> 1. Configurar Selecciones</div>
                 <div class="card-body">
-                    <label class="form-label fw-bold">Materia:</label>
+                    <label class="form-label fw-bold">Elige una Materia:</label>
                     <select id="select-materia-auto" class="form-select mb-2" onchange="cargarProfesAuto()">
                         <option value="">-- Selecciona --</option>
                     </select>
                     
-                    <div id="area-profes-auto" class="border rounded p-2 mb-3 bg-light" style="max-height: 250px; overflow-y: auto; display:none;">
-                        </div>
+                    <div id="area-profes-auto" class="border rounded p-2 mb-3 bg-light" style="max-height: 300px; overflow-y: auto; display:none;">
+                    </div>
 
-                    <button class="btn btn-outline-primary w-100 mb-3" onclick="agregarABolsa()">Agregar a mis Selecciones</button>
+                    <button class="btn btn-outline-primary w-100 mb-3" onclick="agregarABolsa()">
+                        <i class="bi bi-plus-circle"></i> Agregar a mis Selecciones
+                    </button>
                 </div>
             </div>
 
@@ -173,7 +157,7 @@
                 <div class="card-body bg-light" id="resultados-auto" style="overflow-y: auto; max-height: 600px;">
                     <div class="text-center text-muted mt-5">
                         <i class="bi bi-arrow-left-circle display-4 opacity-25"></i>
-                        <p class="mt-3">Configura tus candidatos y presiona Generar.</p>
+                        <p class="mt-3">Selecciona materias y profesores, luego presiona Generar.</p>
                     </div>
                 </div>
             </div>
@@ -184,70 +168,116 @@
 
 <div class="footer-warning small">
     <strong>⚠️ INFORMACIÓN IMPORTANTE:</strong><br>
-    Esta herramienta es un simulador académico desarrollado por alumnos para alumnos.<br>
-    Los resultados mostrados son sugerencias basadas en los horarios publicados. 
-    La inscripción oficial <strong>debe realizarse únicamente</strong> a través del sistema de la DGAE/SIAE en las fechas establecidas.
+    Esta herramienta es un simulador académico. Los resultados son sugerencias.<br>
+    La inscripción oficial <strong>debe realizarse únicamente</strong> a través del sistema de la DGAE/SIAE.
 </div>
 
 <script>
-    let BD = [];
+    // --- VARIABLES GLOBALES ---
+    let BD_CRUDA = []; // Los datos planos del JSON
+    let BD_AGRUPADA = []; // Los datos procesados (Objetos)
     let miHorario = [];
     let bolsa = {}; 
-    const OBLIGATORIA = "ETICA PROFESIONAL";
-    const DB_URL = 'horarios.json'; // <--- Si falla, pon aquí el link RAW de GitHub
+    const DB_FILE = 'Horarios_Completo_UNAM.json'; // TU ARCHIVO JSON
 
-    // CARGAR DATOS E INICIALIZAR
-    fetch(DB_URL)
-        .then(response => {
-            if(!response.ok) throw new Error("No se encontró el archivo JSON.");
-            return response.json();
+    // --- 1. CARGA Y TRANSFORMACIÓN ---
+    fetch(DB_FILE)
+        .then(res => {
+            if(!res.ok) throw new Error("No se encontró el archivo " + DB_FILE);
+            return res.json();
         })
         .then(data => {
-            BD = data;
-            // 4. RECUPERAR DATOS GUARDADOS (Persistencia)
-            cargarEstado();
+            BD_CRUDA = data;
+            console.log("Datos crudos cargados:", BD_CRUDA.length);
+            procesarDatosCrudos(); 
             
-            llenarBuscadorManual();
-            llenarSelectAuto();
+            cargarEstado(); // Recuperar memoria
+            cambiarSemestre(); // Iniciar vista
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+            console.error(err);
+            alert("Error: " + err.message + "\nAsegúrate de usar http.server (no doble clic al archivo).");
+        });
 
-    // --- SISTEMA DE PERSISTENCIA (Punto 4) ---
-    function guardarEstado() {
-        localStorage.setItem('unam_horario', JSON.stringify(miHorario));
-        localStorage.setItem('unam_bolsa', JSON.stringify(bolsa));
+    // --- FUNCIÓN CORREGIDA PARA AGRUPAR DATOS Y DETECTAR PROFESORES ---
+    function procesarDatosCrudos() {
+        let gruposTemp = {};
+
+        BD_CRUDA.forEach(fila => {
+            // 1. BLINDAJE DE DATOS (Para que no fallen los nombres)
+            let nombreAsignatura = fila.asignatura || fila.Asignatura || "SIN NOMBRE";
+            // Buscamos cualquier variación de 'profesor'
+            let nombreProfesor = fila.profesor || fila.Profesor || fila.PROFESOR || "Profesor Pendiente";
+            // Aseguramos que el grupo sea texto
+            let numGrupo = (fila.grupo || "0").toString();
+
+            // 2. CREAR LLAVE ÚNICA (Semestre + Materia + Grupo)
+            // Quitamos espacios para evitar duplicados raros
+            let key = `${fila.semestre}-${nombreAsignatura.replace(/\s+/g, '')}-${numGrupo}`;
+
+            if (!gruposTemp[key]) {
+                gruposTemp[key] = {
+                    id_unico: fila.id_unico, // Usamos el ID de la primera fila que encontremos
+                    semestre: fila.semestre,
+                    asignatura: nombreAsignatura,
+                    profesor: nombreProfesor, // <--- AQUÍ SE GUARDA EL NOMBRE
+                    grupo: numGrupo,
+                    creditos: fila.creditos,
+                    observaciones: fila.observaciones || "",
+                    area: fila.area,
+                    sesiones: []
+                };
+            }
+
+            // 3. AGREGAR HORARIOS VÁLIDOS
+            if (fila.dia && fila.dia !== "POR ASIGNAR" && fila.hora_inicio !== "00:00") {
+                gruposTemp[key].sesiones.push({
+                    dia: fila.dia,
+                    inicio: fila.hora_inicio,
+                    fin: fila.hora_fin,
+                    min_inicio: fila.min_inicio,
+                    min_fin: fila.min_fin,
+                    salon: fila.salon
+                });
+            }
+        });
+
+        // Convertir objeto a array
+        BD_AGRUPADA = Object.values(gruposTemp);
+        console.log("Materias procesadas correctamente:", BD_AGRUPADA.length);
     }
 
-    function cargarEstado() {
-        const savedHorario = localStorage.getItem('unam_horario');
-        const savedBolsa = localStorage.getItem('unam_bolsa');
-
-        if (savedHorario) {
-            miHorario = JSON.parse(savedHorario);
-            actualizarVistaHorario();
-        }
-        if (savedBolsa) {
-            bolsa = JSON.parse(savedBolsa);
-            renderBolsa();
-        }
+    // --- 2. GESTIÓN DE SEMESTRE ---
+    function cambiarSemestre() {
+        // Resetear visualmente
+        document.getElementById('buscador').value = '';
+        document.getElementById('panel-grupos').style.display = 'none';
+        
+        filtrarMaterias();
+        llenarSelectAuto();
     }
 
-    // --- MODO MANUAL ---
+    // --- 3. MODO MANUAL ---
     function filtrarMaterias() {
+        const semestreActivo = parseInt(document.getElementById('semestre-selector').value);
         const texto = document.getElementById('buscador').value.toUpperCase();
         const lista = document.getElementById('lista-materias');
         lista.innerHTML = '';
-        const nombres = [...new Set(BD.map(c => c.asignatura))].sort();
 
-        nombres.forEach(nombre => {
+        // 1. Filtrar BD por semestre
+        let materiasSemestre = BD_AGRUPADA.filter(c => c.semestre === semestreActivo);
+
+        // 2. Obtener nombres únicos y ordenar
+        const nombresUnicos = [...new Set(materiasSemestre.map(c => c.asignatura))].sort();
+
+        nombresUnicos.forEach(nombre => {
             if (nombre.includes(texto)) {
-                if (miHorario.some(c => c.asignatura === nombre)) return; // Ya inscrita
+                // Si ya la tengo inscrita, no la muestro (opcional)
+                // if (miHorario.some(c => c.asignatura === nombre)) return; 
 
                 const item = document.createElement('button');
                 item.className = 'list-group-item list-group-item-action d-flex justify-content-between align-items-center';
-                item.innerHTML = `<span>${nombre}</span>`;
-                if(nombre === OBLIGATORIA) item.innerHTML += ' <span class="badge bg-warning text-dark">Obligatoria</span>';
-                
+                item.innerHTML = `<span>${nombre}</span> <i class="bi bi-chevron-right text-muted small"></i>`;
                 item.onclick = () => mostrarGrupos(nombre);
                 lista.appendChild(item);
             }
@@ -255,55 +285,100 @@
     }
 
     function mostrarGrupos(asignatura) {
+        const semestreActivo = parseInt(document.getElementById('semestre-selector').value);
         document.getElementById('panel-grupos').style.display = 'block';
+        document.getElementById('titulo-panel-grupos').innerText = asignatura;
+        
         const lista = document.getElementById('lista-grupos');
         lista.innerHTML = '';
-        const cursos = BD.filter(c => c.asignatura === asignatura).sort((a,b) => a.grupo - b.grupo);
+
+        // Buscar grupos de esa materia y ordenarlos
+        const cursos = BD_AGRUPADA.filter(c => c.asignatura === asignatura && c.semestre === semestreActivo)
+                                  .sort((a,b) => a.grupo.localeCompare(b.grupo));
+
+        if (cursos.length === 0) {
+            lista.innerHTML = '<div class="p-3 text-center text-muted">No se encontraron grupos para este semestre.</div>';
+            return;
+        }
 
         cursos.forEach(curso => {
             const choca = hayChoque(curso, miHorario);
-            const btn = document.createElement('button');
+            const btn = document.createElement('div');
             btn.className = `list-group-item list-group-item-action ${choca ? 'choque' : ''}`;
             
-            let horarioTexto = curso.sesiones.map(s => `<strong>${s.dia.substr(0,3)}</strong> ${s.inicio}`).join(', ');
+            let horarioTexto = curso.sesiones.length > 0 
+                ? curso.sesiones.map(s => `<strong>${s.dia.substr(0,3)}</strong> ${s.inicio}`).join(', ')
+                : '<span class="text-muted fst-italic">Sin horario definido (en línea o por asignar)</span>';
             
-            btn.innerHTML = `
-                <div class="d-flex w-100 justify-content-between">
-                    <span class="fw-bold">Gpo ${curso.grupo}</span>
-                    <small class="badge bg-light text-dark border">${curso.creditos} cr</small>
-                </div>
-                <div class="mb-1 text-primary small">${curso.profesor}</div>
-                <small class="text-muted">${horarioTexto}</small>
-                ${choca ? '<div class="text-danger small fw-bold">⛔ Empalme de horario</div>' : ''}
-            `;
+            // Botón de Observaciones
+            let obsHtml = '';
+            if (curso.observaciones && curso.observaciones.length > 3) {
+                obsHtml = `
+                    <button class="btn btn-outline-info btn-obs mt-1" onclick="toggleObs('obs-${curso.id_unico}')">
+                        <i class="bi bi-eye"></i> Observaciones
+                    </button>
+                    <div id="obs-${curso.id_unico}" class="obs-text">${curso.observaciones}</div>
+                `;
+            }
 
-            if (!choca) btn.onclick = () => inscribir(curso);
+            btn.innerHTML = `
+                <div class="d-flex w-100 justify-content-between cursor-pointer align-items-center" onclick="${!choca ? `inscribir(${curso.id_unico})` : ''}">
+                    <span class="fw-bold fs-5">Gpo ${curso.grupo}</span>
+                    <span class="badge bg-light text-dark border">${curso.creditos} cr</span>
+                </div>
+                
+                <div class="mb-1 text-primary fw-bold small mt-1 text-uppercase">
+                    <i class="bi bi-person-fill"></i> ${curso.profesor}
+                </div>
+                
+                <small class="text-muted d-block border-top pt-1 mt-1">${horarioTexto}</small>
+                
+                ${obsHtml}
+
+                ${choca ? '<div class="text-danger small fw-bold mt-1"><i class="bi bi-exclamation-octagon"></i> Empalme de horario</div>' : ''}
+                ${!choca ? `<button class="btn btn-sm btn-primary w-100 mt-2" onclick="inscribir(${curso.id_unico})">Agregar al Horario</button>` : ''}
+            `;
+            
             lista.appendChild(btn);
         });
     }
 
-    function cerrarPanelGrupos() {
-        document.getElementById('panel-grupos').style.display = 'none';
+    function toggleObs(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
     }
 
-    function inscribir(curso) {
-        miHorario.push(curso);
-        guardarEstado(); // <--- GUARDAR
-        actualizarVistaHorario();
-        filtrarMaterias();
-        cerrarPanelGrupos();
-        document.getElementById('buscador').value = '';
+    function inscribir(idUnico) {
+        // Buscamos el objeto completo por ID
+        const curso = BD_AGRUPADA.find(c => c.id_unico === idUnico);
+        
+        // Verificar duplicados de materia
+        if (miHorario.some(c => c.asignatura === curso.asignatura)) {
+            alert("Ya tienes inscrita la materia: " + curso.asignatura);
+            return;
+        }
+
+        if(curso) {
+            miHorario.push(curso);
+            guardarEstado();
+            actualizarVistaHorario();
+            cerrarPanelGrupos();
+            document.getElementById('buscador').value = '';
+            filtrarMaterias();
+        }
     }
+
+    function cerrarPanelGrupos() { document.getElementById('panel-grupos').style.display = 'none'; }
 
     function borrarMateria(index) {
         miHorario.splice(index, 1);
-        guardarEstado(); // <--- GUARDAR
+        guardarEstado();
         actualizarVistaHorario();
         filtrarMaterias();
     }
-    
+
     function limpiarTodoManual() {
-        if(confirm("¿Borrar todo tu horario manual?")) {
+        if(confirm("¿Estás seguro de borrar todo tu horario?")) {
             miHorario = [];
             guardarEstado();
             actualizarVistaHorario();
@@ -315,7 +390,6 @@
         const contenedor = document.getElementById('mi-horario');
         contenedor.innerHTML = '';
         let totalCreditos = 0;
-        let tieneEtica = false;
 
         document.getElementById('btn-limpiar-manual').style.display = miHorario.length > 0 ? 'block' : 'none';
 
@@ -323,21 +397,25 @@
             contenedor.innerHTML = '<div class="text-center text-muted mt-5"><i class="bi bi-backpack display-1 opacity-25"></i><p class="mt-2">Mochila vacía.</p></div>';
         } else {
             miHorario.forEach((curso, idx) => {
-                totalCreditos += curso.creditos;
-                if(curso.asignatura === OBLIGATORIA) tieneEtica = true;
-
+                totalCreditos += parseInt(curso.creditos || 0);
+                
                 const card = document.createElement('div');
                 card.className = 'card mb-2 border-start border-4 border-primary shadow-sm';
                 let horarioTxt = curso.sesiones.map(s => `${s.dia.substr(0,3)} ${s.inicio}-${s.fin}`).join(' | ');
                 
+                let obsIcon = curso.observaciones.length > 3 
+                    ? `<i class="bi bi-info-circle-fill text-info ms-1" title="${curso.observaciones}"></i>` 
+                    : '';
+
                 card.innerHTML = `
                     <div class="card-body p-2 d-flex justify-content-between align-items-center">
                         <div style="overflow: hidden;">
-                            <h6 class="mb-0 fw-bold text-truncate">${curso.asignatura}</h6>
-                            <small class="text-muted">${curso.profesor} (Gpo ${curso.grupo})</small><br>
-                            <small class="text-primary fw-bold" style="font-size: 0.85em;">${horarioTxt}</small>
+                            <h6 class="mb-0 fw-bold text-truncate" title="${curso.asignatura}">${curso.asignatura}</h6>
+                            <small class="text-primary fw-bold text-uppercase" style="font-size: 0.85em;">${curso.profesor}</small><br>
+                            <small class="text-muted">Gpo ${curso.grupo} ${obsIcon}</small> | 
+                            <small class="text-dark fw-bold" style="font-size: 0.8em;">${horarioTxt}</small>
                         </div>
-                        <button class="btn btn-sm text-danger fs-5" onclick="borrarMateria(${idx})" title="Quitar materia">&times;</button>
+                        <button class="btn btn-sm text-danger fs-5" onclick="borrarMateria(${idx})" title="Quitar">&times;</button>
                     </div>
                 `;
                 contenedor.appendChild(card);
@@ -345,17 +423,19 @@
         }
 
         const badge = document.getElementById('creditos-badge');
-        badge.innerText = `${totalCreditos} / 41 Créditos`;
-        badge.className = `badge ${totalCreditos > 41 ? 'bg-danger' : (totalCreditos >= 37 ? 'bg-success' : 'bg-warning text-dark')}`;
-        document.getElementById('alerta-etica').style.display = tieneEtica ? 'none' : 'flex';
+        badge.innerText = `${totalCreditos} Créditos`;
+        badge.className = `badge ${totalCreditos > 50 ? 'bg-danger' : 'bg-success'}`;
     }
 
-    // --- MODO AUTOMATICO ---
-
+    // --- 4. MODO AUTOMÁTICO ---
     function llenarSelectAuto() {
+        const semestreActivo = parseInt(document.getElementById('semestre-selector').value);
         const sel = document.getElementById('select-materia-auto');
-        sel.innerHTML = '<option value="">-- Selecciona --</option>'; // Reset
-        const nombres = [...new Set(BD.map(c => c.asignatura))].sort();
+        sel.innerHTML = '<option value="">-- Selecciona --</option>';
+        
+        let materiasSemestre = BD_AGRUPADA.filter(c => c.semestre === semestreActivo);
+        const nombres = [...new Set(materiasSemestre.map(c => c.asignatura))].sort();
+        
         nombres.forEach(n => {
             const opt = document.createElement('option');
             opt.value = n;
@@ -365,24 +445,28 @@
     }
 
     function cargarProfesAuto() {
+        const semestreActivo = parseInt(document.getElementById('semestre-selector').value);
         const nombre = document.getElementById('select-materia-auto').value;
         const div = document.getElementById('area-profes-auto');
         div.innerHTML = '';
         if(!nombre) { div.style.display='none'; return; }
         
         div.style.display='block';
-        const cursos = BD.filter(c => c.asignatura === nombre).sort((a,b) => a.grupo - b.grupo);
+        const cursos = BD_AGRUPADA.filter(c => c.asignatura === nombre && c.semestre === semestreActivo)
+                                  .sort((a,b) => a.grupo.localeCompare(b.grupo));
 
         cursos.forEach(c => {
             const divRow = document.createElement('div');
             divRow.className = 'form-check border-bottom py-2';
             let hor = c.sesiones.map(s => `${s.dia.substr(0,3)} ${s.inicio}`).join(' ');
-            
+            let obsBadge = c.observaciones.length > 5 ? `<span class="badge bg-info text-dark ms-1" title="${c.observaciones}">Obs</span>` : '';
+
             divRow.innerHTML = `
-                <input class="form-check-input check-profe" type="checkbox" value="${c.id}" id="chk_${c.id}">
-                <label class="form-check-label w-100" for="chk_${c.id}" style="cursor:pointer; font-size: 0.9em;">
-                    <span class="fw-bold">${c.profesor}</span> <span class="text-muted">(Gpo ${c.grupo})</span><br>
-                    <span class="text-primary small">${hor}</span>
+                <input class="form-check-input check-profe" type="checkbox" value="${c.id_unico}" id="chk_${c.id_unico}">
+                <label class="form-check-label w-100" for="chk_${c.id_unico}" style="cursor:pointer; font-size: 0.9em;">
+                    <span class="fw-bold text-primary text-uppercase">${c.profesor}</span> 
+                    <span class="text-muted small">(Gpo ${c.grupo})</span> ${obsBadge}<br>
+                    <span class="text-dark small">${hor}</span>
                 </label>
             `;
             div.appendChild(divRow);
@@ -396,9 +480,9 @@
         if(checks.length === 0) { alert("Selecciona al menos un profesor."); return; }
 
         const ids = Array.from(checks).map(c => parseInt(c.value));
-        bolsa[nombre] = BD.filter(c => ids.includes(c.id));
+        bolsa[nombre] = BD_AGRUPADA.filter(c => ids.includes(c.id_unico));
 
-        guardarEstado(); // <--- GUARDAR
+        guardarEstado();
         renderBolsa();
         
         document.getElementById('select-materia-auto').value = "";
@@ -429,23 +513,10 @@
         });
     }
 
-    function borrarDeBolsa(mat) {
-        delete bolsa[mat];
-        guardarEstado(); // <--- GUARDAR
-        renderBolsa();
-    }
-    
-    function limpiarBolsa() {
-        if(confirm("¿Borrar todas tus selecciones?")) {
-            bolsa = {};
-            guardarEstado();
-            renderBolsa();
-        }
-    }
-
+    // --- ALGORITMO DE COMBINACIONES (Modo Automático) ---
     async function generarCombinaciones() {
         const resDiv = document.getElementById('resultados-auto');
-        resDiv.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary"></div><p class="mt-2 text-muted">Analizando combinaciones...</p></div>';
+        resDiv.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary"></div><p class="mt-2 text-muted">Calculando horarios sin choques...</p></div>';
         
         await new Promise(r => setTimeout(r, 100));
 
@@ -453,58 +524,55 @@
         if(materias.length === 0) { resDiv.innerHTML = '<div class="alert alert-warning text-center">Tus selecciones están vacías.</div>'; return; }
 
         const listas = Object.values(bolsa);
+        // Producto Cartesiano
         const cartesian = (...a) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
         let combinaciones = cartesian(...listas);
         if (materias.length === 1) combinaciones = combinaciones.map(c => [c]);
 
         const validos = [];
         
+        // Límite de seguridad
+        const MAX_ANALISIS = 50000;
+        if(combinaciones.length > MAX_ANALISIS) {
+             combinaciones = combinaciones.slice(0, MAX_ANALISIS);
+        }
+
         for (let comb of combinaciones) {
             if (!horarioEsValido(comb)) continue;
             
-            let huecos = 0;
             let creditos = 0;
             let diasSet = new Set();
-            let agenda = {};
-
+            
             comb.forEach(curso => {
-                creditos += curso.creditos;
-                curso.sesiones.forEach(s => {
-                    diasSet.add(s.dia);
-                    if(!agenda[s.dia]) agenda[s.dia] = [];
-                    agenda[s.dia].push([s.min_inicio, s.min_fin]);
-                });
+                creditos += parseInt(curso.creditos || 0);
+                curso.sesiones.forEach(s => diasSet.add(s.dia));
             });
 
-            for (let dia in agenda) {
-                let lapsos = agenda[dia].sort((a,b) => a[0] - b[0]);
-                for(let k=0; k<lapsos.length-1; k++) {
-                    let dif = lapsos[k+1][0] - lapsos[k][1];
-                    if(dif > 0) huecos += dif;
-                }
-            }
-            validos.push({ cursos: comb, creditos, huecos, dias: diasSet.size });
-            if (validos.length >= 100) break; 
+            validos.push({ cursos: comb, creditos, dias: diasSet.size });
+            if (validos.length >= 50) break; // Mostrar máximo 50 resultados
         }
 
-        validos.sort((a,b) => a.dias - b.dias || a.huecos - b.huecos);
+        validos.sort((a,b) => a.dias - b.dias); // Ordenar: menos días es mejor
 
         resDiv.innerHTML = '';
         if(validos.length === 0) {
-            resDiv.innerHTML = '<div class="alert alert-danger text-center"><i class="bi bi-emoji-frown"></i> Todas las combinaciones tienen choque de horario.</div>';
+            resDiv.innerHTML = '<div class="alert alert-danger text-center"><i class="bi bi-emoji-frown"></i> Imposible. Todas las combinaciones tienen empalmes. Intenta quitar profesores.</div>';
             return;
         }
 
-        resDiv.innerHTML = `<div class="alert alert-success py-2 text-center shadow-sm"><strong>${validos.length}</strong> horarios posibles encontrados.</div>`;
+        resDiv.innerHTML = `<div class="alert alert-success py-2 text-center shadow-sm"><strong>${validos.length}</strong> horarios encontrados.</div>`;
 
-        validos.slice(0, 20).forEach((val, i) => {
+        validos.forEach((val, i) => {
             const div = document.createElement('div');
             div.className = 'card mb-3 shadow-sm border-0';
             
             let contenidoCursos = val.cursos.map(c => `
                 <tr>
                     <td class="fw-bold text-primary" style="font-size: 0.9em;">${c.asignatura}</td>
-                    <td style="font-size: 0.85em;">${c.profesor}</td>
+                    <td style="font-size: 0.85em;">
+                        <span class="text-uppercase fw-bold">${c.profesor}</span>
+                        ${c.observaciones.length > 5 ? '<i class="bi bi-info-circle text-info ms-1" title="'+c.observaciones+'"></i>' : ''}
+                    </td>
                     <td class="text-center" style="font-size: 0.85em;">${c.grupo}</td>
                     <td class="text-end text-muted" style="font-size: 0.8em;">${c.sesiones.map(s=>s.dia.substr(0,3) + ' ' + s.inicio).join('<br>')}</td>
                 </tr>
@@ -515,7 +583,7 @@
                     <span class="badge bg-primary rounded-pill">Opción ${i+1}</span>
                     <div>
                         <span class="badge bg-light text-dark border me-1">${val.dias} Días</span>
-                        <span class="badge ${val.creditos > 41 ? 'bg-danger' : (val.creditos >= 37 ? 'bg-success' : 'bg-warning text-dark')}">${val.creditos} Cr</span>
+                        <span class="badge bg-success">${val.creditos} Cr</span>
                     </div>
                 </div>
                 <div class="card-body p-0">
@@ -532,14 +600,44 @@
     }
 
     // --- UTILIDADES ---
+    function guardarEstado() {
+        localStorage.setItem('unam_horario_multi', JSON.stringify(miHorario));
+        localStorage.setItem('unam_bolsa_multi', JSON.stringify(bolsa));
+    }
+
+    function cargarEstado() {
+        const savedHorario = localStorage.getItem('unam_horario_multi');
+        const savedBolsa = localStorage.getItem('unam_bolsa_multi');
+        if (savedHorario) {
+            miHorario = JSON.parse(savedHorario);
+            actualizarVistaHorario();
+        }
+        if (savedBolsa) {
+            bolsa = JSON.parse(savedBolsa);
+            renderBolsa();
+        }
+    }
+
+    function borrarDeBolsa(mat) {
+        delete bolsa[mat];
+        guardarEstado();
+        renderBolsa();
+    }
+    
+    function limpiarBolsa() {
+        if(confirm("¿Borrar selecciones?")) {
+            bolsa = {};
+            guardarEstado();
+            renderBolsa();
+        }
+    }
+
     function cambiarModo(modo) {
         document.getElementById('tab-manual').className = `nav-link ${modo==='manual'?'active':''}`;
         document.getElementById('tab-auto').className = `nav-link ${modo==='auto'?'active':''}`;
         document.getElementById('vista-manual').style.display = modo==='manual'?'flex':'none';
         document.getElementById('vista-auto').style.display = modo==='auto'?'flex':'none';
     }
-
-    function llenarBuscadorManual() { filtrarMaterias(); }
 
     function hayChoque(cursoNuevo, listaAgendada) {
         for (let inscrito of listaAgendada) {
