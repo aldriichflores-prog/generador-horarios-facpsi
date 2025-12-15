@@ -54,6 +54,7 @@
             <span class="text-dark fw-bold me-2 small">VER OFERTA DE:</span>
             <select id="semestre-selector" class="form-select form-select-sm border-0 fw-bold text-primary" style="width: auto; cursor: pointer;" onchange="cambiarSemestre(true)">
                 <option value="2">2do Semestre</option>
+                <option value="4">4to Semestre</option>
                 <option value="6">6to Semestre</option>
                 <option value="8" selected>8vo Semestre</option>
             </select>
@@ -332,8 +333,25 @@
         
         let divAlerta = document.getElementById('alerta-semestre');
         divAlerta.innerHTML = '';
+        
         if(sem === 2) {
             divAlerta.innerHTML = `<div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert"><h5 class="alert-heading"><i class="bi bi-people-fill"></i> ¡Hola, estudiante de Segundo Semestre!</h5><p class="small mb-1">Sabemos que en 2do semestre los horarios funcionan por grupos completos. Tips:</p><ul class="small mb-2"><li><strong>Grupos Espejo:</strong> Los grupos 2001 y 2002, 2003 y 2004, 2005 y 2007, 2006 y 2008, 2009 y 2011 y 2010 y 2012 tienen las mismas horas. Es fácil intercambiar profesores entre ellos.</li><li><strong>Recomendación:</strong> Usa el <strong>Modo Manual</strong>. Elige un grupo base (ej. 2003) y si un profe no te gusta, cámbialo por el del grupo espejo.</li><li>Si quieres usar el modo exploratorio, usa los filtros, te serán de ayuda para ver otras combinaciones.</li></ul><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
+        } 
+        else if (sem === 4) {
+            divAlerta.innerHTML = `<div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
+                <h5 class="alert-heading fw-bold"><i class="bi bi-people-fill"></i> ¡Hola, estudiante de Cuarto Semestre!</h5>
+                <p class="small mb-2">Sabemos que en 4to semestre los horarios funcionan por grupos completos. Tips:</p>
+                <ul class="small mb-0">
+                    <li class="mb-1"><strong>Grupos Espejo:</strong> Los grupos 4001 y 4002, 4003 y 4004, 4005 y 4006, 4007, 4008 y 4009, 4011 y 4012 tienen las mismas horas. Es fácil intercambiar profesores entre ellos.</li>
+                    <li class="mb-1"><strong>Recomendación:</strong> Usa el <strong>Modo Manual</strong>. Elige un grupo base (ej. 4003) y si un profe no te gusta, cámbialo por el del grupo espejo.</li>
+                    <li class="mb-2">Si quieres usar el modo exploratorio, usa los filtros, te serán de ayuda para ver otras combinaciones.</li>
+                    <li class="mt-2 p-2 bg-warning bg-opacity-10 border border-warning rounded text-dark">
+                        <strong><i class="bi bi-exclamation-triangle-fill"></i> IMPORTANTE ACA III:</strong> 
+                        Por cada grupo de <em>APRENDIZAJE Y CONDUCTA ADAPTAT. III</em> le corresponden 2 grupos de (Práctica). Asegúrate de elegir el grupo correspondiente de prácticas acorde a lo que dicen las <strong>observaciones</strong> del grupo de Teoría.
+                    </li>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>`;
         }
     }
 
@@ -376,18 +394,53 @@
         let contenedor = document.getElementById('contenedor-grupos'); contenedor.innerHTML = '';
         if(cursos.length === 0) { contenedor.innerHTML = '<div class="alert alert-warning text-center w-100">No se encontraron grupos.</div>'; return; }
         
+        let materiaPadreInscrita = null;
+        if(sem === 4 && asignatura.includes("APRENDIZAJE Y CONDUCTA ADAPTAT. III (PRACTICA)")) {
+            materiaPadreInscrita = miHorario.find(m => m.asignatura === "APRENDIZAJE Y CONDUCTA ADAPTAT. III");
+        }
+
         cursos.forEach(c => {
             let choca = hayChoque(c, miHorario);
             let yaInscrita = miHorario.some(h => h.id_unico === c.id_unico);
+
+            let bloqueadoPorACA = false;
+            if(materiaPadreInscrita) {
+                if(!materiaPadreInscrita.observaciones.includes(c.grupo)) {
+                    bloqueadoPorACA = true;
+                }
+            }
+
             let horario = c.sesiones.map(s => `<div><span class="fw-bold">${s.dia.substr(0,3)}</span> ${s.inicio}-${s.fin}</div>`).join('') || "<i>Sin horario</i>";
             let obsBtn = c.observaciones.length > 5 ? `<button class="btn-ver-obs" onclick="event.stopPropagation(); verObs('obs-${c.id_unico}')">Ver Obs</button>` : '';
             let obsBox = c.observaciones.length > 5 ? `<div id="obs-${c.id_unico}" class="obs-box">${c.observaciones}</div>` : '';
+            
+            let claseEstado = '';
+            let botonAccion = '';
+            let clickEvent = '';
+
+            if(yaInscrita) {
+                claseEstado = 'inscrita';
+                botonAccion = '<div class="mt-2 text-center text-success fw-bold small"><i class="bi bi-check-circle"></i> Inscrita</div>';
+            } 
+            else if (bloqueadoPorACA) {
+                claseEstado = 'choque';
+                botonAccion = '<div class="mt-2 text-center text-danger fw-bold small"><i class="bi bi-slash-circle"></i> Gpo Incorrecto</div>';
+            }
+            else if (choca) {
+                claseEstado = 'choque';
+                botonAccion = '<div class="mt-2 text-center text-danger fw-bold small">Traslape</div>';
+            } 
+            else {
+                botonAccion = '<div class="mt-2 text-center text-primary fw-bold small opacity-0 btn-add">Agregar</div>';
+                clickEvent = `inscribir(${c.id_unico})`;
+            }
+
             let col = document.createElement('div'); col.className = 'col-md-6 col-lg-4';
-            col.innerHTML = `<div class="grupo-card p-3 d-flex flex-column ${yaInscrita ? 'inscrita' : (choca ? 'choque' : '')}" onclick="${!choca && !yaInscrita ? `inscribir(${c.id_unico})` : ''}">
+            col.innerHTML = `<div class="grupo-card p-3 d-flex flex-column ${claseEstado}" onclick="${clickEvent}">
                     <div class="d-flex justify-content-between mb-2"><span class="badge bg-primary">Gpo ${c.grupo}</span><span class="text-muted small">${c.creditos} Cr</span></div>
                     <h6 class="card-title text-primary small text-uppercase fw-bold mb-2" style="min-height:2.5em;">${c.profesor}</h6>
                     <div class="small text-muted flex-grow-1 border-top pt-2">${horario}</div> ${obsBtn} ${obsBox}
-                    ${yaInscrita ? '<div class="mt-2 text-center text-success fw-bold small"><i class="bi bi-check-circle"></i> Inscrita</div>' : (choca ? '<div class="mt-2 text-center text-danger fw-bold small">Traslape</div>' : '<div class="mt-2 text-center text-primary fw-bold small opacity-0 btn-add">Agregar</div>')}
+                    ${botonAccion}
                 </div>`;
             contenedor.appendChild(col);
         });
@@ -490,6 +543,24 @@
     function delBolsa(k) { delete bolsa[k]; guardarEstado(); renderBolsa(); }
     function limpiarBolsa() { if(confirm("¿Limpiar?")) { bolsa={}; guardarEstado(); renderBolsa(); } }
 
+    // --- NUEVA VALIDACIÓN PARA AUTOMÁTICO 4TO SEMESTRE ---
+    function esCombinacionValida(comb) {
+        let sem = parseInt(document.getElementById('semestre-selector').value);
+        if(sem !== 4) return true; // Si no es 4to, pasa
+
+        let teoria = comb.find(c => c.asignatura === "APRENDIZAJE Y CONDUCTA ADAPTAT. III");
+        let practica = comb.find(c => c.asignatura === "APRENDIZAJE Y CONDUCTA ADAPTAT. III (PRACTICA)");
+
+        // Si existen ambas en la combinación, validamos regla
+        if(teoria && practica) {
+            // El grupo de práctica DEBE aparecer en las observaciones de la teoría
+            if(!teoria.observaciones.includes(practica.grupo)) {
+                return false; // Descartar combinación
+            }
+        }
+        return true;
+    }
+
     async function generarCombinaciones() {
         let resDiv = document.getElementById('resultados-auto'); resDiv.innerHTML = '<div class="text-center py-4"><div class="spinner-border text-primary"></div></div>';
         await new Promise(r => setTimeout(r, 50));
@@ -502,7 +573,8 @@
 
         RESULTADOS_GLOBALES = []; 
         for(let comb of combs) {
-            if(!hayChoqueCombo(comb)) {
+            // AQUÍ AGREGAMOS LA NUEVA VALIDACIÓN && esCombinacionValida(comb)
+            if(!hayChoqueCombo(comb) && esCombinacionValida(comb)) {
                 let creds = comb.reduce((a,b) => a + b.creditos, 0);
                 let diasSet = new Set(comb.flatMap(c => c.sesiones.map(s => s.dia)));
                 let huecos = calcularHuecos(comb);
