@@ -199,10 +199,10 @@
                 </div>
                 <div id="panel-filtros-resultados" class="panel-filtros p-2" style="display:none;">
                     <div class="row g-2">
-                        <div class="col-md-3"><span class="label-filtro">Ordenar:</span><select id="sort-resultados" class="form-select form-select-sm border-primary" onchange="aplicarOrdenYFiltro()"><option value="dias">📅 Menos Días</option><option value="creditos">⭐ Más Créditos</option><option value="huecos">⏳ Menos Huecos</option></select></div>
-                        <div class="col-md-3"><span class="label-filtro">Turno:</span><select id="filtro-turno" class="form-select form-select-sm border-primary" onchange="aplicarOrdenYFiltro()"><option value="">🌞 Cualquiera</option><option value="matutino">🌅 Matutino</option><option value="vespertino">🌇 Vespertino</option></select></div>
+                        <div class="col-md-3"><span class="label-filtro">Ordenar:</span><select id="sort-resultados" class="form-select form-select-sm border-primary" onchange="aplicarOrdenYFiltro()"><option value="dias">Menos Días</option><option value="creditos">Más Créditos</option><option value="huecos">Menos Huecos</option></select></div>
+                        <div class="col-md-3"><span class="label-filtro">Turno:</span><select id="filtro-turno" class="form-select form-select-sm border-primary" onchange="aplicarOrdenYFiltro()"><option value="">Cualquiera</option><option value="matutino">Matutino</option><option value="vespertino">Vespertino</option></select></div>
                         <div class="col-md-3"><span class="label-filtro">Día Libre:</span><select id="filtro-dia-libre" class="form-select form-select-sm border-primary" onchange="aplicarOrdenYFiltro()"><option value="">-- Ninguno --</option><option value="LUNES">Lunes</option><option value="VIERNES">Viernes</option><option value="SABADO">Sábado</option></select></div>
-                        <div class="col-md-3"><span class="label-filtro">Profesor:</span><select id="filtro-profe" class="form-select form-select-sm border-primary" onchange="aplicarOrdenYFiltro()"><option value="">👤 Todos</option></select></div>
+                        <div class="col-md-3"><span class="label-filtro">Profesor:</span><select id="filtro-profe" class="form-select form-select-sm border-primary" onchange="aplicarOrdenYFiltro()"><option value="">Todos</option></select></div>
                     </div>
                 </div>
                 <div class="card-body bg-light overflow-auto p-0" id="resultados-auto" style="max-height: 600px;">
@@ -217,7 +217,8 @@
     <div class="container text-center">
         <button class="btn btn-outline-primary btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalReglas">Ver Normativa Académica y Créditos</button>
         <p class="small text-muted mb-1">⚠️ <strong>Importante:</strong> Simulador académico. Inscripción oficial en SIAE/DGAE.</p>
-        <p class="small text-muted opacity-75">No afiliado oficialmente a la administración de la FacPsi.</p>
+        <p class="small text-muted opacity-75">No afiliado oficialmente a la administración de la Facultad de Psicología de la UNAM.</p>
+        <p class="small text-primary mt-2 fw-bold">Desarrollado por: Aldrich Flores Malvaez y Axel Martinez Serrano</p>
     </div>
 </footer>
 
@@ -543,19 +544,16 @@
     function delBolsa(k) { delete bolsa[k]; guardarEstado(); renderBolsa(); }
     function limpiarBolsa() { if(confirm("¿Limpiar?")) { bolsa={}; guardarEstado(); renderBolsa(); } }
 
-    // --- NUEVA VALIDACIÓN PARA AUTOMÁTICO 4TO SEMESTRE ---
     function esCombinacionValida(comb) {
         let sem = parseInt(document.getElementById('semestre-selector').value);
-        if(sem !== 4) return true; // Si no es 4to, pasa
+        if(sem !== 4) return true;
 
         let teoria = comb.find(c => c.asignatura === "APRENDIZAJE Y CONDUCTA ADAPTAT. III");
         let practica = comb.find(c => c.asignatura === "APRENDIZAJE Y CONDUCTA ADAPTAT. III (PRACTICA)");
 
-        // Si existen ambas en la combinación, validamos regla
         if(teoria && practica) {
-            // El grupo de práctica DEBE aparecer en las observaciones de la teoría
             if(!teoria.observaciones.includes(practica.grupo)) {
-                return false; // Descartar combinación
+                return false;
             }
         }
         return true;
@@ -573,7 +571,6 @@
 
         RESULTADOS_GLOBALES = []; 
         for(let comb of combs) {
-            // AQUÍ AGREGAMOS LA NUEVA VALIDACIÓN && esCombinacionValida(comb)
             if(!hayChoqueCombo(comb) && esCombinacionValida(comb)) {
                 let creds = comb.reduce((a,b) => a + b.creditos, 0);
                 let diasSet = new Set(comb.flatMap(c => c.sesiones.map(s => s.dia)));
