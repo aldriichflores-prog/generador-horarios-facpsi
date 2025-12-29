@@ -584,6 +584,189 @@
         opacity: 0;
         pointer-events: none;
     }
+
+    /* --- PREMIUM MANUAL TOOLBAR STYLES --- */
+    .toolbar-manual-container {
+        background: #ffffff;
+        border-bottom: 1px solid #edf2f7;
+        padding: 0.75rem 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        border-top-left-radius: 12px;
+        /* Smooth corners for the card */
+        border-top-right-radius: 12px;
+    }
+
+    .group-left,
+    .group-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .btn-tool {
+        border: none;
+        background: #f8f9fa;
+        color: #495057;
+        font-weight: 600;
+        font-size: 0.85rem;
+        padding: 8px 14px;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .btn-tool:hover {
+        background: #e9ecef;
+        color: #212529;
+        transform: translateY(-1px);
+    }
+
+    .btn-tool:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .btn-tool-primary {
+        background-color: var(--unam-azul);
+        color: white;
+        box-shadow: 0 2px 5px rgba(0, 43, 122, 0.2);
+    }
+
+    .btn-tool-primary:hover {
+        background-color: #001e54;
+        color: white;
+        box-shadow: 0 4px 10px rgba(0, 43, 122, 0.3);
+    }
+
+    .btn-tool-danger {
+        background-color: #fff5f5;
+        color: #e03131;
+    }
+
+    .btn-tool-danger:hover {
+        background-color: #ffe3e3;
+        color: #c92a2a;
+    }
+
+    /* Input del nombre del horario */
+    .input-tool-name {
+        background: #f8f9fa;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        padding: 6px 12px;
+        font-weight: 700;
+        color: #343a40;
+        font-size: 0.85rem;
+        width: 180px;
+        transition: all 0.2s;
+    }
+
+    .input-tool-name:focus {
+        background: white;
+        border-color: var(--unam-azul);
+        color: var(--unam-azul);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 43, 122, 0.1);
+    }
+
+    /* Dropdown de selección de horario */
+    .select-tool-sched {
+        border: none;
+        background: transparent;
+        font-weight: 800;
+        color: var(--unam-azul);
+        font-size: 0.95rem;
+        cursor: pointer;
+        padding-right: 20px;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23002B7A' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 0.1rem center;
+        background-size: 10px 10px;
+        appearance: none;
+    }
+
+    .select-tool-sched:focus {
+        outline: none;
+    }
+
+    /* Pill de Visual Mode */
+    .visual-pill {
+        background: #212529;
+        color: white;
+        border-radius: 20px;
+        padding: 6px 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: transform 0.2s;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+    }
+
+    .visual-pill:hover {
+        transform: scale(1.03);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .visual-pill input {
+        cursor: pointer;
+    }
+
+    .separator-v {
+        width: 1px;
+        height: 24px;
+        background-color: #dee2e6;
+        margin: 0 5px;
+    }
+
+    /* Dropdown menu customization */
+    .dropdown-menu-tool {
+        border: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        overflow: hidden;
+        padding: 0;
+    }
+
+    .dropdown-item-tool {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+        color: #495057;
+        font-weight: 600;
+        border-bottom: 1px solid #f1f3f5;
+        transition: background 0.2s;
+    }
+
+    .dropdown-item-tool:hover {
+        background: #f8f9fa;
+        color: var(--unam-azul);
+    }
+
+    .dropdown-item-tool:last-child {
+        border-bottom: none;
+    }
+
+    .dropdown-header-tool {
+        background: #f8f9fa;
+        color: #868e96;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 800;
+        padding: 8px 15px;
+    }
 </style>
 <!DOCTYPE html>
 <html lang="es">
@@ -1422,120 +1605,163 @@
                         </div>
 
                         <div class="card shadow-sm border-0 flex-grow-1" style="min-height: 400px;">
-                            <div
-                                class="card-header header-acciones bg-white d-flex justify-content-between align-items-center py-2 flex-wrap gap-2">
-                                <div class="d-flex align-items-center gap-2 flex-wrap">
-                                    <div class="input-group input-group-sm" style="width: auto;">
-                                        <select id="selector-horarios" class="form-select fw-bold"
-                                            style="max-width: 130px; color: #00695c; border-color: #00695c;"
-                                            onchange="cambiarHorarioActivo()"></select>
-
-                                        <button class="btn btn-outline-secondary"
-                                            style="color: #00695c; border-color: #00695c;" onclick="crearNuevoHorario()"
-                                            title="Crear nuevo horario">
-                                            <i class="bi bi-plus-lg"></i>
-                                        </button>
-                                    </div>
-                                    <div class="input-group input-group-sm" style="width: 200px;">
-                                        <input type="text" id="nombre-horario-actual"
-                                            class="form-control fw-bold text-success border-success" value="Mi Horario"
-                                            placeholder="Nombre...">
-                                        <button class="btn btn-success" onclick="guardarNombreHorario()"
-                                            title="Guardar nombre"><i class="bi bi-floppy"></i></button>
-                                    </div>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="eliminarHorarioActual()"
-                                        title="Eliminar este horario"><i class="bi bi-trash"></i></button>
-
-                                    <div class="btn-group btn-group-sm ms-2">
-                                        <button class="btn btn-outline-secondary" id="btn-undo" onclick="undo()"
-                                            disabled title="Deshacer (Undo)">
-                                            <i class="bi bi-arrow-counterclockwise"></i>
-                                        </button>
-                                        <button class="btn btn-outline-secondary" id="btn-redo" onclick="redo()"
-                                            disabled title="Rehacer (Redo)">
-                                            <i class="bi bi-arrow-clockwise"></i>
-                                        </button>
+                            <div <div class="card-header toolbar-manual-container header-acciones">
+                                <!-- SECCIÓN IZQUIERDA: GESTIÓN DE HORARIOS -->
+                                <div class="group-left">
+                                    <div class="d-flex align-items-center bg-white rounded-pill px-2 border shadow-sm"
+                                        style="height: 38px;">
+                                        <select id="selector-horarios"
+                                            class="select-tool-sched border-0 bg-transparent ps-2 py-1"
+                                            style="max-width:140px;" onchange="cambiarHorarioActivo()"></select>
+                                        <div class="vr mx-1"></div>
+                                        <button class="btn btn-sm text-primary" onclick="crearNuevoHorario()"
+                                            title="Crear nuevo horario"><i class="bi bi-plus-lg"></i></button>
                                     </div>
 
-                                    <div class="visual-mode-container ms-3">
-                                        <div class="form-check form-switch d-flex align-items-center m-0">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <input type="text" id="nombre-horario-actual" class="input-tool-name shadow-sm"
+                                            style="height: 38px;" value="Mi Horario" placeholder="Nombrar...">
+                                        <button class="btn-tool btn-tool-primary shadow-sm"
+                                            style="height: 38px; width: 38px; justify-content: center; padding: 0;"
+                                            onclick="guardarNombreHorario()" title="Guardar nombre"><i
+                                                class="bi bi-floppy"></i></button>
+                                        <button class="btn-tool btn-tool-danger shadow-sm"
+                                            style="height: 38px; width: 38px; justify-content: center; padding: 0;"
+                                            onclick="eliminarHorarioActual()" title="Eliminar este horario"><i
+                                                class="bi bi-trash"></i></button>
+                                    </div>
+                                </div>
+
+                                <!-- SECCIÓN CENTRAL: HERRAMIENTAS Y VISTA -->
+                                <div class="group-center d-flex align-items-center gap-2">
+                                    <div class="btn-group shadow-sm rounded-3">
+                                        <button class="btn btn-light border" id="btn-undo" onclick="undo()" disabled
+                                            title="Deshacer (Undo)"><i
+                                                class="bi bi-arrow-counterclockwise"></i></button>
+                                        <button class="btn btn-light border" id="btn-redo" onclick="redo()" disabled
+                                            title="Rehacer (Redo)"><i class="bi bi-arrow-clockwise"></i></button>
+                                    </div>
+
+                                    <div class="visual-pill shadow-sm"
+                                        onclick="document.getElementById('switch-vista').click()">
+                                        <div class="form-check form-switch m-0 d-flex align-items-center">
                                             <input class="form-check-input" type="checkbox" id="switch-vista"
-                                                onchange="toggleVistaVisual()">
-                                            <label class="form-check-label ms-2" for="switch-vista">MODO VISUAL</label>
+                                                onclick="event.stopPropagation()" onchange="toggleVistaVisual()">
+                                            <span class="ms-2"> MODO VISUAL</span>
                                         </div>
                                     </div>
 
-                                    <div class="dropdown ms-1">
-                                        <button class="btn btn-sm btn-link text-secondary p-0 border-0" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="bi bi-gear-fill"></i>
-                                        </button>
-                                        <ul class="dropdown-menu shadow p-2" onclick="event.stopPropagation()">
+                                    <button id="btn-recolorear" class="btn-tool bg-white shadow-sm border"
+                                        style="display:none;" onclick="recolorearInteligente()"
+                                        title="Reasignar colores (Manual)"><i
+                                            class="bi bi-palette text-primary"></i></button>
+
+                                    <div class="dropdown">
+                                        <button class="btn-tool bg-white shadow-sm border" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                class="bi bi-gear-fill text-secondary"></i></button>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-tool shadow p-0"
+                                            onclick="event.stopPropagation()">
                                             <li>
-                                                <h6 class="dropdown-header small">Mostrar en visual:</h6>
+                                                <h6 class="dropdown-header-tool">Mostrar en visual</h6>
                                             </li>
                                             <li>
-                                                <div class="form-check small"><input class="form-check-input vis-toggle"
-                                                        type="checkbox" id="chk-prof" checked
-                                                        onchange="actualizarConfigVisual()"><label
-                                                        class="form-check-label" for="chk-prof">Profesor</label></div>
+                                                <div class="dropdown-item-tool">
+                                                    <div class="form-check small m-0"><input
+                                                            class="form-check-input vis-toggle" type="checkbox"
+                                                            id="chk-prof" checked
+                                                            onchange="actualizarConfigVisual()"><label
+                                                            class="form-check-label w-100"
+                                                            for="chk-prof">Profesor</label></div>
+                                                </div>
                                             </li>
                                             <li>
-                                                <div class="form-check small"><input class="form-check-input vis-toggle"
-                                                        type="checkbox" id="chk-grupo" checked
-                                                        onchange="actualizarConfigVisual()"><label
-                                                        class="form-check-label" for="chk-grupo">Grupo</label></div>
+                                                <div class="dropdown-item-tool">
+                                                    <div class="form-check small m-0"><input
+                                                            class="form-check-input vis-toggle" type="checkbox"
+                                                            id="chk-grupo" checked
+                                                            onchange="actualizarConfigVisual()"><label
+                                                            class="form-check-label w-100" for="chk-grupo">Grupo</label>
+                                                    </div>
+                                                </div>
                                             </li>
                                             <li>
-                                                <div class="form-check small"><input class="form-check-input vis-toggle"
-                                                        type="checkbox" id="chk-horas" checked
-                                                        onchange="actualizarConfigVisual()"><label
-                                                        class="form-check-label" for="chk-horas">Horario</label></div>
+                                                <div class="dropdown-item-tool">
+                                                    <div class="form-check small m-0"><input
+                                                            class="form-check-input vis-toggle" type="checkbox"
+                                                            id="chk-horas" checked
+                                                            onchange="actualizarConfigVisual()"><label
+                                                            class="form-check-label w-100"
+                                                            for="chk-horas">Horario</label></div>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
-                                    <button id="btn-recolorear" class="btn btn-sm btn-outline-primary ms-1"
-                                        style="display:none;" onclick="recolorearInteligente()"
-                                        title="Reasignar colores (Manual)">
-                                        <i class="bi bi-palette"></i>
-                                    </button>
                                 </div>
 
-                                <div class="d-flex align-items-center mt-1 mt-md-0">
-                                    <select id="sort-manual" class="form-select form-select-sm border-primary me-2"
-                                        style="width: auto; font-size: 0.75rem; font-weight: bold;"
-                                        onchange="ordenarMiHorario()">
+                                <!-- SECCIÓN DERECHA: ORDEN Y EXPORT -->
+                                <div class="group-right d-flex align-items-center gap-2">
+                                    <!-- Hidden select for compatibility -->
+                                    <select id="sort-manual" style="display:none;">
                                         <option value="materia" selected>Materia</option>
-                                        <option value="profesor">Profesor (A-Z)</option>
+                                        <option value="profesor">Profesor</option>
                                         <option value="grupo">Grupo</option>
-                                        <option value="horas">Duración Total</option>
-                                        <option value="cronologico">Orden Cronológico</option>
+                                        <option value="horas">Duración</option>
+                                        <option value="cronologico">Crono</option>
                                     </select>
 
-                                    <span id="creditos-badge" class="badge bg-secondary me-3">0 Créditos</span>
+                                    <div class="dropdown">
+                                        <button
+                                            class="btn btn-sm btn-light border shadow-sm dropdown-toggle fw-bold text-secondary"
+                                            type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                            style="border-radius: 20px; padding-left: 15px; padding-right: 15px;">
+                                            <i class="bi bi-sort-down me-1"></i> <span
+                                                id="btn-sort-label">Materia</span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-1">
+                                            <li><button class="dropdown-item small fw-bold py-2"
+                                                    onclick="ordenarMiHorario('materia')">Materia</button></li>
+                                            <li><button class="dropdown-item small fw-bold py-2"
+                                                    onclick="ordenarMiHorario('profesor')">Profesor (A-Z)</button></li>
+                                            <li><button class="dropdown-item small fw-bold py-2"
+                                                    onclick="ordenarMiHorario('grupo')">Grupo</button></li>
+                                            <li><button class="dropdown-item small fw-bold py-2"
+                                                    onclick="ordenarMiHorario('horas')">Duración Total</button></li>
+                                            <li><button class="dropdown-item small fw-bold py-2"
+                                                    onclick="ordenarMiHorario('cronologico')">Orden Cronológico</button>
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                    <div class="btn-group me-2">
-                                        <button type="button" class="btn btn-sm btn-success dropdown-toggle"
+                                    <span id="creditos-badge"
+                                        class="badge rounded-pill bg-light text-dark border shadow-sm py-2 px-3">0
+                                        Créditos</span>
+
+                                    <div class="btn-group">
+                                        <button type="button"
+                                            class="btn btn-success btn-sm fw-bold shadow-sm dropdown-toggle rounded-pill px-3"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="bi bi-download"></i> Descargar
                                         </button>
-                                        <ul class="dropdown-menu dropdown-menu-end shadow">
-                                            <li><button class="dropdown-item small" onclick="descargarPDF()"><i
-                                                        class="bi bi-file-earmark-pdf text-danger"></i> PDF
-                                                    (Hoja)</button></li>
-                                            <li><button class="dropdown-item small" onclick="descargarImagen()"><i
-                                                        class="bi bi-file-image text-primary"></i> Imagen (PNG)</button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-1">
+                                            <li><button class="dropdown-item small py-2" onclick="descargarPDF()"><i
+                                                        class="bi bi-file-earmark-pdf text-danger me-2"></i>PDF</button>
                                             </li>
-                                            <li><button class="dropdown-item small" onclick="descargarExcel()"><i
-                                                        class="bi bi-file-earmark-excel text-success"></i> Excel (.xlsx
-                                                    Visual)</button></li>
-                                            <li><button class="dropdown-item small" onclick="descargarCSV()"><i
-                                                        class="bi bi-file-text"></i> CSV (Datos)</button></li>
+                                            <li><button class="dropdown-item small py-2" onclick="descargarImagen()"><i
+                                                        class="bi bi-file-image text-primary me-2"></i>Imagen
+                                                    PNG</button></li>
+                                            <li><button class="dropdown-item small py-2" onclick="descargarExcel()"><i
+                                                        class="bi bi-file-earmark-excel text-success me-2"></i>Excel</button>
+                                            </li>
+                                            <li><button class="dropdown-item small py-2" onclick="descargarCSV()"><i
+                                                        class="bi bi-file-text me-2"></i>CSV</button></li>
                                         </ul>
                                     </div>
 
-                                    <button class="btn btn-sm btn-outline-danger" id="btn-limpiar-manual"
-                                        onclick="limpiarTodoManual()" style="display:none;">Limpiar</button>
+                                    <button class="btn btn-sm btn-outline-danger border-0 rounded-circle shadow-sm"
+                                        id="btn-limpiar-manual" onclick="limpiarTodoManual()"
+                                        style="display:none; width: 32px; height: 32px;" title="Borrar todo"><i
+                                            class="bi bi-trash"></i></button>
                                 </div>
                             </div>
                             <div class="card-body p-0 d-flex flex-column" style="overflow: hidden;">
@@ -1788,11 +2014,6 @@
                                     <span id="conteo-resultados" class="badge bg-light text-dark border ms-2">0
                                         opciones</span>
                                 </div>
-                                <button class="btn btn-sm btn-outline-secondary" id="btn-recolor-auto"
-                                    onclick="recolorearAuto()"
-                                    style="display:none; color: #6a1b9a; border-color: #6a1b9a;" title="Cambiar paleta">
-                                    <i class="bi bi-palette"></i> Recolorear
-                                </button>
                             </div>
 
                             <div id="panel-filtros-resultados" class="panel-filtros p-2" style="display:none;">
@@ -2026,6 +2247,8 @@
                 let OFFSET_RECOLOR_AUTO = 0;
                 let RESULTADOS_GLOBALES = [];
                 let RESULTADOS_MOSTRADOS = [];
+                let OFFSET_MOSTRADOS = 0;
+                const BATCH_SIZE = 50;
                 let historial = [];
                 let futuro = [];
                 let materiasPendientes = [];
@@ -2091,7 +2314,16 @@
 
                 function recolorearAuto() {
                     OFFSET_RECOLOR_AUTO++;
-                    dibujarResultados(RESULTADOS_MOSTRADOS);
+                    RESULTADOS_MOSTRADOS.forEach((res, i) => {
+                        let switchVis = document.getElementById(`switch-auto-${i}`);
+                        if (switchVis && switchVis.checked) {
+                            let visualDiv = document.getElementById(`res-visual-${i}`);
+                            if (visualDiv) {
+                                visualDiv.innerHTML = generarHTMLGridVisual(`auto-${i}`);
+                                renderizarBloquesEnGrid(res.cursos, `auto-${i}`);
+                            }
+                        }
+                    });
                 }
 
                 function obtenerChoques(c1, lista) {
@@ -2297,7 +2529,7 @@
                     document.getElementById('vista-lista-container').style.display = isVisual ? 'none' : 'block';
                     document.getElementById('vista-visual-container').style.display = isVisual ? 'block' : 'none';
                     document.getElementById('btn-recolorear').style.display = isVisual ? 'inline-block' : 'none';
-                    document.getElementById('sort-manual').style.display = isVisual ? 'none' : 'inline-block';
+
                     if (isVisual) renderizarHorarioVisual();
                 }
 
@@ -2698,9 +2930,30 @@
                     cargarPanelGrupos(asignatura);
                 }
 
-                function ordenarMiHorario() {
-                    let criterio = document.getElementById('sort-manual').value;
+                function ordenarMiHorario(criterioInput = null) {
+                    let criterio = criterioInput;
+                    if (!criterio) {
+                        let el = document.getElementById('sort-manual');
+                        if (el) criterio = el.value;
+                    }
                     if (!criterio) return;
+
+                    // Actualizar UI del selector si existe (para sincronizar)
+                    let elSelect = document.getElementById('sort-manual');
+                    if (elSelect && criterioInput) elSelect.value = criterioInput;
+
+                    // Actualizar texto del botón si existe
+                    let btnLabel = document.getElementById('btn-sort-label');
+                    if (btnLabel) {
+                        const labels = {
+                            'materia': 'Materia',
+                            'profesor': 'Profesor',
+                            'grupo': 'Grupo',
+                            'horas': 'Duración',
+                            'cronologico': 'Cronológico'
+                        };
+                        btnLabel.innerText = labels[criterio] || 'Ordenar';
+                    }
                     const mapaDias = { 'LUNES': 0, 'MARTES': 1, 'MIERCOLES': 2, 'JUEVES': 3, 'VIERNES': 4, 'SABADO': 5 };
                     miHorario.sort((a, b) => {
                         switch (criterio) {
@@ -2728,6 +2981,7 @@
                     });
                     guardarEstado();
                     actualizarTablaHorario();
+                    renderizarHorarioVisual();
                 }
 
                 function actualizarTablaHorario() {
@@ -3178,6 +3432,7 @@
                         }
 
                         if (RESULTADOS_GLOBALES.length > 0) {
+                            renderizarFiltroProfesores();
                             actualizarFiltrosUI();
                             document.getElementById('panel-filtros-resultados').style.display = 'block';
                             aplicarOrdenYFiltro();
@@ -3192,43 +3447,175 @@
 
                 function ejecutarDetectiveDeConflictos(nombresMaterias, contenedor) {
                     document.getElementById('panel-filtros-resultados').style.display = 'none';
+                    let resDiv = document.getElementById('resultados-auto');
 
-                    let reporteHTML = `<div class="alert alert-danger shadow-sm"><h5 class="alert-heading fw-bold"><i class="bi bi-lightning-fill"></i> No existen horarios posibles</h5><p class="small mb-2">Ninguna combinación encaja.</p><hr><h6 class="fw-bold small text-uppercase">Diagnóstico:</h6><ul class="mb-0 small ps-3">`;
+                    resDiv.innerHTML = `
+                        <div class="card border-0 shadow-sm mx-auto mt-4" style="max-width: 600px;">
+                            <div class="card-body text-center p-5">
+                                <div class="mb-4">
+                                    <i class="bi bi-puzzle display-1 text-muted opacity-50"></i>
+                                </div>
+                                <h4 class="fw-bold text-dark mb-3">No existen horarios posibles</h4>
+                                <p class="text-muted mb-4">
+                                    El sistema ha explorado todas las opciones pero no encontró combinaciones válidas. 
+                                    Esto suele ocurrir cuando hay <strong>traslapes inevitables</strong> entre materias obligatorias 
+                                    o cuando se exceden los límites de tiempo.
+                                </p>
+                                <div class="alert alert-light border small text-muted mb-4">
+                                    <i class="bi bi-info-circle me-2"></i> No es un error del estudiante ni una falla del sistema. Es un rompecabezas complejo que requiere ajustes.
+                                </div>
+                                <button class="btn btn-primary rounded-pill px-4 py-2 shadow-sm" onclick="iniciarAnalisisProfundo()">
+                                    <i class="bi bi-search me-2"></i> Identificar materia en conflicto
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
 
-                    let conflictosEncontrados = 0;
+                async function iniciarAnalisisProfundo() {
+                    let resDiv = document.getElementById('resultados-auto');
+                    resDiv.innerHTML = `
+                        <div class="text-center py-5">
+                            <div class="spinner-border text-primary mb-3" role="status"></div>
+                            <h5 class="fw-bold">Analizando conflictos...</h5>
+                            <p class="text-muted small">Simulando escenarios alternativos...</p>
+                        </div>
+                    `;
 
-                    for (let i = 0; i < nombresMaterias.length; i++) {
-                        for (let j = i + 1; j < nombresMaterias.length; j++) {
-                            let matA = nombresMaterias[i];
-                            let matB = nombresMaterias[j];
-                            let gruposA = bolsa[matA];
-                            let gruposB = bolsa[matB];
-                            let sonCompatibles = false;
+                    await new Promise(r => setTimeout(r, 800)); // UX delay
 
-                            checkLoop:
-                            for (let gA of gruposA) {
-                                for (let gB of gruposB) {
-                                    if (!hayChoque(gA, [gB])) {
-                                        sonCompatibles = true;
-                                        break checkLoop;
-                                    }
-                                }
+                    let reportes = [];
+                    let nombres = Object.keys(bolsa);
+
+                    for (let materiaIgnorada of nombres) {
+                        // Crear bolsa temporal sin esta materia
+                        let listasTemp = [];
+                        for (let m of nombres) {
+                            if (m !== materiaIgnorada) {
+                                listasTemp.push(bolsa[m]);
                             }
+                        }
 
-                            if (!sonCompatibles) {
-                                conflictosEncontrados++;
-                                reporteHTML += `<li><strong>${matA}</strong> choca con <strong>${matB}</strong> en todas las opciones.</li>`;
-                            }
+                        let sim = simularGeneracion(listasTemp);
+                        if (sim.validas > 0) {
+                            reportes.push({
+                                ignorada: materiaIgnorada,
+                                validas: sim.validas,
+                                creditos: sim.avgCreditos,
+                                maxCreditos: sim.maxCreditos
+                            });
                         }
                     }
 
-                    if (conflictosEncontrados === 0) {
-                        reporteHTML += `<li>El conflicto es complejo (3 o más materias chocan entre sí).</li><li>Prueba reduciendo materias.</li>`;
+                    // Ordenar por quién desbloquea más opciones
+                    reportes.sort((a, b) => b.validas - a.validas);
+
+                    // Renderizar Reporte
+                    let html = `<div class="container py-4" style="max-width:800px;">
+                        <div class="d-flex align-items-center mb-4">
+                            <button class="btn btn-sm btn-outline-secondary me-3" onclick="generarCombinaciones()"><i class="bi bi-arrow-clockwise"></i> Reintentar</button>
+                            <h4 class="fw-bold mb-0">Reporte de Conflictos</h4>
+                        </div>`;
+
+                    if (reportes.length === 0) {
+                        html += `<div class="alert alert-warning text-center shadow-sm">
+                            <h5 class="fw-bold"><i class="bi bi-exclamation-triangle"></i> Conflicto Complejo</h5>
+                            <p>Incluso quitando una materia a la vez, no se encontraron soluciones válidas.</p>
+                            <p class="small text-muted mb-0">Esto indica que hay múltiples choques simultáneos. Prueba reduciendo tu carga académica eliminando 2 o más materias manualmente.</p>
+                        </div>`;
                     } else {
-                        reporteHTML += `<li class="mt-2 text-muted list-unstyled"><i>Sugerencia: Elimina una de las materias conflictivas.</i></li>`;
+                        html += `<p class="alert alert-info border-0 shadow-sm mb-4"><i class="bi bi-lightbulb-fill me-2"></i>Se detectó que las siguientes materias están bloqueando tu horario. Te sugerimos empezar evaluando la primera opción.</p>`;
+
+                        reportes.forEach((rep, idx) => {
+                            let isBest = idx === 0;
+                            let badgeCreditos = rep.maxCreditos > 41 ?
+                                `<span class="badge bg-warning text-dark border border-warning ms-2"><i class="bi bi-exclamation-circle"></i> Excede Créditos (${rep.maxCreditos})</span>` :
+                                (rep.maxCreditos < 30 ? `<span class="badge bg-light text-muted border ms-2">Baja Carga (${rep.maxCreditos} Cr)</span>` : '');
+
+                            html += `
+                            <div class="card mb-3 ${isBest ? 'border-primary shadow-sm' : 'border-light shadow-sm'}">
+                                <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+                                    <div>
+                                        ${isBest ? '<div class="text-uppercase text-primary fw-bold mb-1" style="font-size:0.7rem; letter-spacing:1px;">Mejor Solución</div>' : ''}
+                                        <h5 class="fw-bold mb-1">Si eliminas: <span class="text-danger">${rep.ignorada}</span></h5>
+                                        <p class="mb-0 text-muted small">Se desbloquean <strong>${rep.validas}${rep.validas >= 100 ? '+' : ''} combinaciones</strong> posibles.</p>
+                                    </div>
+                                    <div class="text-end mt-2 mt-sm-0">
+                                        ${badgeCreditos}
+                                    </div>
+                                </div>
+                            </div>`;
+                        });
                     }
-                    reporteHTML += `</ul></div>`;
-                    contenedor.innerHTML = reporteHTML;
+                    html += `</div>`;
+                    resDiv.innerHTML = html;
+                }
+
+                function simularGeneracion(listas) {
+                    let indices = new Array(listas.length).fill(0);
+                    let validas = 0;
+                    let sumaCreditos = 0;
+                    let maxCreditos = 0;
+                    let count = 0;
+
+                    while (true) {
+                        let comb = [];
+                        for (let i = 0; i < listas.length; i++) comb.push(listas[i][indices[i]]);
+
+                        if (!hayChoqueCombo(comb) && esCombinacionValida(comb)) {
+                            validas++;
+                            let c = comb.reduce((a, b) => a + b.creditos, 0);
+                            sumaCreditos += c;
+                            if (c > maxCreditos) maxCreditos = c;
+                        }
+
+                        count++;
+                        if (validas >= 100 || count >= 2000) break; // Limite para velocidad
+
+                        let next = listas.length - 1;
+                        while (next >= 0) {
+                            indices[next]++;
+                            if (indices[next] < listas[next].length) break;
+                            indices[next] = 0;
+                            next--;
+                        }
+                        if (next < 0) break;
+                    }
+
+                    return {
+                        validas,
+                        avgCreditos: validas ? Math.round(sumaCreditos / validas) : 0,
+                        maxCreditos
+                    };
+                }
+
+
+                function renderizarFiltroProfesores() {
+                    let container = document.getElementById('lista-profes-filtro-resultados');
+                    if (!container) return;
+                    container.innerHTML = '';
+
+                    let todosLosProfes = new Set();
+                    RESULTADOS_GLOBALES.forEach(r => {
+                        r.cursos.forEach(c => todosLosProfes.add(c.profesor));
+                    });
+
+                    let listaOrdenada = Array.from(todosLosProfes).sort();
+
+                    if (listaOrdenada.length === 0) {
+                        container.innerHTML = '<div class="text-muted small text-center p-2">No hay profesores para filtrar.</div>';
+                        return;
+                    }
+
+                    listaOrdenada.forEach(profe => {
+                        let div = document.createElement('div'); div.className = 'form-check mb-1';
+                        // Generar ID seguro
+                        let safeId = 'chk-prof-' + profe.replace(/[^a-zA-Z0-9]/g, '');
+                        let safeVal = profe.replace(/"/g, '&quot;');
+                        div.innerHTML = `<input class="form-check-input chk-filtro-profe" type="checkbox" value="${safeVal}" id="${safeId}" onchange="aplicarOrdenYFiltro()">
+                                         <label class="form-check-label small text-truncate d-block" for="${safeId}" title="${profe}">${profe}</label>`;
+                        container.appendChild(div);
+                    });
                 }
 
                 function filtrarListaProfesResultados(input) {
@@ -3268,8 +3655,11 @@
 
                     let filtrados = RESULTADOS_GLOBALES.filter(r => {
                         if (profesSeleccionados.length > 0) {
-                            let tieneProfe = r.cursos.some(c => profesSeleccionados.includes(c.profesor));
-                            if (!tieneProfe) return false;
+                            // LOGICA STRICT AND: El horario debe tener TODOS los profesores seleccionados
+                            let cumpleTodos = profesSeleccionados.every(profeSel =>
+                                r.cursos.some(c => c.profesor === profeSel)
+                            );
+                            if (!cumpleTodos) return false;
                         }
                         if (diasLibres.length > 0) {
                             let ocupaDiaLibre = r.cursos.some(c => c.sesiones.some(s => diasLibres.includes(s.dia)));
@@ -3292,14 +3682,26 @@
 
                 function dibujarResultados(lista) {
                     RESULTADOS_MOSTRADOS = lista;
-                    let resDiv = document.getElementById('resultados-auto'); resDiv.innerHTML = '';
+                    OFFSET_MOSTRADOS = 0;
+                    let resDiv = document.getElementById('resultados-auto');
+                    resDiv.innerHTML = '';
                     document.getElementById('conteo-resultados').innerText = `${lista.length} opciones`;
-
-                    document.getElementById('btn-recolor-auto').style.display = lista.length > 0 ? 'inline-block' : 'none';
 
                     if (!lista.length) { resDiv.innerHTML = '<div class="alert alert-danger small text-center">No hay combinaciones con esos filtros.</div>'; return; }
 
-                    lista.slice(0, 50).forEach((val, i) => {
+                    renderizarBatchResultados();
+                }
+
+                function renderizarBatchResultados() {
+                    let resDiv = document.getElementById('resultados-auto');
+                    let btnLoad = document.getElementById('btn-cargar-mas');
+                    if (btnLoad) btnLoad.remove();
+
+                    let end = Math.min(OFFSET_MOSTRADOS + BATCH_SIZE, RESULTADOS_MOSTRADOS.length);
+                    let batch = RESULTADOS_MOSTRADOS.slice(OFFSET_MOSTRADOS, end);
+
+                    batch.forEach((val, k) => {
+                        let i = OFFSET_MOSTRADOS + k;
                         let idAcc = `acc-${i}`;
                         let rows = val.cursos.map(c => generarFilaSIAE(c, null, false)).join('');
                         let item = document.createElement('div'); item.className = 'accordion-item border shadow-sm mb-2';
@@ -3324,6 +3726,11 @@
                     <button class="btn btn-sm btn-outline-success me-2" onclick="transferirAManual(${i})" title="Usar este horario en Modo Manual">
                         <i class="bi bi-pencil-square"></i> Transferir
                     </button>
+                    
+                    <button class="btn btn-sm btn-outline-secondary me-2" id="btn-recolor-auto-${i}" style="display:none;" onclick="recolorearAuto(); event.stopPropagation();" title="Cambiar paleta de colores">
+                        <i class="bi bi-palette"></i>
+                    </button>
+
                     <div class="form-check form-switch ms-2 me-1" onclick="event.stopPropagation()" style="transform: scale(0.85); transform-origin: right center;">
                         <input class="form-check-input" type="checkbox" id="switch-auto-${i}" onchange="toggleVistaAuto(${i})">
                         <label class="form-check-label fw-bold text-muted" for="switch-auto-${i}" style="font-size: 0.8rem;">Gráfico</label>
@@ -3339,6 +3746,18 @@
                 </div>`;
                         resDiv.appendChild(item);
                     });
+
+                    OFFSET_MOSTRADOS = end;
+
+                    if (OFFSET_MOSTRADOS < RESULTADOS_MOSTRADOS.length) {
+                        let divBtn = document.createElement('div');
+                        divBtn.id = 'btn-cargar-mas';
+                        divBtn.className = 'text-center py-4';
+                        divBtn.innerHTML = `<button class="btn btn-outline-primary rounded-pill px-4 shadow-sm" onclick="renderizarBatchResultados()">
+                                                <i class="bi bi-plus-circle me-2"></i>Cargar más resultados (${RESULTADOS_MOSTRADOS.length - OFFSET_MOSTRADOS} restantes)
+                                            </button>`;
+                        resDiv.appendChild(divBtn);
+                    }
                 }
 
                 function transferirAManual(idx) {
@@ -3400,9 +3819,13 @@
                     let tabla = document.getElementById(`res-tabla-${idx}`);
                     let visual = document.getElementById(`res-visual-${idx}`);
                     let selectorSort = document.getElementById(`sort-auto-${idx}`);
+                    let recolorBtn = document.getElementById(`btn-recolor-auto-${idx}`);
 
                     if (selectorSort) {
                         selectorSort.style.display = isChecked ? 'none' : 'inline-block';
+                    }
+                    if (recolorBtn) {
+                        recolorBtn.style.display = isChecked ? 'inline-block' : 'none';
                     }
 
                     tabla.style.display = isChecked ? 'none' : 'block';
