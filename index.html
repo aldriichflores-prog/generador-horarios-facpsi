@@ -2186,6 +2186,10 @@
                                         <span class="badge bg-danger border border-danger">Máximo 41 Créditos</span>
                                         <span class="text-muted">Tope del sistema (+1 recursamiento).</span>
                                     </div>
+                                    <p class="mt-2 text-muted fst-italic mb-0" style="font-size: 0.75rem;">(Los créditos
+                                        requeridos para 1.º a 4.º semestre son distintos a los establecidos para 5.º a
+                                        8.º semestre. El sistema identifica automáticamente el rango y aplica los
+                                        créditos correspondientes.)</p>
                                 </li>
 
                                 <li class="list-group-item px-4 py-3">
@@ -2401,6 +2405,7 @@
                                 grupo: gpo,
                                 creditos: parseInt(fila.creditos || 0),
                                 observaciones: fila.observaciones || "",
+                                clave: fila.clave || "",
                                 area: area,
                                 sesiones: []
                             };
@@ -2590,7 +2595,7 @@
                             }
 
                             let htmlContent = `<div class="materia-nombre">${curso.asignatura}</div>`;
-                            htmlContent += `<div class="materia-grupo">Gpo: ${curso.grupo}</div>`;
+                            htmlContent += `<div class="materia-grupo">Gpo: ${curso.grupo} <span style="font-weight:normal; opacity:0.8;">| Clave: ${curso.clave}</span></div>`;
                             htmlContent += `<div class="materia-profe">${curso.profesor}</div>`;
                             htmlContent += `<div class="materia-horas">${horasStr}</div>`;
 
@@ -2863,7 +2868,7 @@
                         }
 
                         let col = document.createElement('div'); col.className = 'col-auto'; col.style.width = '300px'; col.style.flexShrink = '0';
-                        col.innerHTML = `<div class="grupo-card p-3 d-flex flex-column ${claseEstado}" onclick="${clickEvent}"><div class="d-flex justify-content-between mb-2"><span class="badge bg-primary">Gpo ${c.grupo}</span><span class="text-muted small">${c.creditos} Cr</span></div><h6 class="card-title text-primary small text-uppercase fw-bold mb-2" style="min-height:2.5em;">${c.profesor}</h6><div class="small text-muted flex-grow-1 border-top pt-2">${horario}</div> ${obsBtn} ${obsBox} ${botonAccion}</div>`;
+                        col.innerHTML = `<div class="grupo-card p-3 d-flex flex-column ${claseEstado}" onclick="${clickEvent}"><div class="d-flex justify-content-between mb-2"><span class="badge bg-primary">Gpo ${c.grupo}</span><span class="text-muted small">${c.creditos} Cr</span></div><div class="mb-1 text-center"><span class="badge bg-light text-dark border">Clave: ${c.clave}</span></div><h6 class="card-title text-primary small text-uppercase fw-bold mb-2" style="min-height:2.5em;">${c.profesor}</h6><div class="small text-muted flex-grow-1 border-top pt-2">${horario}</div> ${obsBtn} ${obsBox} ${botonAccion}</div>`;
                         contenedor.appendChild(col);
                     });
                 }
@@ -3036,7 +3041,7 @@
                         let rndId = 'obs-auto-' + Math.random().toString(36).substr(2, 6);
                         obsCell = `<button class="btn-ver-obs" onclick="verObs('${rndId}')">Ver Obs</button><div id="${rndId}" class="obs-box text-start mt-1" style="display:none; min-width: 150px;">${c.observaciones}</div>`;
                     }
-                    return `<tr><td class="text-start small fw-bold text-primary text-truncate" style="max-width:150px;" title="${c.asignatura}">${c.asignatura}</td><td>${c.grupo}</td><td class="text-start small text-uppercase text-truncate" style="max-width:150px;" title="${c.profesor}">${c.profesor}</td><td>${d.LUNES}</td><td>${d.MARTES}</td><td>${d.MIERCOLES}</td><td>${d.JUEVES}</td><td>${d.VIERNES}</td><td>${d.SABADO}</td><td>${c.creditos}</td><td>${obsCell}</td><td>${btn}</td></tr>`;
+                    return `<tr><td class="text-start small fw-bold text-primary text-truncate" style="max-width:150px;" title="${c.asignatura}">${c.asignatura} <span class="text-muted fw-normal">(${c.clave})</span></td><td>${c.grupo}</td><td class="text-start small text-uppercase text-truncate" style="max-width:150px;" title="${c.profesor}">${c.profesor}</td><td>${d.LUNES}</td><td>${d.MARTES}</td><td>${d.MIERCOLES}</td><td>${d.JUEVES}</td><td>${d.VIERNES}</td><td>${d.SABADO}</td><td>${c.creditos}</td><td>${obsCell}</td><td>${btn}</td></tr>`;
                 }
 
                 function borrar(idx) {
@@ -3145,14 +3150,14 @@
                 function descargarCSV() {
                     if (miHorario.length === 0) return alert("No hay horario para exportar.");
                     let csvContent = "data:text/csv;charset=utf-8,";
-                    csvContent += "Materia,Grupo,Profesor,Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Creditos,Observaciones\n";
+                    csvContent += "Materia,Clave,Grupo,Profesor,Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Creditos,Observaciones\n";
                     miHorario.forEach(c => {
                         let d = { LUNES: '', MARTES: '', MIERCOLES: '', JUEVES: '', VIERNES: '', SABADO: '' };
                         c.sesiones.forEach(s => { let k = s.dia.toUpperCase().replace('É', 'E'); if (d.hasOwnProperty(k)) d[k] = `${s.inicio}-${s.fin}`; });
                         let asig = c.asignatura.replace(/,/g, '');
                         let prof = c.profesor.replace(/,/g, '');
                         let obs = (c.observaciones || "").replace(/,/g, ' ').replace(/\n/g, ' ');
-                        let row = `${asig},${c.grupo},${prof},${d.LUNES},${d.MARTES},${d.MIERCOLES},${d.JUEVES},${d.VIERNES},${d.SABADO},${c.creditos},${obs}`;
+                        let row = `${asig},${c.clave},${c.grupo},${prof},${d.LUNES},${d.MARTES},${d.MIERCOLES},${d.JUEVES},${d.VIERNES},${d.SABADO},${c.creditos},${obs}`;
                         csvContent += row + "\n";
                     });
                     const encodedUri = encodeURI(csvContent);
@@ -3189,7 +3194,7 @@
                     let merges = [];
 
                     miHorario.forEach(curso => {
-                        let textoCelda = `${curso.asignatura}\n(${curso.profesor})\nGpo: ${curso.grupo}`;
+                        let textoCelda = `${curso.asignatura} (${curso.clave})\n(${curso.profesor})\nGpo: ${curso.grupo}`;
                         curso.sesiones.forEach(sesion => {
                             let diaNormal = sesion.dia.toUpperCase().replace("É", "E");
                             let colIndex = diasKeys.indexOf(diaNormal) + 1;
@@ -3287,6 +3292,7 @@
                         <span class="badge bg-secondary">Gpo ${c.grupo}</span>
                         <span class="text-muted small">${c.creditos} Cr</span>
                     </div>
+                    <div class="mb-1 text-center"><span class="badge bg-light text-dark border">Clave: ${c.clave}</span></div>
                     <h6 class="card-title text-primary small text-uppercase fw-bold mb-2" style="min-height:2.5em;">${c.profesor}</h6>
                     <div class="small text-muted flex-grow-1 border-top pt-2">${horario}</div> 
                     ${obsBtn} ${obsBox} ${textoEstado}
@@ -3884,7 +3890,7 @@
                                 bloque.style.height = `${heightPx}px`;
 
                                 let htmlContent = `<div class="materia-nombre">${curso.asignatura}</div>`;
-                                htmlContent += `<div class="materia-grupo">Gpo: ${curso.grupo}</div>`;
+                                htmlContent += `<div class="materia-grupo">Gpo: ${curso.grupo} <span style="font-weight:normal; opacity:0.8;">| Clave: ${curso.clave}</span></div>`;
                                 htmlContent += `<div class="materia-profe">${curso.profesor}</div>`;
                                 htmlContent += `<div class="materia-horas">${horasStr}</div>`;
 
