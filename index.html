@@ -2245,22 +2245,40 @@
 
             <div id="capture-container"></div>
             <script>
-                let BD_CRUDA = [], BD_AGRUPADA = [], miHorario = [], bolsa = {}, materiaSeleccionadaActual = null, materiaSeleccionadaAuto = null;
-                let MAPA_COLORES_ASIGNADOS = {};
-                let OFFSET_RECOLOR = 0;
-                let OFFSET_RECOLOR_AUTO = 0;
-                let RESULTADOS_GLOBALES = [];
-                let RESULTADOS_MOSTRADOS = [];
-                let OFFSET_MOSTRADOS = 0;
-                const BATCH_SIZE = 50;
-                let historial = [];
-                let futuro = [];
-                let materiasPendientes = [];
-                let configVisual = { prof: true, grupo: true, horas: true };
-                let horariosGuardados = {};
+                // ==========================================
+                // 1. CONSTANTES Y CONFIGURACIÓN GLOBAL
+                // ==========================================
+
+                // --- Bases de Datos ---
+                let BD_CRUDA = [];      // Datos tal cual llegan del JSON
+                let BD_AGRUPADA = [];   // Datos procesados y limpios con clave y estructura unificada
+
+                // --- Estado del Usuario (Modo Manual) ---
+                let miHorario = [];     // Lista de cursos seleccionados actualmente
+                let historial = [];     // Pila para Undo
+                let futuro = [];        // Pila para Redo
+                let materiasPendientes = []; // Materias en previsualización (hover/condicionales)
+                let materiaSeleccionadaActual = null; // Materia activa en el panel izquierdo (Manual)
+
+                // --- Estado del Modo Explorador (Automático) ---
+                let bolsa = {};         // Materias candidatas seleccionadas { "Calculo": [grupo1, grupo2] }
+                let materiaSeleccionadaAuto = null; // Materia activa en el panel izquierdo (Auto)
+                let RESULTADOS_GLOBALES = [];    // Todas las combinaciones generadas
+                let RESULTADOS_MOSTRADOS = [];   // Combinaciones filtradas que se muestran
+                let OFFSET_MOSTRADOS = 0;        // Paginación de resultados visualizados
+                const BATCH_SIZE = 50;           // Cantidad de resultados por página
+
+                // --- Configuración Visual y Sistema ---
+                let configVisual = { prof: true, grupo: true, horas: true }; // Que mostrar en los bloques visuales
+                let MAPA_COLORES_ASIGNADOS = {}; // Cache de colores por ID de materia
+                let OFFSET_RECOLOR = 0;          // Desplazamiento de colores (Manual)
+                let OFFSET_RECOLOR_AUTO = 0;     // Desplazamiento de colores (Auto)
+                let horariosGuardados = {};      // Persistencia de múltiples horarios
                 let activeScheduleId = "default";
 
                 const DB_FILE = 'Horarios_Completo_UNAM.json';
+
+                // Paleta de colores pastel para los bloques
                 const PALETA_ENTERA = [
                     '#FFF9C4', '#F5F5DC', '#E3F2FD', '#F3E5F5', '#E0F2F1', '#FFF3E0', '#FBE9E7', '#FAFAFA',
                     '#ECEFF1', '#F9FBE7', '#FFF4F0', '#FFF4DC', '#F1F3FF', '#FFECF0', '#DCF2DD', '#D0F3CB',
@@ -2268,14 +2286,28 @@
                     '#D2DADD', '#FFFAC7', '#B0E0E0', '#B1CAFF', '#B7DAFF', '#FEDBD7', '#FFCCEA', '#FBC6F0',
                     '#FFE2C8', '#99DAFF', '#FFA79F', '#82E9E6', '#C3ADFF', '#FFC7BA'
                 ];
-                let PALETA_ORDENADA = [];
+                let PALETA_ORDENADA = []; // Se llena onload ordenando por luminancia
 
+                // ==========================================
+                // 2. UTILIDADES Y HELPERS
+                // ==========================================
+
+                /** Calcula la luminancia de un color Hex para ordenar la paleta */
                 function getLuminance(hex) { let c = hex.substring(1); let rgb = parseInt(c, 16); let r = (rgb >> 16) & 0xff; let g = (rgb >> 8) & 0xff; let b = (rgb >> 0) & 0xff; return 0.2126 * r + 0.7152 * g + 0.0722 * b; }
+
+                /** Convierte hora "HH:MM" a minutos desde las 00:00 */
                 function convertirMinutos(horaStr) { if (!horaStr || typeof horaStr !== 'string') return 0; const [h, m] = horaStr.split(':').map(Number); return (h * 60) + m; }
+
+                /** Convierte minutos a formato "HH:MM" */
                 function minutosAHora(minutos) { let h = Math.floor(minutos / 60); let m = minutos % 60; return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`; }
+
+                /** Asigna un color fijo a una materia basado en su ID si no tiene uno */
                 function asignarColorFijo(id_unico) { if (MAPA_COLORES_ASIGNADOS[id_unico]) return; let count = Object.keys(MAPA_COLORES_ASIGNADOS).length; let color = PALETA_ORDENADA[count % PALETA_ORDENADA.length]; MAPA_COLORES_ASIGNADOS[id_unico] = color; }
 
-                // --- UNDO/REDO ---
+                // ==========================================
+                // 3. GESTIÓN DEL ESTADO (UNDO/REDO)
+                // ==========================================
+
                 function registrarEstado() {
                     historial.push(JSON.parse(JSON.stringify(miHorario)));
                     futuro = [];
@@ -2314,8 +2346,33 @@
                     filtrarMaterias();
                 }
 
-                function recolorearInteligente() { OFFSET_RECOLOR++; let materiasOrdenadas = [...miHorario].sort((a, b) => { if (a.creditos !== b.creditos) return a.creditos - b.creditos; return a.asignatura.localeCompare(b.asignatura); }); let totalMaterias = materiasOrdenadas.length; let totalColores = PALETA_ORDENADA.length; if (totalMaterias > 0) { let step = totalColores / totalMaterias; materiasOrdenadas.forEach((mat, i) => { let baseIndex = Math.floor(i * step); let nextIndex = Math.floor((i + 1) * step); let sectionSize = Math.max(1, nextIndex - baseIndex); let indexWithin = OFFSET_RECOLOR % sectionSize; let finalIndex = baseIndex + indexWithin; if (finalIndex >= totalColores) finalIndex = totalColores - 1; MAPA_COLORES_ASIGNADOS[mat.id_unico] = PALETA_ORDENADA[finalIndex]; }); } guardarEstado(); renderizarHorarioVisual(); }
+                // ==========================================
+                // 4. LÓGICA DE COLORES Y CHOQUES
+                // ==========================================
 
+                /** Cambia los colores de las materias del Modo Manual cíclicamente */
+                function recolorearInteligente() {
+                    OFFSET_RECOLOR++;
+                    let materiasOrdenadas = [...miHorario].sort((a, b) => { if (a.creditos !== b.creditos) return a.creditos - b.creditos; return a.asignatura.localeCompare(b.asignatura); });
+                    let totalMaterias = materiasOrdenadas.length;
+                    let totalColores = PALETA_ORDENADA.length;
+                    if (totalMaterias > 0) {
+                        let step = totalColores / totalMaterias;
+                        materiasOrdenadas.forEach((mat, i) => {
+                            let baseIndex = Math.floor(i * step);
+                            let nextIndex = Math.floor((i + 1) * step);
+                            let sectionSize = Math.max(1, nextIndex - baseIndex);
+                            let indexWithin = OFFSET_RECOLOR % sectionSize;
+                            let finalIndex = baseIndex + indexWithin;
+                            if (finalIndex >= totalColores) finalIndex = totalColores - 1;
+                            MAPA_COLORES_ASIGNADOS[mat.id_unico] = PALETA_ORDENADA[finalIndex];
+                        });
+                    }
+                    guardarEstado();
+                    renderizarHorarioVisual();
+                }
+
+                /** Cambia los colores de los Resultados Automáticos */
                 function recolorearAuto() {
                     OFFSET_RECOLOR_AUTO++;
                     RESULTADOS_MOSTRADOS.forEach((res, i) => {
@@ -2330,6 +2387,7 @@
                     });
                 }
 
+                /** Detecta conflictos de horario entre un curso 'c1' y una lista de cursos */
                 function obtenerChoques(c1, lista) {
                     let conflictos = [];
                     if (!c1 || !lista) return conflictos;
@@ -2351,6 +2409,8 @@
                 }
 
                 function hayChoque(c1, lista) { return obtenerChoques(c1, lista).length > 0; }
+
+                /** Verifica si hay algún choque interno en una lista de cursos (para el generador) */
                 function hayChoqueCombo(lista) { for (let i = 0; i < lista.length; i++) { for (let j = i + 1; j < lista.length; j++) { if (hayChoque(lista[i], [lista[j]])) return true; } } return false; }
 
                 function actualizarConfigVisual() {
@@ -2369,10 +2429,16 @@
                     }
                 }
 
+                // ==========================================
+                // 5. INICIALIZACIÓN Y CARGA DE DATOS
+                // ==========================================
+
                 // Se eliminó toggleFijarPanel por petición del usuario
 
                 window.onload = function () {
+                    // Ordenar paleta por brillo para contraste
                     PALETA_ORDENADA = [...PALETA_ENTERA].sort((a, b) => getLuminance(b) - getLuminance(a));
+
                     fetch(DB_FILE)
                         .then(res => { if (!res.ok) throw new Error("Error JSON"); return res.json(); })
                         .then(data => {
@@ -2380,12 +2446,20 @@
                             procesarDatosCrudos();
                             crearGridVisualVacia();
                             cargarEstado();
+                            // Restaurar semestre si estaba seleccionado
                             let semSelect = document.getElementById('semestre-selector');
                             if (semSelect.value) cambiarSemestre(false);
                         })
                         .catch(err => { console.error(err); alert("Error cargando datos: " + err.message); });
                 };
 
+                /** 
+                 * Procesa el JSON crudo a objetos utilizables.
+                 * - Genera ID único si no existe
+                 * - Normaliza campos
+                 * - Agrupa sesiones
+                 * - EXTRAE LA CLAVE (Nuevo Recquerimiento)
+                 */
                 function procesarDatosCrudos() {
                     let temp = {};
                     BD_CRUDA.forEach(fila => {
@@ -2395,7 +2469,10 @@
                         let gpo = (fila.grupo || "0").toString();
                         let area = (fila.area || "GENERAL").toString().trim();
                         if (area === "") area = "GENERAL";
+
+                        // Clave única para agrupar sesiones del mismo grupo
                         let key = `${sem}-${asig}-${gpo}`;
+
                         if (!temp[key]) {
                             temp[key] = {
                                 id_unico: fila.id_unico || Math.random(),
@@ -2405,14 +2482,16 @@
                                 grupo: gpo,
                                 creditos: parseInt(fila.creditos || 0),
                                 observaciones: fila.observaciones || "",
-                                clave: fila.clave || "",
+                                clave: fila.clave || "", // INTEGRACIÓN DE CLAVE
                                 area: area,
                                 sesiones: []
                             };
                         }
+
                         let d = fila.dia || "POR ASIGNAR";
                         let i = fila.hora_inicio || "00:00";
                         let f = fila.hora_fin || "00:00";
+
                         if (d !== "POR ASIGNAR" && i !== "00:00") {
                             temp[key].sesiones.push({
                                 dia: d, inicio: i, fin: f,
@@ -2423,6 +2502,10 @@
                     });
                     BD_AGRUPADA = Object.values(temp);
                 }
+
+                // ==========================================
+                // 6. PERSISTENCIA Y GESTIÓN DE HORARIOS
+                // ==========================================
 
                 function guardarEstado() {
                     horariosGuardados[activeScheduleId].cursos = miHorario;
@@ -2440,16 +2523,20 @@
                     } else {
                         horariosGuardados = { "default": { nombre: "Mi Horario 1", cursos: [] } };
                     }
+
                     let savedId = localStorage.getItem('unam_active_id_v3');
                     if (savedId && horariosGuardados[savedId]) {
                         activeScheduleId = savedId;
                     } else {
+                        // Fallback si el ID guardado no existe
                         activeScheduleId = Object.keys(horariosGuardados)[0];
                     }
+
                     let b = localStorage.getItem('unam_b_v3');
                     let c = localStorage.getItem('unam_colors_v3');
                     if (b) bolsa = JSON.parse(b);
                     if (c) MAPA_COLORES_ASIGNADOS = JSON.parse(c);
+
                     miHorario = horariosGuardados[activeScheduleId].cursos || [];
 
                     historial = [];
@@ -2479,8 +2566,11 @@
                     miHorario = horariosGuardados[activeScheduleId].cursos || [];
                     localStorage.setItem('unam_active_id_v3', activeScheduleId);
                     document.getElementById('nombre-horario-actual').value = horariosGuardados[activeScheduleId].nombre;
+
+                    // Resetear estados temporales
                     materiasPendientes = [];
                     historial = []; futuro = []; actualizarBotonesUndo();
+
                     actualizarTablaHorario();
                     renderizarHorarioVisual();
                     materiaSeleccionadaActual = null;
@@ -2494,8 +2584,10 @@
                     horariosGuardados[newId] = { nombre: `Nuevo Horario ${count}`, cursos: [] };
                     activeScheduleId = newId;
                     miHorario = [];
+
                     materiasPendientes = [];
                     historial = []; futuro = []; actualizarBotonesUndo();
+
                     guardarEstado();
                     actualizarUIHorarios();
                     actualizarTablaHorario();
@@ -2516,16 +2608,25 @@
                 function eliminarHorarioActual() {
                     if (Object.keys(horariosGuardados).length <= 1) return alert("Debes tener al menos un horario.");
                     if (!confirm(`¿Eliminar "${horariosGuardados[activeScheduleId].nombre}" permanentemente?`)) return;
+
                     delete horariosGuardados[activeScheduleId];
                     activeScheduleId = Object.keys(horariosGuardados)[0];
                     miHorario = horariosGuardados[activeScheduleId].cursos;
+
                     materiasPendientes = [];
                     historial = []; futuro = []; actualizarBotonesUndo();
+
                     guardarEstado();
                     actualizarUIHorarios();
                     actualizarTablaHorario();
                     renderizarHorarioVisual();
                 }
+
+                function mostrarToast() { document.getElementById('toast-guardado').style.display = 'block'; setTimeout(() => document.getElementById('toast-guardado').style.display = 'none', 1500); }
+
+                // ==========================================
+                // 7. INTERFAZ: VISUALIZACIÓN Y HELPERS
+                // ==========================================
 
                 function mostrarToast() { document.getElementById('toast-guardado').style.display = 'block'; setTimeout(() => document.getElementById('toast-guardado').style.display = 'none', 1500); }
 
@@ -2538,7 +2639,30 @@
                     if (isVisual) renderizarHorarioVisual();
                 }
 
-                function crearGridVisualVacia() { let tbody = document.getElementById('grid-horario-visual'); tbody.innerHTML = ''; let startMin = 7 * 60; let endMin = 21 * 60; for (let m = startMin; m < endMin; m += 30) { let tr = document.createElement('tr'); let horaStr = minutosAHora(m); let idHora = m; let tdHora = document.createElement('td'); tdHora.className = 'hora-col'; tdHora.innerText = horaStr; tr.appendChild(tdHora);['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'].forEach(dia => { let td = document.createElement('td'); td.id = `grid-${dia}-${idHora}`; td.dataset.dia = dia; td.dataset.min = idHora; tr.appendChild(td); }); tbody.appendChild(tr); } }
+                /** Genera la estructura HTML vacía del horario gráfico */
+                function crearGridVisualVacia() {
+                    let tbody = document.getElementById('grid-horario-visual');
+                    tbody.innerHTML = '';
+                    let startMin = 7 * 60;
+                    let endMin = 21 * 60;
+                    for (let m = startMin; m < endMin; m += 30) {
+                        let tr = document.createElement('tr');
+                        let horaStr = minutosAHora(m);
+                        let idHora = m;
+                        let tdHora = document.createElement('td');
+                        tdHora.className = 'hora-col';
+                        tdHora.innerText = horaStr;
+                        tr.appendChild(tdHora);
+                        ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'].forEach(dia => {
+                            let td = document.createElement('td');
+                            td.id = `grid-${dia}-${idHora}`;
+                            td.dataset.dia = dia;
+                            td.dataset.min = idHora;
+                            tr.appendChild(td);
+                        });
+                        tbody.appendChild(tr);
+                    }
+                }
 
                 function resaltarMateria(idUnico) {
                     let bloques = document.querySelectorAll(`.bloque-${idUnico}`);
@@ -2563,6 +2687,7 @@
                     });
                 }
 
+                /** Inserta un bloque visual en el grid */
                 function insertarBloque(curso, color, esTraslape) {
                     let horasStr = curso.sesiones.map(s => `${s.dia.substr(0, 3)} ${s.inicio}-${s.fin}`).join('\n');
                     curso.sesiones.forEach(sesion => {
@@ -2595,6 +2720,7 @@
                             }
 
                             let htmlContent = `<div class="materia-nombre">${curso.asignatura}</div>`;
+                            // CLAVE INTEGRADA
                             htmlContent += `<div class="materia-grupo">Gpo: ${curso.grupo} <span style="font-weight:normal; opacity:0.8;">| Clave: ${curso.clave}</span></div>`;
                             htmlContent += `<div class="materia-profe">${curso.profesor}</div>`;
                             htmlContent += `<div class="materia-horas">${horasStr}</div>`;
@@ -2609,7 +2735,22 @@
                     });
                 }
 
-                function mostrarDetallesMateria(id) { let curso = miHorario.find(c => c.id_unico === id); if (!curso) return; document.getElementById('tituloMateriaModal').innerText = curso.asignatura; document.getElementById('profeMateriaModal').innerText = curso.profesor || "Profesor no asignado"; let obs = curso.observaciones ? curso.observaciones : "Sin observaciones registradas para este grupo."; document.getElementById('obsMateriaModal').innerText = obs; let btnEliminar = document.getElementById('btnEliminarDesdeModal'); btnEliminar.onclick = () => eliminarDesdeModal(id); let modal = new bootstrap.Modal(document.getElementById('modalDetallesMateria')); modal.show(); }
+                // ==========================================
+                // 8. INTERACCIONES MODALES
+                // ==========================================
+
+                function mostrarDetallesMateria(id) {
+                    let curso = miHorario.find(c => c.id_unico === id);
+                    if (!curso) return;
+                    document.getElementById('tituloMateriaModal').innerText = curso.asignatura;
+                    document.getElementById('profeMateriaModal').innerText = curso.profesor || "Profesor no asignado";
+                    let obs = curso.observaciones ? curso.observaciones : "Sin observaciones registradas para este grupo.";
+                    document.getElementById('obsMateriaModal').innerText = obs;
+                    let btnEliminar = document.getElementById('btnEliminarDesdeModal');
+                    btnEliminar.onclick = () => eliminarDesdeModal(id);
+                    let modal = new bootstrap.Modal(document.getElementById('modalDetallesMateria'));
+                    modal.show();
+                }
 
                 function eliminarDesdeModal(id) {
                     if (!confirm("¿Estás seguro de eliminar esta materia?")) return;
@@ -2628,6 +2769,10 @@
                         modal.hide();
                     }
                 }
+
+                // ==========================================
+                // 9. LÓGICA DE FILTRADO Y NAVEGACIÓN
+                // ==========================================
 
                 function obtenerMateriasActivas() {
                     const selector = document.getElementById('semestre-selector');
@@ -2712,6 +2857,10 @@
                         vistaAuto.style.display = (m === 'auto') ? 'block' : 'none';
                     }
                 }
+
+                // ==========================================
+                // 10. MODO MANUAL: SELECCIÓN Y PANELES
+                // ==========================================
 
                 function filtrarMaterias() {
                     let txt = document.getElementById('buscador').value.toUpperCase();
@@ -2914,6 +3063,10 @@
                     cargarPanelGrupos(asignatura);
                 }
 
+                // ==========================================
+                // 11. GESTIÓN DE MI HORARIO Y TABLA
+                // ==========================================
+
                 function toggleSeleccionManual(id, asignatura) {
                     registrarEstado();
                     if (materiasPendientes.some(p => p.curso.id_unico === id)) {
@@ -3064,6 +3217,11 @@
                         actualizarTablaHorario();
                     }
                 }
+
+                // --- NUEVAS FUNCIONES DE DESCARGA (CORRIGEN MÓVIL/VERTICAL) ---
+                // ==========================================
+                // 12. FUNCIONES DE EXPORTACIÓN
+                // ==========================================
 
                 // --- NUEVAS FUNCIONES DE DESCARGA (CORRIGEN MÓVIL/VERTICAL) ---
                 async function descargarPDF() {
@@ -3227,6 +3385,10 @@
                     XLSX.writeFile(wb, "Horario_FacPsi_UNAM.xlsx");
                 }
 
+                // ==========================================
+                // 13. MODO EXPLORADOR: SELECCIÓN Y GENERACIÓN
+                // ==========================================
+
                 function filtrarMateriasAuto() {
                     let txt = document.getElementById('buscador-auto').value.toUpperCase();
                     let lista = document.getElementById('lista-materias-auto'); lista.innerHTML = '';
@@ -3337,6 +3499,10 @@
                     if (teoria && practica) { if (!teoria.observaciones.includes(practica.grupo)) return false; }
                     return true;
                 }
+
+                // ==========================================
+                // 14. ALGORITMOS DE GENERACIÓN
+                // ==========================================
 
                 async function generarCombinaciones() {
                     let resDiv = document.getElementById('resultados-auto');
@@ -3595,6 +3761,10 @@
                     };
                 }
 
+
+                // ==========================================
+                // 15. RENDERIZADO DE RESULTADOS Y UTILIDADES
+                // ==========================================
 
                 function renderizarFiltroProfesores() {
                     let container = document.getElementById('lista-profes-filtro-resultados');
@@ -3909,6 +4079,10 @@
                     });
                 }
 
+                // ==========================================
+                // 16. INIT Y CONTROL DE FLUJO GLOBAL
+                // ==========================================
+
                 window.entrarAlWorkspace = function () {
                     let selectorInicio = document.getElementById('landing-selector');
                     let valor = selectorInicio.value;
@@ -3939,6 +4113,7 @@
                         landing.style.display = 'none';
                     }, 600);
                 };
+
                 function actualizarFiltrosUI() {
                     if (document.getElementById('sort-resultados'))
                         document.getElementById('sort-resultados').value = 'dias';
