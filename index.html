@@ -2408,7 +2408,8 @@
                         });
                     } else {
                         const sem = parseInt(valor);
-                        return BD_AGRUPADA.filter(c => c.semestre === sem);
+                        // Mostrar materias del semestre seleccionado, o "PRINCIPIOS..." si estamos en 6to (ya que es de 8vo pero se abre a 6to)
+                        return BD_AGRUPADA.filter(c => c.semestre === sem || (c.asignatura === "PRINCIPIOS DE SUSTENTABILIDAD" && sem === 6));
                     }
                 }
 
