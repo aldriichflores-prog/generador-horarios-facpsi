@@ -14416,5 +14416,43 @@
         "min_fin": 1020,
         "salon": "AULA PENDIENTE",
         "clave": 54
+    },
+    {
+        "id_unico": 999001,
+        "semestre": 6,
+        "id_curso": 9999,
+        "area": "Prácticas 6to",
+        "grupo": "6999",
+        "asignatura": "INTERACCIÓN FAMILIAR CON NIÑOS Y ADOLESCENTES",
+        "creditos": 6,
+        "profesor": "FALCÓ PLIEGO ANA CECILIA",
+        "observaciones": "",
+        "dia": "MARTES",
+        "hora_inicio": "11:00",
+        "hora_fin": "15:00",
+        "min_inicio": 660,
+        "min_fin": 900,
+        "salon": "POR ASIGNAR",
+        "clave": 9999
+    },
+    {
+        "id_unico": 999002,
+        "semestre": 6,
+        "id_curso": 9999,
+        "area": "Prácticas 6to",
+        "grupo": "6999",
+        "asignatura": "INTERACCIÓN FAMILIAR CON NIÑOS Y ADOLESCENTES",
+        "creditos": 6,
+        "profesor": "FALCÓ PLIEGO ANA CECILIA",
+        "observaciones": "",
+        "dia": "JUEVES",
+        "hora_inicio": "11:00",
+        "hora_fin": "14:30",
+        "min_inicio": 660,
+        "min_fin": 870,
+        "salon": "POR ASIGNAR",
+        "clave": 9999
     }
+        
 ]
+
