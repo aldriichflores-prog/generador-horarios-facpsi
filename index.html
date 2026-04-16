@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Generador Horarios para la Facultad de Psicología UNAM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+    <div id="step-1-landing">
+        <div class="bg-layer aura-background">
+            <div data-us-project="uFY4IYPs2LU8fWm96Im2" style="width: 100%; height: 100%;"></div>
+            <script type="text/javascript">
+                !function () { if (!window.UnicornStudio) { window.UnicornStudio = { isInitialized: !1 }; var i = document.createElement("script"); i.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js", i.onload = function () { window.UnicornStudio.isInitialized || (UnicornStudio.init(), window.UnicornStudio.isInitialized = !0) }, (document.head || document.body).appendChild(i) } }();
+            </script>
+        </div>
+
+        <div class="bg-layer tint-overlay"></div>
+
+        <div class="bg-layer particle-canvas">
+            <canvas id="ocean-dust"></canvas>
+        </div>
+
+        <div class="landing-content-wrapper">
+
+            <div class="landing-header">
+                <h1 class="header-generator-title">Generador de Horarios</h1>
+                <p class="header-school-subtitle">
+                    de Apoyo a la Inscripción de la Facultad de Psicología UNAM
+                </p>
+            </div>
+
+            <div class="card-selector-container">
+                <div class="glass-card">
+                    <p class="mb-2 fw-bold text-white small">Para comenzar:</p>
+                    <label class="fw-bold mb-3 d-block display-6" style="color: white; letter-spacing: 0.5px;">¿Qué
+                        semestre cursarás?</label>
+                    <select id="landing-selector" class="form-select form-select-lg fw-bold landing-select mb-4"
+                        onchange="document.getElementById('btn-start-app').disabled = false">
+                        <option value="" selected disabled>- Elige una opción -</option>
+                        <option value="2">2do Semestre</option>
+                        <option value="4">4to Semestre</option>
+                        <option value="6">6to Semestre</option>
+                        <option value="8">8vo Semestre</option>
+                        <option value="adicional">Semestre Adicional / Optativas</option>
+                    </select>
+
+                    <button id="btn-start-app" class="btn-gold-gradient rounded-pill px-5 py-3 w-100"
+                        onclick="window.entrarAlWorkspace()" disabled>
+                        COMENZAR <i class="bi bi-arrow-right-short fs-4 align-middle"></i>
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="landing-footer mb-4">
+                <p class="mb-1"><i class="bi bi-exclamation-diamond"></i>
+                    <strong>Importante:</strong>
+                </p>
+                <p class="mb-0">
+                    <strong>NO AFILIADO</strong> a la administración de la Facultad.<br>
+                    La inscripción oficial se realiza en las páginas oficiales de la Facultad.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="app-container-wrapper">
+
+        <header class="header-hero text-center mb-3">
+            <div class="container">
+                <span class="badge-student mb-2 d-inline-block"><i class="bi bi-mortarboard"></i> PROYECTO
+                    SADA</span>
+                <br><strong>Semestre 2026-2</strong>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <p class="lead" style="font-size: 1.1rem;">
+                            Organiza tu semestre de forma sencilla y eficiente.
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-2 d-inline-flex align-items-center bg-white rounded-pill px-3 py-1 shadow-sm">
+                    <span class="text-dark fw-bold me-2 small">VER OFERTA DE:</span>
+                    <select id="semestre-selector" class="form-select form-select-sm border-0 fw-bold text-primary"
+                        style="width: auto; cursor: pointer;" onchange="cambiarSemestre(false)">
+                        <option value="2">2do Semestre</option>
+                        <option value="4">4to Semestre</option>
+                        <option value="6">6to Semestre</option>
+                        <option value="8" selected>8vo Semestre</option>
+                        <option value="adicional">Semestre adicional</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <div class="container-fluid px-4 pb-3" id="app">
+            <div id="alerta-semestre" class="container mb-3"></div>
+
+            <div class="container mb-4">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm card-hover-effect"
+                            style="border-top: 5px solid #00695c !important; cursor: pointer;"
+                            onclick="activarModo('manual')">
+                            <div
+                                class="card-body p-4 text-center d-flex flex-column align-items-center justify-content-center">
+                                <div class="mb-3 rounded-circle p-3" style="background-color: #e0f2f1; color: #00695c;">
+                                    <i class="bi bi-pencil-square display-5"></i>
+                                </div>
+                                <h4 class="fw-bold text-dark mb-1">Arma tu horario paso a paso</h4>
+                                <p class="text-muted fst-italic mb-4">Elige grupo por grupo y construye tu horario a tu manera</p>
+
+                                <button class="btn btn-custom-manual rounded-pill px-4 fw-bold mt-auto">
+                                    Modo Manual <i class="bi bi-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 shadow-sm card-hover-effect"
+                            style="border-top: 5px solid #6a1b9a !important; cursor: pointer;"
+                            onclick="activarModo('auto')">
+                            <div
+                                class="card-body p-4 text-center d-flex flex-column align-items-center justify-content-center">
+                                <div class="mb-3 rounded-circle p-3" style="background-color: #f3e5f5; color: #6a1b9a;">
+                                    <i class="bi bi-cpu-fill display-5"></i>
+                                </div>
+                                <h4 class="fw-bold text-dark mb-1">Genera todos los horarios posibles</h4>
+                                <p class="text-muted fst-italic mb-4">Selecciona diferentes grupos y se generarán las combinaciones posibles</p>
+
+                                <button class="btn btn-custom-auto rounded-pill px-4 fw-bold mt-auto">
+                                    Modo Generar Horarios <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner de consentimiento tipo cookie -->
+            <div id="banner-consentimiento" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9500; background:#1a1a2e; color:#e8e8f0; padding:14px 24px; box-shadow:0 -4px 20px rgba(0,0,0,0.35); animation: slideUpCookie 0.4s ease-out;">
+                <div class="d-flex align-items-center gap-3 flex-wrap justify-content-between">
+                    <div class="d-flex align-items-start gap-3 flex-grow-1" style="min-width:0;">
+                        <i class="bi bi-mortarboard fs-4 flex-shrink-0" style="color:#D59F0F; margin-top:2px;"></i>
+                        <div style="min-width:0;">
+                            <span class="fw-bold" style="font-size:0.9rem;">Tu participación nos ayuda a mejorar.</span>
+                            <span class="ms-1" style="font-size:0.82rem; color:#b0b8cc;">Recopilamos datos <strong style="color:#e8e8f0;">anónimos</strong> de uso (materias, profesores, herramientas) para mejorar esta herramienta. No se recopila información personal.</span>
+                            <a href="#" class="ms-2" style="font-size:0.78rem; color:#7fb3f5; white-space:nowrap;" onclick="event.preventDefault(); document.getElementById('detalle-terminos').style.display = document.getElementById('detalle-terminos').style.display === 'none' ? 'block' : 'none';">Más info</a>
+                            <div id="detalle-terminos" class="mt-2" style="display:none; font-size:0.78rem; color:#b0b8cc; border-top:1px solid #333558; padding-top:8px;">
+                                <strong style="color:#e8e8f0;">¿Qué se recopila?</strong> Semestre, materias y profesores elegidos, herramientas usadas, y el horario final si decides compartirlo. &nbsp;|&nbsp;
+                                <strong style="color:#e8e8f0;">¿Qué NO?</strong> Nombre, cuenta, correo, IP ni datos identificables. &nbsp;|&nbsp;
+                                <strong style="color:#e8e8f0;">¿Quién?</strong> Proyecto SADA — estudiantes de la Facultad de Psicología UNAM.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                        <button class="btn btn-sm fw-bold rounded-pill px-4" style="background:#002b7a; color:white; border:none; white-space:nowrap;" onclick="aceptarConsentimiento(true)">
+                            <i class="bi bi-check-circle me-1"></i> Entendido
+                        </button>
+                        <button class="btn btn-sm rounded-pill px-3" style="background:transparent; color:#7fb3f5; border:1px solid #333558; white-space:nowrap;" onclick="aceptarConsentimiento(false)">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="vista-manual" class="flex-column" style="display:none;">
+                <div class="instruction-bar p-3 mx-3 mb-3"
+                    style="background-color: #e0f2f1; border: 1px solid #b2dfdb; border-left: 5px solid #00695c;">
+                    <div class="d-flex justify-content-between align-items-center cursor-pointer"
+                        data-bs-toggle="collapse" data-bs-target="#instruccionesManual" aria-expanded="true"
+                        onclick="SadaAnalytics.trackHerramienta('ver_normativa', {mode: 'manual'})">
+                        <h6 class="fw-bold mb-0" style="font-size: 0.85rem; letter-spacing: 0.5px; color: #004d40;">
+                            <i class="bi bi-ui-checks-grid me-2"></i> MODO MANUAL: PASOS A SEGUIR
+                        </h6>
+                        <i class="bi bi-chevron-down text-dark"></i>
+                    </div>
+
+                    <div class="collapse show mt-3" id="instruccionesManual">
+                        <div class="row align-items-center g-3 border-bottom pb-4"
+                            style="border-color: #b2dfdb !important;">
+                            <div class="col-md-4 d-flex align-items-start border-end-md" style="border-color: #b2dfdb;">
+                                <div class="step-badge shadow-sm" style="background-color: #00695c;">1</div>
+                                <div class="step-text">
+                                    <span class="step-title" style="color: #00695c;">AGREGAR</span>
+                                    Busca un área y materia en el panel izquierdo.
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-start border-end-md" style="border-color: #b2dfdb;">
+                                <div class="step-badge shadow-sm" style="background-color: #00695c;">2</div>
+                                <div class="step-text">
+                                    <span class="step-title" style="color: #00695c;">SELECCIONAR</span>
+                                    Selecciona al profesor y se agregará automáicamente
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-start">
+                                <div class="step-badge shadow-sm" style="background-color: #00695c;">3</div>
+                                <div class="step-text">
+                                    <span class="step-title" style="color: #00695c;">VISUALIZA</span>
+                                    Repite con la siguiente materia y observa tus selecciones
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6 class="fw-bold mb-3 pb-2 border-bottom mt-4"
+                            style="color: #004d40; border-color: #b2dfdb !important;">
+                            <i class="bi bi-option"></i> Opciones Avanzadas
+                        </h6>
+
+                        <div class="row g-3">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
+                                    <div class="text-danger mb-2"><i class="bi bi-exclamation-octagon fs-4"></i></div>
+                                    <h6 class="fw-bold small text-dark">Manejo de Traslapes</h6>
+                                    <p class="small text-muted mb-0">Se mostrarán en color rojo los traslapes.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
+                                    <div class="text-success mb-2"><i class="bi bi-calendar2-plus fs-4"></i></div>
+                                    <h6 class="fw-bold small text-dark">Actividades Personalizadas</h6>
+                                    <p class="small text-muted mb-0">Agrega tus actividades diarias al sistema (inglés, prácticas, deportes, etc).</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
+                                    <div class="text-primary mb-2"><i class="bi bi-arrow-counterclockwise fs-4"></i>
+                                    </div>
+                                    <h6 class="fw-bold small text-dark">Deshacer / Rehacer</h6>
+                                    <p class="small text-muted mb-0">¿Te equivocaste? Usa las flechas deshacer para
+                                        corregir
+                                        sin perder nada.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
+                                    <div class="text-info mb-2"><i class="bi bi-sort-down fs-4"></i></div>
+                                    <h6 class="fw-bold small text-dark">Orden de Visualizacion</h6>
+                                    <p class="small text-muted mb-0">Usa el filtro para ordenar tu lista por materia,
+                                        profesor, grupo, duración tota u orden cronológico.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
+                                    <div class="text-warning mb-2"><i class="bi bi-layout-text-window-reverse fs-4"></i>
+                                    </div>
+                                    <h6 class="fw-bold small text-dark">Modo Visual</h6>
+                                    <p class="small text-muted mb-0">Activa el switch "Visual" para ver tablas
+                                        dinámicas.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
+                                    <div style="color: #6f42c1;" class="mb-2"><i class="bi bi-credit-card-2-back fs-4"></i>
+                                    </div>
+                                    <h6 class="fw-bold small text-dark">Visualización de créditos</h6>
+                                    <p class="small text-muted mb-0">Se mostrarán los créditos seleccionados
+                                        por materia,
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-6">
+                                <div
+                                    class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-row align-items-center">
+                                    <div class="text-secondary me-3"><i class="bi bi-download fs-1"></i></div>
+                                    <div>
+                                        <h6 class="fw-bold small text-dark">Exportación Total</h6>
+                                        <p class="small text-muted mb-0">Descarga tu horario en <strong>PDF</strong>,
+                                            <strong> png</strong>, <strong>Excel</strong> o <strong>CSV</strong>.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 h-100">
+                    <div class="col-lg-3 col-md-4 d-flex flex-column">
+
+                        <!-- ── Panel de Perfil SADA ── -->
+                        <div id="sada-panel-perfil"></div>
+
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white py-3">
+                                <h6 class="fw-bold mb-2" style="color: #00695c;"><i class="bi bi-search"></i> 1. Elige
+                                    Materia</h6>
+                                <input type="text" id="buscador" class="form-control form-control-sm"
+                                    placeholder="Buscar materia..." onkeyup="filtrarMaterias()">
+                            </div>
+                            <div class="card-body p-0 overflow-auto" id="lista-materias-container" style="max-height: 60vh;">
+                                <div id="lista-materias" class="list-group list-group-flush"></div>
+                            </div>
+                        </div>
+
+                        <!-- ── Panel Actividades Extra ── -->
+                        <div class="card shadow-sm mt-2 border-0">
+                            <div class="card-header bg-white py-2 d-flex justify-content-between align-items-center cursor-pointer" data-bs-toggle="collapse" data-bs-target="#panel-actividades" aria-expanded="true">
+                                <h6 class="fw-bold mb-0 small" style="color: #e65100;"><i class="bi bi-calendar-plus me-1"></i> Actividades Extra</h6>
+                                <span class="d-flex align-items-center gap-2">
+                                    <span id="badge-actividades" class="badge bg-light text-dark border" style="display:none;">0</span>
+                                    <i class="bi bi-chevron-down small"></i>
+                                </span>
+                            </div>
+                            <div class="collapse show" id="panel-actividades">
+                                <div class="card-body p-2">
+                                    <p class="text-muted small mb-2">Agrega prácticas, inglés, deportes, etc.</p>
+                                    <input type="text" id="act-nombre" class="form-control form-control-sm mb-2" placeholder="Nombre (ej: Inglés B1)">
+                                    <div class="d-flex flex-wrap gap-1 mb-2">
+                                        <label class="btn btn-outline-secondary btn-sm px-2 py-0 act-dia-btn"><input type="checkbox" class="d-none act-dia-chk" value="LUNES"> L</label>
+                                        <label class="btn btn-outline-secondary btn-sm px-2 py-0 act-dia-btn"><input type="checkbox" class="d-none act-dia-chk" value="MARTES"> M</label>
+                                        <label class="btn btn-outline-secondary btn-sm px-2 py-0 act-dia-btn"><input type="checkbox" class="d-none act-dia-chk" value="MIERCOLES"> Mi</label>
+                                        <label class="btn btn-outline-secondary btn-sm px-2 py-0 act-dia-btn"><input type="checkbox" class="d-none act-dia-chk" value="JUEVES"> J</label>
+                                        <label class="btn btn-outline-secondary btn-sm px-2 py-0 act-dia-btn"><input type="checkbox" class="d-none act-dia-chk" value="VIERNES"> V</label>
+                                        <label class="btn btn-outline-secondary btn-sm px-2 py-0 act-dia-btn"><input type="checkbox" class="d-none act-dia-chk" value="SABADO"> S</label>
+                                    </div>
+                                    <div class="d-flex gap-2 mb-2">
+                                        <div class="flex-fill"><label class="form-label small mb-0 text-muted">Inicio</label><input type="time" id="act-inicio" class="form-control form-control-sm" value="07:00"></div>
+                                        <div class="flex-fill"><label class="form-label small mb-0 text-muted">Fin</label><input type="time" id="act-fin" class="form-control form-control-sm" value="09:00"></div>
+                                    </div>
+                                    <button class="btn btn-sm w-100 fw-bold text-white" style="background-color: #e65100;" onclick="agregarActividad()"><i class="bi bi-plus-circle me-1"></i> Agregar</button>
+                                </div>
+                                <div id="lista-actividades" class="list-group list-group-flush"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-8 d-flex flex-column">
+
+                        <div id="contenedor-panel-manual" class="card shadow-sm border-0 mb-3 bg-light"
+                            style="flex-shrink: 0;">
+                            <div class="card-header bg-white d-flex justify-content-between align-items-center py-2">
+                                <div class="d-flex align-items-center">
+                                    <h6 class="fw-bold mb-0 me-3" id="titulo-seleccion" style="color: #00695c;"><i
+                                            class="bi bi-arrow-left-circle"></i> 2. Selecciona un Profesor</h6>
+                                    <span class="badge bg-light text-dark border"
+                                        id="info-seleccion">Esperando...</span>
+                                </div>
+                            </div>
+                            <div class="card-body bg-light py-2" id="body-panel-manual">
+                                <div id="contenedor-grupos" class="horizontal-scroll-container">
+                                    <div class="text-center text-muted py-4 w-100">
+                                        <i class="bi bi-hand-index-thumb display-6 opacity-25"></i>
+                                        <p class="mt-2 small mb-0">Selecciona una materia del menú izquierdo.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recordatorio horario final -->
+                        <div class="d-flex align-items-center justify-content-center gap-2 py-1 px-3 mx-1 rounded-3" style="background:linear-gradient(90deg,#f0fdf4,#dcfce7); border:1px dashed #86efac; font-size:0.78rem; color:#166534;">
+                            <i class="bi bi-mortarboard" style="font-size:0.9rem;"></i>
+                            <span>Cuando termines de armar tu horario, recuerda presionar <strong>"Este es mi horario final"</strong> — ¡nos ayuda mucho!</span>
+                        </div>
+
+                        <div class="card shadow-sm border-0 flex-grow-1" style="min-height: 400px;">
+                            <div class="card-header toolbar-manual-container header-acciones">
+                                <div class="d-flex align-items-center gap-2 flex-wrap w-100">
+
+                                    <!-- Ordenar -->
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-light border shadow-sm dropdown-toggle fw-bold text-secondary rounded-pill px-3" type="button" data-bs-toggle="dropdown">
+                                            <i class="bi bi-sort-down me-1"></i> <span id="btn-sort-label">Materia</span>
+                                        </button>
+                                        <ul class="dropdown-menu shadow border-0 rounded-3 mt-1">
+                                            <li><button class="dropdown-item small fw-bold py-2" onclick="ordenarMiHorario('materia')">Materia</button></li>
+                                            <li><button class="dropdown-item small fw-bold py-2" onclick="ordenarMiHorario('profesor')">Profesor (A-Z)</button></li>
+                                            <li><button class="dropdown-item small fw-bold py-2" onclick="ordenarMiHorario('grupo')">Grupo</button></li>
+                                            <li><button class="dropdown-item small fw-bold py-2" onclick="ordenarMiHorario('horas')">Duración Total</button></li>
+                                            <li><button class="dropdown-item small fw-bold py-2" onclick="ordenarMiHorario('cronologico')">Orden Cronológico</button></li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Créditos -->
+                                    <span id="creditos-badge" class="badge rounded-pill bg-light text-dark border shadow-sm py-2 px-3">0 Créditos</span>
+
+                                    <!-- Spacer -->
+                                    <div class="flex-grow-1"></div>
+
+                                    <!-- Undo/Redo -->
+                                    <div class="btn-group shadow-sm rounded-3">
+                                        <button class="btn btn-light border btn-sm" id="btn-undo" onclick="undo()" disabled title="Deshacer"><i class="bi bi-arrow-counterclockwise"></i></button>
+                                        <button class="btn btn-light border btn-sm" id="btn-redo" onclick="redo()" disabled title="Rehacer"><i class="bi bi-arrow-clockwise"></i></button>
+                                    </div>
+
+                                    <!-- Borrar todo -->
+                                    <button class="btn btn-sm btn-outline-danger rounded-pill shadow-sm px-3" onclick="limpiarTodoManual()" title="Borrar todo"><i class="bi bi-trash me-1"></i>Limpiar</button>
+
+                                    <!-- Descargar -->
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-light btn-sm fw-bold border shadow-sm dropdown-toggle rounded-pill px-3" data-bs-toggle="dropdown">
+                                            <i class="bi bi-download"></i> Descargar
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-1">
+                                            <li><button class="dropdown-item small py-2" onclick="descargarPDF()"><i class="bi bi-file-earmark-pdf text-danger me-2"></i>PDF</button></li>
+                                            <li><button class="dropdown-item small py-2" onclick="descargarImagen()"><i class="bi bi-file-image text-primary me-2"></i>Imagen PNG</button></li>
+                                            <li><button class="dropdown-item small py-2" onclick="descargarExcel()"><i class="bi bi-file-earmark-excel text-success me-2"></i>Excel</button></li>
+                                            <li><button class="dropdown-item small py-2" onclick="descargarCSV()"><i class="bi bi-file-text me-2"></i>CSV</button></li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Confirmar horario final -->
+                                    <button id="btn-confirmar-horario" class="btn btn-sm btn-success text-white rounded-pill px-3 fw-bold shadow-sm" onclick="confirmarHorarioManual()" title="Ayúdanos registrando tu elección final">
+                                        <i class="bi bi-mortarboard me-1"></i> Este es mi horario final
+                                    </button>
+
+                                    <!-- Modo Visual -->
+                                    <div class="visual-pill shadow-sm" onclick="document.getElementById('switch-vista').click()">
+                                        <div class="form-check form-switch m-0 d-flex align-items-center">
+                                            <input class="form-check-input" type="checkbox" id="switch-vista" onclick="event.stopPropagation()" onchange="toggleVistaVisual()">
+                                            <span class="ms-2">VISUAL</span>
+                                        </div>
+                                    </div>
+
+                                    <button id="btn-recolorear" class="btn-tool bg-white shadow-sm border" style="display:none;" onclick="recolorearInteligente()" title="Reasignar colores"><i class="bi bi-palette text-primary"></i></button>
+
+                                    <!-- Config visual -->
+                                    <div class="dropdown">
+                                        <button class="btn-tool bg-white shadow-sm border" type="button" data-bs-toggle="dropdown"><i class="bi bi-gear-fill text-secondary"></i></button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow p-0" onclick="event.stopPropagation()">
+                                            <li><h6 class="dropdown-header-tool">Mostrar en visual</h6></li>
+                                            <li><div class="dropdown-item-tool"><div class="form-check small m-0"><input class="form-check-input vis-toggle" type="checkbox" id="chk-prof" checked onchange="actualizarConfigVisual()"><label class="form-check-label w-100" for="chk-prof">Profesor</label></div></div></li>
+                                            <li><div class="dropdown-item-tool"><div class="form-check small m-0"><input class="form-check-input vis-toggle" type="checkbox" id="chk-grupo" checked onchange="actualizarConfigVisual()"><label class="form-check-label w-100" for="chk-grupo">Grupo</label></div></div></li>
+                                            <li><div class="dropdown-item-tool"><div class="form-check small m-0"><input class="form-check-input vis-toggle" type="checkbox" id="chk-horas" checked onchange="actualizarConfigVisual()"><label class="form-check-label w-100" for="chk-horas">Horario</label></div></div></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-body p-0 d-flex flex-column" style="overflow: hidden;">
+                                <div id="vista-lista-container" class="table-responsive bg-white p-2 flex-grow-1"
+                                    style="overflow-y: auto;">
+                                    <table class="table table-bordered table-hover mb-0 tabla-siae">
+                                        <thead class="sticky-top">
+                                            <tr>
+                                                <th>Materia</th>
+                                                <th>Gpo</th>
+                                                <th>Profesor</th>
+                                                <th class="col-dia">Lun</th>
+                                                <th class="col-dia">Mar</th>
+                                                <th class="col-dia">Mie</th>
+                                                <th class="col-dia">Jue</th>
+                                                <th class="col-dia">V</th>
+                                                <th class="col-dia">S</th>
+                                                <th>Cr</th>
+                                                <th>Obs</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabla-mi-horario">
+                                            <tr>
+                                                <td colspan="12" class="text-center text-muted py-4">No has agregado
+                                                    materias aún.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="vista-visual-container" class="table-responsive bg-white p-3 flex-grow-1"
+                                    style="display:none; overflow-y: auto;">
+                                    <table class="table mb-0 tabla-visual w-100">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:50px;">Hora</th>
+                                                <th>Lunes</th>
+                                                <th>Martes</th>
+                                                <th>Miércoles</th>
+                                                <th>Jueves</th>
+                                                <th>Viernes</th>
+                                                <th>Sábado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="grid-horario-visual"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="vista-auto" class="container-fluid p-0" style="display:none;">
+                <div class="instruction-bar p-3 mx-3 mb-3"
+                    style="background-color: #f3e5f5; border: 1px solid #e1bee7; border-left: 5px solid #6a1b9a;">
+                    <div class="d-flex justify-content-between align-items-center cursor-pointer"
+                        data-bs-toggle="collapse" data-bs-target="#instruccionesAuto" aria-expanded="true"
+                        onclick="SadaAnalytics.trackHerramienta('ver_normativa', {mode: 'auto'})">
+                        <h6 class="fw-bold mb-0" style="font-size: 0.85rem; letter-spacing: 0.5px; color: #4a148c;">
+                            <i class="bi bi-ui-checks-grid me-2"></i> MODO EXPLORAR. PASOS A SEGUIR:
+                        </h6>
+                        <i class="bi bi-chevron-down text-dark"></i>
+                    </div>
+
+                    <div class="collapse show mt-3" id="instruccionesAuto">
+                        <div class="row align-items-center g-3 border-bottom pb-4"
+                            style="border-color: #e1bee7 !important;">
+                            <div class="col-md-4 d-flex align-items-start border-end-md" style="border-color: #e1bee7;">
+                                <div class="step-badge shadow-sm" style="background-color: #6a1b9a;">1</div>
+                                <div class="step-text">
+                                    <span class="step-title" style="color: #6a1b9a;">AGREGAR</span>
+                                    Busca tu materia a la izquierda y selecciónala.
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-start border-end-md" style="border-color: #e1bee7;">
+                                <div class="step-badge shadow-sm" style="background-color: #6a1b9a;">2</div>
+                                <div class="step-text">
+                                    <span class="step-title" style="color: #6a1b9a;">SELECCIONAR</span>
+                                    En el panel derecho selecciona todos los profesores que quieras.
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-start">
+                                <div class="step-badge shadow-sm" style="background-color: #6a1b9a;">3</div>
+                                <div class="step-text">
+                                    <span class="step-title" style="color: #6a1b9a;">GENERAR</span>
+                                    Presiona generar horarios y visualiza todas las combinaciones.
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6 class="fw-bold mb-3 pb-2 border-bottom mt-4"
+                            style="color: #4a148c; border-color: #e1bee7 !important;">
+                            <i class="bi bi-stars" style="color: #aa00ff;"></i> Opciones Avanzadas y Filtros
+                        </h6>
+
+                        <div class="row g-3">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
+                                    <div class="mb-2" style="color: #d32f2f;"><i class="bi bi-shield-x fs-4"></i></div>
+                                    <h6 class="fw-bold small text-dark">Manejo de Traslapes</h6>
+                                    <p class="small text-muted mb-0">El sistema genera en autómatico las combinaciones. Si
+                                        no existe alguna posible entre tus selecciones, el sistema te señalará dónde
+                                        está el
+                                        problema.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-lg-8">
+                                <div class="p-3 border rounded bg-white h-100 shadow-sm">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="me-2" style="color: #6a1b9a;"><i class="bi bi-filter"></i>
+                                        </div>
+                                        <h6 class="fw-bold small text-dark mb-0">Filtros</h6>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-md-6">
+                                            <ul class="small text-muted mb-0 ps-3">
+                                                <li><strong>Ordenar:</strong> Visualiza horarios con menos días de
+                                                    asistencia,
+                                                    más créditos o menos horas libres.</li>
+                                                <li><strong>Turno:</strong> Filtra horarios por turno matutino, vespertino o
+                                                    mixto.
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul class="small text-muted mb-0 ps-3">
+                                                <li><strong>Días Libres:</strong> Observa combinaciones que te dejen
+                                                    ciertos días
+                                                    sin clase</li>
+                                                <li><strong>Profesores:</strong> ¿Buscas a alguien específico? Búscalo
+                                                    en
+                                                    este filtro.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column"
+                                    style="border-left: 4px solid #6a1b9a !important;">
+                                    <div class="text-success mb-2"><i class="bi bi-calendar2-plus fs-4"></i></div>
+                                    <h6 class="fw-bold small text-dark">Actividades Personalizadas</h6>
+                                    <p class="small text-muted mb-0">Agrega tus actividades diarias al sistema (inglés, prácticas, deportes, etc).</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
+                                    <div class="text-warning mb-2"><i class="bi bi-layout-text-window-reverse fs-4"></i>
+                                    </div>
+                                    <h6 class="fw-bold small text-dark">Modo Visual</h6>
+                                    <p class="small text-muted mb-0">Activa el switch "Visual" para ver tablas dinámicas.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
+                                    <div style="color: #6f42c1;" class="mb-2"><i class="bi bi-diagram-3-fill fs-4"></i></div>
+                                    <h6 class="fw-bold small text-dark">Combinaciones Múltiples</h6>
+                                    <p class="small text-muted mb-0">Se visualizarán solo 50 combinaciones de todas las posibles,
+                                        usa los filtros para observar más.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div
+                                    class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-row align-items-center">
+                                    <div class="text-secondary me-3"><i class="bi bi-download fs-1"></i></div>
+                                    <div>
+                                        <h6 class="fw-bold small text-dark">Descarga y Guarda</h6>
+                                        <p class="small text-muted mb-0">Puedes descargar tu opción elegida en PDF, PNG,
+                                            Excel o CSV.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+
+                    <div class="col-lg-3 col-md-4 d-flex flex-column gap-3">
+
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white py-3">
+                                <h6 class="fw-bold mb-2" style="color: #6a1b9a;"><i class="bi bi-search"></i> 1. Elige
+                                    Materia</h6>
+                                <input type="text" id="buscador-auto" class="form-control form-control-sm"
+                                    placeholder="Buscar materia..." onkeyup="filtrarMateriasAuto()">
+                            </div>
+                            <div class="card-body p-0 overflow-auto" style="max-height: 60vh;">
+                                <div id="lista-materias-auto" class="list-group list-group-flush"></div>
+                            </div>
+                        </div>
+
+                        <!-- ── Actividades Extra (Auto) ── -->
+                        <div class="card shadow-sm border-0">
+                            <div class="card-header bg-white py-2 d-flex justify-content-between align-items-center cursor-pointer" data-bs-toggle="collapse" data-bs-target="#panel-actividades-auto" aria-expanded="true">
+                                <h6 class="fw-bold mb-0 small" style="color: #e65100;"><i class="bi bi-calendar-plus me-1"></i> Actividades Extra</h6>
+                                <span class="d-flex align-items-center gap-2">
+                                    <span id="badge-actividades-auto" class="badge bg-light text-dark border" style="display:none;">0</span>
+                                    <i class="bi bi-chevron-down small"></i>
+                                </span>
+                            </div>
+                            <div class="collapse" id="panel-actividades-auto">
+                                <div class="card-body p-2">
+                                    <p class="text-muted small mb-2">Se consideran al generar combinaciones.</p>
+                                    <input type="text" id="act-nombre-auto" class="form-control form-control-sm mb-2" placeholder="Nombre (ej: Inglés B1)">
+                                    <div class="d-flex flex-wrap gap-1 mb-2">
+                                        <label class="btn btn-outline-secondary btn-sm px-2 py-0 act-dia-btn"><input type="checkbox" class="d-none act-dia-chk-auto" value="LUNES"> L</label>
+                                        <label class="btn btn-outline-secondary btn-sm px-2 py-0 act-dia-btn"><input type="checkbox" class="d-none act-dia-chk-auto" value="MARTES"> M</label>
+                                        <label class="btn btn-outline-secondary btn-sm px-2 py-0 act-dia-btn"><input type="checkbox" class="d-none act-dia-chk-auto" value="MIERCOLES"> Mi</label>
+                                        <label class="btn btn-outline-secondary btn-sm px-2 py-0 act-dia-btn"><input type="checkbox" class="d-none act-dia-chk-auto" value="JUEVES"> J</label>
+                                        <label class="btn btn-outline-secondary btn-sm px-2 py-0 act-dia-btn"><input type="checkbox" class="d-none act-dia-chk-auto" value="VIERNES"> V</label>
+                                        <label class="btn btn-outline-secondary btn-sm px-2 py-0 act-dia-btn"><input type="checkbox" class="d-none act-dia-chk-auto" value="SABADO"> S</label>
+                                    </div>
+                                    <div class="d-flex gap-2 mb-2">
+                                        <div class="flex-fill"><label class="form-label small mb-0 text-muted">Inicio</label><input type="time" id="act-inicio-auto" class="form-control form-control-sm" value="07:00"></div>
+                                        <div class="flex-fill"><label class="form-label small mb-0 text-muted">Fin</label><input type="time" id="act-fin-auto" class="form-control form-control-sm" value="09:00"></div>
+                                    </div>
+                                    <button class="btn btn-sm w-100 fw-bold text-white" style="background-color: #e65100;" onclick="agregarActividad('auto')"><i class="bi bi-plus-circle me-1"></i> Agregar</button>
+                                </div>
+                                <div id="lista-actividades-auto" class="list-group list-group-flush"></div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm flex-shrink-0">
+                            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                                <span class="fw-bold small text-uppercase" style="color: #6a1b9a;"><i
+                                        class="bi bi-list-check"></i> 3. Mis Selecciones</span>
+                                <button class="btn btn-sm btn-outline-danger rounded-pill px-3" onclick="limpiarBolsa()" title="Limpiar todo"><i class="bi bi-trash me-1"></i>Limpiar todo</button>
+                            </div>
+                            <div class="card-body p-0">
+                                <ul id="lista-bolsa" class="list-group list-group-flush small">
+                                    <li class="list-group-item text-muted text-center py-3">Vacío</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-light border-top p-2">
+                                <button class="btn btn-custom-auto w-100 fw-bold py-2" onclick="generarCombinaciones()">
+                                    <i class="bi bi-cpu-fill"></i> GENERAR HORARIOS
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-8 d-flex flex-column">
+
+                        <div id="contenedor-panel-auto" class="card shadow-sm border-0 mb-3 flex-shrink-0"
+                            style="height: auto; min-height: 100px;">
+                            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                                <h6 class="fw-bold mb-0" id="titulo-seleccion-auto" style="color: #6a1b9a;"><i
+                                        class="bi bi-arrow-left-circle"></i> 3. Selecciona Profesores o grupos</h6>
+                                <span class="badge bg-light text-dark border"
+                                    id="info-seleccion-auto">Esperando...</span>
+                            </div>
+                            <div class="card-body bg-light">
+                                <div id="contenedor-grupos-auto" class="horizontal-scroll-container">
+                                    <div class="text-center text-muted py-5 w-100">
+                                        <i class="bi bi-hand-index-thumb display-4 opacity-25"></i>
+                                        <p class="mt-3 lead small">Selecciona una materia a la izquierda para ver sus
+                                            grupos o profesores aquí.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recordatorio horario final -->
+                        <div class="d-flex align-items-center justify-content-center gap-2 py-1 px-3 mx-1 rounded-3" style="background:linear-gradient(90deg,#f0fdf4,#dcfce7); border:1px dashed #86efac; font-size:0.78rem; color:#166534;">
+                            <i class="bi bi-mortarboard" style="font-size:0.9rem;"></i>
+                            <span>Cuando encuentres tu combinación ideal, recuerda presionar <strong>"Mi opción de horario"</strong> — ¡nos ayuda mucho!</span>
+                        </div>
+
+                        <div class="card border-0 shadow" style="min-height: 0;">
+
+                            <div class="card-header bg-white fw-bold d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span style="color: #6a1b9a;"><i class="bi bi-table"></i> Resultados</span>
+                                    <span id="conteo-resultados" class="badge bg-light text-dark border ms-2">0
+                                        opciones</span>
+                                </div>
+                            </div>
+
+                            <div id="panel-filtros-resultados" class="panel-filtros p-2" style="display:none;">
+                                <div class="row g-2">
+                                    <div class="col-md-3"><span class="label-filtro">Ordenar:</span><select
+                                            id="sort-resultados" class="form-select form-select-sm border-primary"
+                                            onchange="aplicarOrdenYFiltro()">
+                                            <option value="dias">Menos Días</option>
+                                            <option value="creditos">Más Créditos</option>
+                                            <option value="huecos">Menos Huecos</option>
+                                        </select></div>
+                                    <div class="col-md-3"><span class="label-filtro">Turno:</span><select
+                                            id="filtro-turno" class="form-select form-select-sm border-primary"
+                                            onchange="aplicarOrdenYFiltro()">
+                                            <option value="">Cualquiera</option>
+                                            <option value="matutino">Matutino</option>
+                                            <option value="vespertino">Vespertino</option>
+                                        </select></div>
+                                    <div class="col-md-3">
+                                        <span class="label-filtro">Días Libres:</span>
+                                        <div class="dropdown" id="dropdown-dias-container">
+                                            <button
+                                                class="btn btn-sm btn-outline-primary dropdown-toggle w-100 text-truncate"
+                                                type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                id="btn-filtro-dia" style="font-size:0.75rem;">Ninguno</button>
+                                            <div class="dropdown-menu p-2 shadow" onclick="event.stopPropagation()">
+                                                <div class="form-check mb-1"><input
+                                                        class="form-check-input chk-filtro-dia" type="checkbox"
+                                                        value="LUNES" id="fd-l" onchange="aplicarOrdenYFiltro()"><label
+                                                        class="form-check-label small" for="fd-l">Lunes</label></div>
+                                                <div class="form-check mb-1"><input
+                                                        class="form-check-input chk-filtro-dia" type="checkbox"
+                                                        value="MARTES" id="fd-m" onchange="aplicarOrdenYFiltro()"><label
+                                                        class="form-check-label small" for="fd-m">Martes</label></div>
+                                                <div class="form-check mb-1"><input
+                                                        class="form-check-input chk-filtro-dia" type="checkbox"
+                                                        value="MIERCOLES" id="fd-mi"
+                                                        onchange="aplicarOrdenYFiltro()"><label
+                                                        class="form-check-label small" for="fd-mi">Miércoles</label>
+                                                </div>
+                                                <div class="form-check mb-1"><input
+                                                        class="form-check-input chk-filtro-dia" type="checkbox"
+                                                        value="JUEVES" id="fd-j" onchange="aplicarOrdenYFiltro()"><label
+                                                        class="form-check-label small" for="fd-j">Jueves</label></div>
+                                                <div class="form-check mb-1"><input
+                                                        class="form-check-input chk-filtro-dia" type="checkbox"
+                                                        value="VIERNES" id="fd-v"
+                                                        onchange="aplicarOrdenYFiltro()"><label
+                                                        class="form-check-label small" for="fd-v">Viernes</label></div>
+                                                <div class="form-check mb-1"><input
+                                                        class="form-check-input chk-filtro-dia" type="checkbox"
+                                                        value="SABADO" id="fd-s" onchange="aplicarOrdenYFiltro()"><label
+                                                        class="form-check-label small" for="fd-s">Sábado</label></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="label-filtro">Profesores:</span>
+                                        <div class="dropdown" id="dropdown-profes-container">
+                                            <button
+                                                class="btn btn-sm btn-outline-primary dropdown-toggle w-100 text-truncate"
+                                                type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                id="btn-filtro-profe" style="font-size:0.75rem;">Todos</button>
+                                            <div class="dropdown-menu p-2 shadow"
+                                                style="width: 250px; max-height: 300px; overflow-y: auto;"
+                                                onclick="event.stopPropagation()">
+                                                <input type="text" class="form-control form-control-sm mb-2"
+                                                    placeholder="Buscar profe..."
+                                                    onkeyup="filtrarListaProfesResultados(this)">
+                                                <div class="d-flex justify-content-between mb-2 pb-1 border-bottom">
+                                                    <button class="btn btn-sm btn-link p-0 text-decoration-none"
+                                                        onclick="toggleAllProfesResultados(true)"
+                                                        style="font-size:0.75rem;">Seleccionar Todos</button>
+                                                    <button
+                                                        class="btn btn-sm btn-link p-0 text-decoration-none text-danger"
+                                                        onclick="toggleAllProfesResultados(false)"
+                                                        style="font-size:0.75rem;">Limpiar</button>
+                                                </div>
+                                                <div id="lista-profes-filtro-resultados"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body bg-light overflow-auto p-0" id="resultados-auto"
+                                style="min-height: 200px;">
+                                <div class="text-center text-muted py-5">
+                                    <p class="small">Configura tus profesores arriba y genera horarios.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalDetallesMateria" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content overflow-hidden border-0 shadow">
+                        <div class="modal-header border-bottom-0 pb-0 text-center justify-content-center">
+                            <h5 class="modal-title fw-bold text-primary" id="tituloMateriaModal">Detalles</h5>
+                        </div>
+                        <div class="modal-body p-0">
+                            <div class="modal-profe-area">
+                                <h6 class="text-muted small text-uppercase fw-bold mb-2">Profesor(a) Titular</h6>
+                                <h4 class="fw-bold text-dark mb-0" id="profeMateriaModal">--</h4>
+                            </div>
+                            <div class="modal-obs-area">
+                                <h6 class="text-muted small text-uppercase fw-bold mb-2">Observaciones</h6>
+                                <p class="mb-0 fst-italic" id="obsMateriaModal">--</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between border-top-0 pt-2 pb-3 bg-light px-4">
+                            <button type="button" id="btnEliminarDesdeModal"
+                                class="btn btn-sm btn-danger px-3 rounded-pill"><i class="bi bi-trash"></i> Eliminar
+                                Materia</button>
+                            <button type="button" class="btn btn-sm btn-secondary px-4 rounded-pill"
+                                data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <footer class="mt-auto bg-white border-top py-4">
+                <div class="container text-center">
+                    <button class="btn btn-outline-primary btn-sm mb-3" data-bs-toggle="modal"
+                        data-bs-target="#modalReglas">
+                        <i class="bi bi-info-circle"></i> Ver Normativa Académica y Créditos
+                    </button>
+
+                    <div class="mx-auto" style="max-width: 700px;">
+                        <p class="small text-muted mb-1">
+                            <strong>Aviso Importante:</strong> Esta herramienta es un simulador. Los horarios y
+                            profesores están <strong>sujetos a cambios</strong> de último momento por parte de la
+                            administración de la Facultad.
+                        </p>
+                        <p class="small text-muted mb-1">
+                            Nos esforzamos por mantener la base de datos actualizada ante cualquier aviso, sin embargo,
+                            <strong>no nos hacemos responsables</strong> por discrepancias entre este generador y el
+                            sistema oficial al momento de tu inscripción.
+                        </p>
+                    </div>
+
+                    <p class="small text-primary mt-3 fw-bold">¡Mucha suerte en sus inscripciones!</p>
+                </div>
+            </footer>
+
+            <div class="modal fade" id="modalReglas" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content border-0 shadow">
+                        <div class="modal-header bg-light">
+                            <h5 class="modal-title fw-bold text-primary"><i class="bi bi-journal-bookmark-fill"></i>
+                                Normativa y Créditos</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body p-0">
+                            <ul class="list-group list-group-flush small">
+
+                                <li
+                                    class="list-group-item bg-warning bg-opacity-10 border-start border-4 border-warning p-3">
+                                    <h6 class="fw-bold text-dark mb-2"><i class="bi bi-speedometer2"></i> Carga
+                                        Académica:</h6>
+                                    <div class="d-flex gap-2 align-items-center flex-wrap">
+                                        <span class="badge bg-warning text-dark border border-warning">Mínimo 37
+                                            Créditos</span>
+                                        <span class="text-muted">Carga ideal para acabar en tiempo.</span>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center flex-wrap mt-1">
+                                        <span class="badge bg-danger border border-danger">Máximo 41 Créditos</span>
+                                        <span class="text-muted">Tope del sistema (+1 recursamiento).</span>
+                                    </div>
+                                    <p class="mt-2 text-muted fst-italic mb-0" style="font-size: 0.75rem;">(Los créditos
+                                        requeridos para 1.º a 4.º semestre son distintos a los establecidos para 5.º a
+                                        8.º semestre. El sistema identifica automáticamente el rango y aplica los
+                                        créditos correspondientes.)</p>
+                                </li>
+
+                                <li class="list-group-item px-4 py-3">
+                                    <div class="fw-bold text-primary mb-1">1. Límites y Plazos</div>
+                                    <p class="mb-1">El sistema permite inscribir hasta <strong>41 créditos</strong>
+                                        semestrales, con opción a un recursamiento adicional. Tienes un margen de
+                                        tolerancia de 3 a 4 créditos sobre los 310 totales del plan.</p>
+                                </li>
+
+                                <li class="list-group-item px-4 py-3">
+                                    <div class="fw-bold text-primary mb-1">2. Asignaturas Optativas y Reprobación</div>
+                                    <p class="mb-1">Si obtienes una calificación de <strong>NP o 5</strong> en una
+                                        optativa, tienes la libertad de recursar la misma materia o elegir una distinta.
+                                    </p>
+                                    <p class="mb-0 text-muted">Recuerda que la oferta de optativas es variable; no todas
+                                        se abren cada semestre. Verifica disponibilidad <a
+                                            href="http://132.248.25.133/alumno/horarios/publicar/" target="_blank"
+                                            class="fw-bold text-decoration-none">aquí</a>.</p>
+                                </li>
+
+                                <li class="list-group-item px-4 py-3">
+                                    <div class="fw-bold text-primary mb-1">3. Movilidad y Planteles Externos</div>
+                                    <p class="mb-0">Las materias cursadas en otros planteles o en programas de Movilidad
+                                        Estudiantil aparecerán en tu Historia Académica y serán revalidadas según el
+                                        Plan de Estudios. <strong>Ojo:</strong> Sus créditos se suman a tu tope
+                                        semestral permitido (41 créditos).</p>
+                                </li>
+
+                                <li class="list-group-item bg-light px-4 py-3">
+                                    <div class="d-flex align-items-start gap-2">
+                                        <i class="bi bi-link-45deg fs-4 text-primary"></i>
+                                        <div>
+                                            <strong>Enlaces de consulta oficial:</strong><br>
+                                            <a href="http://www.psicologia.unam.mx/programa-completo-de-la-licenciatura-en-psicologia/"
+                                                target="_blank" class="text-decoration-none me-3"><i
+                                                    class="bi bi-file-earmark-text"></i> Ver Programas de Asignatura</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer border-0 pt-0">
+                            <button type="button" class="btn btn-secondary rounded-pill px-4"
+                                data-bs-dismiss="modal">Entendido</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="toast-guardado"><i class="bi bi-save"></i> Guardado</div>
+
+            <div id="capture-container"></div>
+            <!-- Librerías externas JS -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Scripts propios -->
+            <script src="particles.js"></script>
+            <script src="sada_analytics.js?v=3"></script>
+            <script src="app.js?v=3"></script>
+        </div>
+    </body>
+</html>
