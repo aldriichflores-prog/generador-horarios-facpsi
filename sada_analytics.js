@@ -112,7 +112,16 @@ window.SadaAnalytics = (function () {
         return { utm_source: p.get('utm_source'), utm_medium: p.get('utm_medium'), utm_campaign: p.get('utm_campaign') };
     }
  
-    function localISO() { return new Date().toISOString(); }
+    function localISO() {
+        const d = new Date();
+        const offset = -d.getTimezoneOffset();
+        const sign = offset >= 0 ? '+' : '-';
+        const pad = (n) => String(Math.abs(n)).padStart(2, '0');
+        const tz = `${sign}${pad(Math.floor(offset / 60))}:${pad(offset % 60)}`;
+        const iso = d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate())
+            + 'T' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds()) + tz;
+        return iso;
+    }
  
     // ══════════════════════════════════════════
     // INICIALIZACIÓN
@@ -377,6 +386,18 @@ window.SadaAnalytics = (function () {
     function getSessionId() { return _sessionId; }
     function isReady() { return _initialized; }
  
+    function updateSatisfaction(rating) {
+        if (!_initialized || !_sessionId) return;
+        try {
+            fetch(`${SUPABASE_URL}/rest/v1/schedule_snapshots?session_id=eq.${_sessionId}&confirmed=eq.true&satisfaction=is.null`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Prefer': 'return=minimal' },
+                body: JSON.stringify({ satisfaction: rating })
+            });
+            enqueueEvent('satisfaction_rating', { rating });
+        } catch (e) { /* silenciar */ }
+    }
+ 
     return {
         init,
         trackEntrarWorkspace, trackCambiarSemestre, trackCambiarModo,
@@ -384,7 +405,7 @@ window.SadaAnalytics = (function () {
         trackHerramienta,
         trackGenerarCombinaciones, trackAbrirCombinacion,
         trackExportar, trackTransferir, trackFiltro, trackPerfilSADA, trackCustom,
-        saveSnapshot, saveExitSnapshot,
+        saveSnapshot, saveExitSnapshot, updateSatisfaction,
         getVisitorId, getSessionId, isReady
     };
 })();

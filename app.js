@@ -5,7 +5,7 @@
 
 // Fallback si sada_analytics.js no cargó
 if (!window.SadaAnalytics) {
-    window.SadaAnalytics = { trackEntrarWorkspace(){}, trackCambiarSemestre(){}, trackCambiarModo(){}, trackBuscarMateria(){}, trackAgregarCurso(){}, trackEliminarCurso(){}, trackAgregarBolsa(){}, trackGenerarCombinaciones(){}, trackAbrirCombinacion(){}, trackExportar(){}, trackTransferir(){}, trackFiltro(){}, trackPerfilSADA(){}, trackCustom(){}, trackHerramienta(){}, saveSnapshot(){}, saveExitSnapshot(){}, init(){} };
+    window.SadaAnalytics = { trackEntrarWorkspace(){}, trackCambiarSemestre(){}, trackCambiarModo(){}, trackBuscarMateria(){}, trackAgregarCurso(){}, trackEliminarCurso(){}, trackAgregarBolsa(){}, trackGenerarCombinaciones(){}, trackAbrirCombinacion(){}, trackExportar(){}, trackTransferir(){}, trackFiltro(){}, trackPerfilSADA(){}, trackCustom(){}, trackHerramienta(){}, saveSnapshot(){}, saveExitSnapshot(){}, updateSatisfaction(){}, init(){} };
 }
 var SadaAnalytics = window.SadaAnalytics;
 
@@ -2166,6 +2166,7 @@ function confirmarHorarioManual() {
             btn.disabled = false;
         }, 5000);
     }
+    mostrarEncuestaSatisfaccion();
 }
 
 async function descargarAutoOpcion(idx, formato) {
@@ -2280,6 +2281,7 @@ function confirmarHorarioAuto(idx) {
             btn.classList.add('btn-success');
         }
     }
+    mostrarEncuestaSatisfaccion();
 }
 
 function actualizarFiltrosUI() {
@@ -2296,4 +2298,50 @@ function actualizarFiltrosUI() {
     document.querySelectorAll('.chk-filtro-profe').forEach(c => c.checked = false);
     let btnProf = document.getElementById('btn-filtro-profe');
     if (btnProf) btnProf.innerText = 'Todos';
+}
+
+// ==========================================
+// ENCUESTA DE SATISFACCIÓN (post-confirmación)
+// ==========================================
+
+let _encuestaTimer = null;
+
+function mostrarEncuestaSatisfaccion() {
+    // Eliminar encuesta anterior si existe
+    let existing = document.getElementById('encuesta-satisfaccion');
+    if (existing) existing.remove();
+    if (_encuestaTimer) clearTimeout(_encuestaTimer);
+
+    let div = document.createElement('div');
+    div.id = 'encuesta-satisfaccion';
+    div.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); z-index:9999; background:#1a1a2e; color:#e8e8f0; padding:16px 24px; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); animation:slideUpCookie 0.4s ease-out; display:flex; align-items:center; gap:16px; font-size:0.9rem;';
+    div.innerHTML = `
+        <div>
+            <div class="fw-bold mb-1" style="font-size:0.85rem;">¿Qué tan satisfecho estás con tu horario?</div>
+            <div class="d-flex gap-1" id="estrellas-satisfaccion">
+                ${[1,2,3,4,5].map(n => `<button class="btn btn-sm px-2 py-1" style="font-size:1.3rem; background:none; border:none; cursor:pointer; filter:grayscale(1); transition:filter 0.2s;" onmouseenter="this.style.filter='none'" onmouseleave="if(!this.dataset.selected) this.style.filter='grayscale(1)'" onclick="enviarSatisfaccion(${n})" title="${n} estrella${n>1?'s':''}">⭐</button>`).join('')}
+            </div>
+        </div>
+        <button class="btn btn-sm" style="background:none; border:none; color:#7fb3f5; font-size:0.75rem; white-space:nowrap;" onclick="cerrarEncuesta()">Cerrar</button>
+    `;
+    document.body.appendChild(div);
+
+    // Auto-cerrar después de 8 segundos
+    _encuestaTimer = setTimeout(() => cerrarEncuesta(), 8000);
+}
+
+function enviarSatisfaccion(rating) {
+    SadaAnalytics.updateSatisfaction(rating);
+
+    let div = document.getElementById('encuesta-satisfaccion');
+    if (div) {
+        div.innerHTML = '<i class="bi bi-heart-fill" style="color:#ff6b6b;"></i> <span class="fw-bold">¡Gracias por tu respuesta!</span>';
+        setTimeout(() => cerrarEncuesta(), 2000);
+    }
+}
+
+function cerrarEncuesta() {
+    if (_encuestaTimer) { clearTimeout(_encuestaTimer); _encuestaTimer = null; }
+    let div = document.getElementById('encuesta-satisfaccion');
+    if (div) { div.style.opacity = '0'; div.style.transition = 'opacity 0.3s'; setTimeout(() => div.remove(), 300); }
 }
