@@ -39,7 +39,15 @@ window.SadaAnalytics = (function () {
                 },
                 body: JSON.stringify(data)
             });
-            if (!res.ok) { console.warn(`[SADA] Insert ${table}:`, await res.text()); return null; }
+            if (!res.ok) { 
+                const statusCode = res.status;
+                const errText = await res.text();
+                // Si el registro ya existe (409 Conflict) no lo consideramos error grave para inserts
+                if (statusCode === 409) return true;
+                
+                console.warn(`[SADA] Insert ${table} (${statusCode}):`, errText); 
+                return null; 
+            }
             return true;
         } catch (e) { console.warn(`[SADA] Net error (${table}):`, e.message); return null; }
     }
@@ -140,7 +148,7 @@ window.SadaAnalytics = (function () {
                 user_agent: navigator.userAgent.substring(0, 500),
                 timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                 language: navigator.language, last_seen: localISO()
-            }, 'id');
+            });
  
             const utm = getUTMParams();
             await supabaseInsert('sessions', {
@@ -227,7 +235,6 @@ window.SadaAnalytics = (function () {
             materia: curso.asignatura, clave: curso.clave, grupo: curso.grupo,
             profesor: curso.profesor, semestre: curso.semestre, creditos: curso.creditos
         });
-        supabaseRPC('increment_materia_stat', { p_semester: String(curso.semestre), p_materia: curso.asignatura, p_clave: curso.clave || '', p_field: 'selected' });
         supabaseRPC('increment_prof_stat', { p_semester: String(curso.semestre), p_materia: curso.asignatura, p_profesor: curso.profesor, p_grupo: curso.grupo, p_clave: curso.clave || '', p_field: 'selected' });
     }
  
