@@ -2,36 +2,105 @@ Proyecto SADA (Sistema de Apoyo a la Decisión Académica)
 
 Presentación
 
-El proyecto SADA, nació de la necesidad de cubrir un espacio ignorado por la administración de la Facultad de Psicología en el proceso de inscripciones.
-Aunque certeramente el sistema de inscripción se remodeló para hacer una IU y UX más accesible y amena, no resolvió el problema de fondo que muchos 
-alumnos sufren semestre a semestre, el armar un horario compatible con sus intereses y que esta posiblemente limitado a una carga cognitiva determinada
-para buscar profesores o materias de una forma fácil y accesible. 
+El proyecto SADA nació de la necesidad de cubrir un espacio ignorado por la administración de la Facultad de Psicología en el proceso de inscripciones.
+Aunque certeramente el sistema de inscripción se remodeló para hacer una IU y UX más accesible y amena, no resolvió el problema de fondo que muchos
+alumnos sufren semestre a semestre: armar un horario compatible con sus intereses, limitados además por la carga cognitiva que implica buscar profesores
+y materias de forma dispersa, sin una herramienta centralizada y fácil de usar.
 
 Objetivo
 
-El Generador de Horarios plantea cubrir una necesidad entre los alumnos, el brindar una plataforma donde los estudiantes
-puedan explorar de forma eficaz y automatizada las opciones de profesores y materias que se ofertan en la Facultad, sin plantear una tarea extra que 
-conlleve estrés y aumento en la incertidumbre durante las elecciones de sus horarios.
+El Generador de Horarios plantea cubrir una necesidad entre los alumnos: brindar una plataforma donde los estudiantes puedan explorar de forma eficaz
+y automatizada las opciones de profesores y materias que se ofertan en la Facultad, sin que esa tarea represente una carga adicional que conlleve estrés
+e incertidumbre durante el proceso de inscripción.
 
-1. "Generador de Horarios"
+1. Generador de Horarios
    1.1 Página de Bienvenida
 
-   La página de bienvenida es un land-page, que plantea una pregunta inicial: ¿Qué semestre cursarás? Dentro de las opciones existen a) Tercer semestre,
-   b) Quinto semestre, c) Séptimo Semestre y d) Semestre adicional, que corresponden a la oferta de materias y profesores publicada en la página de horarios
-   oficial de la facultad 2027-1. Adicionalmente se agrega un mensaje disclaimer que aclara que el sistema presentado es hecho por alumnos de la facultad
-   para alumnos de la facultad y que la administración de la Facultad no tienen ingenerencia en su creación.
+   La página de bienvenida es un landing page que invita al estudiante a elegir su semestre antes de ingresar al sistema. Las opciones disponibles son:
+   3er Semestre, 5to Semestre, 7to Semestre y Semestre Adicional. Estas opciones corresponden a la oferta académica publicada en la página
+   oficial de horarios de la Facultad para el semestre vigente.
 
-   1.2 MODOS DE USO
+   1.2 Elección de Modos de Uso
 
-   1.2.1 MODO MANUAL
+   La pantalla presenta dos tarjetas que explican brevemente los dos modos de uso disponibles: Modo Manual y Modo Automático. Cada tarjeta
+   tiene un botón de acceso que lleva directamente al modo correspondiente. Esta presentación doble cumple una función de orientación: El estudiante
+   entiende desde antes de entrar qué camino existe y cuál le conviene según su situación.
+   Al pie de la pantalla se incluye un aviso que aclara que la herramienta es un proyecto estudiantil, sin afiliación ni respaldo oficial de la administración
+   de la Facultad.
 
-   D
+   1.3 Espacio de Trabajo
 
-   1.3 SEMESTRES
+   Al elegir un modo, el sistema transiciona al espacio de trabajo. Este espacio está encabezado por una barra de cabecera que muestra el nombre del
+   proyecto, el semestre vigente (ej. Semestre 2027-1) y un selector desplegable que permite cambiar de semestre en cualquier momento sin salir del
+   sistema.
+   Al cambiar el semestre, el espacio de trabajo se reinicia limpiamente: se borra el horario en construcción y la base de datos de materias
+   se actualiza para mostrar la oferta del semestre recién seleccionado.
+   Inmediatamente debajo del encabezado aparece, cuando corresponde, una alerta informativa específica para el semestre elegido (ver sección 1.4 sobre
+   comportamiento por semestre).
+   Debajo de esa alerta se ubica una barra de instrucciones desplegable que describe visualmente los tres pasos del modo activo. Su diseño permite que
+   se cierre para liberar espacio en pantalla una vez que el estudiante ya conoce el flujo. Esta barra también incluye una sección de "Opciones Avanzadas"
+   que anticipa las herramientas disponibles, funcionando como una guía rápida al inicio y como recordatorio para usuarios que regresan.
+   
+   El espacio de trabajo se divide en dos columnas. La columna izquierda contiene los paneles de selección de materias y actividades extracurriculares.
+   La columna derecha contiene el panel de grupos o profesores disponibles para la materia seleccionada, la tabla o cuadrícula del horario en construcción,
+   y la barra de herramientas principal. Esta división es intencional: guía al usuario de izquierda a derecha en una secuencia lógica de decisiones.
+
+   1.3.1 Modo Manual
+
+   El Modo Manual está pensado para el estudiante que ya tiene una idea clara de qué materias quiere cursar y prefiere construir su horario con control.
+
+   El flujo es lineal y secuencial:
+
+   Paso 1. Elegir materia: El panel izquierdo muestra todas las materias disponibles para el semestre seleccionado, agrupadas por área de conocimiento.
+   Cada área es un acordeón colapsable con un contador de materias disponibles. El estudiante puede buscar directamente por nombre de la materias usando el
+   buscador en la parte superior del panel.
+   Al seleccionar una materia del listado, el panel derecho (panel de grupos) se activa y carga los grupos disponibles para esa materia.
+
+   Paso 2. Seleccionar profesor y grupo: El panel de grupos presenta cada opción como una tarjeta individual que muestra el nombre del profesor,
+   el número de grupo, la clave de la materia, los créditos y el horario completo (días y horas de cada clase). Si el grupo tiene observaciones
+   relevantes, aparece un botón "Ver Obs" que despliega esa información sin abandonar el panel.
+   
+   El estudiante selecciona la tarjeta del grupo de su preferencia y el sistema lo agrega automáticamente al horario en construcción. No hay un botón de
+   confirmación adicional: el clic sobre la tarjeta es la acción de agregar.
+   
+   Detección de traslapes. Cuando el estudiante intenta agregar un grupo cuyo horario choca con una materia ya registrada, el sistema no lo bloquea
+   silenciosamente ni lo agrega sin aviso. En cambio, la tarjeta del grupo conflictivo se resalta visualmente en rojo y aparecen dos botones:
+   "Confirmar Cambio" y "Cancelar". Si el estudiante confirma, el sistema elimina automáticamente la materia en conflicto y registra el nuevo grupo.
+   Si cancela, no ocurre ningún cambio.
+   Esta lógica permite al estudiante tomar una decisión informada sin perder el control de su horario. En el modo visual, los traslapes se señalan con una
+   etiqueta de "TRASLAPE" visible sobre el bloque en la cuadrícula.
+
+   Paso 3. Repetir y visualizar: El estudiante repite el proceso para cada materia que quiera incluir. El horario va creciendo en la tabla inferior
+   de la columna derecha, que muestra materia, grupo, profesor, los días de la semana con su horario y los créditos. El contador de créditos en la
+   barra de herramientas se actualiza en tiempo real e indica si la carga está dentro del rango válido, es insuficiente o excede el máximo permitido.
+   
+
+   1.3.2 Modo Automático
+
+   El Modo Explorador está diseñado para el estudiante que no sabe de antemano qué combinación de materias y profesores cabe sin traslapes, o que quiere
+   explorar todas las posibilidades antes de decidir. En lugar de probar opciones una por una, el estudiante selecciona una variedad materias y profesores
+   que le sirven y el sistema hace el trabajo de encontrar todas las combinaciones válidas.
+   
+   El flujo también es de tres pasos, señalizados visualmente en la barra de instrucciones colapsable:
+   
+   Paso 1: Agregar materias a la Selecciones: El panel izquierdo funciona igual que en Modo Manual: materias agrupadas por área, buscador en tiempo real,
+   acordeones colapsables. Al seleccionar una materia, no se agrega directamente al horario sino a la "Selección de Materias", que es una lista de opciones
+   seleccionadas para la combinación. La materia aparece marcada visualmente en el listado para indicar que ya está en la selección, y un contador  en el
+   panel inferior izquierdo, "Mis Selecciones" muestra cuántas materias están se han seleccionado.
+
+   Paso 2. Seleccionar profesores candidatos: Al hacer clic en una materia del listado, el panel derecho muestra todos los grupos disponibles para
+   esa materia. El estudiante selecciona todos los grupos o profesores que considera aceptables.
+   No es una selección única: se pueden marcar varios grupos de la misma materia. Cada grupo marcado queda registrado como opción válida para esa materia
+   en la combinación.
+   Este paso es lo que le da poder al modo: Si el estudiante acepta cinco profesores para una materia, el sistema explorará combinaciones con los cinco.
+   
+   Paso 3. Generar. El botón "Generar Horarios" desencadena el algoritmo que calcula todas las combinaciones posibles entre los grupos candidatos de
+   cada materia, descartando automáticamente aquellas que presenten traslapes. Las combinaciones válidas se muestran ordenadas en tarjetas en el panel
+   de resultados. Si no existe ninguna combinación sin traslape entre las selecciones actuales, el sistema no devuelve un error genérico: Identifica cuál
+   materia es la fuente del conflicto y lo señala explícitamente, guiando al estudiante hacia dónde debe ampliar o cambiar sus opciones.
+   
+   Por rendimiento, el sistema muestra un máximo de 50 combinaciones de todas las posibles calculadas. Los filtros (sección siguiente) permiten reordenar
+   la variedad de resultados y poner al frente las combinaciones más relevantes para cada criterio.
     
-   1.3.1 Tercer Semestre
-
-   Al elegir tercer semestre, se desplegará incialmente un mensaje que explica como funcionan los horarios presentados para Tronco Común. Explicando que son los
-   grupos espejos, en que orden se administran los grupos espejo y una recomendación de como usarlos mediante el modo manual.
 
    
