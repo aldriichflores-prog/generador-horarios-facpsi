@@ -101,6 +101,38 @@ e incertidumbre durante el proceso de inscripción.
    
    Por rendimiento, el sistema muestra un máximo de 50 combinaciones de todas las posibles calculadas. Los filtros (sección siguiente) permiten reordenar
    la variedad de resultados y poner al frente las combinaciones más relevantes para cada criterio.
-    
+
+   1.3.2.1 Panel de Resultados y Filtros (Modo Explorador)
+
+   Después de generar, el panel de resultados se activa con un contador que indica cuántas opciones válidas se encontraron. Cada resultado se presenta
+   como una tarjeta expandible que muestra el resumen del horario (número de días de asistencia, créditos totales, horas libres entre clases) y la tabla
+   completa con materia, grupo, profesor y horario por día.
+
+      Cada tarjeta de resultado tiene tres acciones disponibles:
+
+         "Mi opción de horario": Marca esa combinación como el horario final del estudiante y la registra en el sistema del data base
+   
+         "Pasar al Modo Manual": transfiere todos los cursos de esa combinación al Modo Manual, donde el estudiante puede seguir ajustando materia por
+         materia.
+         Esta acción es el puente entre ambos modos: Explorar posibilidades con el motor automático y luego refinar a mano.
+
+         Tabla Dinámica: Es un cambio dentro de cada tarjeta activa la cuadrícula gráfica de esa combinación específica.
+
+      El panel de filtros aparece encima de los resultados una vez que se ha generado al menos una combinación. Contiene cuatro controles:
+
+         Ordenar: Reordena las combinaciones por "Menos días de asistencia", "Más créditos" o "Menos horas libres entre clases". Permite al
+         estudiante priorizar según su preferencia de carga semanal.
+
+         Turno: Filtra para mostrar solo combinaciones matutinas (todas las materias terminan antes de las 14:00) o vespertinas (todas inician después
+         de las 13:00). Las combinaciones que no cumplen el filtro se ocultan, no se eliminan.
+
+         Días libres: Es un menú desplegable con casillas de verificación para cada día de la semana (Lunes a Sábado). Al marcar un día, el sistema filtra
+         y muestra únicamente las combinaciones que no tienen clases ese día, permitiendo al estudiante proteger un día libre específico.
+   
+         Profesores: Es un menú desplegable con todos los profesores que aparecen en los resultados generados. Incluye un buscador interno para localizar
+         rápidamente a un profesor por nombre, y botones de "Seleccionar todos" y "Limpiar". Al marcar profesores específicos, el filtro muestra solo las
+         combinaciones que los incluyen.
+
+      Todos los filtros actúan de forma acumulativa y se aplican en tiempo real al cambiar cualquier control.
 
    
