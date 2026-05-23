@@ -9,11 +9,12 @@ y materias de forma dispersa, sin una herramienta centralizada y fácil de usar.
 
 Objetivo
 
-El Generador de Horarios plantea cubrir una necesidad entre los alumnos: brindar una plataforma donde los estudiantes puedan explorar de forma eficaz
+El Generador de Horarios plantea cubrir una necesidad entre los alumnos: Brindar una plataforma donde los estudiantes puedan explorar de forma eficaz
 y automatizada las opciones de profesores y materias que se ofertan en la Facultad, sin que esa tarea represente una carga adicional que conlleve estrés
 e incertidumbre durante el proceso de inscripción.
 
 1. Generador de Horarios
+
    1.1 Página de Bienvenida
 
    La página de bienvenida es un landing page que invita al estudiante a elegir su semestre antes de ingresar al sistema. Las opciones disponibles son:
@@ -259,7 +260,7 @@ e incertidumbre durante el proceso de inscripción.
    La calificación es voluntaria: el modal puede cerrarse sin responder. Para los horarios donde sí se responde, la puntuación queda disponible como
    variable en los análisis de datos del proyecto, permitiendo explorar si ciertos patrones de satisfacción de la página.
 
-2.  Base de Datos
+3.  Base de Datos
    
    El proyecto SADA incluye un sistema de recopilación de datos de uso completamente anónimo, construido sobre Supabase (PostgreSQL). Este sistema
    documenta cómo los estudiantes interactúan con el generador: qué materias y profesores exploran, qué herramientas usan, cómo navegan entre modos
