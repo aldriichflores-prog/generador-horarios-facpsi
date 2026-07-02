@@ -6,61 +6,35 @@
     <title>Generador Horarios para la Facultad de Psicología UNAM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- 1. Frameworks externos (bootstrap e íconos)-->
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-    <!-- 2. Animaciones (UnicornStudio) y librerias (html2canvas, jspdf, sheetjs)-->
-
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Tight:wght@400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap"
         rel="stylesheet">
-
-    <!-- 3. Librerías Externas de JS (PDF y Excel) -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 
-    <!-- 4. Estilos Internos del Proyecto -->
-
     <link rel="stylesheet" href="styles.css?v=8">
-    <link rel="stylesheet" href="landing.css">
     <link rel="stylesheet" href="apple-overrides.css?v=29">
-    <link rel="stylesheet" href="mode-selection.css">
-    <link rel="stylesheet" href="normativa-modal.css">
-    <link rel="stylesheet" href="workspace-manual.css?=v4">
-    <link rel="stylesheet" href="workspace-auto.css?v=1">
 </head>
-
-
-<!-- PANTALLA DE INICIO (LANDING PAGE)          -->
-
 <div id="step-1-landing">
-    
-    <!-- 1. Fondos animados y texturas -->
     <div class="bg-layer aura-background">
-        <!-- Contenedor de animación de UnicornStudio (Limpiado: el ancho/alto ahora vive en el CSS) -->
-        <div class="unicorn-canvas-container" data-us-project="uFY4IYPs2LU8fWm96Im2"></div>
+        <div data-us-project="uFY4IYPs2LU8fWm96Im2" style="width: 100%; height: 100%;"></div>
         <script type="text/javascript">
             !function () { if (!window.UnicornStudio) { window.UnicornStudio = { isInitialized: !1 }; var i = document.createElement("script"); i.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js", i.onload = function () { window.UnicornStudio.isInitialized || (UnicornStudio.init(), window.UnicornStudio.isInitialized = !0) }, (document.head || document.body).appendChild(i) } }();
         </script>
     </div>
 
-    <!-- Filtro oscuro transparente -->
     <div class="bg-layer tint-overlay"></div>
 
-    <!-- Partículas interactuables con el mouse -->
     <div class="bg-layer particle-canvas">
         <canvas id="ocean-dust"></canvas>
     </div>
 
-    <!-- 2. Contenedor principal de la interfaz de inicio -->
     <div class="landing-content-wrapper">
 
-        <!-- Encabezado -->
         <div class="landing-header">
             <h1 class="header-generator-title">Generador de Horarios</h1>
             <p class="header-school-subtitle">
@@ -68,7 +42,6 @@
             </p>
         </div>
 
-        <!-- Tarjeta de cristal donde se elige el semestre -->
         <div class="card-selector-container">
             <div class="glass-card">
                 <p class="landing-kicker mb-2 fw-bold text-white small">Para comenzar:</p>
@@ -77,10 +50,10 @@
                 <select id="landing-selector" class="form-select form-select-lg fw-bold landing-select mb-4"
                     onchange="document.getElementById('btn-start-app').disabled = false">
                     <option value="" selected disabled>- Elige una opción -</option>
-                    <option value="1">1er Semestre</option>
-                    <option value="3">3er Semestre</option>
-                    <option value="5">5to Semestre</option>
-                    <option value="7">7mo Semestre</option>
+                    <option value="2">2do Semestre</option>
+                    <option value="4">4to Semestre</option>
+                    <option value="6">6to Semestre</option>
+                    <option value="8">8vo Semestre</option>
                     <option value="adicional">Semestre Adicional / Optativas</option>
                 </select>
 
@@ -105,7 +78,6 @@
     </div>
 </div>
 
-<!-- Aviso de privacidad-->
 <div id="landing-privacy-bar" role="region" aria-label="Aviso de privacidad">
     <div class="lpb-message">
         <i class="bi bi-shield-lock-fill lpb-icon" aria-hidden="true"></i>
@@ -139,8 +111,7 @@
     };
 </script>
 
-<!-- COMPONENTES DE TRANSICIÓN Y CARGA          -->
-<!-- Pantalla de carga-->
+
 <div id="mode-loading-screen" aria-hidden="true">
     <div class="mode-loading-shell">
         <div class="mode-loading-spinner"></div>
@@ -149,7 +120,6 @@
     </div>
 </div>
 
-<!-- Contenedor principal de la aplicación -->
 <div id="app-container-wrapper">
     <header class="header-hero text-center mb-3">
         <div class="container">
@@ -160,11 +130,11 @@
                 class="mt-3 d-inline-flex align-items-center bg-white rounded-pill px-3 py-1 shadow-sm header-semestre-pill">
                 <span class="header-semestre-label me-2">Ver oferta:</span>
                 <select id="semestre-selector" class="form-select border-0 fw-bold text-primary header-semestre-select"
-                    onchange="cambiarSemestre(false)">
-                    <option value="1">1er Semestre</option>
-                    <option value="3">3er Semestre</option>
-                    <option value="5">5to Semestre</option>
-                    <option value="7" selected>7mo Semestre</option>
+                    style="width: auto; cursor: pointer;" onchange="cambiarSemestre(false)">
+                    <option value="2">2do Semestre</option>
+                    <option value="4">4to Semestre</option>
+                    <option value="6">6to Semestre</option>
+                    <option value="8" selected>8vo Semestre</option>
                     <option value="adicional">Semestre adicional</option>
                 </select>
             </div>
@@ -179,7 +149,7 @@
             <div class="row g-4">
                 <div class="col-md-6">
                     <div class="card h-100 border-0 shadow-sm card-hover-effect mode-card mode-card-manual"
-                        onclick="activarModoConCarga('manual')">
+                        style="cursor: pointer;" onclick="activarModoConCarga('manual')">
                         <div
                             class="card-body p-4 text-center d-flex flex-column align-items-center justify-content-center">
                             <div class="mode-icon mode-icon-manual mb-3 rounded-circle p-3">
@@ -198,7 +168,7 @@
 
                 <div class="col-md-6">
                     <div class="card h-100 border-0 shadow-sm card-hover-effect mode-card mode-card-auto"
-                        onclick="activarModoConCarga('auto')">
+                        style="cursor: pointer;" onclick="activarModoConCarga('auto')">
                         <div
                             class="card-body p-4 text-center d-flex flex-column align-items-center justify-content-center">
                             <div class="mode-icon mode-icon-auto mb-3 rounded-circle p-3">
@@ -224,75 +194,80 @@
                     Cambiar al Modo Automático <i class="bi bi-arrow-right ms-1"></i>
                 </button>
             </div>
-<div id="manual-start-anchor" class="instruction-bar instruction-bar-manual p-2 mx-3 mb-3">
+            <div id="manual-start-anchor" class="instruction-bar p-3 mx-3 mb-3"
+                style="background-color: #eef8f6; border: 1px solid #b9e1d8; border-left: 5px solid #00695c; font-family: var(--sf-text);">
 
-    <!-- Título Principal -->
-    <div class="instruction-bar-static-header border-0 pb-0"
-        onclick="SadaAnalytics.trackHerramienta('ver_normativa', {mode: 'manual'})">
-        <h6 class="mb-0 instruction-bar-title-wrap instruction-bar-title d-flex align-items-center">
-            <span class="icon-align">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    viewBox="0 0 16 16" aria-hidden="true">
-                    <path fill-rule="evenodd"
-                        d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
-                </svg>
-            </span>
-            Modo Manual: Pasos a seguir
-        </h6>
-    </div>
+                <div class="d-flex align-items-center"
+                    onclick="SadaAnalytics.trackHerramienta('ver_normativa', {mode: 'manual'})">
+                    <h6 class="mb-0 d-flex align-items-center gap-2"
+                        style="font-family: var(--sf-text); font-size: 15px; font-weight: 700; letter-spacing: -0.022px; color: #004d40;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            viewBox="0 0 16 16" style="flex-shrink:0;" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                        Modo Manual: Pasos a seguir
+                    </h6>
+                </div>
 
-    <!-- Pasos -->
-    <div class="row align-items-center g-1 border-bottom pb-2 mt-2 instruction-steps-row">
-        <div class="col-md-4 d-flex align-items-start border-end-md" style="border-color: #b9e1d8;">
-            <div class="step-badge step-badge-manual shadow-sm">1</div>
-            <div class="step-text">
-                <span class="step-title step-title-manual">Agregar</span>
-                Busca un área y materia en el panel izquierdo.
-            </div>
-        </div>
-        <div class="col-md-4 d-flex align-items-start border-end-md" style="border-color: #b9e1d8;">
-            <div class="step-badge step-badge-manual shadow-sm">2</div>
-            <div class="step-text">
-                <span class="step-title step-title-manual">Seleccionar</span>
-                Selecciona al profesor y se agregará automáticamente.
-            </div>
-        </div>
-        <div class="col-md-4 d-flex align-items-start">
-            <div class="step-badge step-badge-manual shadow-sm">3</div>
-            <div class="step-text">
-                <span class="step-title step-title-manual">Visualizar</span>
-                Repite con la siguiente materia y observa tus selecciones.
-            </div>
-        </div>
-    </div>
+                <div class="row align-items-center g-3 border-bottom pb-4 mt-3"
+                    style="border-color: #b9e1d8 !important;">
+                    <div class="col-md-4 d-flex align-items-start border-end-md" style="border-color: #b9e1d8;">
+                        <div class="step-badge step-badge-manual shadow-sm">1</div>
+                        <div class="step-text"
+                            style="font-family: var(--sf-text); font-size: 14px; font-weight: 400; line-height: 1.47; letter-spacing: -0.224px; color: #3c3c3e;">
+                            <span class="step-title step-title-manual"
+                                style="font-family: var(--sf-text); font-size: 12px; font-weight: 700; letter-spacing: 0.3px;">Agregar</span>
+                            Busca un área y materia en el panel izquierdo.
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-start border-end-md" style="border-color: #b9e1d8;">
+                        <div class="step-badge step-badge-manual shadow-sm">2</div>
+                        <div class="step-text"
+                            style="font-family: var(--sf-text); font-size: 14px; font-weight: 400; line-height: 1.47; letter-spacing: -0.224px; color: #3c3c3e;">
+                            <span class="step-title step-title-manual"
+                                style="font-family: var(--sf-text); font-size: 12px; font-weight: 700; letter-spacing: 0.3px;">Seleccionar</span>
+                            Selecciona al profesor y se agregará automáticamente.
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-start">
+                        <div class="step-badge step-badge-manual shadow-sm">3</div>
+                        <div class="step-text"
+                            style="font-family: var(--sf-text); font-size: 14px; font-weight: 400; line-height: 1.47; letter-spacing: -0.224px; color: #3c3c3e;">
+                            <span class="step-title step-title-manual"
+                                style="font-family: var(--sf-text); font-size: 12px; font-weight: 700; letter-spacing: 0.3px;">Visualizar</span>
+                            Repite con la siguiente materia y observa tus selecciones.
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Toggle de Opciones Avanzadas -->
-    <div id="opts-avanzados-toggle-manual"
-        class="instruction-bar-toggle mt-2 pb-2.5 collapsed instruction-steps-row"
-        style="cursor: pointer; user-select: none;"
-        data-bs-toggle="collapse" data-bs-target="#opcionesAvanzadasManual" aria-expanded="false"
-        onclick="SadaAnalytics.trackHerramienta('ver_normativa', {mode: 'manual'})">
-        
-        <h6 class="mb-0 instruction-bar-title-wrap instruction-section-title instruction-section-title-manual d-flex align-items-center">
-            <span style="width: 32px; display: inline-flex; justify-content: center;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    viewBox="0 0 16 16" aria-hidden="true">
-                    <path fill-rule="evenodd"
-                        d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z" />
-                </svg>
-            </span> 
-            Opciones Avanzadas
-        </h6>
-        
-        <div class="instruction-bar-side">
-            <span class="d-inline-flex align-items-center justify-content-center rounded-circle opts-toggle-chevron-circle-manual">
-                <svg class="opts-avanzados-chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                    fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                </svg>
-            </span>
-        </div>
-    </div>
+                <div id="opts-avanzados-toggle-manual"
+                    class="opts-expand-toggle d-flex justify-content-between align-items-center mt-4 pb-2 border-bottom collapsed"
+                    style="border-color: #b9e1d8 !important; cursor: pointer; user-select: none;"
+                    data-bs-toggle="collapse" data-bs-target="#opcionesAvanzadasManual" aria-expanded="false"
+                    onclick="SadaAnalytics.trackHerramienta('ver_normativa', {mode: 'manual'})">
+                    <h6 class="mb-0 d-flex align-items-center gap-2"
+                        style="font-family: var(--sf-text); color: #004d40; font-size: 16px; font-weight: 700; letter-spacing: -0.022em;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#00695c"
+                            viewBox="0 0 16 16" style="flex-shrink:0;" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z" />
+                        </svg>
+                        Opciones Avanzadas
+                    </h6>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge rounded-pill"
+                            style="color: #00695c; background-color: transparent; border: 1px solid #00695c; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; padding: 0.4em 0.9em; font-family: var(--sf-text);">
+                            Desliza
+                        </span>
+                        <svg class="opts-avanzados-chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                            fill="#004d40" viewBox="0 0 16 16" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </div>
+                </div>
+
                 <div class="collapse" id="opcionesAvanzadasManual">
                     <div class="row g-3 mt-1">
                         <div class="col-md-6 col-lg-3">
@@ -369,7 +344,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12 col-lg-6">
+                        <div class="col-md-12">
                             <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-row align-items-center">
                                 <div class="text-secondary me-3"><i class="bi bi-download fs-1"></i></div>
                                 <div>
@@ -398,7 +373,7 @@
 
                     <div class="apple-subject-panel-shell ml-panel">
                         <div class="ml-step">
-                            <i class="bi bi-search"></i> 1. Elegir Materia
+                            <i class="bi bi-search"></i> 1. Elige Materia
                         </div>
                         <div class="ml-search">
                             <input type="text" id="buscador" placeholder="Buscar materia..."
@@ -423,7 +398,8 @@
                         </div>
                         <div class="collapse show" id="panel-actividades">
                             <div class="actA__body">
-                                <p class="actA__hint t-caption">Agrega prácticas, inglés, deportes o cualquier otra actividad.</p>
+                                <p class="actA__hint t-caption">Agrega prácticas, inglés, deportes o cualquier
+                                    compromiso fijo.</p>
                                 <div class="actA__field">
                                     <label class="actA__label t-field-label" for="act-nombre">Nombre</label>
                                     <input type="text" id="act-nombre" class="actA__input t-body"
@@ -452,10 +428,18 @@
                                         <div class="actA__time-control">
                                             <input type="time" id="act-inicio" class="actA__time t-body t-counter"
                                                 value="07:00" aria-label="Hora de inicio">
+                                            <button type="button" class="actA__time-button"
+                                                onclick="abrirSelectorHora('act-inicio')" aria-label="Elegir hora de inicio">
+                                                <i class="bi bi-clock"></i>
+                                            </button>
                                         </div>
                                         <div class="actA__time-control">
                                             <input type="time" id="act-fin" class="actA__time t-body t-counter"
                                                 value="09:00" aria-label="Hora de fin">
+                                            <button type="button" class="actA__time-button"
+                                                onclick="abrirSelectorHora('act-fin')" aria-label="Elegir hora de fin">
+                                                <i class="bi bi-clock"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -475,7 +459,7 @@
                         <div class="card-header bg-white d-flex justify-content-between align-items-center py-2 mobile-top-sheet-header apple-prof-panel-typography"
                             onclick="this.parentElement.classList.toggle('expanded')" style="cursor:pointer;">
                             <div class="d-flex align-items-center">
-                                <h6 class="mb-0 me-3" id="titulo-seleccion"><i
+                                <h6 class="mb-0 me-3" id="titulo-seleccion" style="color: #00695c; font-weight: 700;"><i
                                         class="bi bi-arrow-left-circle"></i> 2. Selecciona un Profesor</h6>
                                 <span class="badge bg-light text-dark border" id="info-seleccion">Esperando...</span>
                             </div>
@@ -483,18 +467,20 @@
                         </div>
                         <div class="card-body bg-light py-2 apple-prof-panel-typography" id="body-panel-manual">
                             <div id="contenedor-grupos" class="horizontal-scroll-container">
-                                <div class="apple-empty-state w-100 text-center">
-                                    <i class="bi bi-hand-index-thumb"></i>
-                                    <p>Selecciona un profesor del menú izquierdo.</p>
+                                <div class="text-center text-muted py-4 w-100">
+                                    <i class="bi bi-hand-index-thumb display-6 opacity-25"></i>
+                                    <p class="mt-2 small mb-0">Selecciona una materia del menú izquierdo.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Recordatorio horario final -->
-                    <div class="disclaimer-manual d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-mortarboard-fill flex-shrink-0"></i>
-                        <span>Cuando termines de armar tu horario, presiona <strong> "Mi Opción Principal" </strong> &mdash; nos ayudas a recopilar datos. </span>
+                    <div class="disclaimer-manual d-flex align-items-center justify-content-center gap-2 py-2 px-3 mx-1 rounded-3"
+                        style="background:#f0fdf4; border:1px solid #86efac; font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; font-weight:400; line-height:1.29; letter-spacing:-0.224px; color:#166534;">
+                        <i class="bi bi-mortarboard" style="font-size:14px; flex-shrink:0;"></i>
+                        <span>Cuando termines de armar tu horario, presiona <span style="font-weight:600;">"Mi Opci&oacute;n
+                                Principal"</span> &mdash; Nos ayudar&aacute;s a recopilar datos</span>
                     </div>
 
                     <div id="panel-manual-grid" class="card border-0 flex-grow-1 l1-frame" style="min-height: 400px;">
@@ -703,62 +689,76 @@
                     Cambiar al Modo Manual <i class="bi bi-arrow-left ms-1"></i>
                 </button>
             </div>
-                        <div id="auto-start-anchor" class="instruction-bar instruction-bar-auto p-2 mx-3 mb-3">
-                <div class="instruction-bar-static-header border-0 pb-0"
+            <div id="auto-start-anchor" class="instruction-bar p-3 mx-3 mb-3"
+                style="background-color: #f3e5f5; border: 1px solid #e1bee7; border-left: 5px solid #6a1b9a; font-family: var(--ff-text);">
+                <div class="d-flex align-items-center"
                     onclick="SadaAnalytics.trackHerramienta('ver_normativa', {mode: 'auto'})">
-                    <h6 class="mb-0 d-flex align-items-center gap-2 instruction-bar-title-auto">
+                    <h6 class="mb-0 d-flex align-items-center gap-2"
+                        style="font-size: 13px; font-weight: 600; letter-spacing: 0.3px; color: #4a148c;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             viewBox="0 0 16 16" style="flex-shrink:0;" aria-hidden="true">
                             <path fill-rule="evenodd"
                                 d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
                         </svg>
-                        Modo Automático: Pasos a seguir
+                        MODO EXPLORAR: PASOS A SEGUIR
                     </h6>
                 </div>
 
-                <div class="row align-items-center g-1 border-bottom pb-2 mt-2 steps-border-auto">
-                    <div class="col-md-4 d-flex align-items-start border-end-md steps-border-auto">
-                        <div class="step-badge step-badge-auto shadow-sm">1</div>
-                        <div class="step-text step-text-auto">
-                            <span class="step-title step-title-auto">Agregar</span>
-                            Busca tu materia a la izquierda y selecciónala.
+                <div class="mt-3">
+                    <div class="row align-items-center g-3 border-bottom pb-4"
+                        style="border-color: #e1bee7 !important;">
+                        <div class="col-md-4 d-flex align-items-start border-end-md" style="border-color: #e1bee7;">
+                            <div class="step-badge shadow-sm" style="background-color: #6a1b9a;">1</div>
+                            <div class="step-text"
+                                style="font-size: 14px; font-weight: 400; line-height: 1.47; letter-spacing: -0.224px; color: #3c3c3e;">
+                                <span class="step-title"
+                                    style="color: #6a1b9a; font-size: 12px; font-weight: 600; letter-spacing: 0.3px;">AGREGAR</span>
+                                Busca tu materia a la izquierda y selecciónala.
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-start border-end-md" style="border-color: #e1bee7;">
+                            <div class="step-badge shadow-sm" style="background-color: #6a1b9a;">2</div>
+                            <div class="step-text"
+                                style="font-size: 14px; font-weight: 400; line-height: 1.47; letter-spacing: -0.224px; color: #3c3c3e;">
+                                <span class="step-title"
+                                    style="color: #6a1b9a; font-size: 12px; font-weight: 600; letter-spacing: 0.3px;">SELECCIONAR</span>
+                                En el panel derecho selecciona todos los profesores que quieras.
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-start">
+                            <div class="step-badge shadow-sm" style="background-color: #6a1b9a;">3</div>
+                            <div class="step-text"
+                                style="font-size: 14px; font-weight: 400; line-height: 1.47; letter-spacing: -0.224px; color: #3c3c3e;">
+                                <span class="step-title"
+                                    style="color: #6a1b9a; font-size: 12px; font-weight: 600; letter-spacing: 0.3px;">GENERAR</span>
+                                Presiona generar horarios y visualiza todas las combinaciones.
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4 d-flex align-items-start border-end-md steps-border-auto">
-                        <div class="step-badge step-badge-auto shadow-sm">2</div>
-                        <div class="step-text step-text-auto">
-                            <span class="step-title step-title-auto">Seleccionar</span>
-                            En el panel derecho selecciona todos los profesores que quieras.
-                        </div>
-                    </div>
-                    <div class="col-md-4 d-flex align-items-start">
-                        <div class="step-badge step-badge-auto shadow-sm">3</div>
-                        <div class="step-text step-text-auto">
-                            <span class="step-title step-title-auto">Generar</span>
-                            Presiona generar horarios y visualiza todas las combinaciones.
-                        </div>
-                    </div>
-                </div>
 
-                <div id="opts-avanzados-toggle"
-                    class="opts-expand-toggle opts-toggle-auto d-flex justify-content-between align-items-center mt-2 pb-2.5 collapsed"
-                    data-bs-toggle="collapse" data-bs-target="#opcionesAvanzadasAuto" aria-expanded="false">
-                        <h6 class="mb-0 d-flex align-items-center gap-2 opts-toggle-title-auto">
+                    <div id="opts-avanzados-toggle"
+                        class="opts-expand-toggle d-flex justify-content-between align-items-center mt-4 pb-2 border-bottom collapsed"
+                        style="border-color: #e1bee7 !important; cursor: pointer; user-select: none;"
+                        data-bs-toggle="collapse" data-bs-target="#opcionesAvanzadasAuto" aria-expanded="false">
+                        <h6 class="mb-0 d-flex align-items-center gap-2"
+                            style="color: #4a148c; font-size: 14px; font-weight: 600; letter-spacing: 0.07em;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#aa00ff"
                                 viewBox="0 0 16 16" style="flex-shrink:0;" aria-hidden="true">
                                 <path fill-rule="evenodd"
                                     d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z" />
                             </svg>
-                            Opciones avanzadas y filtros
+                            OPCIONES AVANZADAS Y FILTROS
                         </h6>
                         <div class="d-flex align-items-center gap-2">
-                            <span class="d-inline-flex align-items-center justify-content-center rounded-circle opts-toggle-chevron-circle">
-                            <svg class="opts-avanzados-chevron" xmlns="http://www.w3.org/2000/svg" width="14"
-                                height="14" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                            <span class="badge rounded-pill"
+                                style="color: #6a1b9a; background-color: transparent; border: 1px solid #6a1b9a; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; padding: 0.4em 0.9em; font-family: var(--sf-text); text-transform: uppercase;">
+                                DESLIZA
+                            </span>
+                            <svg class="opts-avanzados-chevron" xmlns="http://www.w3.org/2000/svg" width="12"
+                                height="12" fill="#4a148c" viewBox="0 0 16 16" aria-hidden="true">
                                 <path fill-rule="evenodd"
                                     d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                             </svg>
-                            </span>
                         </div>
                     </div>
 
@@ -767,9 +767,11 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
                                     <div class="mb-2" style="color: #d32f2f;"><i class="bi bi-shield-x fs-4"></i></div>
-                                    <h6 class="mb-1 adv-card-h6">
+                                    <h6 class="mb-1"
+                                        style="font-size: 14px; font-weight: 600; letter-spacing: -0.224px; color: #1c1c1e;">
                                         Manejo de Traslapes</h6>
-                                    <p class="mb-0 adv-card-p">
+                                    <p class="mb-0"
+                                        style="font-size: 13px; font-weight: 400; line-height: 1.47; letter-spacing: -0.12px; color: #6e6e73;">
                                         El sistema genera automáticamente las combinaciones. Si no existe alguna posible
                                         entre tus selecciones, el sistema te señalará dónde está el problema.</p>
                                 </div>
@@ -783,24 +785,27 @@
                                             <path
                                                 d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
                                         </svg>
-                                        <h6 class="mb-0 adv-card-h6">
+                                        <h6 class="mb-0"
+                                            style="font-size: 14px; font-weight: 600; letter-spacing: -0.224px; color: #1c1c1e;">
                                             Filtros</h6>
                                     </div>
                                     <div class="row g-2">
                                         <div class="col-md-6">
-                                            <ul class="mb-0 ps-3 adv-card-ul">
-                                                <li><span class="adv-card-span-label">Ordenar:</span>
+                                            <ul class="mb-0 ps-3"
+                                                style="font-size: 13px; font-weight: 400; line-height: 1.6; letter-spacing: -0.12px; color: #6e6e73;">
+                                                <li><span style="font-weight: 600; color: #3c3c3e;">Ordenar:</span>
                                                     Visualiza horarios con menos días de asistencia, más créditos o
                                                     menos horas libres.</li>
-                                                <li><span class="adv-card-span-label">Turno:</span> Filtra
+                                                <li><span style="font-weight: 600; color: #3c3c3e;">Turno:</span> Filtra
                                                     horarios por turno matutino, vespertino o mixto.</li>
                                             </ul>
                                         </div>
                                         <div class="col-md-6">
-                                            <ul class="mb-0 ps-3 adv-card-ul">
-                                                <li><span class="adv-card-span-label">Días Libres:</span>
+                                            <ul class="mb-0 ps-3"
+                                                style="font-size: 13px; font-weight: 400; line-height: 1.6; letter-spacing: -0.12px; color: #6e6e73;">
+                                                <li><span style="font-weight: 600; color: #3c3c3e;">Días Libres:</span>
                                                     Observa combinaciones que te dejen ciertos días sin clase.</li>
-                                                <li><span class="adv-card-span-label">Profesores:</span>
+                                                <li><span style="font-weight: 600; color: #3c3c3e;">Profesores:</span>
                                                     ¿Buscas a algún profesor en específico? Seleccionalos en este
                                                     filtro.</li>
                                             </ul>
@@ -810,11 +815,14 @@
                             </div>
 
                             <div class="col-md-6 col-lg-4">
-                                <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column adv-card-border-left-auto">
+                                <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column"
+                                    style="border-left: 4px solid #6a1b9a !important;">
                                     <div class="text-success mb-2"><i class="bi bi-calendar2-plus fs-4"></i></div>
-                                    <h6 class="mb-1 adv-card-h6">
+                                    <h6 class="mb-1"
+                                        style="font-size: 14px; font-weight: 600; letter-spacing: -0.224px; color: #1c1c1e;">
                                         Actividades Personalizadas</h6>
-                                    <p class="mb-0 adv-card-p">
+                                    <p class="mb-0"
+                                        style="font-size: 13px; font-weight: 400; line-height: 1.47; letter-spacing: -0.12px; color: #6e6e73;">
                                         Agrega tus actividades diarias al sistema (inglés, prácticas, deportes, etc).
                                     </p>
                                 </div>
@@ -824,9 +832,11 @@
                                 <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
                                     <div class="text-warning mb-2"><i class="bi bi-layout-text-window-reverse fs-4"></i>
                                     </div>
-                                    <h6 class="mb-1 adv-card-h6">
+                                    <h6 class="mb-1"
+                                        style="font-size: 14px; font-weight: 600; letter-spacing: -0.224px; color: #1c1c1e;">
                                         Tabla Dinámica</h6>
-                                    <p class="mb-0 adv-card-p">
+                                    <p class="mb-0"
+                                        style="font-size: 13px; font-weight: 400; line-height: 1.47; letter-spacing: -0.12px; color: #6e6e73;">
                                         Activa el switch "Tabla Dinámica" para cambiar la visualización de tu horario.
                                     </p>
                                 </div>
@@ -836,9 +846,11 @@
                                 <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
                                     <div style="color: #6f42c1;" class="mb-2"><i class="bi bi-diagram-3-fill fs-4"></i>
                                     </div>
-                                    <h6 class="mb-1 adv-card-h6">
+                                    <h6 class="mb-1"
+                                        style="font-size: 14px; font-weight: 600; letter-spacing: -0.224px; color: #1c1c1e;">
                                         Combinaciones Múltiples</h6>
-                                    <p class="mb-0 adv-card-p">
+                                    <p class="mb-0"
+                                        style="font-size: 13px; font-weight: 400; line-height: 1.47; letter-spacing: -0.12px; color: #6e6e73;">
                                         Se visualizarán solo 50 combinaciones iniciales de todas las posibles; usa los
                                         filtros para observar más.</p>
                                 </div>
@@ -847,9 +859,11 @@
                             <div class="col-md-6 col-lg-6">
                                 <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
                                     <div class="mb-2 text-secondary"><i class="bi bi-download fs-4"></i></div>
-                                    <h6 class="mb-1 adv-card-h6">
+                                    <h6 class="mb-1"
+                                        style="font-size: 14px; font-weight: 600; letter-spacing: -0.224px; color: #1c1c1e;">
                                         Descarga y Guarda</h6>
-                                    <p class="mb-0 adv-card-p">
+                                    <p class="mb-0"
+                                        style="font-size: 13px; font-weight: 400; line-height: 1.47; letter-spacing: -0.12px; color: #6e6e73;">
                                         Puedes descargar tu opción elegida en PDF, PNG, Excel o CSV.</p>
                                 </div>
                             </div>
@@ -857,9 +871,11 @@
                             <div class="col-md-6 col-lg-6">
                                 <div class="p-3 border rounded bg-white h-100 shadow-sm d-flex flex-column">
                                     <div class="mb-2 text-danger"><i class="bi bi-journal-plus fs-4"></i></div>
-                                    <h6 class="mb-1 adv-card-h6">
+                                    <h6 class="mb-1"
+                                        style="font-size: 14px; font-weight: 600; letter-spacing: -0.224px; color: #1c1c1e;">
                                         Materias Otro Semestre</h6>
-                                    <p class="mb-0 adv-card-p">
+                                    <p class="mb-0"
+                                        style="font-size: 13px; font-weight: 400; line-height: 1.47; letter-spacing: -0.12px; color: #6e6e73;">
                                         Agrega materias de otro semestre deslizando hasta arriba en "Ver Oferta" y
                                         cambiando el semestre.
                                     </p>
@@ -868,13 +884,14 @@
 
                         </div>
                     </div><!-- /#opcionesAvanzadasAuto -->
+                </div>
             </div>
             <div class="row g-3">
 
                 <div class="col-lg-3 col-md-4 d-flex flex-column gap-3 pb-mobile-buffer">
 
                     <div class="apple-subject-panel-shell ml-panel">
-                        <div class="ml-step ml-step-auto">
+                        <div class="ml-step" style="color: #6a1b9a;">
                             <i class="bi bi-search"></i> 1. Elige Materia
                         </div>
                         <div class="ml-search">
@@ -900,7 +917,8 @@
                         </div>
                         <div class="collapse" id="panel-actividades-auto">
                             <div class="actA__body">
-                                <p class="actA__hint t-caption">Agrega prácticas, inglés, deportes o cualquier otra actividad.</p>
+                                <p class="actA__hint t-caption">Agrega prácticas, inglés, deportes o cualquier
+                                    compromiso fijo.</p>
                                 <div class="actA__field">
                                     <label class="actA__label t-field-label" for="act-nombre-auto">Nombre</label>
                                     <input type="text" id="act-nombre-auto" class="actA__input t-body"
@@ -930,10 +948,18 @@
                                         <div class="actA__time-control">
                                             <input type="time" id="act-inicio-auto" class="actA__time t-body t-counter"
                                                 value="07:00" aria-label="Hora de inicio">
+                                            <button type="button" class="actA__time-button"
+                                                onclick="abrirSelectorHora('act-inicio-auto')" aria-label="Elegir hora de inicio">
+                                                <i class="bi bi-clock"></i>
+                                            </button>
                                         </div>
                                         <div class="actA__time-control">
                                             <input type="time" id="act-fin-auto" class="actA__time t-body t-counter"
                                                 value="09:00" aria-label="Hora de fin">
+                                            <button type="button" class="actA__time-button"
+                                                onclick="abrirSelectorHora('act-fin-auto')" aria-label="Elegir hora de fin">
+                                                <i class="bi bi-clock"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -956,8 +982,8 @@
                             onclick="this.parentElement.classList.toggle('expanded'); setTimeout(updateMobileLayoutVars, 100);"
                             style="cursor:pointer;">
                             <div class="d-flex align-items-center">
-                                <h6 class="mb-0 me-3 panel-prof-title-auto" id="titulo-seleccion-auto"
-                                    ><i class="bi bi-arrow-left-circle"></i> 2.
+                                <h6 class="mb-0 me-3" id="titulo-seleccion-auto"
+                                    style="color: #6a1b9a; font-weight: 700;"><i class="bi bi-arrow-left-circle"></i> 2.
                                     Selecciona Profesores o grupos</h6>
                                 <span class="badge bg-light text-dark border"
                                     id="info-seleccion-auto">Esperando...</span>
@@ -977,7 +1003,11 @@
 
                     <div class="misel-frame mt-3" id="panel-mis-selecciones">
                         <div class="misel-header">
-                            <div class="misel-title"><i class="bi bi-ui-checks-grid"></i> 3. Mis Selecciones</div>
+                            <span class="misel-step">3</span>
+                            <div class="misel-titles">
+                                <div class="misel-title">Mis Selecciones</div>
+                                <div class="misel-subtitle">Materias listas para combinar</div>
+                            </div>
                             <span class="misel-counter" aria-label="Resumen de selecciones">
                                 <span class="misel-counter__item"><b id="misel-cnt-mat">0</b> materias</span>
                                 <span class="misel-counter__sep">·</span>
@@ -1000,7 +1030,8 @@
                             </ul>
                             <div class="misel-hint">
                                 <i class="bi bi-info-circle-fill"></i>
-                                Si no se genera alguna combinación, el sistema te recomendará qué materia modificar para obtener más opciones.
+                                Cada materia genera combinaciones según los profesores que elegiste. Más opciones = más
+                                horarios posibles.
                             </div>
                         </div>
                     </div>
@@ -1018,7 +1049,7 @@
             <div class="back-row">
                 <button class="back-btn" onclick="activarModoConCarga('auto')">
                     <span class="ico"><i class="bi bi-arrow-left"></i></span>
-                    Volver a Selecciones
+                    Volver a seleccionar
                 </button>
             </div>
 
@@ -1175,15 +1206,14 @@
             </button>
 
             <div class="mx-auto text-muted" style="max-width: 700px;">
-                <p class = "footer-disclaimer">
+                <p
+                    style="font-family: var(--sf-text); font-weight: 400; font-size: 14px; letter-spacing: -0.012em; line-height: 1.47; color: #6e6e73;">
                     Esta herramienta es un simulador no oficial. Los horarios y
                     profesores se obtienen de la página oficial de la facultad.
                 </p>
             </div>
 
-            <p class="small text-primary mt-3 footer-greeting"
-            >
-            ¡Mucha suerte en sus inscripciones!</p>
+            <p class="small text-primary mt-3" style="font-family: var(--sf-text); font-weight: 700;">¡Mucha suerte en sus inscripciones!</p>
         </div>
     </footer>
 
@@ -1285,7 +1315,6 @@
     <!-- Scripts propios -->
     <script src="particles.js"></script>
     <script src="sada_analytics.js?v=3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="app.js?v=10"></script>
     <script>
         /* Actualiza la píldora de conteo del panel Mis Selecciones */
@@ -1448,7 +1477,6 @@
         }, 100);
     };
 </script>
-
 </body>
 
 </html>

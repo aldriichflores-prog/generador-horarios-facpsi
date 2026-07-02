@@ -1,0 +1,111 @@
+import sqlite3
+import os
+
+# --- CONFIGURACIÓN ---
+DIRECTORIO_ACTUAL = os.path.dirname(os.path.abspath(__file__))
+DB_NAME = os.path.join(DIRECTORIO_ACTUAL, "horarios_unam.db")
+
+if not os.path.exists(DB_NAME):
+    print("[ERROR] No encuentro la base de datos.")
+    exit()
+
+conn = sqlite3.connect(DB_NAME)
+cursor = conn.cursor()
+
+print("--- ASIGNANDO CRÉDITOS A LAS MATERIAS ---")
+
+# 1. Aseguramos que la columna exista
+try:
+    cursor.execute("ALTER TABLE horarios ADD COLUMN creditos INTEGER DEFAULT 6")
+    print("[OK] Columna 'creditos' creada (Default: 6).")
+except:
+    print("[INFO] La columna 'creditos' ya existía.")
+
+# 2. MAPA EXACTO: NOMBRE EN TU BD -> CRÉDITOS
+# He sacado estos nombres directamente de tu archivo .db
+mapa_creditos = {
+    # --- ÁREA GENERAL / TRONCO ---
+    'APRENDIZAJE,MOTIVAC.Y COGNIC. II': 8,
+    'DESAR.ACTUALS.EN COGNIC.COMPOR.II': 6,
+    'INVESTIGAC.Y ANALISIS DE DATOS II': 6,
+    'TALLER DE INVESTIGACION II': 10,
+    
+    # --- CLÍNICA ---
+    'PSICODIAGNOSTICO II': 9,
+    'TEORIA Y TECNICA DE LA ENTREVIS. II': 6,
+    'EPIDEMIOLOGIA Y SALUD PUBLICA': 6,
+    'PSICODINAMICA DE GRUPOS': 6,
+    
+    # --- ORGANIZACIONAL ---
+    'ADMINISTRACION DE PERSONAL': 6,
+    'CAPACITAC.Y DESARR.DE PERSONAL II': 8,
+    'INTEGRACION DE PERSONAL I': 8,
+    
+    # --- EDUCATIVA ---
+    'INVESTIGACION EN EDUCACION': 15,
+    'INVESTIG.CUANTITATIVA EN EDUCACION': 6,
+    'PARADIGMAS PSICOEDUC.CONTEMPORAN': 6,
+    'PROGRAMAS DE INTERVEN. PSICOEDUCAT.': 6,
+    
+    # --- NEURO / PSICOBIOLOGÍA ---
+    'EVALUACION NEUROPSICOLOGICA': 4,
+    'PSICOFARMACOLOGIA Y ADICCION': 6,
+    'PSICOFISIOLOGIA DE LA ATENCION': 6,
+    'PSICOFISIOLOGIA DEL SUEO': 6,
+    'TECNICAS DE IMAGENOLOGIA CEREBRAL': 4,
+    'TEMAS SELECTOS EN PSICOBIOLOGIA II': 6,
+    
+    # --- SOCIAL ---
+    'CONFLICTO, CONFORMIDAD Y CONSENSO': 13,
+    'ESTADISTICA INFERENC.EN PSICOLOGIA':6,
+    'PSICOLOGIA DE LA VIDA COTIDIANA': 6,
+    'INVESTIGACION SOCIAL': 6,
+    'FUENTES DE INFORMACION':6,
+    
+    # --- CONTEXTUAL / OPTATIVAS ---
+    'APORTES DESDE EPISTEM. FEMINIST. PSIC.': 5,
+    'ETICA PROFESIONAL':4,
+
+    # ====== 7MO SEMESTRE ======
+    'COMPRENSION DE LA REALIDAD SOCIAL II': 4,
+    'ANALISIS DEL DISCURSO': 6,
+    'ANALISIS SEMIOTICO': 6,
+    'CULTURA, TECNOLOGIA Y DIVERSIDAD': 6,
+    'ESTRATEGIAS DE INTERVENCION': 6,
+    'INTERVENCION EN PROCESOS PSICOSOCIALES': 14,
+    'APRENDIZAJE, MOTIVACION Y COGNICION III': 8,
+    'DESARROLLOS ACTUALES EN COGNICION Y COMPORTAMIENTO III': 6,
+    'INVESTIGACION Y ANALISIS DE DATOS III': 6,
+    'TALLER DE INVESTIGACION III': 10,
+    'INTEGRACION DE INFORMES PSICOLOGICOS': 9,
+    'PSICOPATOLOGIA Y PERSONALIDAD': 9,
+    'TEORIAS PSICOLOGICAS DE LA SALUD': 6,
+    'TEORIAS Y SISTEMAS TERAPEUTICOS': 6,
+    'CAPACITACION Y DESARROLLO DE PERSONAL III': 8,
+    'ELABORACION DE PRUEBAS INDUSTRIALES': 8,
+    'INTEGRACION DE PERSONAL II': 8,
+    'RELACIONES LABORALES': 6,
+    'ANALISIS DEL SISTEMA EDUCATIVO MEXICANO': 6,
+    'INDUCCION A LA INTERVENCION EN EDUCACION': 15,
+    'INVESTIGACION CUALITATIVA EN EDUCACION': 6,
+    'NUEVAS TECNOLOGIAS EN EDUCACION': 6,
+    'BIOESTADISTICA': 4,
+    'ESTUDIOS DE SENALES ELECTRICAS CEREBRALES': 4,
+    'NEUROBIOLOGIA DEL APRENDIZAJE Y LA MEMORIA': 6,
+    'NEUROCIENCIAS COGNOSCITIVAS': 6,
+    'PSICOBIOLOGIA DEL DESARROLLO': 6,
+    'TEMAS SELECTOS EN PSICOBIOLOGIA III': 6
+}
+
+count = 0
+for asignatura, creditos in mapa_creditos.items():
+    # Usamos nombre exacto para no fallar
+    query = "UPDATE horarios SET creditos = ? WHERE asignatura = ?"
+    cursor.execute(query, (creditos, asignatura))
+    count += 1
+
+conn.commit()
+print(f"[EXITO] Se actualizaron los créditos de {count} materias.")
+print("Verifica si 'TALLER DE INVESTIGACION II' quedó con 10 créditos.")
+
+conn.close()

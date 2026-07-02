@@ -1,0 +1,520 @@
+/* =========================================================================
+   ======================= LANDING PAGE CSS (INICIO) =======================
+   ========================================================================= 
+   Archivo exclusivo para la pantalla de inicio (#step-1-landing).
+   Contiene fondos interactivos, tarjetas de cristal, tipografías y botones.
+   ========================================================================= */
+
+
+/* ==========================================================================
+   1. CONTENEDORES PRINCIPALES Y VARIABLES (Diseño)
+   ========================================================================== */
+
+#step-1-landing {
+    /* Esqueleto (Layout) */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #002B7A 0%, #00153d 100%);
+    z-index: 9999;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    
+    /* Sistema de Diseño (Variables Globales para Landing) */
+    font-family: var(--sf-text);
+    --sf-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --sf-text: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --radius-sm: 8px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+    --radius-2xl: 24px;
+}
+
+.landing-content-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.landing-header {
+    margin-bottom: 3rem;
+    animation: fadeInDown 1s ease-out;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* ==========================================================================
+   2. FONDOS INTERACTIVOS Y PARTÍCULAS
+   ========================================================================== */
+
+/* Contenedor principal de la animación 3D / WebGL */
+.unicorn-canvas-container {
+    width: 100%;
+    height: 100%;
+}
+
+.bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.aura-background {
+    z-index: -20;
+    opacity: 0.6;
+}
+
+.tint-overlay {
+    z-index: -15;
+    background-color: rgba(30, 58, 138, 0.3);
+    mix-blend-mode: overlay;
+}
+
+.particle-canvas {
+    z-index: -10;
+    opacity: 0.5;
+}
+
+
+/* ==========================================================================
+   3. TIPOGRAFÍA Y TÍTULOS (Textos principales)
+   ========================================================================== */
+
+#step-1-landing .header-generator-title {
+    font-family: var(--sf-display);
+    font-weight: 700;
+    font-size: clamp(2.2rem, 5vw, 4.8rem);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-shadow: none;
+}
+
+#step-1-landing .header-school-subtitle {
+    font-family: var(--sf-display);
+    font-weight: 700;
+    font-style: normal;
+    font-size: clamp(1rem, 1.85vw, 1.4rem);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    color: #D59F0F;
+    text-shadow: none;
+    white-space: normal;
+    max-width: 56ch;
+}
+
+/* Pequeño texto introductorio en las tarjetas (Kicker) */
+#step-1-landing .landing-kicker,
+#step-1-landing .glass-card p.small {
+    font-family: var(--font-text);
+    font-size: clamp(0.84rem, 1vw, 0.96rem);
+    font-weight: 700;
+    letter-spacing: -0.004em;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: none;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Preguntas grandes arriba de los selectores */
+#step-1-landing .landing-question,
+#step-1-landing .glass-card label.display-6 {
+    font-family: var(--sf-display) !important;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 2.4vw, 2.05rem) !important;
+    line-height: 1.14;
+    letter-spacing: -0.022em !important;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 18px !important;
+}
+
+
+/* ==========================================================================
+   4. TARJETAS ESTILO "GLASSMORPHISM" (Efecto Cristal)
+   ========================================================================== */
+
+.card-selector-container {
+    width: 100%;
+    max-width: 450px;
+    animation: fadeInUp 1s ease-out 0.2s backwards;
+}
+
+#step-1-landing .glass-card {
+    background: rgba(0, 18, 54, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-2xl);
+    width: min(100%, 430px);
+    margin: 0 auto;
+    padding: 26px 24px 24px;
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+
+/* ==========================================================================
+   5. CONTROLES Y BOTONES (Selectores e Iniciar)
+   ========================================================================== */
+
+/* Selector desplegable de Semestre / Carrera */
+#step-1-landing .landing-select {
+    font-family: var(--sf-text) !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.012em;
+    line-height: 1.4;
+    background-color: rgba(0, 6, 26, 0.6) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm) !important;
+    min-height: 54px;
+    padding: 13px 16px !important;
+}
+
+#step-1-landing .landing-select:focus {
+    border-color: rgba(253, 224, 71, 0.55);
+    box-shadow: 0 0 0 2px rgba(253, 224, 71, 0.18);
+}
+
+/* Opciones dentro del selector */
+#step-1-landing .landing-select option {
+    background-color: #040e2e;
+    color: #ffffff;
+}
+
+/* Botón de Iniciar en estado normal y desactivado */
+#step-1-landing #btn-start-app {
+    font-family: var(--sf-text);
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    min-height: 54px;
+    padding: 13px 24px !important;
+    border-radius: 9999px !important;
+}
+
+#step-1-landing #btn-start-app:disabled {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+}
+
+/* Estilo visual dorado del botón */
+.btn-gold-gradient {
+    background: linear-gradient(135deg, #fde047 0%, #D59F0F 100%);
+    border: 1px solid #fde047;
+    color: #00153d;
+    box-shadow: 0 0 15px rgba(213, 159, 15, 0.45);
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.btn-gold-gradient:hover {
+    box-shadow: 0 0 25px rgba(213, 159, 15, 0.75);
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #fde047 0%, #D59F0F 100%);
+    border-color: #ffffff;
+    color: #00153d;
+}
+
+.btn-gold-gradient:disabled {
+    background: #4b5563;
+    border-color: #6b7280;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* ==========================================================================
+   6. FOOTER, BARRA DE PRIVACIDAD Y MODAL
+   ========================================================================== */
+
+#step-1-landing .landing-footer {
+    font-family: var(--sf-text);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.47;
+    letter-spacing: -0.008em;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 520px;
+    margin-top: 32px;
+    padding-bottom: 72px; /* Espacio reservado para la barra de privacidad */
+    text-align: center;
+    animation: fadeIn 1.5s ease-out 0.5s backwards;
+}
+
+#step-1-landing .landing-footer strong {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* App footer global – Apple SF Pro Text stack */
+footer.mt-auto p.small,
+footer.mt-auto button {
+    font-family: var(--ff-text);
+    font-weight: 400;
+    letter-spacing: -0.008em;
+    line-height: 1.47;
+}
+
+/* Textos dentro del Modal de Políticas de Privacidad */
+#modalReglas .modal-title,
+#modalReglas h6,
+#modalReglas p,
+#modalReglas li,
+#modalReglas div,
+#modalReglas span,
+#modalReglas a,
+#modalReglas button {
+    font-family: var(--ff-text);
+    letter-spacing: -0.008em;
+}
+
+/* Barra flotante inferior de cookies/privacidad */
+#landing-privacy-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10050;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px 14px;
+    background: #00061a;
+    border-top: 1px solid rgba(213, 159, 15, 0.3);
+    font-family: var(--sf-text);
+    color: #ffffff;
+    flex-wrap: wrap;
+    line-height: 1.4;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.35);
+}
+
+#landing-privacy-bar .lpb-message {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1 1 480px;
+    min-width: 0;
+}
+
+#landing-privacy-bar .lpb-icon {
+    color: #D59F0F;
+    font-size: 20px;
+    flex-shrink: 0;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+}
+
+#landing-privacy-bar .lpb-text {
+    font-size: 13.5px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: #d7dae3;
+    display: block;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    line-height: 1.35;
+}
+
+#landing-privacy-bar .lpb-text strong {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* Botones dentro de la barra de privacidad */
+#landing-privacy-bar .lpb-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+#landing-privacy-bar .lpb-btn {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1;
+    min-height: 36px;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+    text-decoration: none;
+    box-shadow: none;
+    outline: none;
+}
+
+#landing-privacy-bar .lpb-btn-ghost,
+#landing-privacy-bar .lpb-btn-ghost:focus,
+#landing-privacy-bar .lpb-btn-ghost:active {
+    background: transparent !important;
+    color: #d7dae3 !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+}
+
+#landing-privacy-bar .lpb-btn-ghost:hover {
+    border-color: rgba(255, 255, 255, 0.6) !important;
+    color: #ffffff !important;
+}
+
+#landing-privacy-bar .lpb-btn-primary,
+#landing-privacy-bar .lpb-btn-primary:focus,
+#landing-privacy-bar .lpb-btn-primary:active {
+    background: #040e2e !important;
+    color: #ffffff !important;
+    border: 1px solid #040e2e !important;
+}
+
+#landing-privacy-bar .lpb-btn-primary:hover {
+    background: #040e2e !important;
+    border-color: #040e2e !important;
+    color: #ffffff !important;
+}
+
+#landing-privacy-bar .lpb-btn-primary .bi-chevron-down {
+    font-size: 11px;
+    margin-left: 2px;
+    color: #ffffff;
+}
+
+/* Detalle expandible de la barra de privacidad */
+#landing-privacy-bar .lpb-detail {
+    flex-basis: 100%;
+    font-size: 11px;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: #b0b4c1;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease, padding-top 0.3s ease;
+}
+
+#landing-privacy-bar .lpb-detail.open {
+    max-height: 160px;
+    opacity: 1;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 2px;
+}
+
+#landing-privacy-bar .lpb-detail strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+
+/* ==========================================================================
+   7. ANIMACIONES Y KEYFRAMES GLOBALES DE LA LANDING
+   ========================================================================== */
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Animación cuando la landing desaparece al iniciar la app */
+.slide-up-exit {
+    transform: translateY(-100%);
+}
+
+
+/* ==========================================================================
+   8. RESPONSIVE DESIGN (MÓVILES)
+   ========================================================================== */
+
+@media (max-width: 640px) {
+    #step-1-landing .glass-card {
+        width: min(100%, 100%);
+        padding: 22px 18px 20px;
+    }
+
+    #step-1-landing .landing-kicker,
+    #step-1-landing .glass-card p.small {
+        font-size: 0.82rem;
+        margin-bottom: 8px;
+    }
+
+    #step-1-landing .landing-question,
+    #step-1-landing .glass-card label.display-6 {
+        font-size: clamp(1.45rem, 7vw, 1.78rem) !important;
+        margin-bottom: 16px !important;
+    }
+
+    #landing-privacy-bar {
+        padding: 12px 16px;
+        gap: 10px;
+        min-height: 0;
+    }
+
+    #landing-privacy-bar .lpb-message {
+        flex: 1 1 100%;
+    }
+
+    #landing-privacy-bar .lpb-text {
+        font-size: 13px;
+    }
+
+    #landing-privacy-bar .lpb-icon {
+        font-size: 18px;
+    }
+
+    #landing-privacy-bar .lpb-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #landing-privacy-bar .lpb-btn {
+        font-size: 13px;
+        flex: 1 1 calc(50% - 4px);
+        padding: 8px 14px;
+    }
+}

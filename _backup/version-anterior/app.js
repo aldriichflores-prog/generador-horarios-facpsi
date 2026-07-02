@@ -1,16 +1,16 @@
 // ==========================================
-// SADA - Generador de Horarios FACPSI UNAM
-// app.js - Logica principal de la aplicacion
+// SADA — Generador de Horarios FACPSI UNAM
+// app.js — Lógica principal de la aplicación
 // ==========================================
 
-// Fallback si sada_analytics.js no cargo
+// Fallback si sada_analytics.js no cargó
 if (!window.SadaAnalytics) {
-    window.SadaAnalytics = { trackEntrarWorkspace() { }, trackCambiarSemestre() { }, trackCambiarModo() { }, trackBuscarMateria() { }, trackAgregarCurso() { }, trackEliminarCurso() { }, trackAgregarBolsa() { }, trackGenerarCombinaciones() { }, trackAbrirCombinacion() { }, trackExportar() { }, trackTransferir() { }, trackFiltro() { }, trackPerfilSADA() { }, trackCustom() { }, trackHerramienta() { }, saveSnapshot() { }, saveExitSnapshot() { }, updateSatisfaction() { }, init() { } };
+    window.SadaAnalytics = { trackEntrarWorkspace(){}, trackCambiarSemestre(){}, trackCambiarModo(){}, trackBuscarMateria(){}, trackAgregarCurso(){}, trackEliminarCurso(){}, trackAgregarBolsa(){}, trackGenerarCombinaciones(){}, trackAbrirCombinacion(){}, trackExportar(){}, trackTransferir(){}, trackFiltro(){}, trackPerfilSADA(){}, trackCustom(){}, trackHerramienta(){}, saveSnapshot(){}, saveExitSnapshot(){}, updateSatisfaction(){}, init(){} };
 }
 var SadaAnalytics = window.SadaAnalytics;
 
 // ==========================================
-// 1. CONSTANTES Y CONFIGURACION GLOBAL
+// 1. CONSTANTES Y CONFIGURACIÓN GLOBAL
 // ==========================================
 
 // --- Bases de Datos ---
@@ -21,40 +21,35 @@ let BD_AGRUPADA = [];   // Datos procesados y limpios con clave y estructura uni
 let miHorario = [];     // Lista de cursos seleccionados actualmente
 let historial = [];     // Pila para Undo
 let futuro = [];        // Pila para Redo
-let materiasPendientes = []; // Materias en previsualizacion (hover/condicionales)
+let materiasPendientes = []; // Materias en previsualización (hover/condicionales)
 let materiaSeleccionadaActual = null; // Materia activa en el panel izquierdo (Manual)
 
-// --- Estado del Modo Explorador (Automatico) ---
+// --- Estado del Modo Explorador (Automático) ---
 let bolsa = {};         // Materias candidatas seleccionadas { "Calculo": [grupo1, grupo2] }
 let materiaSeleccionadaAuto = null; // Materia activa en el panel izquierdo (Auto)
 let RESULTADOS_GLOBALES = [];    // Todas las combinaciones generadas
 let RESULTADOS_MOSTRADOS = [];   // Combinaciones filtradas que se muestran
-let OFFSET_MOSTRADOS = 0;        // Paginacion de resultados visualizados
-const BATCH_SIZE = 50;           // Cantidad de resultados por pagina
+let OFFSET_MOSTRADOS = 0;        // Paginación de resultados visualizados
+const BATCH_SIZE = 50;           // Cantidad de resultados por página
 
-// --- Configuracion Visual y Sistema ---
+// --- Configuración Visual y Sistema ---
 let configVisual = { prof: true, grupo: true, horas: true }; // Que mostrar en los bloques visuales
 let MAPA_COLORES_ASIGNADOS = {}; // Cache de colores por ID de materia
 let OFFSET_RECOLOR = 0;          // Desplazamiento de colores (Manual)
 let OFFSET_RECOLOR_AUTO = 0;     // Desplazamiento de colores (Auto)
-let horariosGuardados = {};      // Persistencia de multiples horarios
+let horariosGuardados = {};      // Persistencia de múltiples horarios
 let activeScheduleId = "default";
 let actividadesExtra = [];       // Actividades extracurriculares del usuario
 
-const DB_FILE = 'Horarios_Impares_Completo_UNAM.json';
+const DB_FILE = 'Horarios_Completo_UNAM.json';
 
 // Paleta de colores pastel para los bloques
 const PALETA_ENTERA = [
-    '#FFD8D6', /* Rojo Apple */
-    '#CCE4FF', /* Azul Apple */
-    '#D6F4DF', /* Verde Apple */
-    '#FFECCC', /* Naranja Apple */
-    '#EFDCF8', /* Morado Apple */
-    '#DEF4FE', /* Cyan Apple */
-    '#FFF5CC', /* Amarillo Apple */
-    '#FFD5DE', /* Rosa Apple */
-    '#DEDDF7', /* Indigo Apple */
-    '#E2E2E7'  /* Gris Apple */
+    '#FFF9C4', '#F5F5DC', '#E3F2FD', '#F3E5F5', '#E0F2F1', '#FFF3E0', '#FBE9E7', '#FAFAFA',
+    '#ECEFF1', '#F9FBE7', '#FFF4F0', '#FFF4DC', '#F1F3FF', '#FFECF0', '#DCF2DD', '#D0F3CB',
+    '#DAEDAF', '#FFE8DC', '#E9F8FF', '#FAD2D2', '#FFD9E4', '#D1F3FF', '#CBE6F1', '#EADFFF',
+    '#D2DADD', '#FFFAC7', '#B0E0E0', '#B1CAFF', '#B7DAFF', '#FEDBD7', '#FFCCEA', '#FBC6F0',
+    '#FFE2C8', '#99DAFF', '#FFA79F', '#82E9E6', '#C3ADFF', '#FFC7BA'
 ];
 let PALETA_ORDENADA = []; // Se llena onload ordenando por luminancia
 
@@ -71,30 +66,11 @@ function convertirMinutos(horaStr) { if (!horaStr || typeof horaStr !== 'string'
 /** Convierte minutos a formato "HH:MM" */
 function minutosAHora(minutos) { let h = Math.floor(minutos / 60); let m = minutos % 60; return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`; }
 
-function normalizarDiaHorario(dia) {
-    return String(dia || '')
-        .trim()
-        .toUpperCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
-}
-
-function obtenerMinutosSesion(sesion, campoMin, campoHora) {
-    if (!sesion) return 0;
-    let valorMin = Number(sesion[campoMin]);
-    if (Number.isFinite(valorMin)) return valorMin;
-    return convertirMinutos(sesion[campoHora]);
-}
-
-function limpiarNombreActividadExtra(nombre) {
-    return String(nombre || '').replace(/^[^\p{L}\p{N}]+/u, '').trim();
-}
-
 /** Asigna un color fijo a una materia basado en su ID si no tiene uno */
 function asignarColorFijo(id_unico) { if (MAPA_COLORES_ASIGNADOS[id_unico]) return; let count = Object.keys(MAPA_COLORES_ASIGNADOS).length; let color = PALETA_ORDENADA[count % PALETA_ORDENADA.length]; MAPA_COLORES_ASIGNADOS[id_unico] = color; }
 
 // ==========================================
-// 3. GESTION DEL ESTADO (UNDO/REDO)
+// 3. GESTIÓN DEL ESTADO (UNDO/REDO)
 // ==========================================
 
 function registrarEstado() {
@@ -138,10 +114,10 @@ function actualizarUICompleta() {
 }
 
 // ==========================================
-// 4. LOGICA DE COLORES Y CHOQUES
+// 4. LÓGICA DE COLORES Y CHOQUES
 // ==========================================
 
-/** Cambia los colores de las materias del Modo Manual ciclicamente */
+/** Cambia los colores de las materias del Modo Manual cíclicamente */
 function recolorearInteligente() {
     SadaAnalytics.trackHerramienta('recolor');
     OFFSET_RECOLOR++;
@@ -164,7 +140,7 @@ function recolorearInteligente() {
     renderizarHorarioVisual();
 }
 
-/** Cambia los colores de los Resultados Automaticos */
+/** Cambia los colores de los Resultados Automáticos */
 function recolorearAuto() {
     SadaAnalytics.trackHerramienta('auto_recolor');
     OFFSET_RECOLOR_AUTO++;
@@ -186,14 +162,10 @@ function obtenerChoques(c1, lista) {
     if (!c1 || !lista) return conflictos;
     for (let c2 of lista) {
         let choca = false;
-        for (let s1 of (c1.sesiones || [])) {
-            for (let s2 of (c2.sesiones || [])) {
-                if (normalizarDiaHorario(s1.dia) === normalizarDiaHorario(s2.dia)) {
-                    let s1Inicio = obtenerMinutosSesion(s1, 'min_inicio', 'inicio');
-                    let s1Fin = obtenerMinutosSesion(s1, 'min_fin', 'fin');
-                    let s2Inicio = obtenerMinutosSesion(s2, 'min_inicio', 'inicio');
-                    let s2Fin = obtenerMinutosSesion(s2, 'min_fin', 'fin');
-                    if (s1Inicio < s2Fin && s2Inicio < s1Fin) {
+        for (let s1 of c1.sesiones) {
+            for (let s2 of c2.sesiones) {
+                if (s1.dia === s2.dia) {
+                    if (s1.min_inicio < s2.min_fin && s2.min_inicio < s1.min_fin) {
                         choca = true; break;
                     }
                 }
@@ -207,13 +179,11 @@ function obtenerChoques(c1, lista) {
 
 function hayChoque(c1, lista) { return obtenerChoques(c1, lista).length > 0; }
 
-/** Verifica si hay algun choque interno en una lista de cursos (para el generador) */
+/** Verifica si hay algún choque interno en una lista de cursos (para el generador) */
 function hayChoqueCombo(lista) {
-    let actsAuto = actividadesExtra.filter(a => a.modo === 'auto');
-    let listaCompleta = [...lista, ...actsAuto];
+    let listaCompleta = [...lista, ...actividadesExtra];
     for (let i = 0; i < listaCompleta.length; i++) { for (let j = i + 1; j < listaCompleta.length; j++) { if (hayChoque(listaCompleta[i], [listaCompleta[j]])) return true; } } return false;
 }
-
 
 function actualizarConfigVisual() {
     configVisual.prof = document.getElementById('chk-prof').checked;
@@ -232,14 +202,15 @@ function actualizarConfigVisual() {
 }
 
 // ==========================================
-// 5. INICIALIZACION Y CARGA DE DATOS
+// 5. INICIALIZACIÓN Y CARGA DE DATOS
 // ==========================================
 
-// Se elimino toggleFijarPanel por peticion del usuario
+// Se eliminó toggleFijarPanel por petición del usuario
 
-window.addEventListener('DOMContentLoaded', function () {
+window.onload = function () {
     // Ordenar paleta por brillo para contraste
-    PALETA_ORDENADA = [...PALETA_ENTERA];
+    PALETA_ORDENADA = [...PALETA_ENTERA].sort((a, b) => getLuminance(b) - getLuminance(a));
+
     fetch(DB_FILE)
         .then(res => { if (!res.ok) throw new Error("Error JSON"); return res.json(); })
         .then(data => {
@@ -251,9 +222,9 @@ window.addEventListener('DOMContentLoaded', function () {
             let semSelect = document.getElementById('semestre-selector');
             if (semSelect.value) cambiarSemestre(false);
 
-            // -- Modulos SADA eliminados temporalmente --
+            // ── Módulos SADA eliminados temporalmente ──
 
-            // -- Toggle visual para botones de dia (actividades extra) --
+            // ── Toggle visual para botones de día (actividades extra) ──
             document.querySelectorAll('.act-dia-btn').forEach(btn => {
                 btn.addEventListener('click', function () {
                     let chk = this.querySelector('input[type="checkbox"]');
@@ -263,9 +234,9 @@ window.addEventListener('DOMContentLoaded', function () {
             });
         })
         .catch(err => { console.error(err); alert("Error cargando datos: " + err.message); });
-});
+};
 
-// Snapshot al salir de la pagina (fallback)
+// Snapshot al salir de la página (fallback)
 window.addEventListener('beforeunload', function () {
     if (miHorario && miHorario.length > 0) {
         SadaAnalytics.saveExitSnapshot(miHorario, actividadesExtra, document.getElementById('semestre-selector').value, 'manual');
@@ -274,7 +245,7 @@ window.addEventListener('beforeunload', function () {
 
 /** 
  * Procesa el JSON crudo a objetos utilizables.
- * - Genera ID unico si no existe
+ * - Genera ID único si no existe
  * - Normaliza campos
  * - Agrupa sesiones
  * - EXTRAE LA CLAVE (Nuevo Recquerimiento)
@@ -289,7 +260,7 @@ function procesarDatosCrudos() {
         let area = (fila.area || "GENERAL").toString().trim();
         if (area === "") area = "GENERAL";
 
-        // Clave unica para agrupar sesiones del mismo grupo
+        // Clave única para agrupar sesiones del mismo grupo
         let key = `${sem}-${asig}-${gpo}`;
 
         if (!temp[key]) {
@@ -301,7 +272,7 @@ function procesarDatosCrudos() {
                 grupo: gpo,
                 creditos: parseInt(fila.creditos || 0),
                 observaciones: fila.observaciones || "",
-                clave: fila.clave || "", // INTEGRACION DE CLAVE
+                clave: fila.clave || "", // INTEGRACIÓN DE CLAVE
                 area: area,
                 sesiones: []
             };
@@ -323,7 +294,7 @@ function procesarDatosCrudos() {
 }
 
 // ==========================================
-// 6. PERSISTENCIA Y GESTION DE HORARIOS
+// 6. PERSISTENCIA Y GESTIÓN DE HORARIOS
 // ==========================================
 
 function guardarEstado() {
@@ -378,6 +349,7 @@ function cargarEstado() {
 
     actualizarUIHorarios();
     actualizarTablaHorario();
+    renderBolsa();
 }
 
 function actualizarUIHorarios() {
@@ -434,7 +406,7 @@ function crearNuevoHorario() {
 
 function guardarNombreHorario() {
     let nuevoNombre = document.getElementById('nombre-horario-actual').value.trim();
-    if (!nuevoNombre) return alert("El nombre no puede estar vacio");
+    if (!nuevoNombre) return alert("El nombre no puede estar vacío");
     horariosGuardados[activeScheduleId].nombre = nuevoNombre;
     guardarEstado();
     actualizarUIHorarios();
@@ -460,7 +432,7 @@ function eliminarHorarioActual() {
 function mostrarToast() { document.getElementById('toast-guardado').style.display = 'block'; setTimeout(() => document.getElementById('toast-guardado').style.display = 'none', 1500); }
 
 // ==========================================
-// 7. INTERFAZ: VISUALIZACION Y HELPERS
+// 7. INTERFAZ: VISUALIZACIÓN Y HELPERS
 // ==========================================
 
 function toggleVistaVisual() {
@@ -469,16 +441,11 @@ function toggleVistaVisual() {
     document.getElementById('vista-lista-container').style.display = isVisual ? 'none' : 'block';
     document.getElementById('vista-visual-container').style.display = isVisual ? 'block' : 'none';
     document.getElementById('btn-recolorear').style.display = isVisual ? 'inline-block' : 'none';
-    let configVisualDropdown = document.getElementById('config-visual-dropdown');
-    if (configVisualDropdown) {
-        configVisualDropdown.classList.toggle('is-visible', isVisual);
-        configVisualDropdown.style.display = isVisual ? 'block' : 'none';
-    }
 
     if (isVisual) renderizarHorarioVisual();
 }
 
-/** Genera la estructura HTML vacia del horario grafico */
+/** Genera la estructura HTML vacía del horario gráfico */
 function crearGridVisualVacia() {
     let tbody = document.getElementById('grid-horario-visual');
     tbody.innerHTML = '';
@@ -521,8 +488,7 @@ function renderizarHorarioVisual() {
         insertarBloque(curso, color, false);
     });
 
-    let actsManual = actividadesExtra.filter(a => a.modo === 'manual');
-    actsManual.forEach(act => {
+    actividadesExtra.forEach(act => {
         insertarBloque(act, '#FFE0B2', false);
     });
 
@@ -615,7 +581,7 @@ function eliminarDesdeModal(id) {
 }
 
 // ==========================================
-// 9. LOGICA DE FILTRADO Y NAVEGACION
+// 9. LÓGICA DE FILTRADO Y NAVEGACIÓN
 // ==========================================
 
 function obtenerMateriasActivas() {
@@ -654,321 +620,176 @@ function cambiarSemestre(resetear = true) {
         guardarEstado();
         actualizarUIHorarios();
         actualizarTablaHorario();
-        _modoAutoInicializado = false;
+        renderBolsa();
     }
     document.getElementById('buscador').value = '';
     document.getElementById('buscador-auto').value = '';
     materiaSeleccionadaActual = null;
     materiaSeleccionadaAuto = null;
     limpiarPanelGrupos();
+    limpiarPanelGruposAuto();
 
     let divAlerta = document.getElementById('alerta-semestre');
     divAlerta.innerHTML = '';
     if (val === 'adicional') {
-        divAlerta.innerHTML = `<div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
-            <h5 class="alerta-semestre-title"><i class="bi bi-info-circle-fill"></i> Semestre Adicional: Reglas de Selección</h5>
-            <hr class="my-2" style="border-color: rgba(4, 14, 46, 0.1);">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <p class="alerta-semestre-text mb-1"><strong><i class="bi bi-card-checklist"></i> Requisitos Académicos:</strong></p>
-                    <ul class="alerta-semestre-list mb-0">
-                        <li>Elige asignaturas de <strong>6° y 8° semestre</strong> de la oferta vigente.</li>
-                        <li>Propón asignaturas que <strong>no hayas inscrito previamente</strong>.</li>
-                        <li>Rango de créditos obligatorio: <strong>Mínimo 31 - Máximo 41</strong>.</li>
-                    </ul>
-                </div>
-                <div class="col-md-4 mt-3 mt-md-0">
-                    <div class="bg-white p-3 rounded border border-primary">
-                        <label class="form-label fw-bold text-primary mb-2" style="font-size:13px; font-family: var(--ff-text);">
-                            <i class="bi bi-funnel-fill"></i> Sistema de Pertenencia:
-                        </label>
-                        <select id="filtro-sistema" class="form-select form-select-sm border-primary" onchange="filtrarMaterias(); filtrarMateriasAuto();">
-                            <option value="escolarizado">Escolarizado (Gpos. 6000-8000)</option>
-                            <option value="sua">SUA (Gpos. 9000)</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>`;
-
+        divAlerta.innerHTML = `<div class="alert alert-info shadow-sm" role="alert"><div class="d-flex align-items-center mb-2"><i class="bi bi-info-circle-fill fs-4 me-2 text-primary"></i><h5 class="alert-heading fw-bold mb-0">Semestre Adicional: Reglas de Selección</h5></div><hr class="my-2"><div class="row align-items-center"><div class="col-md-8"><p class="small mb-1"><strong><i class="bi bi-card-checklist"></i> Requisitos Académicos:</strong></p><ul class="small mb-2 ps-3"><li>Elige asignaturas de <strong>6° y 8° semestre</strong> de la oferta vigente.</li><li>Propón asignaturas que <strong>no hayas inscrito previamente</strong>.</li><li>Rango de créditos obligatorio: <strong>Mínimo 31 - Máximo 41</strong>.</div><div class="col-md-4 mt-2 mt-md-0"><div class="bg-white p-3 rounded border border-primary"><label class="form-label fw-bold text-primary small mb-1">Sistema de Pertenencia:</label><select id="filtro-sistema" class="form-select form-select-sm border-primary" onchange="filtrarMaterias(); filtrarMateriasAuto();"><option value="escolarizado">Escolarizado (Gpos. 6000-8000)</option><option value="sua">SUA (Gpos. 9000)</option></select><small class="text-danger fw-bold d-block mt-1"><i`;
     }
     else if (sem === 2) {
-        divAlerta.innerHTML = `<div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
-            <h5 class="alerta-semestre-title"><i class="bi bi-people-fill"></i> ¡Hola, estudiante de Segundo Semestre!</h5>
-            <p class="alerta-semestre-text">Sabemos que en 2do semestre los horarios funcionan por grupos completos. Por lo que te recomendamos tener en cuenta lo siguiente:</p>
-            <ul class="alerta-semestre-list">
-                <li><strong>¿Qué son los Grupos Espejo?:</strong> Son dos o más grupos que se imparten exactamente en el mismo horario, pero con diferente profesor.</li>
-                <li><strong>¿Cuáles son los Grupos Espejo?:</strong> El grupo 2001 y 2002. 2003 y 2004. 2005 y 2006. 2007 y 2008. 2010 y 2011.</li>
-                <li><strong>Recomendación:</strong> Usa el Modo Manual. Elige un grupo base (ej. 2003) y si un profe no te gusta, cámbialo por el del grupo espejo.</li>
-                <li>Si quieres usar el modo exploratorio, usa los filtros, te serán de ayuda para ver otras combinaciones.</li>
-            </ul>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>`;
+        divAlerta.innerHTML = `<div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert"><h5 class="alert-heading"><i class="bi bi-people-fill"></i> ¡Hola, estudiante de Segundo Semestre!</h5><p class="small mb-1">Sabemos que en 2do semestre los horarios funcionan por grupos completos. Por lo que te recomendamos tener en cuenta lo siguiente:</p><ul class="small mb-2"><li><strong>¿Qué son los Grupos Espejo?:</strong> Son dos o más grupos que se imparten exactamente en el mismo horario, pero con diferente profesor. <li><strong>¿Cuáles son los Grupos Espejo?:</strong> El grupo 2001 y 2002. 2003 y 2004. 2005 y 2006. 2007 y 2008. 2010 y 2011.  </li><li><strong>Recomendación:</strong> Usa el <strong>Modo Manual</strong>. Elige un grupo base (ej. 2003) y si un profe no te gusta, cámbialo por el del grupo espejo.</li><li>Si quieres usar el modo exploratorio, usa los filtros, te serán de ayuda para ver otras combinaciones.</li></ul><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
     }
     else if (sem === 4) {
-        divAlerta.innerHTML = `<div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
-            <h5 class="alerta-semestre-title"><i class="bi bi-people-fill"></i> ¡Hola, estudiante de Cuarto Semestre!</h5>
-            <p class="alerta-semestre-text">Sabemos que en 4to semestre los horarios funcionan por grupos completos. Por lo que te recomendamos tener en cuenta lo siguiente:</p>
-            <ul class="alerta-semestre-list" style="margin-bottom:0;">
-                <li style="margin-bottom:4px;"><strong>Grupos Espejo:</strong> Grupos: 4001 y 4002. 4003 y 4004. 4005 y 4006. 4007 - 4008 y 4009. 4011 y 4012 tienen las mismas horas. Es fácil intercambiar profesores entre ellos.</li>
-                <li style="margin-bottom:4px;"><strong>Recomendación:</strong> Usa el Modo Manual. Elige un grupo base (ej. 4003) y si un profe no te gusta, cámbialo por el del grupo espejo.</li>
-                <li style="margin-bottom:8px;">Si quieres usar el modo exploratorio, usa los filtros, te serán de ayuda para ver otras combinaciones.</li>
-                <li style="margin-top:8px;padding:8px;background:rgba(255,159,10,0.10);border:1px solid rgba(255,159,10,0.30);border-radius:8px;color:#1d1d1f;">
-                    <strong><i class="bi bi-exclamation-triangle-fill"></i> Importante ACA III:</strong> Por cada grupo de Aprendizaje y Conducta Adaptat. III le corresponden 2 grupos de (Práctica). Asegúrate de elegir el grupo correspondiente de prácticas acorde a lo que dicen las <strong>observaciones</strong> del grupo de Teoría.
-                </li>
-            </ul>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>`;
-
+        divAlerta.innerHTML = `<div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert"><h5 class="alert-heading fw-bold"><i class="bi bi-people-fill"></i> ¡Hola, estudiante de Cuarto Semestre!</h5><p class="small mb-2">Sabemos que en 4to semestre los horarios funcionan por grupos completos. Por lo que te recomendamos tener en cuenta los siguiente:</p><ul class="small mb-0"><li class="mb-1"><strong>Grupos Espejo:</strong> Grupos: 4001 y 4002. 4003 y 4004. 4005 y 4006. 4007 - 4008 y 4009. 4011 y 4012 tienen las mismas horas. Es fácil intercambiar profesores entre ellos.</li><li class="mb-1"><strong>Recomendación:</strong> Usa el <strong>Modo Manual</strong>. Elige un grupo base (ej. 4003) y si un profe no te gusta, cámbialo por el del grupo espejo.</li><li class="mb-2">Si quieres usar el modo exploratorio, usa los filtros, te serán de ayuda para ver otras combinaciones.</li><li class="mt-2 p-2 bg-warning bg-opacity-10 border border-warning rounded text-dark"><strong><i class="bi bi-exclamation-triangle-fill"></i> IMPORTANTE ACA III:</strong> Por cada grupo de <em>APRENDIZAJE Y CONDUCTA ADAPTAT. III</em> le corresponden 2 grupos de (Práctica). Asegúrate de elegir el grupo correspondiente de prácticas acorde a lo que dicen las <strong>observaciones</strong> del grupo de Teoría.</li></ul><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
     }
 
     filtrarMaterias();
-    
-    if (sem === 2 || sem === 4) {
-        setTimeout(() => {
-            let alerta = document.getElementById('alerta-semestre');
-            if (alerta) {
-                const offset = 47; // pixeles de margen superior
-                const elementPosition = alerta.getBoundingClientRect().top + window.scrollY;
-                window.scrollTo({
-                    top: elementPosition - offset,
-                    behavior: 'smooth'
-                });
-            }
-        }, 150);
-    }
-
-    if (_modoActualWorkspace === 'auto' || _modoActualWorkspace === 'resultados') {
-        prepararModoAutoSiNecesario(true);
-    }
-}
-
-let _modoCargaEnCurso = false;
-let _modoActualWorkspace = 'seleccion';
-let _modoAutoInicializado = false;
-
-function prepararModoAutoSiNecesario(forzar = false) {
-    if (!forzar && _modoAutoInicializado) return;
-    renderBolsa();
-    limpiarPanelGruposAuto();
     filtrarMateriasAuto();
-    _modoAutoInicializado = true;
 }
 
-function mostrarPantallaCargaModo(modo) {
-    let overlay = document.getElementById('mode-loading-screen');
-    if (!overlay) return;
-    let titulo = overlay.querySelector('.mode-loading-title');
-    let copy = overlay.querySelector('.mode-loading-copy');
-    if (modo === 'manual') {
-        if (titulo) titulo.textContent = 'Cargando modo manual';
-        if (copy) copy.textContent = 'Preparando tu horario para que aparezca completo...';
-    } else if (modo === 'generando') {
-        if (titulo) titulo.textContent = 'Generando horarios';
-        if (copy) copy.textContent = 'Calculando todas las combinaciones posibles sin traslapes...';
-    } else {
-        if (titulo) titulo.textContent = 'Cargando generador automático';
-        if (copy) copy.textContent = 'Preparando tu horario para que aparezca completo...';
-    }
-    overlay.classList.add('is-visible');
-    overlay.setAttribute('aria-hidden', 'false');
-}
-
-function ocultarPantallaCargaModo() {
-    let overlay = document.getElementById('mode-loading-screen');
-    if (!overlay) return;
-    overlay.classList.remove('is-visible');
-    overlay.setAttribute('aria-hidden', 'true');
-}
-
-function enfocarInicioModo(modo) {
-    if (modo === 'resultados') {
-        let objetivoResultados = document.querySelector('#vista-resultados .back-row') || document.getElementById('vista-resultados');
-        if (objetivoResultados) {
-            const top = objetivoResultados.getBoundingClientRect().top + window.pageYOffset - 12;
-            window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
-        }
-        return;
-    }
-
-    let objetivo = null;
-    if (modo === 'manual') {
-        objetivo = document.getElementById('manual-start-anchor');
-    } else if (modo === 'auto') {
-        objetivo = document.getElementById('auto-start-anchor');
-    }
-
-    if (!objetivo) return;
-
-    const top = objetivo.getBoundingClientRect().top + window.pageYOffset - 12;
-    window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
-}
-
-function activarModoConCarga(modo) {
-    if (_modoCargaEnCurso) return;
-    _modoCargaEnCurso = true;
-    mostrarPantallaCargaModo(modo);
-
-    setTimeout(() => {
-        activarModo(modo);
-        if (typeof updateMobileLayoutVars === 'function') updateMobileLayoutVars();
-        if (typeof initMobileObservers === 'function') initMobileObservers();
-        enfocarInicioModo(modo);
-
-        setTimeout(() => {
-            ocultarPantallaCargaModo();
-            _modoCargaEnCurso = false;
-        }, 220);
-    }, 260);
-}
+let _bannerMostrado = false;
 
 function activarModo(modo) {
-    // Intercept mode selection for mobile tabs
-    if (window.innerWidth < 768) {
-        if (modo === 'manual' && typeof switchToMobileTab === 'function') switchToMobileTab(2);
-        if (modo === 'auto' && typeof switchToMobileTab === 'function') switchToMobileTab(4);
-        if (modo === 'resultados' && typeof switchToMobileTab === 'function') switchToMobileTab(5);
-    }
-
     cambiarModo(modo);
+    // Mostrar banner de consentimiento (1 vez por sesión)
+    if (!_bannerMostrado) {
+        let banner = document.getElementById('banner-consentimiento');
+        if (banner) { banner.style.display = 'block'; _bannerMostrado = true; }
+    }
+    setTimeout(() => {
+        let destino = _bannerMostrado ? 'banner-consentimiento' : (modo === 'manual' ? 'vista-manual' : 'vista-auto');
+        let elemento = document.getElementById(destino);
+        if (elemento) {
+            const yOffset = -20;
+            const y = elemento.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+    }, 100);
 }
 
-function mostrarSeleccionDeModo() {
-    let modeCards = document.getElementById('mode-cards-container');
-    let vistaManual = document.getElementById('vista-manual');
-    let vistaAuto = document.getElementById('vista-auto');
-    let vistaResultados = document.getElementById('vista-resultados');
-
-    if (modeCards) modeCards.style.display = 'block';
-    if (vistaManual) vistaManual.style.display = 'none';
-    if (vistaAuto) vistaAuto.style.display = 'none';
-    if (vistaResultados) vistaResultados.style.display = 'none';
+function aceptarConsentimiento(acepto) {
+    document.getElementById('banner-consentimiento').style.display = 'none';
+    SadaAnalytics.trackCustom('consent', { accepted: acepto });
 }
 
 function cambiarModo(m) {
     SadaAnalytics.trackCambiarModo(m);
-    let modeCards = document.getElementById('mode-cards-container');
     let vistaManual = document.getElementById('vista-manual');
     let vistaAuto = document.getElementById('vista-auto');
-    let vistaResultados = document.getElementById('vista-resultados');
-
-    if (m === 'seleccion') {
-        _modoActualWorkspace = 'seleccion';
-        mostrarSeleccionDeModo();
-        return;
-    }
-
-    _modoActualWorkspace = m;
-    if (m === 'auto' || m === 'resultados') {
-        prepararModoAutoSiNecesario();
-    }
-    
-    if (modeCards) {
-        modeCards.style.display = 'none';
-    }
     if (vistaManual) {
         vistaManual.style.display = (m === 'manual') ? 'flex' : 'none';
     }
     if (vistaAuto) {
         vistaAuto.style.display = (m === 'auto') ? 'block' : 'none';
     }
-    if (vistaResultados) {
-        vistaResultados.style.display = (m === 'resultados') ? 'block' : 'none';
-    }
 }
 
 // ==========================================
-// 10. MODO MANUAL: SELECCION Y PANELES
+// 10. MODO MANUAL: SELECCIÓN Y PANELES
 // ==========================================
 
 function filtrarMaterias() {
     let txt = document.getElementById('buscador').value.toUpperCase();
-    let lista = document.getElementById('lista-materias');
-    lista.innerHTML = '';
-
+    let lista = document.getElementById('lista-materias'); lista.innerHTML = '';
     let matSem = obtenerMateriasActivas();
-    if (matSem.length === 0) {
-        lista.innerHTML = '<div class="p-3 text-muted small text-center">No hay datos disponibles para esta selección.</div>';
-        return;
-    }
+    if (matSem.length === 0) { lista.innerHTML = '<div class="p-3 text-muted small text-center">No hay datos disponibles para esta selección.</div>'; return; }
 
     let areas = [...new Set(matSem.map(c => c.area))].sort();
+
     let semVal = parseInt(document.getElementById('semestre-selector').value);
     let teoriaACA = "APRENDIZAJE Y CONDUCTA ADAPTAT. III";
     let practicaACA = "APRENDIZAJE Y CONDUCTA ADAPTAT. III (PRACTICA)";
-    const tienePerfilActivo = typeof SADA_PERFIL !== 'undefined' && SADA_PERFIL.completado === true;
 
     areas.forEach(area => {
         let matsEnArea = [...new Set(matSem.filter(c => c.area === area).map(c => c.asignatura))].sort();
         let matsFiltradas = matsEnArea.filter(m => m.toUpperCase().includes(txt));
-        if (matsFiltradas.length === 0) return;
 
-        let isOpen = matsFiltradas.includes(materiaSeleccionadaActual) || txt.length >= 2;
+        if (matsFiltradas.length > 0) {
+            let header = document.createElement('div');
+            header.className = 'area-header area-toggle';
+            header.innerHTML = `<i class="bi bi-chevron-right area-arrow"></i> ${area} <span class="badge bg-secondary rounded-pill ms-1">${matsFiltradas.length}</span>`;
+            header.style.cursor = 'pointer';
 
-        // AreaAccordion header
-        let header = document.createElement('div');
-        header.className = 'ml-area-header';
-        header.setAttribute('data-open', String(isOpen));
-        header.innerHTML = `<i class="bi bi-chevron-down ml-chevron"></i><span class="ml-area-name">${area.toLowerCase()}</span><span class="ml-area-count">${matsFiltradas.length}</span>`;
+            let grupo = document.createElement('div');
+            grupo.className = 'area-group';
+            grupo.style.display = 'none';
 
-        // AreaAccordion body
-        let body = document.createElement('div');
-        body.className = 'ml-area-body';
-        body.setAttribute('data-open', String(isOpen));
-
-        header.onclick = () => {
-            let open = header.getAttribute('data-open') === 'true';
-            header.setAttribute('data-open', String(!open));
-            body.setAttribute('data-open', String(!open));
-        };
-
-        matsFiltradas.forEach(nom => {
-            let inscrita = miHorario.some(c => c.asignatura === nom);
-            let esActiva = materiaSeleccionadaActual === nom;
-
-            // MateriaItem: determinar estado e icono
-            let estado = 'default';
-            let iconHtml = '';
-
-            if (esActiva) {
-                estado = 'activa';
-                iconHtml = '<i class="bi bi-check-circle-fill ml-item-icon" aria-hidden="true"></i>';
-            } else if (inscrita) {
-                estado = 'inscrita';
-                iconHtml = '<i class="bi bi-bookmark-check-fill ml-item-icon" aria-hidden="true"></i>';
-            } else if (tienePerfilActivo && typeof sadaRecomendarCursos === 'function') {
-                const semActual = parseInt(document.getElementById('semestre-selector').value);
-                const cursoConScore = sadaRecomendarCursos(semActual).find(c => c.asignatura === nom);
-                if (cursoConScore && cursoConScore.sada.recomendado) {
-                    estado = 'candidata';
-                    iconHtml = '<i class="bi bi-star-fill ml-item-icon" aria-hidden="true"></i>';
-                }
+            let tieneActiva = matsFiltradas.includes(materiaSeleccionadaActual);
+            let hayBusqueda = txt.length >= 2;
+            if (tieneActiva || hayBusqueda) {
+                grupo.style.display = 'block';
+                header.querySelector('.area-arrow').classList.add('area-arrow-open');
             }
 
-            // Par ACA obligatorio (4.º semestre)
-            let extraClass = '';
-            if (semVal === 4) {
-                if (nom === teoriaACA && !inscrita && miHorario.some(c => c.asignatura === practicaACA)) extraClass = 'ml-item--requerido';
-                if (nom === practicaACA && !inscrita && miHorario.some(c => c.asignatura === teoriaACA)) extraClass = 'ml-item--requerido';
-            }
-
-            let item = document.createElement('div');
-            item.className = `ml-item${extraClass ? ' ' + extraClass : ''}`;
-            item.setAttribute('data-state', estado);
-            item.innerHTML = `<span class="ml-item-name">${nom}</span>${iconHtml}`;
-
-            item.onclick = () => {
-                materiaSeleccionadaActual = nom;
-                filtrarMaterias();
-                cargarPanelGrupos(nom);
-                if (typeof expandMobilePanel === 'function') expandMobilePanel('#contenedor-panel-manual');
+            header.onclick = () => {
+                let abierto = grupo.style.display === 'block';
+                grupo.style.display = abierto ? 'none' : 'block';
+                header.querySelector('.area-arrow').classList.toggle('area-arrow-open');
             };
-            body.appendChild(item);
-        });
 
-        lista.appendChild(header);
-        lista.appendChild(body);
+            lista.appendChild(header);
+
+            matsFiltradas.forEach(nom => {
+                let inscrita = miHorario.some(c => c.asignatura === nom);
+                let active = materiaSeleccionadaActual === nom ? 'active-item' : '';
+
+                let htmlAviso = '';
+                let claseExtra = '';
+
+                if (semVal === 4) {
+                    if (nom === teoriaACA) {
+                        let tengoPractica = miHorario.some(c => c.asignatura === practicaACA);
+                        if (tengoPractica && !inscrita) {
+                            htmlAviso = '<span class="aviso-requerido">Necesaria inscribir</span>';
+                            claseExtra = 'item-requerido';
+                        }
+                    } else if (nom === practicaACA) {
+                        let tengoTeoria = miHorario.some(c => c.asignatura === teoriaACA);
+                        if (tengoTeoria && !inscrita) {
+                            htmlAviso = '<span class="aviso-requerido">Necesaria inscribir</span>';
+                            claseExtra = 'item-requerido';
+                        }
+                    }
+                }
+
+                let item = document.createElement('div');
+                item.className = `list-group-item materia-item px-3 py-2 ${inscrita ? 'inscrita-item' : ''} ${active} ${claseExtra}`;
+
+                // ── Badge SADA: score de recomendación si el perfil está activo ──
+                let badgeSADA = '';
+                const tienePerfilActivo = typeof SADA_PERFIL !== 'undefined' &&
+                    SADA_PERFIL.completado === true;
+                if (tienePerfilActivo && typeof sadaRecomendarCursos === 'function') {
+                    const semActual = parseInt(document.getElementById('semestre-selector').value);
+                    const cursosNom = BD_AGRUPADA.filter(c => c.asignatura === nom && c.semestre === semActual);
+                    if (cursosNom.length > 0) {
+                        const cursoConScore = sadaRecomendarCursos(semActual).find(c => c.asignatura === nom);
+                        if (cursoConScore && cursoConScore.sada.recomendado) {
+                            badgeSADA = `<span class="badge ms-1"
+                                style="background:#e8f0fe; color:#002B7A; font-size:0.65rem; font-weight:600;"
+                                title="Recomendado por SADA (score: ${cursoConScore.sada.score})">
+                                ★ SADA
+                            </span>`;
+                        }
+                    }
+                }
+
+                item.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="${inscrita ? 'fw-bold text-success' : ''}">${nom} ${badgeSADA}</span>
+            ${inscrita ? '<i class="bi bi-check-circle-fill text-success"></i>' : ''}
+        </div>
+        ${htmlAviso}
+    `;
+
+                item.onclick = () => {
+                    materiaSeleccionadaActual = nom;
+                    filtrarMaterias();
+                    cargarPanelGrupos(nom);
+                };
+                grupo.appendChild(item);
+            });
+
+            lista.appendChild(grupo);
+        }
     });
 }
 
@@ -980,130 +801,100 @@ function limpiarPanelGrupos() {
     renderizarHorarioVisual();
 }
 
-function escapeHtml(texto) {
-    return String(texto || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-}
+function cargarPanelGrupos(asignatura) {
+    let semVal = document.getElementById('semestre-selector').value;
+    let sem = parseInt(semVal);
+    document.getElementById('titulo-seleccion').innerHTML = `<i class="bi bi-book"></i> ${asignatura}`;
+    let cursos = obtenerMateriasActivas().filter(c => c.asignatura === asignatura).sort((a, b) => a.grupo.localeCompare(b.grupo));
 
-function getGrupoCardObservationIcon(estado) {
-    switch (estado) {
-        case 'traslape':
-            return 'bi-person-exclamation';
-        case 'previsualizacion':
-            return 'bi-bookmark-star';
-        case 'candidato':
-            return 'bi-list-check';
-        default:
-            return 'bi-link-45deg';
-    }
-}
-
-function getGrupoCardObservationTone(estado) {
-    switch (estado) {
-        case 'traslape':
-            return 'grupo-card-v2__observation--traslape';
-        case 'previsualizacion':
-        case 'candidato':
-            return 'grupo-card-v2__observation--warning';
-        default:
-            return 'grupo-card-v2__observation--default';
-    }
-}
-
-function getGrupoCardStateMarkup(estado) {
-    switch (estado) {
-        case 'inscrita':
-            return '<div class="grupo-card-v2__state-pill grupo-card-v2__state-pill--inscrita">Seleccionada</div>';
-        case 'traslape':
-            return '<div class="grupo-card-v2__state-pill grupo-card-v2__state-pill--traslape">Traslape</div>';
-        case 'previsualizacion':
-            return '<div class="grupo-card-v2__state-pill grupo-card-v2__state-pill--previsualizacion">Previsualización</div>';
-        case 'candidato':
-            return '<div class="grupo-card-v2__state-pill grupo-card-v2__state-pill--candidato">Seleccionado</div>';
-        default:
-            return '';
-    }
-}
-
-/**
- * GrupoCard reusable renderer.
- * Core props: numeroGrupo, profesor, horario, salon, observacion, estado, onSelect.
- * Internal optional fields preserve current workflows: clickDisabled, footerHtml, creditsText.
- */
-function createGrupoCard({
-    numeroGrupo,
-    profesor,
-    horario,
-    salon,
-    observacion,
-    estado = 'default',
-    onSelect = null,
-    clickDisabled = false,
-    footerHtml = '',
-    creditsText = '',
-    clave = ''
-}) {
-    let card = document.createElement('div');
-    card.className = `grupo-card grupo-card-v2 grupo-card-v2--${estado}`;
-
-    if (!clickDisabled && typeof onSelect === 'function') {
-        card.setAttribute('role', 'button');
-        card.setAttribute('tabindex', '0');
-        card.onclick = onSelect;
-        card.onkeydown = (event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                onSelect(event);
-            }
-        };
+    let gA = parseInt(cursos[0]?.grupo), gB = parseInt(cursos[1]?.grupo);
+    if (!isNaN(gA) && !isNaN(gB)) {
+        cursos.sort((a, b) => parseInt(a.grupo) - parseInt(b.grupo));
     }
 
-    const checkIcon = estado === 'inscrita'
-        ? ' <i class="bi bi-check-circle grupo-card-v2__title-icon" aria-hidden="true"></i>'
-        : '';
-    const rightMeta = creditsText
-        ? `<div class="grupo-card-v2__meta-right">${escapeHtml(creditsText)}</div>`
-        : '';
-    const claveHtml = clave
-        ? `<div class="grupo-card-v2__clave"><span class="grupo-card-v2__clave-label">Clave:</span> ${escapeHtml(clave)}</div>`
-        : '';
-    const observationHtml = observacion
-        ? `<div class="grupo-card-v2__obs-wrap"><button class="grupo-card-v2__obs-btn2" onclick="event.stopPropagation();var b=this.nextElementSibling;b.style.display=b.style.display==='block'?'none':'block';this.classList.toggle('open')"><i class="bi bi-info-circle" aria-hidden="true"></i> Observaciones <i class="bi bi-chevron-down grupo-card-v2__obs-chevron" aria-hidden="true"></i></button><div class="grupo-card-v2__obs-content" style="display:none">${escapeHtml(observacion)}</div></div>`
-        : '';
-    const salonHtml = salon ? `<br>${escapeHtml(salon)}` : '';
+    document.getElementById('info-seleccion').innerText = `${cursos.length} Grupos`;
+    let contenedor = document.getElementById('contenedor-grupos'); contenedor.innerHTML = '';
+    if (cursos.length === 0) { contenedor.innerHTML = '<div class="alert alert-warning text-center w-100">No se encontraron grupos.</div>'; return; }
 
-    card.innerHTML = `
-        <div class="grupo-card-v2__meta">
-            <div class="grupo-card-v2__group">Grupo ${escapeHtml(numeroGrupo)}${checkIcon}</div>
-            ${rightMeta}
-        </div>
-        ${claveHtml}
-        <div class="grupo-card-v2__profesor">${escapeHtml(profesor)}</div>
-        <hr class="grupo-card-v2__divider">
-        <div class="grupo-card-v2__horario">${horario}${salonHtml}</div>
-        ${observationHtml}
-        <div class="grupo-card-v2__footer">
-            ${getGrupoCardStateMarkup(estado)}
-            ${footerHtml}
-        </div>
-    `;
+    let materiaPadreInscrita = null;
+    let materiaHijoInscrita = null;
 
-    return card;
+    if (sem === 4) {
+        if (asignatura.includes("APRENDIZAJE Y CONDUCTA ADAPTAT. III (PRACTICA)")) {
+            materiaPadreInscrita = miHorario.find(m => m.asignatura === "APRENDIZAJE Y CONDUCTA ADAPTAT. III");
+        }
+        else if (asignatura === "APRENDIZAJE Y CONDUCTA ADAPTAT. III") {
+            materiaHijoInscrita = miHorario.find(m => m.asignatura.includes("(PRACTICA)"));
+        }
+    }
+
+    let horarioSinMateriaActual = miHorario.filter(h => h.asignatura !== asignatura);
+
+    cursos.forEach(c => {
+        let conflictos = obtenerChoques(c, [...horarioSinMateriaActual, ...actividadesExtra]);
+        let choca = conflictos.length > 0;
+        let yaInscrita = miHorario.some(h => h.id_unico === c.id_unico);
+        let esPrevisualizada = materiasPendientes.some(p => p.curso.id_unico === c.id_unico);
+        let bloqueadoPorACA = false;
+
+        if (materiaPadreInscrita && !materiaPadreInscrita.observaciones.includes(c.grupo)) {
+            bloqueadoPorACA = true;
+        }
+        if (materiaHijoInscrita && !c.observaciones.includes(materiaHijoInscrita.grupo)) {
+            bloqueadoPorACA = true;
+        }
+
+        let horario = c.sesiones.map(s => `<div><span class="fw-bold">${s.dia.substr(0, 3)}</span> ${s.inicio}-${s.fin}</div>`).join('') || "<i>Sin horario</i>";
+        let obsBtn = c.observaciones.length > 5 ? `<button class="btn-ver-obs" onclick="event.stopPropagation(); verObs('obs-${c.id_unico}')">Ver Obs</button>` : '';
+        let obsBox = c.observaciones.length > 5 ? `<div id="obs-${c.id_unico}" class="obs-box">${c.observaciones}</div>` : '';
+
+        let claseEstado = '';
+        let botonAccion = '';
+        let clickEvent = '';
+
+        if (yaInscrita) {
+            claseEstado = 'inscrita';
+            botonAccion = '<div class="mt-2 text-center text-success fw-bold small"><i class="bi bi-check-circle-fill"></i> Seleccionado</div>';
+            clickEvent = `toggleSeleccionManual(${c.id_unico}, '${asignatura}')`;
+        }
+        else if (bloqueadoPorACA) {
+            claseEstado = 'choque';
+            botonAccion = '<div class="mt-2 text-center text-danger fw-bold small"><i class="bi bi-slash-circle"></i> Gpo Incorrecto</div>';
+        }
+        else if (esPrevisualizada) {
+            claseEstado = 'previsualizacion';
+            let pendiente = materiasPendientes.find(p => p.curso.id_unico === c.id_unico);
+            let listaNombresConflictos = pendiente.conflictos.map(cf => cf.asignatura).join(', ');
+
+            botonAccion = `
+    <div class="mt-2 text-center small">
+        <div class="text-danger fw-bold mb-1" style="font-size:0.65rem;">SE ELIMINARÁ: ${listaNombresConflictos}</div>
+        <button class="btn btn-sm btn-danger w-100 fw-bold" onclick="event.stopPropagation(); confirmarTraslape(${c.id_unico})">CONFIRMAR CAMBIO</button>
+        <button class="btn btn-sm btn-link text-muted p-0 mt-1" onclick="event.stopPropagation(); cancelarTraslape(${c.id_unico}, '${asignatura}')">Cancelar</button>
+    </div>`;
+        }
+        else if (choca) {
+            claseEstado = 'choque';
+            botonAccion = '<div class="mt-2 text-center text-danger fw-bold small">TRASLAPE (Click para ver)</div>';
+            clickEvent = `previsualizarTraslape(${c.id_unico}, '${asignatura}')`;
+        }
+        else {
+            botonAccion = '<div class="mt-2 text-center text-primary fw-bold small opacity-0 btn-add">Seleccionar</div>';
+            clickEvent = `toggleSeleccionManual(${c.id_unico}, '${asignatura}')`;
+        }
+
+        let col = document.createElement('div'); col.className = 'col-auto'; col.style.width = '300px'; col.style.flexShrink = '0';
+        col.innerHTML = `<div class="grupo-card p-3 d-flex flex-column ${claseEstado}" onclick="${clickEvent}"><div class="d-flex justify-content-between mb-2"><span class="badge bg-primary">Gpo ${c.grupo}</span><span class="text-muted small">${c.creditos} Cr</span></div><div class="mb-1 text-center"><span class="badge bg-light text-dark border">Clave: ${c.clave}</span></div><h6 class="card-title text-primary small text-uppercase fw-bold mb-2" style="min-height:2.5em;">${c.profesor}</h6><div class="small text-muted flex-grow-1 border-top pt-2">${horario}</div> ${obsBtn} ${obsBox} ${botonAccion}</div>`;
+        contenedor.appendChild(col);
+    });
 }
-
-
 
 function verObs(id) { let el = document.getElementById(id); el.style.display = el.style.display === 'block' ? 'none' : 'block'; }
 
 function previsualizarTraslape(idNuevo, asignatura) {
     let cursoNuevo = BD_AGRUPADA.find(c => c.id_unico === idNuevo);
     let horarioActual = miHorario.filter(h => h.asignatura !== asignatura);
-    let actsManual = actividadesExtra.filter(a => a.modo === 'manual');
-    let conflictos = obtenerChoques(cursoNuevo, [...horarioActual, ...actsManual]);
+    let conflictos = obtenerChoques(cursoNuevo, [...horarioActual, ...actividadesExtra]);
 
     if (!materiasPendientes.some(p => p.curso.id_unico === idNuevo)) {
         materiasPendientes.push({
@@ -1141,7 +932,7 @@ function cancelarTraslape(idUnicoCancelar, asignatura) {
 }
 
 // ==========================================
-// 11. GESTION DE MI HORARIO Y TABLA
+// 11. GESTIÓN DE MI HORARIO Y TABLA
 // ==========================================
 
 function toggleSeleccionManual(id, asignatura) {
@@ -1170,7 +961,6 @@ function toggleSeleccionManual(id, asignatura) {
 
 function ordenarMiHorario(criterioInput = null) {
     let criterio = criterioInput;
-    window.criterioOrdenManual = criterio;
     if (!criterio) {
         let el = document.getElementById('sort-manual');
         if (el) criterio = el.value;
@@ -1230,56 +1020,23 @@ function actualizarTablaHorario() {
     let total = 0;
     let btnLimpiar = document.getElementById('btn-limpiar-manual');
     if (btnLimpiar) btnLimpiar.style.display = miHorario.length ? 'inline-block' : 'none';
-    let actsManual = actividadesExtra.filter(a => a.modo === 'manual');
-    
-    if (!miHorario.length && !actsManual.length) {
-        tbody.innerHTML = '<tr><td colspan="12" class="text-center text-muted py-4 t-body">No has agregado materias aún.</td></tr>';
+    if (!miHorario.length && !actividadesExtra.length) {
+        tbody.innerHTML = '<tr><td colspan="12" class="text-center text-muted py-4">No has agregado materias aún.</td></tr>';
     } else {
-        let criterio = window.criterioOrdenManual || 'cronologico';
-        
-        let combinado = [];
-        miHorario.forEach((c, idx) => combinado.push({ item: c, idx: idx, isExtra: false }));
-        actsManual.forEach(act => combinado.push({ item: act, idx: null, isExtra: true }));
-
-        const mapaDias = { 'LUNES': 0, 'MARTES': 1, 'MIERCOLES': 2, 'JUEVES': 3, 'VIERNES': 4, 'SABADO': 5 };
-        combinado.sort((aObj, bObj) => {
-            let a = aObj.item; let b = bObj.item;
-            switch (criterio) {
-                case 'materia': return a.asignatura.localeCompare(b.asignatura);
-                case 'profesor': return a.profesor.localeCompare(b.profesor);
-                case 'grupo':
-                    let gA = parseInt(a.grupo); let gB = parseInt(b.grupo);
-                    if (!isNaN(gA) && !isNaN(gB)) return gA - gB;
-                    return a.grupo.localeCompare(b.grupo);
-                case 'horas':
-                    let durA = a.sesiones.reduce((sum, s) => sum + (s.min_fin - s.min_inicio), 0);
-                    let durB = b.sesiones.reduce((sum, s) => sum + (s.min_fin - s.min_inicio), 0);
-                    return durB - durA;
-                case 'cronologico':
-                    let getEarliest = (curso) => {
-                        if (!curso.sesiones || curso.sesiones.length === 0) return 999999;
-                        let mins = curso.sesiones.map(s => (mapaDias[s.dia.toUpperCase()] || 0) * 1440 + s.min_inicio);
-                        return Math.min(...mins);
-                    };
-                    return getEarliest(a) - getEarliest(b);
-                default: return 0;
-            }
+        miHorario.forEach((c, idx) => {
+            total += c.creditos;
+            tbody.innerHTML += generarFilaSIAE(c, idx);
         });
-
-        combinado.forEach(obj => {
-            if (obj.isExtra) {
-                let actConFlag = Object.assign({}, obj.item, { _esActividad: true });
-                tbody.innerHTML += generarFilaSIAE(actConFlag, null, false);
-            } else {
-                total += obj.item.creditos;
-                tbody.innerHTML += generarFilaSIAE(obj.item, obj.idx);
-            }
+        actividadesExtra.forEach(act => {
+            tbody.innerHTML += generarFilaSIAE(act, null, false);
         });
     }
 
     // --- LOGICA AJUSTADA DE CREDITOS ---
     let semVal = parseInt(document.getElementById('semestre-selector').value);
     let badge = document.getElementById('creditos-badge');
+    badge.innerText = `${total} Créditos`;
+    badge.className = 'badge me-3';
 
     let minIdeal = 37;
     let maxIdeal = 41;
@@ -1287,69 +1044,34 @@ function actualizarTablaHorario() {
     if (semVal === 2) { minIdeal = 40; maxIdeal = 40; }
     if (semVal === 4) { minIdeal = 44; maxIdeal = 44; }
 
-    badge.className = 'tb cred-badge';
-    badge.style.background = '';
-    badge.style.color = '';
-    badge.style.borderColor = '';
-    let numStyle = '';
-    
-    let icon = 'bi-mortarboard';
-    if (total > 0 && total < minIdeal) {
-        icon = 'bi-exclamation-circle';
-        badge.style.background = '#fff9e6';
-        badge.style.color = '#856404';
-        badge.style.borderColor = '#ffe082';
-        numStyle = 'background:#D59F0F; color:#002B7A;';
+    if (total === 0) {
+        badge.classList.add('bg-secondary');
+    } else if (total < minIdeal) {
+        badge.classList.add('bg-warning', 'text-dark');
+        badge.innerText += " (Faltan)";
     } else if (total > maxIdeal) {
-        icon = 'bi-x-octagon';
-        badge.style.background = '#fff5f5';
-        badge.style.color = '#c92a2a';
-        badge.style.borderColor = '#ffc9c9';
-        numStyle = 'background:#dc3545; color:#fff;';
-    } else if (total > 0) {
-        icon = 'bi-check-circle';
+        badge.classList.add('bg-danger');
+        badge.innerText += " (Exceso)";
+    } else {
+        badge.classList.add('bg-success');
+        badge.innerText += " (¡Perfecto!)";
         // Auto-snapshot silencioso al llegar a créditos ideales
         SadaAnalytics.saveSnapshot(miHorario, actividadesExtra, document.getElementById('semestre-selector').value, 'manual', false);
     }
-    
-    badge.innerHTML = `<i class="bi ${icon}"></i> Créditos <span class="num" style="${numStyle}">${total}</span>`;
 
     if (document.getElementById('switch-vista').checked) renderizarHorarioVisual();
 }
 
 function generarFilaSIAE(c, idx = null, showDelete = true) {
-    const DIAS = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
-    let d = { LUNES: null, MARTES: null, MIERCOLES: null, JUEVES: null, VIERNES: null, SABADO: null };
-    c.sesiones.forEach(s => {
-        let k = normalizarDiaHorario(s.dia);
-        if (d.hasOwnProperty(k)) d[k] = `${escapeHtml(s.inicio)}-${escapeHtml(s.fin)}`;
-    });
-
-let color = (MAPA_COLORES_ASIGNADOS[c.id_unico] || '#d2d2d7');
-    if (c._esActividad) color = '#ffb66d'; 
-    let displayAsignatura = c._esActividad ? limpiarNombreActividadExtra(c.asignatura) : c.asignatura;
-    let swatchTd = `<td class="swatch-cell"><span class="swatch" style="background:${color}"></span></td>`;
-    let claveHtml = c.clave ? `<span class="materia-clave">${escapeHtml(c.clave)}</span>` : '';
-    let nombreTd = `<td class="materia-cell"><span class="materia-name">${escapeHtml(displayAsignatura)}</span>${claveHtml}</td>`;
-    let grupoTd = `<td class="grupo-cell"><span class="grupo-pill">${escapeHtml(c.grupo)}</span></td>`;
-    let profTd = `<td class="profesor-cell"><span class="profesor">${escapeHtml(c.profesor)}</span></td>`;
-    let dayTds = DIAS.map(dia =>
-        d[dia] !== null
-            ? `<td class="day-cell"><span class="hours">${d[dia]}</span></td>`
-            : `<td class="day-cell empty">-</td>`
-    ).join('');
-    let creditosTd = `<td class="creditos">${c.creditos || '-'}</td>`;
-    
-    let rmTd = '';
-    if (c._esActividad) {
-        rmTd = `<td class="accion-cell"><button class="rm-btn" onclick="eliminarActividad('${c.id_unico}')" title="Eliminar Actividad"><i class="bi bi-x-lg"></i></button></td>`;
-    } else if (showDelete && idx !== null) {
-        rmTd = `<td class="accion-cell"><button class="rm-btn" onclick="borrar(${idx})" title="Eliminar Materia"><i class="bi bi-x-lg"></i></button></td>`;
-    } else {
-        rmTd = `<td class="accion-cell"></td>`;
+    let d = { LUNES: '', MARTES: '', MIERCOLES: '', JUEVES: '', VIERNES: '', SABADO: '' };
+    c.sesiones.forEach(s => { let k = s.dia.toUpperCase().replace('É', 'E'); if (d.hasOwnProperty(k)) d[k] = `${s.inicio}-${s.fin}`; });
+    let btn = showDelete ? `<button onclick="borrar(${idx})" class="btn btn-sm text-danger p-0"><i class="bi bi-x-circle-fill"></i></button>` : '';
+    let obsCell = '';
+    if (c.observaciones && c.observaciones.length > 5) {
+        let rndId = 'obs-auto-' + Math.random().toString(36).substr(2, 6);
+        obsCell = `<button class="btn-ver-obs" onclick="verObs('${rndId}')">Ver Obs</button><div id="${rndId}" class="obs-box text-start mt-1" style="display:none; min-width: 150px;">${c.observaciones}</div>`;
     }
-    let trClass = c._esActividad ? ' class="actividad"' : '';
-    return `<tr${trClass}>${swatchTd}${nombreTd}${grupoTd}${profTd}${dayTds}${creditosTd}${rmTd}</tr>`;
+    return `<tr><td class="text-start small fw-bold text-primary text-truncate" style="max-width:150px;" title="${c.asignatura}">${c.asignatura} <span class="text-muted fw-normal">(${c.clave})</span></td><td>${c.grupo}</td><td class="text-start small text-uppercase text-truncate" style="max-width:150px;" title="${c.profesor}">${c.profesor}</td><td>${d.LUNES}</td><td>${d.MARTES}</td><td>${d.MIERCOLES}</td><td>${d.JUEVES}</td><td>${d.VIERNES}</td><td>${d.SABADO}</td><td>${c.creditos}</td><td>${obsCell}</td><td>${btn}</td></tr>`;
 }
 
 function borrar(idx) {
@@ -1368,8 +1090,6 @@ function limpiarTodoManual() {
         registrarEstado();
         miHorario = [];
         materiasPendientes = [];
-        actividadesExtra = [];
-        renderActividades();
         guardarEstado();
         limpiarPanelGrupos();
         filtrarMaterias();
@@ -1377,12 +1097,12 @@ function limpiarTodoManual() {
     }
 }
 
-// --- NUEVAS FUNCIONES DE DESCARGA (CORRIGEN MOVIL/VERTICAL) ---
+// --- NUEVAS FUNCIONES DE DESCARGA (CORRIGEN MÓVIL/VERTICAL) ---
 // ==========================================
-// 12. FUNCIONES DE EXPORTACION
+// 12. FUNCIONES DE EXPORTACIÓN
 // ==========================================
 
-// --- NUEVAS FUNCIONES DE DESCARGA (CORRIGEN MOVIL/VERTICAL) ---
+// --- NUEVAS FUNCIONES DE DESCARGA (CORRIGEN MÓVIL/VERTICAL) ---
 async function descargarPDF() {
     const { jsPDF } = window.jspdf;
 
@@ -1395,18 +1115,15 @@ async function descargarPDF() {
     container.innerHTML = ''; // Limpiar
 
     let wrapper = document.createElement('div');
-    wrapper.className = 'L1 export-siae-sheet';
     wrapper.style.width = '1300px'; // Forzar ancho escritorio
-    wrapper.style.padding = '28px';
+    wrapper.style.padding = '20px';
     wrapper.style.backgroundColor = '#ffffff';
-    wrapper.innerHTML = '<div class="export-siae-title">Horario seleccionado</div>';
 
     let clone = source.cloneNode(true);
     clone.style.display = 'block';
     clone.style.overflow = 'visible';
     clone.style.height = 'auto';
     clone.style.maxHeight = 'none';
-    clone.classList.remove('table-responsive');
 
     wrapper.appendChild(clone);
     container.appendChild(wrapper);
@@ -1445,18 +1162,15 @@ async function descargarImagen() {
     container.innerHTML = '';
 
     let wrapper = document.createElement('div');
-    wrapper.className = 'L1 export-siae-sheet';
     wrapper.style.width = '1300px'; // Forzar ancho escritorio
-    wrapper.style.padding = '28px';
+    wrapper.style.padding = '20px';
     wrapper.style.backgroundColor = '#ffffff';
-    wrapper.innerHTML = '<div class="export-siae-title">Horario seleccionado</div>';
 
     let clone = source.cloneNode(true);
     clone.style.display = 'block';
     clone.style.overflow = 'visible';
     clone.style.height = 'auto';
     clone.style.maxHeight = 'none';
-    clone.classList.remove('table-responsive');
 
     wrapper.appendChild(clone);
     container.appendChild(wrapper);
@@ -1558,18 +1272,8 @@ function descargarExcel() {
 // 12.5. ACTIVIDADES EXTRACURRICULARES
 // ==========================================
 
-function abrirSelectorHora(inputId) {
-    let input = document.getElementById(inputId);
-    if (!input) return;
-    input.focus();
-    if (typeof input.showPicker === 'function') {
-        input.showPicker();
-    }
-}
-
 function agregarActividad(source) {
     let suffix = source === 'auto' ? '-auto' : '';
-    let modoFiltro = source === 'auto' ? 'auto' : 'manual';
     let nombre = document.getElementById('act-nombre' + suffix).value.trim();
     let inicio = document.getElementById('act-inicio' + suffix).value;
     let fin = document.getElementById('act-fin' + suffix).value;
@@ -1587,31 +1291,22 @@ function agregarActividad(source) {
         min_inicio: convertirMinutos(inicio), min_fin: convertirMinutos(fin)
     }));
 
-    // AQUÍ ESTÁ LA ETIQUETA: modo: modoFiltro
     let actividad = {
-        id_unico: id, asignatura: nombre, profesor: 'Actividad Extra',
+        id_unico: id, asignatura: '⚡ ' + nombre, profesor: 'Actividad Extra',
         grupo: '-', creditos: 0, clave: '-', observaciones: '', semestre: 0,
-        area: 'EXTRA', sesiones: sesiones, esActividad: true,
-        modo: modoFiltro 
+        area: 'EXTRA', sesiones: sesiones, esActividad: true
     };
-    actividad.asignatura = nombre;
 
-    let targetHorario = modoFiltro === 'auto' ? [] : miHorario;
-    let prevActs = actividadesExtra.filter(a => a.modo === modoFiltro);
-    let conflictos = obtenerChoques(actividad, [...targetHorario, ...prevActs]);
+    let conflictos = obtenerChoques(actividad, [...miHorario, ...actividadesExtra]);
     if (conflictos.length > 0) {
-        let nombres = conflictos.map(c => c.esActividad ? limpiarNombreActividadExtra(c.asignatura) : c.asignatura).join(', ');
-        alert('Esta actividad se traslapa con: ' + nombres + '.\nAjusta el día u horario para poder agregarla.');
-        return;
+        let nombres = conflictos.map(c => c.asignatura).join(', ');
+        if (!confirm('Esta actividad choca con: ' + nombres + '.\n¿Agregarla de todas formas?')) return;
     }
 
     actividadesExtra.push(actividad);
     renderActividades();
     renderizarHorarioVisual();
     actualizarTablaHorario();
-    renderBolsa();
-    if (materiaSeleccionadaActual) cargarPanelGrupos(materiaSeleccionadaActual);
-    if (materiaSeleccionadaAuto) cargarPanelGruposAuto(materiaSeleccionadaAuto);
 
     document.getElementById('act-nombre' + suffix).value = '';
     document.querySelectorAll('.act-dia-chk' + suffix).forEach(c => { c.checked = false; c.parentElement.classList.remove('active'); });
@@ -1624,103 +1319,85 @@ function eliminarActividad(id) {
     renderActividades();
     renderizarHorarioVisual();
     actualizarTablaHorario();
-    renderBolsa();
     if (materiaSeleccionadaActual) cargarPanelGrupos(materiaSeleccionadaActual);
 }
 
 function renderActividades() {
+    let count = actividadesExtra.length;
     ['', '-auto'].forEach(suffix => {
-        let modoStr = suffix === '-auto' ? 'auto' : 'manual';
-        let actsFiltradas = actividadesExtra.filter(a => a.modo === modoStr);
-        let count = actsFiltradas.length;
-        
         let lista = document.getElementById('lista-actividades' + suffix);
         let badge = document.getElementById('badge-actividades' + suffix);
         if (badge) { badge.style.display = count > 0 ? 'inline-block' : 'none'; badge.textContent = count; }
         if (!lista) return;
-        lista.innerHTML = '';    
-        actsFiltradas.forEach(act => {
+        lista.innerHTML = '';
+        actividadesExtra.forEach(act => {
             let diasStr = act.sesiones.map(s => s.dia.substr(0, 3)).join(', ');
             let horaStr = act.sesiones[0] ? act.sesiones[0].inicio + '-' + act.sesiones[0].fin : '';
-            let nombre = limpiarNombreActividadExtra(act.asignatura);
+            let nombre = act.asignatura.replace('⚡ ', '');
             let item = document.createElement('div');
-            item.className = 'actA__chip';
-            item.innerHTML = '<div><div class="actA__chip-name">' + nombre + '</div><div class="actA__chip-meta">' + diasStr + ' · ' + horaStr + '</div></div><button class="actA__chip-rm" onclick="eliminarActividad(\'' + act.id_unico + '\')" title="Eliminar"><i class="bi bi-x-circle-fill"></i></button>';
+            item.className = 'list-group-item d-flex justify-content-between align-items-center py-1 px-2';
+            item.innerHTML = '<div class="small"><span class="fw-bold" style="color: #e65100;">' + nombre + '</span><br><span class="text-muted" style="font-size:0.7rem;">' + diasStr + ' · ' + horaStr + '</span></div><button class="btn btn-sm text-danger p-0" onclick="eliminarActividad(\'' + act.id_unico + '\')" title="Eliminar"><i class="bi bi-x-circle"></i></button>';
             lista.appendChild(item);
         });
     });
 }
 
 // ==========================================
-// 13. MODO EXPLORADOR: SELECCION Y GENERACION
+// 13. MODO EXPLORADOR: SELECCIÓN Y GENERACIÓN
 // ==========================================
 
 function filtrarMateriasAuto() {
     let txt = document.getElementById('buscador-auto').value.toUpperCase();
-    let lista = document.getElementById('lista-materias-auto');
-    lista.innerHTML = '';
-
+    let lista = document.getElementById('lista-materias-auto'); lista.innerHTML = '';
     let matSem = obtenerMateriasActivas();
-    if (matSem.length === 0) {
-        lista.innerHTML = '<div class="p-3 text-muted small text-center">No hay datos.</div>';
-        return;
-    }
-
+    if (matSem.length === 0) { lista.innerHTML = '<div class="p-3 text-muted small text-center">No hay datos.</div>'; return; }
     let areas = [...new Set(matSem.map(c => c.area))].sort();
 
     areas.forEach(area => {
         let matsEnArea = [...new Set(matSem.filter(c => c.area === area).map(c => c.asignatura))].sort();
         let matsFiltradas = matsEnArea.filter(m => m.toUpperCase().includes(txt));
-        if (matsFiltradas.length === 0) return;
 
-        let isOpen = matsFiltradas.includes(materiaSeleccionadaAuto) || txt.length >= 2;
+        if (matsFiltradas.length > 0) {
+            let header = document.createElement('div');
+            header.className = 'area-header area-toggle';
+            header.innerHTML = `<i class="bi bi-chevron-right area-arrow"></i> ${area} <span class="badge bg-secondary rounded-pill ms-1">${matsFiltradas.length}</span>`;
+            header.style.cursor = 'pointer';
 
-        let header = document.createElement('div');
-        header.className = 'ml-area-header';
-        header.setAttribute('data-open', String(isOpen));
-        header.innerHTML = `<i class="bi bi-chevron-down ml-chevron"></i><span class="ml-area-name">${area.toLowerCase()}</span><span class="ml-area-count">${matsFiltradas.length}</span>`;
+            let grupo = document.createElement('div');
+            grupo.className = 'area-group';
+            grupo.style.display = 'none';
 
-        let body = document.createElement('div');
-        body.className = 'ml-area-body';
-        body.setAttribute('data-open', String(isOpen));
-
-        header.onclick = () => {
-            let open = header.getAttribute('data-open') === 'true';
-            header.setAttribute('data-open', String(!open));
-            body.setAttribute('data-open', String(!open));
-        };
-
-        matsFiltradas.forEach(nom => {
-            let enBolsa = bolsa[nom] && bolsa[nom].length > 0;
-            let esActiva = materiaSeleccionadaAuto === nom;
-
-            let estado = 'default';
-            let iconHtml = '';
-
-            if (esActiva) {
-                estado = 'activa';
-                iconHtml = '<i class="bi bi-check-circle-fill ml-item-icon" aria-hidden="true"></i>';
-            } else if (enBolsa) {
-                estado = 'candidata';
-                iconHtml = '<i class="bi bi-star-fill ml-item-icon" aria-hidden="true"></i>';
+            let tieneActiva = matsFiltradas.includes(materiaSeleccionadaAuto);
+            let hayBusqueda = txt.length >= 2;
+            if (tieneActiva || hayBusqueda) {
+                grupo.style.display = 'block';
+                header.querySelector('.area-arrow').classList.add('area-arrow-open');
             }
 
-            let item = document.createElement('div');
-            item.className = 'ml-item';
-            item.setAttribute('data-state', estado);
-            item.innerHTML = `<span class="ml-item-name">${nom}</span>${iconHtml}`;
-
-            item.onclick = () => {
-                materiaSeleccionadaAuto = nom;
-                filtrarMateriasAuto();
-                cargarPanelGruposAuto(nom);
-                if (typeof expandMobilePanel === 'function') expandMobilePanel('#contenedor-panel-auto');
+            header.onclick = () => {
+                let abierto = grupo.style.display === 'block';
+                grupo.style.display = abierto ? 'none' : 'block';
+                header.querySelector('.area-arrow').classList.toggle('area-arrow-open');
             };
-            body.appendChild(item);
-        });
 
-        lista.appendChild(header);
-        lista.appendChild(body);
+            lista.appendChild(header);
+
+            matsFiltradas.forEach(nom => {
+                let enBolsa = bolsa[nom] && bolsa[nom].length > 0;
+                let active = materiaSeleccionadaAuto === nom ? 'active-item' : '';
+                let item = document.createElement('div');
+                item.className = `list-group-item materia-item px-3 py-2 ${enBolsa ? 'candidata-item' : ''} ${active}`;
+                item.innerHTML = `<div class="d-flex justify-content-between align-items-center"><span class="${enBolsa ? 'fw-bold text-dark' : ''}">${nom}</span>${enBolsa ? '<i class="bi bi-star-fill text-warning"></i>' : ''}</div>`;
+                item.onclick = () => {
+                    materiaSeleccionadaAuto = nom;
+                    filtrarMateriasAuto();
+                    cargarPanelGruposAuto(nom);
+                };
+                grupo.appendChild(item);
+            });
+
+            lista.appendChild(grupo);
+        }
     });
 }
 
@@ -1730,114 +1407,13 @@ function limpiarPanelGruposAuto() {
     document.getElementById('contenedor-grupos-auto').innerHTML = '<div class="text-center text-muted py-5 w-100"><i class="bi bi-hand-index-thumb display-1 opacity-25"></i><p class="mt-3 lead">Selecciona una materia a la izquierda.</p></div>';
 }
 
-
-
-function cargarPanelGrupos(asignatura) {
-    let semVal = document.getElementById('semestre-selector').value;
-    let sem = parseInt(semVal);
-    document.getElementById('titulo-seleccion').innerHTML = `<i class="bi bi-book"></i> ${asignatura}`;
-    let cursos = obtenerMateriasActivas().filter(c => c.asignatura === asignatura).sort((a, b) => a.grupo.localeCompare(b.grupo));
-
-    let gA = parseInt(cursos[0].grupo), gB = parseInt(cursos[1].grupo);
-    if (!isNaN(gA) && !isNaN(gB)) {
-        cursos.sort((a, b) => parseInt(a.grupo) - parseInt(b.grupo));
-    }
-
-    document.getElementById('info-seleccion').innerText = `${cursos.length} Grupos`;
-    let contenedor = document.getElementById('contenedor-grupos');
-    contenedor.innerHTML = '';
-    contenedor.className = 'horizontal-scroll-container';
-    if (cursos.length === 0) {
-        contenedor.innerHTML = '<div class="alert alert-warning text-center w-100">No se encontraron grupos.</div>';
-        return;
-    }
-
-    let materiaPadreInscrita = null;
-    let materiaHijoInscrita = null;
-
-    if (sem === 4) {
-        if (asignatura.includes("APRENDIZAJE Y CONDUCTA ADAPTAT. III (PRACTICA)")) {
-            materiaPadreInscrita = miHorario.find(m => m.asignatura === "APRENDIZAJE Y CONDUCTA ADAPTAT. III");
-        } else if (asignatura === "APRENDIZAJE Y CONDUCTA ADAPTAT. III") {
-            materiaHijoInscrita = miHorario.find(m => m.asignatura.includes("(PRACTICA)"));
-        }
-    }
-    let horarioSinMateriaActual = miHorario.filter(h => h.asignatura !== asignatura);
-    
-    let actsManual = actividadesExtra.filter(a => a.modo === 'manual');
-    cursos.forEach(c => {
-        let conflictos = obtenerChoques(c, [...horarioSinMateriaActual, ...actsManual]);
-        let choca = conflictos.length > 0;
-        let yaInscrita = miHorario.some(h => h.id_unico === c.id_unico);
-        let esPrevisualizada = materiasPendientes.some(p => p.curso.id_unico === c.id_unico);
-        let bloqueadoPorACA = false;
-
-        if (materiaPadreInscrita && !materiaPadreInscrita.observaciones.includes(c.grupo)) {
-            bloqueadoPorACA = true;
-        }
-        if (materiaHijoInscrita && !c.observaciones.includes(materiaHijoInscrita.grupo)) {
-            bloqueadoPorACA = true;
-        }
-
-        let horario = c.sesiones.length > 0
-            ? c.sesiones.map(s => `<div class="gc-horario-row"><span class="gc-horario-dia">${escapeHtml(s.dia.substr(0, 3).toUpperCase())}</span><span>${escapeHtml(s.inicio)}-${escapeHtml(s.fin)}</span></div>`).join('')
-            : '<i>Sin horario</i>';
-        let estado = 'default';
-        let footerHtml = '';
-        let onSelect = null;
-        let clickDisabled = false;
-
-        if (yaInscrita) {
-            estado = 'inscrita';
-            onSelect = () => toggleSeleccionManual(c.id_unico, asignatura);
-        } else if (bloqueadoPorACA) {
-            estado = 'traslape';
-            clickDisabled = true;
-        } else if (esPrevisualizada) {
-            estado = 'previsualizacion';
-            let pendiente = materiasPendientes.find(p => p.curso.id_unico === c.id_unico);
-            let listaNombresConflictos = pendiente.conflictos.map(cf => cf.asignatura).join(', ');
-            footerHtml = `
-                <div class="grupo-card-v2__action-block">
-                    <div class="grupo-card-v2__action-caption">Se eliminará: ${escapeHtml(listaNombresConflictos)}</div>
-                    <button class="btn btn-sm btn-danger w-100 fw-bold" onclick="event.stopPropagation(); confirmarTraslape(${c.id_unico})">CONFIRMAR CAMBIO</button>
-                    <button class="btn btn-sm btn-link text-muted p-0 mt-1" onclick="event.stopPropagation(); cancelarTraslape(${c.id_unico}, '${asignatura}')">Cancelar</button>
-                </div>`;
-        } else if (choca) {
-            estado = 'traslape';
-            onSelect = () => previsualizarTraslape(c.id_unico, asignatura);
-        } else {
-            onSelect = () => toggleSeleccionManual(c.id_unico, asignatura);
-        }
-
-        contenedor.appendChild(createGrupoCard({
-            numeroGrupo: c.grupo,
-            profesor: c.profesor,
-            horario,
-            salon: c.salon,
-            observacion: c.observaciones.length > 5 ? c.observaciones : '',
-            estado,
-            onSelect,
-            clickDisabled,
-            footerHtml,
-            creditsText: `${c.creditos} Cr`,
-            clave: c.clave || ''
-        }));
-    });
-}
-
 function cargarPanelGruposAuto(asignatura) {
     document.getElementById('titulo-seleccion-auto').innerHTML = `<i class="bi bi-book"></i> ${asignatura}`;
     let cursos = obtenerMateriasActivas().filter(c => c.asignatura === asignatura).sort((a, b) => a.grupo.localeCompare(b.grupo));
     document.getElementById('info-seleccion-auto').innerText = `${cursos.length} Grupos`;
 
-    let contenedor = document.getElementById('contenedor-grupos-auto');
-    contenedor.innerHTML = '';
-    contenedor.className = 'horizontal-scroll-container';
-    if (cursos.length === 0) {
-        contenedor.innerHTML = '<div class="alert alert-warning text-center w-100">No se encontraron grupos.</div>';
-        return;
-    }
+    let contenedor = document.getElementById('contenedor-grupos-auto'); contenedor.innerHTML = '';
+    if (cursos.length === 0) { contenedor.innerHTML = '<div class="alert alert-warning text-center w-100">No se encontraron grupos.</div>'; return; }
 
     let idsEnBolsa = [];
     if (bolsa[asignatura]) {
@@ -1846,21 +1422,26 @@ function cargarPanelGruposAuto(asignatura) {
 
     cursos.forEach(c => {
         let seleccionado = idsEnBolsa.includes(c.id_unico);
-        let horario = c.sesiones.length > 0
-            ? c.sesiones.map(s => `<div class="gc-horario-row"><span class="gc-horario-dia">${escapeHtml(s.dia.substr(0, 3).toUpperCase())}</span><span>${escapeHtml(s.inicio)}-${escapeHtml(s.fin)}</span></div>`).join('')
-            : '<i>Sin horario</i>';
+        let horario = c.sesiones.map(s => `<div><span class="fw-bold">${s.dia.substr(0, 3)}</span> ${s.inicio}-${s.fin}</div>`).join('') || "<i>Sin horario</i>";
+        let obsBtn = c.observaciones.length > 5 ? `<button class="btn-ver-obs" onclick="event.stopPropagation(); verObs('obs-auto-${c.id_unico}')">Ver Obs</button>` : '';
+        let obsBox = c.observaciones.length > 5 ? `<div id="obs-auto-${c.id_unico}" class="obs-box">${c.observaciones}</div>` : '';
 
-        contenedor.appendChild(createGrupoCard({
-            numeroGrupo: c.grupo,
-            profesor: c.profesor,
-            horario,
-            salon: c.salon,
-            observacion: c.observaciones.length > 5 ? c.observaciones : '',
-            estado: seleccionado ? 'candidato' : 'default',
-            onSelect: () => toggleCandidato(c.id_unico, asignatura),
-            creditsText: `${c.creditos} Cr`,
-            clave: c.clave || ''
-        }));
+        let claseEstado = seleccionado ? 'candidato-seleccionado' : '';
+        let textoEstado = seleccionado ? '<div class="mt-2 text-center text-dark fw-bold small"><i class="bi bi-check-circle-fill text-warning"></i> Seleccionado</div>' : '<div class="mt-2 text-center text-primary fw-bold small opacity-0 btn-add">Agregar</div>';
+
+        let col = document.createElement('div'); col.className = 'col-auto'; col.style.width = '280px'; col.style.flexShrink = '0';
+        col.innerHTML = `
+<div class="grupo-card p-3 d-flex flex-column ${claseEstado}" onclick="toggleCandidato(${c.id_unico}, '${asignatura}')">
+    <div class="d-flex justify-content-between mb-2">
+        <span class="badge bg-secondary">Gpo ${c.grupo}</span>
+        <span class="text-muted small">${c.creditos} Cr</span>
+    </div>
+    <div class="mb-1 text-center"><span class="badge bg-light text-dark border">Clave: ${c.clave}</span></div>
+    <h6 class="card-title text-primary small text-uppercase fw-bold mb-2" style="min-height:2.5em;">${c.profesor}</h6>
+    <div class="small text-muted flex-grow-1 border-top pt-2">${horario}</div> 
+    ${obsBtn} ${obsBox} ${textoEstado}
+</div>`;
+        contenedor.appendChild(col);
     });
 }
 
@@ -1884,45 +1465,15 @@ function toggleCandidato(id, asignatura) {
 function renderBolsa() {
     let ul = document.getElementById('lista-bolsa'); ul.innerHTML = '';
     let keys = Object.keys(bolsa);
-    let actsAuto = actividadesExtra.filter(act => act.modo === 'auto');
-    let tieneActividades = actsAuto.length > 0;
-    
-    if (keys.length === 0 && !tieneActividades) { 
-        ul.innerHTML = '<li class="list-group-item text-muted text-center py-3 w-100 rounded border-0 bg-transparent">Aún no has seleccionado materias.</li>'; 
-        return; 
-    }
-    
+    if (keys.length === 0) { ul.innerHTML = '<li class="list-group-item text-muted text-center py-3">Vacío</li>'; return; }
     keys.forEach(k => {
-        let li = document.createElement('li'); li.className = 'list-group-item d-flex justify-content-between align-items-center py-2 px-3 rounded shadow-sm border border-secondary border-opacity-25 bg-white';
-        li.style.width = "auto";
-        li.style.flex = "1 1 auto";
-        li.style.minWidth = "220px";
-        li.innerHTML = `<div class="misel-chip-name"><span class="fw-bold d-block text-truncate small" title="${escapeHtml(k)}">${escapeHtml(k)}</span></div><div class="misel-chip-meta"><span class="badge bg-secondary rounded-pill">${bolsa[k].length}</span><i class="bi bi-x-circle text-danger cursor-pointer fs-6"></i></div>`;
-        li.querySelector('.bi-x-circle').onclick = () => delBolsa(k);
-        ul.appendChild(li);
-    });
-
-    actsAuto.forEach(act => {
-        let li = document.createElement('li'); 
-        li.className = 'list-group-item misel-chip--extra d-flex justify-content-between align-items-center py-2 px-3 rounded shadow-sm bg-white';
-        li.style.width = "auto";
-        li.style.flex = "1 1 auto";
-        li.style.minWidth = "220px";
-        li.innerHTML = `<div class="misel-chip-name"><span class="fw-bold d-block text-truncate small" title="${escapeHtml(act.asignatura)}">${escapeHtml(act.asignatura)} (Extra)</span></div><div class="misel-chip-meta"><span class="badge">1</span><i class="bi bi-x-circle text-danger cursor-pointer fs-6"></i></div>`;
-        li.querySelector('.bi-x-circle').onclick = () => eliminarActividad(act.id_unico);
+        let li = document.createElement('li'); li.className = 'list-group-item d-flex justify-content-between align-items-center py-1';
+        li.innerHTML = `<div><span class="fw-bold d-block text-truncate small" style="max-width:140px;" title="${k}">${k}</span></div><div><span class="badge bg-secondary rounded-pill me-2">${bolsa[k].length}</span><i class="bi bi-x-circle text-danger cursor-pointer" onclick="delBolsa('${k}')"></i></div>`;
         ul.appendChild(li);
     });
 }
 
-function delBolsa(k) { 
-    delete bolsa[k]; 
-    guardarEstado(); 
-    renderBolsa(); 
-    filtrarMateriasAuto(); 
-    if (materiaSeleccionadaAuto === k) {
-        limpiarPanelGruposAuto(); 
-    }
-}
+function delBolsa(k) { delete bolsa[k]; guardarEstado(); renderBolsa(); filtrarMateriasAuto(); limpiarPanelGruposAuto(); }
 function limpiarBolsa() {
     if (confirm("¿Limpiar todo? Se borrarán las selecciones y todas las combinaciones generadas.")) {
         bolsa = {};
@@ -1949,13 +1500,10 @@ function esCombinacionValida(comb) {
 }
 
 // ==========================================
-// 14. ALGORITMOS DE GENERACION
+// 14. ALGORITMOS DE GENERACIÓN
 // ==========================================
 
 async function generarCombinaciones() {
-    mostrarPantallaCargaModo('generando');
-    await new Promise(r => setTimeout(r, 600)); // Allow UI to update with loading screen and feel longer
-
     let resDiv = document.getElementById('resultados-auto');
 
     resDiv.innerHTML = `
@@ -1970,6 +1518,7 @@ async function generarCombinaciones() {
             </div>`;
 
     window.detenerGeneracion = false;
+    await new Promise(r => setTimeout(r, 100));
 
     try {
         let nombresMaterias = Object.keys(bolsa);
@@ -2008,15 +1557,12 @@ async function generarCombinaciones() {
             }
 
             if (!hayChoqueCombo(comb) && esCombinacionValida(comb)) {
-                let actsAuto = actividadesExtra.filter(a => a.modo === 'auto');
-                let fullComb = [...comb, ...actsAuto];
-                
-                let creds = fullComb.reduce((a, b) => a + b.creditos, 0);
-                let diasSet = new Set(fullComb.flatMap(c => c.sesiones.map(s => s.dia)));
-                let huecos = calcularHuecos(fullComb);
+                let creds = comb.reduce((a, b) => a + b.creditos, 0);
+                let diasSet = new Set(comb.flatMap(c => c.sesiones.map(s => s.dia)));
+                let huecos = calcularHuecos(comb);
 
                 RESULTADOS_GLOBALES.push({
-                    cursos: fullComb,
+                    cursos: [...comb],
                     creditos: creds,
                     dias: diasSet.size,
                     huecos: huecos
@@ -2074,20 +1620,8 @@ async function generarCombinaciones() {
         } else {
             ejecutarDetectiveDeConflictos(nombresMaterias, resDiv);
         }
-
-        await new Promise(r => setTimeout(r, 400)); // Extra delay to feel like the engine is stopping
-        ocultarPantallaCargaModo();
-        // Automatically switch to Results view
-        if (window.innerWidth < 768 && typeof switchToMobileTab === 'function') {
-            switchToMobileTab(5);
-        } else {
-            activarModo('resultados');
-        }
-        enfocarInicioModo('resultados');
     } catch (error) {
         console.error(error);
-        ocultarPantallaCargaModo();
-        alert(error.message);
         resDiv.innerHTML = `<div class="alert alert-danger text-center"><i class="bi bi-exclamation-triangle-fill"></i> ${error.message}</div>`;
     }
 }
@@ -2175,9 +1709,9 @@ async function iniciarAnalisisProfundo() {
 
         reportes.forEach((rep, idx) => {
             let isBest = idx === 0;
-            let badgeCreditos = rep.maxCreditos > 41
-                ? `<span class="badge bg-warning text-dark border border-warning ms-2"><i class="bi bi-exclamation-circle"></i> Excede Créditos (${rep.maxCreditos})</span>`
-                : (rep.maxCreditos < 30 ? `<span class="badge bg-light text-muted border ms-2">Baja Carga (${rep.maxCreditos} Cr)</span>` : '');
+            let badgeCreditos = rep.maxCreditos > 41 ?
+                `<span class="badge bg-warning text-dark border border-warning ms-2"><i class="bi bi-exclamation-circle"></i> Excede Créditos (${rep.maxCreditos})</span>` :
+                (rep.maxCreditos < 30 ? `<span class="badge bg-light text-muted border ms-2">Baja Carga (${rep.maxCreditos} Cr)</span>` : '');
 
             html += `
             <div class="card mb-3 ${isBest ? 'border-primary shadow-sm' : 'border-light shadow-sm'}">
@@ -2284,14 +1818,6 @@ function toggleAllProfesResultados(state) {
     aplicarOrdenYFiltro();
 }
 
-function setFiltroResultado(inputId, value, label, buttonId) {
-    let input = document.getElementById(inputId);
-    let button = document.getElementById(buttonId);
-    if (input) input.value = value;
-    if (button) button.textContent = label;
-    aplicarOrdenYFiltro();
-}
-
 function calcularHuecos(comb) {
     let agenda = {}; comb.forEach(c => c.sesiones.forEach(s => { if (!agenda[s.dia]) agenda[s.dia] = []; agenda[s.dia].push([s.min_inicio, s.min_fin]); }));
     let huecos = 0;
@@ -2311,7 +1837,6 @@ function aplicarOrdenYFiltro() {
     let profesSeleccionados = Array.from(document.querySelectorAll('.chk-filtro-profe:checked')).map(c => c.value);
     let textoBotonProfe = document.getElementById('btn-filtro-profe');
     textoBotonProfe.innerText = profesSeleccionados.length > 0 ? (profesSeleccionados.length === 1 ? profesSeleccionados[0] : `${profesSeleccionados.length} seleccionados`) : "Todos";
-    actualizarEstadoFiltrosResultados(crit, tFiltro, diasLibres, profesSeleccionados);
 
     // Tracking de filtros usados
     SadaAnalytics.trackHerramienta('auto_filter', { sort: crit, turno: tFiltro, dias_libres: diasLibres, profesores_filtrados: profesSeleccionados });
@@ -2343,19 +1868,6 @@ function aplicarOrdenYFiltro() {
     dibujarResultados(filtrados);
 }
 
-function actualizarEstadoFiltrosResultados(crit, turno, diasLibres, profesSeleccionados) {
-    const estados = {
-        'filtro-card-sort': !!crit,
-        'filtro-card-turno': !!turno,
-        'filtro-card-dias': diasLibres.length > 0,
-        'filtro-card-profes': profesSeleccionados.length > 0
-    };
-    Object.entries(estados).forEach(([id, activo]) => {
-        let el = document.getElementById(id);
-        if (el) el.classList.toggle('is-active', activo);
-    });
-}
-
 function dibujarResultados(lista) {
     RESULTADOS_MOSTRADOS = lista;
     OFFSET_MOSTRADOS = 0;
@@ -2380,60 +1892,61 @@ function renderizarBatchResultados() {
         let i = OFFSET_MOSTRADOS + k;
         let idAcc = `acc-${i}`;
         let rows = val.cursos.map(c => generarFilaSIAE(c, null, false)).join('');
-        let item = document.createElement('div'); item.className = 'opcion-card';
+        let item = document.createElement('div'); item.className = 'accordion-item border shadow-sm mb-2';
         item.innerHTML = `
-        <div class="opcion-head" role="button" tabindex="0" onclick="toggleOpcionResultado(event, ${i})" onkeydown="if(event.key==='Enter'||event.key===' '){toggleOpcionResultado(event, ${i});}">
-        <span class="opcion-num">Opción ${i + 1}</span>
-        <div class="opcion-stats t-body">
-        <span class="stat"><i class="bi bi-calendar-week"></i> <b>${val.dias}</b> días</span>
-        <span class="div"></span>
-        <span class="stat"><i class="bi bi-mortarboard"></i> <b>${val.creditos}</b> créditos</span>
-        <span class="div"></span>
-        <span class="stat"><i class="bi bi-hourglass-split"></i> <b>${val.huecos}h</b> libres</span>
+<h2 class="accordion-header d-flex align-items-center">
+    <button class="accordion-button collapsed py-2 flex-grow-1" type="button" data-bs-toggle="collapse" data-bs-target="#${idAcc}" onclick="SadaAnalytics.trackAbrirCombinacion(${i}, RESULTADOS_MOSTRADOS[${i}].cursos)">
+        <div class="d-flex w-100 justify-content-between align-items-center me-3">
+            <div>
+                <span class="badge bg-primary">Opción ${i + 1}</span>
+                <small class="text-muted fw-bold ms-2">${val.dias} Días | ${val.creditos} Cr | ${val.huecos}h Libres</small>
+            </div>
         </div>
-        <div class="opcion-actions">
-        <button id="btn-auto-${i}" class="ac-btn ac-btn--main" onclick="confirmarHorarioAuto(${i})">
-            <i class="bi bi-mortarboard-fill"></i> Mi Opción Principal
+    </button>
+    <button class="btn btn-sm btn-success text-white shadow-sm rounded-pill px-3 me-1 fw-bold" style="font-size:0.78rem;" onclick="event.stopPropagation(); confirmarHorarioAuto(${i})" title="Registrar como mi horario final">
+        <i class="bi bi-mortarboard me-1"></i>Mi opción de horario
+    </button>
+    <button class="btn btn-sm btn-light border border-primary shadow-sm rounded-pill px-2 me-1 fw-semibold" style="font-size:0.78rem; color:#0d6efd;" onclick="event.stopPropagation(); transferirAManual(${i})" title="Enviar este horario al Modo Manual para editarlo">
+        <i class="bi bi-arrow-left-right me-1"></i>Transferir
+    </button>
+    <div class="dropdown me-1" onclick="event.stopPropagation()">
+        <button class="btn btn-sm btn-light border shadow-sm rounded-pill px-3 fw-semibold dropdown-toggle" type="button" data-bs-toggle="dropdown" onclick="event.stopPropagation()">
+            <i class="bi bi-download me-1"></i>Descargar
         </button>
-        <button class="ac-btn ac-btn--ghost" onclick="transferirAManual(${i})">
-            <i class="bi bi-arrow-left-right"></i> Transferir
-        </button>
-        <div class="dropdown d-inline-block">
-            <button class="ac-btn ac-btn--neutral dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            <i class="bi bi-download"></i> Descargar
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 t-body">
-            <li><a class="dropdown-item py-2" href="#" onclick="event.preventDefault(); descargarAutoOpcion(${i}, 'pdf')"><i class="bi bi-file-earmark-pdf me-2 text-danger"></i> PDF</a></li>
-            <li><a class="dropdown-item py-2" href="#" onclick="event.preventDefault(); descargarAutoOpcion(${i}, 'png')"><i class="bi bi-image me-2 text-primary"></i> PNG</a></li>
-            <li><a class="dropdown-item py-2" href="#" onclick="event.preventDefault(); descargarAutoOpcion(${i}, 'excel')"><i class="bi bi-file-earmark-excel me-2 text-success"></i> Excel</a></li>
-            </ul>
-        </div>
-        <div class="dropdown d-inline-block">
-            <button id="sort-auto-${i}" class="ac-btn ac-btn--neutral dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            <i class="bi bi-sort-alpha-down"></i> <span id="sort-auto-label-${i}">Ordenar</span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 t-body">
-            <li><button class="dropdown-item py-2" onclick="ordenarTablaAuto(${i}, 'materia')">Por Materia (A-Z)</button></li>
-            <li><button class="dropdown-item py-2" onclick="ordenarTablaAuto(${i}, 'profesor')">Por Profe (A-Z)</button></li>
-            <li><button class="dropdown-item py-2" onclick="ordenarTablaAuto(${i}, 'grupo')">Por Grupo (1-15)</button></li>
-            <li><button class="dropdown-item py-2" onclick="ordenarTablaAuto(${i}, 'cronologico')">Por Hora (00-24)</button></li>
-            </ul>
-        </div>
-        <button class="ac-btn ac-btn--dark" onclick="let sw = document.getElementById('switch-auto-${i}'); sw.checked = !sw.checked; toggleVistaAuto(${i})">
-            <i class="bi bi-grid-3x3-gap-fill"></i> Tabla dinámica
-        </button>
-        <button class="ac-btn ac-btn--neutral ms-1" data-bs-toggle="collapse" data-bs-target="#opcion-body-${i}" aria-expanded="false" title="Abrir opción">
-            <i class="bi bi-chevron-down"></i>
-        </button>
-        <input type="checkbox" id="switch-auto-${i}" style="display:none;" onchange="toggleVistaAuto(${i})">
+        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-1" onclick="event.stopPropagation()">
+            <li><button class="dropdown-item small py-2" onclick="descargarAutoOpcion(${i},'pdf')"><i class="bi bi-file-earmark-pdf text-danger me-2"></i>PDF</button></li>
+            <li><button class="dropdown-item small py-2" onclick="descargarAutoOpcion(${i},'png')"><i class="bi bi-file-image text-primary me-2"></i>Imagen PNG</button></li>
+            <li><button class="dropdown-item small py-2" onclick="descargarAutoOpcion(${i},'excel')"><i class="bi bi-file-earmark-excel text-success me-2"></i>Excel</button></li>
+            <li><button class="dropdown-item small py-2" onclick="descargarAutoOpcion(${i},'csv')"><i class="bi bi-file-text me-2"></i>CSV</button></li>
+        </ul>
+    </div>
+    <select id="sort-auto-${i}" class="form-select form-select-sm border-primary me-2 d-none d-md-inline-block" style="width: auto; font-size: 0.75rem;" onclick="event.stopPropagation()" onchange="ordenarTablaAuto(${i}, this.value)">
+        <option value="materia" selected>Ordenar: Materia</option>
+        <option value="profesor">Ordenar: Profesor (A-Z)</option>
+        <option value="grupo">Ordenar: Grupo</option>
+        <option value="horas">Ordenar: Duración</option>
+        <option value="cronologico">Ordenar: Cronológico</option>
+    </select>
+
+    <button class="btn-tool bg-white shadow-sm border me-1" id="btn-recolor-auto-${i}" style="display:none;" onclick="recolorearAuto(); event.stopPropagation();" title="Cambiar paleta de colores">
+        <i class="bi bi-palette text-primary"></i>
+    </button>
+
+    <div class="visual-pill shadow-sm me-1" onclick="event.stopPropagation();" style="transform: scale(0.85); transform-origin: right center;">
+        <div class="form-check form-switch m-0 d-flex align-items-center">
+            <input class="form-check-input" type="checkbox" id="switch-auto-${i}" onclick="event.stopPropagation()" onchange="toggleVistaAuto(${i})">
+            <span class="ms-2">VISUAL</span>
         </div>
     </div>
-    <div class="opcion-body collapse t-body t-aa" id="opcion-body-${i}">
+</h2>
+<div id="${idAcc}" class="accordion-collapse collapse">
+    <div class="accordion-body p-0">
         <div id="res-tabla-${i}" class="table-responsive">
-            <table class="table table-bordered table-sm mb-0 tabla-siae"><thead class="table-light"><tr><th class="swatch-col"></th><th>Materia</th><th class="grupo-col">Gpo</th><th>Profesor</th><th class="col-dia">L</th><th class="col-dia">M</th><th class="col-dia">Mi</th><th class="col-dia">J</th><th class="col-dia">V</th><th class="col-dia">S</th><th class="num-col">Cr</th><th class="act-col"></th></tr></thead><tbody id="tbody-auto-${i}">${rows}</tbody></table>
+            <table class="table table-bordered table-sm mb-0 tabla-siae"><thead class="table-light"><tr><th>Mat</th><th>Gpo</th><th>Prof</th><th class="col-dia">L</th><th class="col-dia">M</th><th class="col-dia">M</th><th class="col-dia">J</th><th class="col-dia">V</th><th class="col-dia">S</th><th>Cr</th><th>Obs</th></tr></thead><tbody id="tbody-auto-${i}">${rows}</tbody></table>
         </div>
         <div id="res-visual-${i}" class="p-3 bg-white" style="display:none; overflow-x:auto;"></div>
-    </div>`;
+    </div>
+</div>`;
         resDiv.appendChild(item);
     });
 
@@ -2471,17 +1984,6 @@ function transferirAManual(idx) {
     alert("¡Horario transferido con éxito! Ahora puedes editarlo manualmente.");
 }
 
-function toggleOpcionResultado(event, idx) {
-    if (event && event.target.closest('button, a, input, select, label, .dropdown, .dropdown-menu')) return;
-    let body = document.getElementById(`opcion-body-${idx}`);
-    if (!body) return;
-    if (window.bootstrap && bootstrap.Collapse) {
-        bootstrap.Collapse.getOrCreateInstance(body, { toggle: false }).toggle();
-    } else {
-        body.classList.toggle('show');
-    }
-}
-
 function ordenarTablaAuto(idx, criterio) {
     if (!RESULTADOS_MOSTRADOS[idx]) return;
     SadaAnalytics.trackHerramienta('auto_sort', { combination: idx, criterio: criterio });
@@ -2490,14 +1992,12 @@ function ordenarTablaAuto(idx, criterio) {
 
     cursos.sort((a, b) => {
         switch (criterio) {
-            case 'materia': return a.asignatura.localeCompare(b.asignatura, 'es', { sensitivity: 'base' });
-            case 'profesor': return a.profesor.localeCompare(b.profesor, 'es', { sensitivity: 'base' });
-            case 'alfabetico':
-                return `${a.asignatura} ${a.profesor}`.localeCompare(`${b.asignatura} ${b.profesor}`, 'es', { sensitivity: 'base' });
+            case 'materia': return a.asignatura.localeCompare(b.asignatura);
+            case 'profesor': return a.profesor.localeCompare(b.profesor);
             case 'grupo':
                 let gA = parseInt(a.grupo); let gB = parseInt(b.grupo);
                 if (!isNaN(gA) && !isNaN(gB)) return gA - gB;
-                return a.grupo.localeCompare(b.grupo, 'es', { sensitivity: 'base' });
+                return a.grupo.localeCompare(b.grupo);
             case 'horas':
                 let durA = a.sesiones.reduce((sum, s) => sum + (s.min_fin - s.min_inicio), 0);
                 let durB = b.sesiones.reduce((sum, s) => sum + (s.min_fin - s.min_inicio), 0);
@@ -2517,17 +2017,6 @@ function ordenarTablaAuto(idx, criterio) {
 
     let rows = cursos.map(c => generarFilaSIAE(c, null, false)).join('');
     document.getElementById(`tbody-auto-${idx}`).innerHTML = rows;
-    let label = document.getElementById(`sort-auto-label-${idx}`);
-    if (label) {
-        const labels = {
-            materia: 'Materia',
-            profesor: 'Profe',
-            alfabetico: 'Materia',
-            grupo: 'Grupo',
-            cronologico: 'Hora'
-        };
-        label.textContent = labels[criterio] || 'Ordenar';
-    }
 }
 
 function toggleVistaAuto(idx) {
@@ -2539,8 +2028,7 @@ function toggleVistaAuto(idx) {
     let recolorBtn = document.getElementById(`btn-recolor-auto-${idx}`);
 
     if (selectorSort) {
-        let sortGroup = selectorSort.closest('.dropdown') || selectorSort;
-        sortGroup.style.display = isChecked ? 'none' : 'inline-block';
+        selectorSort.style.display = isChecked ? 'none' : 'inline-block';
     }
     if (recolorBtn) {
         recolorBtn.style.display = isChecked ? 'inline-block' : 'none';
@@ -2658,23 +2146,28 @@ window.entrarAlWorkspace = function () {
 };
 
 // ==========================================
-// 17. CONFIRMACION DE HORARIO FINAL
+// 17. CONFIRMACIÓN DE HORARIO FINAL
 // ==========================================
 
 function confirmarHorarioManual() {
     if (miHorario.length === 0) return alert('No tienes materias seleccionadas.');
     SadaAnalytics.saveSnapshot(miHorario, actividadesExtra, document.getElementById('semestre-selector').value, 'manual', true);
-
+    
     let btn = document.getElementById('btn-confirmar-horario');
     if (btn) {
         btn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> ¡Horario registrado! Gracias';
         btn.classList.remove('btn-outline-success');
         btn.classList.add('btn-success');
         btn.disabled = true;
+        setTimeout(() => {
+            btn.innerHTML = '<i class="bi bi-mortarboard me-1"></i> Este es mi horario final';
+            btn.classList.remove('btn-success');
+            btn.classList.add('btn-outline-success');
+            btn.disabled = false;
+        }, 5000);
     }
     mostrarEncuestaSatisfaccion();
 }
-
 
 async function descargarAutoOpcion(idx, formato) {
     if (!RESULTADOS_MOSTRADOS[idx]) return;
@@ -2687,7 +2180,7 @@ async function descargarAutoOpcion(idx, formato) {
         cursos.forEach(c => {
             let d = { LUNES: '', MARTES: '', MIERCOLES: '', JUEVES: '', VIERNES: '', SABADO: '' };
             c.sesiones.forEach(s => { let k = s.dia.toUpperCase().replace('É', 'E'); if (d.hasOwnProperty(k)) d[k] = `${s.inicio}-${s.fin}`; });
-            let row = `${c.asignatura.replace(/,/g, '')},${c.clave},${c.grupo},${c.profesor.replace(/,/g, '')},${d.LUNES},${d.MARTES},${d.MIERCOLES},${d.JUEVES},${d.VIERNES},${d.SABADO},${c.creditos},${(c.observaciones || '').replace(/,/g, ' ').replace(/\n/g, ' ')}`;
+            let row = `${c.asignatura.replace(/,/g,'')},${c.clave},${c.grupo},${c.profesor.replace(/,/g,'')},${d.LUNES},${d.MARTES},${d.MIERCOLES},${d.JUEVES},${d.VIERNES},${d.SABADO},${c.creditos},${(c.observaciones||'').replace(/,/g,' ').replace(/\n/g,' ')}`;
             csvContent += row + "\n";
         });
         const link = document.createElement('a');
@@ -2732,24 +2225,22 @@ async function descargarAutoOpcion(idx, formato) {
         return;
     }
 
-    // PDF o PNG: capturar con el mismo estilo refinado de la tabla predeterminada
-    let sourceEl = document.getElementById(`res-tabla-${idx}`);
+    // PDF o PNG: capturar la tabla del acordeón
+    let isVisual = document.getElementById(`switch-auto-${idx}`) && document.getElementById(`switch-auto-${idx}`).checked;
+    let sourceEl = document.getElementById(isVisual ? `res-visual-${idx}` : `res-tabla-${idx}`);
     if (!sourceEl) return;
 
     let container = document.getElementById('capture-container');
     container.innerHTML = '';
     let wrapper = document.createElement('div');
-    wrapper.className = 'L1 export-siae-sheet';
     wrapper.style.width = '1300px';
-    wrapper.style.padding = '28px';
+    wrapper.style.padding = '20px';
     wrapper.style.backgroundColor = '#ffffff';
-    wrapper.innerHTML = `<div class="export-siae-title">Horario opción ${idx + 1}</div>`;
     let clone = sourceEl.cloneNode(true);
     clone.style.display = 'block';
     clone.style.overflow = 'visible';
     clone.style.height = 'auto';
     clone.style.maxHeight = 'none';
-    clone.classList.remove('table-responsive');
     wrapper.appendChild(clone);
     container.appendChild(wrapper);
 
@@ -2779,12 +2270,16 @@ function confirmarHorarioAuto(idx) {
     if (!RESULTADOS_MOSTRADOS[idx]) return;
     let cursos = RESULTADOS_MOSTRADOS[idx].cursos;
     SadaAnalytics.saveSnapshot(cursos, actividadesExtra, document.getElementById('semestre-selector').value, 'auto', true);
-    let btn = document.getElementById('btn-auto-' + idx);
-    if (btn) {
-        btn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> ¡Registrado!';
-        btn.disabled = true;
-        btn.style.opacity = '0.6';
-        btn.style.cursor = 'not-allowed';
+    
+    // Feedback visual: encontrar el botón por su contexto
+    let accordion = document.getElementById('acc-' + idx);
+    if (accordion) {
+        let btn = accordion.closest('.accordion-item').querySelector('.btn-outline-success, .btn-success');
+        if (btn) {
+            btn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i>¡Registrado!';
+            btn.classList.remove('btn-outline-success');
+            btn.classList.add('btn-success');
+        }
     }
     mostrarEncuestaSatisfaccion();
 }
@@ -2792,13 +2287,9 @@ function confirmarHorarioAuto(idx) {
 function actualizarFiltrosUI() {
     if (document.getElementById('sort-resultados'))
         document.getElementById('sort-resultados').value = 'dias';
-    let btnSort = document.getElementById('btn-sort-resultados');
-    if (btnSort) btnSort.textContent = 'Menos Días';
 
     if (document.getElementById('filtro-turno'))
         document.getElementById('filtro-turno').value = '';
-    let btnTurno = document.getElementById('btn-filtro-turno');
-    if (btnTurno) btnTurno.textContent = 'Cualquiera';
 
     document.querySelectorAll('.chk-filtro-dia').forEach(c => c.checked = false);
     let btnDia = document.getElementById('btn-filtro-dia');
@@ -2807,92 +2298,45 @@ function actualizarFiltrosUI() {
     document.querySelectorAll('.chk-filtro-profe').forEach(c => c.checked = false);
     let btnProf = document.getElementById('btn-filtro-profe');
     if (btnProf) btnProf.innerText = 'Todos';
-    actualizarEstadoFiltrosResultados('dias', '', [], []);
 }
 
 // ==========================================
-// ENCUESTA DE SATISFACCION (post-confirmacion)
+// ENCUESTA DE SATISFACCIÓN (post-confirmación)
 // ==========================================
 
 let _encuestaTimer = null;
 
 function mostrarEncuestaSatisfaccion() {
+    // Eliminar encuesta anterior si existe
     let existing = document.getElementById('encuesta-satisfaccion');
     if (existing) existing.remove();
     if (_encuestaTimer) clearTimeout(_encuestaTimer);
 
     let div = document.createElement('div');
     div.id = 'encuesta-satisfaccion';
-    
-    // Glassmorphism, centrado, fuente Apple y Nueva Animación Exclusiva
-    div.style.cssText = `
-        position: fixed; 
-        bottom: 24px; 
-        left: 50%; 
-        z-index: 9999; 
-        background: rgba(255, 255, 255, 0.85); 
-        backdrop-filter: blur(12px); 
-        -webkit-backdrop-filter: blur(12px);
-        color: var(--c-label-primary, #000); 
-        padding: 24px 32px; 
-        border-radius: 20px; 
-        box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
-        border: 1px solid rgba(255, 182, 109, 0.3);
-        animation: slideUpCenter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
-        gap: 12px; 
-        font-family: var(--sf-text, -apple-system, sans-serif);
-        text-align: center;
-        min-width: 320px;
-    `;
-
+    div.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); z-index:9999; background:#1a1a2e; color:#e8e8f0; padding:16px 24px; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); animation:slideUpCookie 0.4s ease-out; display:flex; align-items:center; gap:16px; font-size:0.9rem;';
     div.innerHTML = `
-        <style>
-            @keyframes slideUpCenter {
-                from { transform: translate(-50%, 150%); opacity: 0; }
-                to { transform: translate(-50%, 0); opacity: 1; }
-            }
-        </style>
-        <div style="font-weight: 600; font-size: 15px; letter-spacing: -0.01em;">¿Qué tan satisfecho estás con esta página?</div>
-        
-        <div class="d-flex justify-content-center gap-2" id="estrellas-satisfaccion" style="margin: 4px 0;">
-            ${[1, 2, 3, 4, 5].map(n => `
-                <button class="star-btn" 
-                    style="font-size: 26px; color: #d2d2d7; background: none; border: none; padding: 0; cursor: pointer; transition: transform 0.2s, color 0.2s;" 
-                    onmouseenter="document.querySelectorAll('.star-btn').forEach((b, i) => b.style.color = i < ${n} ? '#ffb66d' : '#d2d2d7'); this.style.transform='scale(1.2)'" 
-                    onmouseleave="document.querySelectorAll('.star-btn').forEach(b => { b.style.color = '#d2d2d7'; b.style.transform='scale(1)'; })" 
-                    onclick="enviarSatisfaccion(${n})" title="${n} estrella${n > 1 ? 's' : ''}">
-                    <i class="bi bi-star-fill"></i>
-                </button>
-            `).join('')}
+        <div>
+            <div class="fw-bold mb-1" style="font-size:0.85rem;">¿Qué tan satisfecho estás con tu horario?</div>
+            <div class="d-flex gap-1" id="estrellas-satisfaccion">
+                ${[1,2,3,4,5].map(n => `<button class="btn btn-sm px-2 py-1" style="font-size:1.3rem; background:none; border:none; cursor:pointer; filter:grayscale(1); transition:filter 0.2s;" onmouseenter="this.style.filter='none'" onmouseleave="if(!this.dataset.selected) this.style.filter='grayscale(1)'" onclick="enviarSatisfaccion(${n})" title="${n} estrella${n>1?'s':''}">⭐</button>`).join('')}
+            </div>
         </div>
-
-        <button style="background: none; border: none; color: var(--c-label-tertiary, #8e8e93); font-size: 12px; font-weight: 500; cursor: pointer; padding: 4px;" 
-            onclick="cerrarEncuesta()">Cerrar</button>
+        <button class="btn btn-sm" style="background:none; border:none; color:#7fb3f5; font-size:0.75rem; white-space:nowrap;" onclick="cerrarEncuesta()">Cerrar</button>
     `;
-    
     document.body.appendChild(div);
 
-    // Auto-cerrar exactamente a los 10 segundos
-    _encuestaTimer = setTimeout(() => cerrarEncuesta(), 10000);
+    // Auto-cerrar después de 8 segundos
+    _encuestaTimer = setTimeout(() => cerrarEncuesta(), 8000);
 }
-
 
 function enviarSatisfaccion(rating) {
     SadaAnalytics.updateSatisfaction(rating);
 
     let div = document.getElementById('encuesta-satisfaccion');
     if (div) {
-        // Pantalla de agradecimiento centrada y con tu Naranja Pastel
-        div.innerHTML = `
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0;">
-                <i class="bi bi-check-circle-fill" style="color: #ffb66d; font-size: 28px; margin-bottom: 8px;"></i> 
-                <span style="font-weight: 600; font-size: 15px;">¡Gracias por tu retroalimentación!</span>
-            </div>
-        `;
-        setTimeout(() => cerrarEncuesta(), 2500);
+        div.innerHTML = '<i class="bi bi-heart-fill" style="color:#ff6b6b;"></i> <span class="fw-bold">¡Gracias por tu respuesta!</span>';
+        setTimeout(() => cerrarEncuesta(), 2000);
     }
 }
 
@@ -2901,17 +2345,3 @@ function cerrarEncuesta() {
     let div = document.getElementById('encuesta-satisfaccion');
     if (div) { div.style.opacity = '0'; div.style.transition = 'opacity 0.3s'; setTimeout(() => div.remove(), 300); }
 }
-
-// --- INICIAR SELECTOR ---
-document.addEventListener("DOMContentLoaded", function() {
-    flatpickr(".actA__time", {
-        enableTime: true,
-        noCalendar: true,
-        dateFormat: "H:i",
-        altInput: true,
-        altFormat: "h:i K",
-        time_24hr: false,
-        disableMobile: "true"
-    });
-});
-

@@ -41,20 +41,15 @@ let horariosGuardados = {};      // Persistencia de multiples horarios
 let activeScheduleId = "default";
 let actividadesExtra = [];       // Actividades extracurriculares del usuario
 
-const DB_FILE = 'Horarios_Impares_Completo_UNAM.json';
+const DB_FILE = 'Horarios_Completo_UNAM.json';
 
 // Paleta de colores pastel para los bloques
 const PALETA_ENTERA = [
-    '#FFD8D6', /* Rojo Apple */
-    '#CCE4FF', /* Azul Apple */
-    '#D6F4DF', /* Verde Apple */
-    '#FFECCC', /* Naranja Apple */
-    '#EFDCF8', /* Morado Apple */
-    '#DEF4FE', /* Cyan Apple */
-    '#FFF5CC', /* Amarillo Apple */
-    '#FFD5DE', /* Rosa Apple */
-    '#DEDDF7', /* Indigo Apple */
-    '#E2E2E7'  /* Gris Apple */
+    '#FFF9C4', '#F5F5DC', '#E3F2FD', '#F3E5F5', '#E0F2F1', '#FFF3E0', '#FBE9E7', '#FAFAFA',
+    '#ECEFF1', '#F9FBE7', '#FFF4F0', '#FFF4DC', '#F1F3FF', '#FFECF0', '#DCF2DD', '#D0F3CB',
+    '#DAEDAF', '#FFE8DC', '#E9F8FF', '#FAD2D2', '#FFD9E4', '#D1F3FF', '#CBE6F1', '#EADFFF',
+    '#D2DADD', '#FFFAC7', '#B0E0E0', '#B1CAFF', '#B7DAFF', '#FEDBD7', '#FFCCEA', '#FBC6F0',
+    '#FFE2C8', '#99DAFF', '#FFA79F', '#82E9E6', '#C3ADFF', '#FFC7BA'
 ];
 let PALETA_ORDENADA = []; // Se llena onload ordenando por luminancia
 
@@ -209,11 +204,9 @@ function hayChoque(c1, lista) { return obtenerChoques(c1, lista).length > 0; }
 
 /** Verifica si hay algun choque interno en una lista de cursos (para el generador) */
 function hayChoqueCombo(lista) {
-    let actsAuto = actividadesExtra.filter(a => a.modo === 'auto');
-    let listaCompleta = [...lista, ...actsAuto];
+    let listaCompleta = [...lista, ...actividadesExtra];
     for (let i = 0; i < listaCompleta.length; i++) { for (let j = i + 1; j < listaCompleta.length; j++) { if (hayChoque(listaCompleta[i], [listaCompleta[j]])) return true; } } return false;
 }
-
 
 function actualizarConfigVisual() {
     configVisual.prof = document.getElementById('chk-prof').checked;
@@ -239,7 +232,8 @@ function actualizarConfigVisual() {
 
 window.addEventListener('DOMContentLoaded', function () {
     // Ordenar paleta por brillo para contraste
-    PALETA_ORDENADA = [...PALETA_ENTERA];
+    PALETA_ORDENADA = [...PALETA_ENTERA].sort((a, b) => getLuminance(b) - getLuminance(a));
+
     fetch(DB_FILE)
         .then(res => { if (!res.ok) throw new Error("Error JSON"); return res.json(); })
         .then(data => {
@@ -521,8 +515,7 @@ function renderizarHorarioVisual() {
         insertarBloque(curso, color, false);
     });
 
-    let actsManual = actividadesExtra.filter(a => a.modo === 'manual');
-    actsManual.forEach(act => {
+    actividadesExtra.forEach(act => {
         insertarBloque(act, '#FFE0B2', false);
     });
 
@@ -665,62 +658,13 @@ function cambiarSemestre(resetear = true) {
     let divAlerta = document.getElementById('alerta-semestre');
     divAlerta.innerHTML = '';
     if (val === 'adicional') {
-        divAlerta.innerHTML = `<div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
-            <h5 class="alerta-semestre-title"><i class="bi bi-info-circle-fill"></i> Semestre Adicional: Reglas de Selección</h5>
-            <hr class="my-2" style="border-color: rgba(4, 14, 46, 0.1);">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <p class="alerta-semestre-text mb-1"><strong><i class="bi bi-card-checklist"></i> Requisitos Académicos:</strong></p>
-                    <ul class="alerta-semestre-list mb-0">
-                        <li>Elige asignaturas de <strong>6° y 8° semestre</strong> de la oferta vigente.</li>
-                        <li>Propón asignaturas que <strong>no hayas inscrito previamente</strong>.</li>
-                        <li>Rango de créditos obligatorio: <strong>Mínimo 31 - Máximo 41</strong>.</li>
-                    </ul>
-                </div>
-                <div class="col-md-4 mt-3 mt-md-0">
-                    <div class="bg-white p-3 rounded border border-primary">
-                        <label class="form-label fw-bold text-primary mb-2" style="font-size:13px; font-family: var(--ff-text);">
-                            <i class="bi bi-funnel-fill"></i> Sistema de Pertenencia:
-                        </label>
-                        <select id="filtro-sistema" class="form-select form-select-sm border-primary" onchange="filtrarMaterias(); filtrarMateriasAuto();">
-                            <option value="escolarizado">Escolarizado (Gpos. 6000-8000)</option>
-                            <option value="sua">SUA (Gpos. 9000)</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>`;
-
+        divAlerta.innerHTML = `<div class="alert alert-info shadow-sm" role="alert"><div class="d-flex align-items-center mb-2"><i class="bi bi-info-circle-fill fs-4 me-2 text-primary"></i><h5 class="alert-heading fw-bold mb-0">Semestre Adicional: Reglas de Selección</h5></div><hr class="my-2"><div class="row align-items-center"><div class="col-md-8"><p class="small mb-1"><strong><i class="bi bi-card-checklist"></i> Requisitos Académicos:</strong></p><ul class="small mb-2 ps-3"><li>Elige asignaturas de <strong>6° y 8° semestre</strong> de la oferta vigente.</li><li>Propón asignaturas que <strong>no hayas inscrito previamente</strong>.</li><li>Rango de créditos obligatorio: <strong>Mínimo 31 - Máximo 41</strong>.</div><div class="col-md-4 mt-2 mt-md-0"><div class="bg-white p-3 rounded border border-primary"><label class="form-label fw-bold text-primary small mb-1">Sistema de Pertenencia:</label><select id="filtro-sistema" class="form-select form-select-sm border-primary" onchange="filtrarMaterias(); filtrarMateriasAuto();"><option value="escolarizado">Escolarizado (Gpos. 6000-8000)</option><option value="sua">SUA (Gpos. 9000)</option></select><small class="text-danger fw-bold d-block mt-1"><i`;
     }
     else if (sem === 2) {
-        divAlerta.innerHTML = `<div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
-            <h5 class="alerta-semestre-title"><i class="bi bi-people-fill"></i> ¡Hola, estudiante de Segundo Semestre!</h5>
-            <p class="alerta-semestre-text">Sabemos que en 2do semestre los horarios funcionan por grupos completos. Por lo que te recomendamos tener en cuenta lo siguiente:</p>
-            <ul class="alerta-semestre-list">
-                <li><strong>¿Qué son los Grupos Espejo?:</strong> Son dos o más grupos que se imparten exactamente en el mismo horario, pero con diferente profesor.</li>
-                <li><strong>¿Cuáles son los Grupos Espejo?:</strong> El grupo 2001 y 2002. 2003 y 2004. 2005 y 2006. 2007 y 2008. 2010 y 2011.</li>
-                <li><strong>Recomendación:</strong> Usa el Modo Manual. Elige un grupo base (ej. 2003) y si un profe no te gusta, cámbialo por el del grupo espejo.</li>
-                <li>Si quieres usar el modo exploratorio, usa los filtros, te serán de ayuda para ver otras combinaciones.</li>
-            </ul>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>`;
+        divAlerta.innerHTML = `<div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert"><h5 style="font-family:var(--sf-text);font-size:14px;font-weight:700;letter-spacing:-0.022em;color:#040e2e;margin-bottom:6px;"><i class="bi bi-people-fill"></i> ¡Hola, estudiante de Segundo Semestre!</h5><p style="font-family:var(--sf-text);font-size:13px;font-weight:400;letter-spacing:-0.01em;line-height:1.45;color:#6e6e73;margin-bottom:6px;">Sabemos que en 2do semestre los horarios funcionan por grupos completos. Por lo que te recomendamos tener en cuenta lo siguiente:</p><ul style="font-family:var(--sf-text);font-size:13px;font-weight:400;letter-spacing:-0.01em;line-height:1.45;color:#1d1d1f;padding-left:1.2rem;margin-bottom:8px;"><li><strong style="font-weight:700;">¿Qué son los Grupos Espejo?:</strong> Son dos o más grupos que se imparten exactamente en el mismo horario, pero con diferente profesor.</li><li><strong style="font-weight:700;">¿Cuáles son los Grupos Espejo?:</strong> El grupo 2001 y 2002. 2003 y 2004. 2005 y 2006. 2007 y 2008. 2010 y 2011.</li><li><strong style="font-weight:700;">Recomendación:</strong> Usa el Modo Manual. Elige un grupo base (ej. 2003) y si un profe no te gusta, cámbialo por el del grupo espejo.</li><li>Si quieres usar el modo exploratorio, usa los filtros, te serán de ayuda para ver otras combinaciones.</li></ul><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
     }
     else if (sem === 4) {
-        divAlerta.innerHTML = `<div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
-            <h5 class="alerta-semestre-title"><i class="bi bi-people-fill"></i> ¡Hola, estudiante de Cuarto Semestre!</h5>
-            <p class="alerta-semestre-text">Sabemos que en 4to semestre los horarios funcionan por grupos completos. Por lo que te recomendamos tener en cuenta lo siguiente:</p>
-            <ul class="alerta-semestre-list" style="margin-bottom:0;">
-                <li style="margin-bottom:4px;"><strong>Grupos Espejo:</strong> Grupos: 4001 y 4002. 4003 y 4004. 4005 y 4006. 4007 - 4008 y 4009. 4011 y 4012 tienen las mismas horas. Es fácil intercambiar profesores entre ellos.</li>
-                <li style="margin-bottom:4px;"><strong>Recomendación:</strong> Usa el Modo Manual. Elige un grupo base (ej. 4003) y si un profe no te gusta, cámbialo por el del grupo espejo.</li>
-                <li style="margin-bottom:8px;">Si quieres usar el modo exploratorio, usa los filtros, te serán de ayuda para ver otras combinaciones.</li>
-                <li style="margin-top:8px;padding:8px;background:rgba(255,159,10,0.10);border:1px solid rgba(255,159,10,0.30);border-radius:8px;color:#1d1d1f;">
-                    <strong><i class="bi bi-exclamation-triangle-fill"></i> Importante ACA III:</strong> Por cada grupo de Aprendizaje y Conducta Adaptat. III le corresponden 2 grupos de (Práctica). Asegúrate de elegir el grupo correspondiente de prácticas acorde a lo que dicen las <strong>observaciones</strong> del grupo de Teoría.
-                </li>
-            </ul>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>`;
-
+        divAlerta.innerHTML = `<div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert"><h5 style="font-family:var(--sf-text);font-size:14px;font-weight:700;letter-spacing:-0.022em;color:#040e2e;margin-bottom:6px;"><i class="bi bi-people-fill"></i> ¡Hola, estudiante de Cuarto Semestre!</h5><p style="font-family:var(--sf-text);font-size:13px;font-weight:400;letter-spacing:-0.01em;line-height:1.45;color:#6e6e73;margin-bottom:6px;">Sabemos que en 4to semestre los horarios funcionan por grupos completos. Por lo que te recomendamos tener en cuenta lo siguiente:</p><ul style="font-family:var(--sf-text);font-size:13px;font-weight:400;letter-spacing:-0.01em;line-height:1.45;color:#1d1d1f;padding-left:1.2rem;margin-bottom:0;"><li style="margin-bottom:4px;"><strong style="font-weight:700;">Grupos Espejo:</strong> Grupos: 4001 y 4002. 4003 y 4004. 4005 y 4006. 4007 - 4008 y 4009. 4011 y 4012 tienen las mismas horas. Es fácil intercambiar profesores entre ellos.</li><li style="margin-bottom:4px;"><strong style="font-weight:700;">Recomendación:</strong> Usa el Modo Manual. Elige un grupo base (ej. 4003) y si un profe no te gusta, cámbialo por el del grupo espejo.</li><li style="margin-bottom:8px;">Si quieres usar el modo exploratorio, usa los filtros, te serán de ayuda para ver otras combinaciones.</li><li style="margin-top:8px;padding:8px;background:rgba(255,159,10,0.10);border:1px solid rgba(255,159,10,0.30);border-radius:8px;color:#1d1d1f;"><strong><i class="bi bi-exclamation-triangle-fill"></i> Importante ACA III:</strong> Por cada grupo de Aprendizaje y Conducta Adaptat. III le corresponden 2 grupos de (Práctica). Asegúrate de elegir el grupo correspondiente de prácticas acorde a lo que dicen las <strong>observaciones</strong> del grupo de Teoría.</li></ul><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
     }
 
     filtrarMaterias();
@@ -910,7 +854,7 @@ function filtrarMaterias() {
         let header = document.createElement('div');
         header.className = 'ml-area-header';
         header.setAttribute('data-open', String(isOpen));
-        header.innerHTML = `<i class="bi bi-chevron-down ml-chevron"></i><span class="ml-area-name">${area.toLowerCase()}</span><span class="ml-area-count">${matsFiltradas.length}</span>`;
+        header.innerHTML = `<i class="bi bi-chevron-down ml-chevron"></i><span class="ml-area-name">${area}</span><span class="ml-area-count">${matsFiltradas.length}</span>`;
 
         // AreaAccordion body
         let body = document.createElement('div');
@@ -1023,7 +967,7 @@ function getGrupoCardStateMarkup(estado) {
         case 'previsualizacion':
             return '<div class="grupo-card-v2__state-pill grupo-card-v2__state-pill--previsualizacion">Previsualización</div>';
         case 'candidato':
-            return '<div class="grupo-card-v2__state-pill grupo-card-v2__state-pill--candidato">Seleccionado</div>';
+            return '<div class="grupo-card-v2__state-pill grupo-card-v2__state-pill--candidato">Candidato</div>';
         default:
             return '';
     }
@@ -1102,8 +1046,7 @@ function verObs(id) { let el = document.getElementById(id); el.style.display = e
 function previsualizarTraslape(idNuevo, asignatura) {
     let cursoNuevo = BD_AGRUPADA.find(c => c.id_unico === idNuevo);
     let horarioActual = miHorario.filter(h => h.asignatura !== asignatura);
-    let actsManual = actividadesExtra.filter(a => a.modo === 'manual');
-    let conflictos = obtenerChoques(cursoNuevo, [...horarioActual, ...actsManual]);
+    let conflictos = obtenerChoques(cursoNuevo, [...horarioActual, ...actividadesExtra]);
 
     if (!materiasPendientes.some(p => p.curso.id_unico === idNuevo)) {
         materiasPendientes.push({
@@ -1170,7 +1113,6 @@ function toggleSeleccionManual(id, asignatura) {
 
 function ordenarMiHorario(criterioInput = null) {
     let criterio = criterioInput;
-    window.criterioOrdenManual = criterio;
     if (!criterio) {
         let el = document.getElementById('sort-manual');
         if (el) criterio = el.value;
@@ -1230,50 +1172,16 @@ function actualizarTablaHorario() {
     let total = 0;
     let btnLimpiar = document.getElementById('btn-limpiar-manual');
     if (btnLimpiar) btnLimpiar.style.display = miHorario.length ? 'inline-block' : 'none';
-    let actsManual = actividadesExtra.filter(a => a.modo === 'manual');
-    
-    if (!miHorario.length && !actsManual.length) {
+    if (!miHorario.length && !actividadesExtra.length) {
         tbody.innerHTML = '<tr><td colspan="12" class="text-center text-muted py-4 t-body">No has agregado materias aún.</td></tr>';
     } else {
-        let criterio = window.criterioOrdenManual || 'cronologico';
-        
-        let combinado = [];
-        miHorario.forEach((c, idx) => combinado.push({ item: c, idx: idx, isExtra: false }));
-        actsManual.forEach(act => combinado.push({ item: act, idx: null, isExtra: true }));
-
-        const mapaDias = { 'LUNES': 0, 'MARTES': 1, 'MIERCOLES': 2, 'JUEVES': 3, 'VIERNES': 4, 'SABADO': 5 };
-        combinado.sort((aObj, bObj) => {
-            let a = aObj.item; let b = bObj.item;
-            switch (criterio) {
-                case 'materia': return a.asignatura.localeCompare(b.asignatura);
-                case 'profesor': return a.profesor.localeCompare(b.profesor);
-                case 'grupo':
-                    let gA = parseInt(a.grupo); let gB = parseInt(b.grupo);
-                    if (!isNaN(gA) && !isNaN(gB)) return gA - gB;
-                    return a.grupo.localeCompare(b.grupo);
-                case 'horas':
-                    let durA = a.sesiones.reduce((sum, s) => sum + (s.min_fin - s.min_inicio), 0);
-                    let durB = b.sesiones.reduce((sum, s) => sum + (s.min_fin - s.min_inicio), 0);
-                    return durB - durA;
-                case 'cronologico':
-                    let getEarliest = (curso) => {
-                        if (!curso.sesiones || curso.sesiones.length === 0) return 999999;
-                        let mins = curso.sesiones.map(s => (mapaDias[s.dia.toUpperCase()] || 0) * 1440 + s.min_inicio);
-                        return Math.min(...mins);
-                    };
-                    return getEarliest(a) - getEarliest(b);
-                default: return 0;
-            }
+        miHorario.forEach((c, idx) => {
+            total += c.creditos;
+            tbody.innerHTML += generarFilaSIAE(c, idx);
         });
-
-        combinado.forEach(obj => {
-            if (obj.isExtra) {
-                let actConFlag = Object.assign({}, obj.item, { _esActividad: true });
-                tbody.innerHTML += generarFilaSIAE(actConFlag, null, false);
-            } else {
-                total += obj.item.creditos;
-                tbody.innerHTML += generarFilaSIAE(obj.item, obj.idx);
-            }
+        actividadesExtra.forEach(act => {
+            let actConFlag = Object.assign({}, act, { _esActividad: true });
+            tbody.innerHTML += generarFilaSIAE(actConFlag, null, false);
         });
     }
 
@@ -1317,6 +1225,7 @@ function actualizarTablaHorario() {
     if (document.getElementById('switch-vista').checked) renderizarHorarioVisual();
 }
 
+
 function generarFilaSIAE(c, idx = null, showDelete = true) {
     const DIAS = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
     let d = { LUNES: null, MARTES: null, MIERCOLES: null, JUEVES: null, VIERNES: null, SABADO: null };
@@ -1325,8 +1234,9 @@ function generarFilaSIAE(c, idx = null, showDelete = true) {
         if (d.hasOwnProperty(k)) d[k] = `${escapeHtml(s.inicio)}-${escapeHtml(s.fin)}`;
     });
 
-let color = (MAPA_COLORES_ASIGNADOS[c.id_unico] || '#d2d2d7');
-    if (c._esActividad) color = '#ffb66d'; 
+    let color = (MAPA_COLORES_ASIGNADOS[c.asignatura] || '#d2d2d7');
+    if (c._esActividad) color = '#e65100';
+
     let displayAsignatura = c._esActividad ? limpiarNombreActividadExtra(c.asignatura) : c.asignatura;
     let swatchTd = `<td class="swatch-cell"><span class="swatch" style="background:${color}"></span></td>`;
     let claveHtml = c.clave ? `<span class="materia-clave">${escapeHtml(c.clave)}</span>` : '';
@@ -1339,16 +1249,11 @@ let color = (MAPA_COLORES_ASIGNADOS[c.id_unico] || '#d2d2d7');
             : `<td class="day-cell empty">-</td>`
     ).join('');
     let creditosTd = `<td class="creditos">${c.creditos || '-'}</td>`;
-    
-    let rmTd = '';
-    if (c._esActividad) {
-        rmTd = `<td class="accion-cell"><button class="rm-btn" onclick="eliminarActividad('${c.id_unico}')" title="Eliminar Actividad"><i class="bi bi-x-lg"></i></button></td>`;
-    } else if (showDelete && idx !== null) {
-        rmTd = `<td class="accion-cell"><button class="rm-btn" onclick="borrar(${idx})" title="Eliminar Materia"><i class="bi bi-x-lg"></i></button></td>`;
-    } else {
-        rmTd = `<td class="accion-cell"></td>`;
-    }
+    let rmTd = showDelete && idx !== null
+        ? `<td class="accion-cell"><button class="rm-btn" onclick="borrar(${idx})" title="Eliminar"><i class="bi bi-x-lg"></i></button></td>`
+        : `<td class="accion-cell"></td>`;
     let trClass = c._esActividad ? ' class="actividad"' : '';
+
     return `<tr${trClass}>${swatchTd}${nombreTd}${grupoTd}${profTd}${dayTds}${creditosTd}${rmTd}</tr>`;
 }
 
@@ -1368,8 +1273,6 @@ function limpiarTodoManual() {
         registrarEstado();
         miHorario = [];
         materiasPendientes = [];
-        actividadesExtra = [];
-        renderActividades();
         guardarEstado();
         limpiarPanelGrupos();
         filtrarMaterias();
@@ -1569,7 +1472,6 @@ function abrirSelectorHora(inputId) {
 
 function agregarActividad(source) {
     let suffix = source === 'auto' ? '-auto' : '';
-    let modoFiltro = source === 'auto' ? 'auto' : 'manual';
     let nombre = document.getElementById('act-nombre' + suffix).value.trim();
     let inicio = document.getElementById('act-inicio' + suffix).value;
     let fin = document.getElementById('act-fin' + suffix).value;
@@ -1587,18 +1489,14 @@ function agregarActividad(source) {
         min_inicio: convertirMinutos(inicio), min_fin: convertirMinutos(fin)
     }));
 
-    // AQUÍ ESTÁ LA ETIQUETA: modo: modoFiltro
     let actividad = {
         id_unico: id, asignatura: nombre, profesor: 'Actividad Extra',
         grupo: '-', creditos: 0, clave: '-', observaciones: '', semestre: 0,
-        area: 'EXTRA', sesiones: sesiones, esActividad: true,
-        modo: modoFiltro 
+        area: 'EXTRA', sesiones: sesiones, esActividad: true
     };
     actividad.asignatura = nombre;
 
-    let targetHorario = modoFiltro === 'auto' ? [] : miHorario;
-    let prevActs = actividadesExtra.filter(a => a.modo === modoFiltro);
-    let conflictos = obtenerChoques(actividad, [...targetHorario, ...prevActs]);
+    let conflictos = obtenerChoques(actividad, [...miHorario, ...actividadesExtra]);
     if (conflictos.length > 0) {
         let nombres = conflictos.map(c => c.esActividad ? limpiarNombreActividadExtra(c.asignatura) : c.asignatura).join(', ');
         alert('Esta actividad se traslapa con: ' + nombres + '.\nAjusta el día u horario para poder agregarla.');
@@ -1609,7 +1507,6 @@ function agregarActividad(source) {
     renderActividades();
     renderizarHorarioVisual();
     actualizarTablaHorario();
-    renderBolsa();
     if (materiaSeleccionadaActual) cargarPanelGrupos(materiaSeleccionadaActual);
     if (materiaSeleccionadaAuto) cargarPanelGruposAuto(materiaSeleccionadaAuto);
 
@@ -1624,28 +1521,24 @@ function eliminarActividad(id) {
     renderActividades();
     renderizarHorarioVisual();
     actualizarTablaHorario();
-    renderBolsa();
     if (materiaSeleccionadaActual) cargarPanelGrupos(materiaSeleccionadaActual);
 }
 
 function renderActividades() {
+    let count = actividadesExtra.length;
     ['', '-auto'].forEach(suffix => {
-        let modoStr = suffix === '-auto' ? 'auto' : 'manual';
-        let actsFiltradas = actividadesExtra.filter(a => a.modo === modoStr);
-        let count = actsFiltradas.length;
-        
         let lista = document.getElementById('lista-actividades' + suffix);
         let badge = document.getElementById('badge-actividades' + suffix);
         if (badge) { badge.style.display = count > 0 ? 'inline-block' : 'none'; badge.textContent = count; }
         if (!lista) return;
-        lista.innerHTML = '';    
-        actsFiltradas.forEach(act => {
+        lista.innerHTML = '';
+        actividadesExtra.forEach(act => {
             let diasStr = act.sesiones.map(s => s.dia.substr(0, 3)).join(', ');
             let horaStr = act.sesiones[0] ? act.sesiones[0].inicio + '-' + act.sesiones[0].fin : '';
             let nombre = limpiarNombreActividadExtra(act.asignatura);
             let item = document.createElement('div');
-            item.className = 'actA__chip';
-            item.innerHTML = '<div><div class="actA__chip-name">' + nombre + '</div><div class="actA__chip-meta">' + diasStr + ' · ' + horaStr + '</div></div><button class="actA__chip-rm" onclick="eliminarActividad(\'' + act.id_unico + '\')" title="Eliminar"><i class="bi bi-x-circle-fill"></i></button>';
+            item.className = 'list-group-item d-flex justify-content-between align-items-center py-2 px-2';
+            item.innerHTML = '<div><span class="t-item-primary" style="color: #e65100;">' + nombre + '</span><br><span class="t-body" style="color: var(--c-label-secondary);">' + diasStr + ' · ' + horaStr + '</span></div><button class="btn btn-sm text-danger p-0" onclick="eliminarActividad(\'' + act.id_unico + '\')" title="Eliminar"><i class="bi bi-x-circle"></i></button>';
             lista.appendChild(item);
         });
     });
@@ -1678,7 +1571,7 @@ function filtrarMateriasAuto() {
         let header = document.createElement('div');
         header.className = 'ml-area-header';
         header.setAttribute('data-open', String(isOpen));
-        header.innerHTML = `<i class="bi bi-chevron-down ml-chevron"></i><span class="ml-area-name">${area.toLowerCase()}</span><span class="ml-area-count">${matsFiltradas.length}</span>`;
+        header.innerHTML = `<i class="bi bi-chevron-down ml-chevron"></i><span class="ml-area-name">${area}</span><span class="ml-area-count">${matsFiltradas.length}</span>`;
 
         let body = document.createElement('div');
         body.className = 'ml-area-body';
@@ -1762,11 +1655,11 @@ function cargarPanelGrupos(asignatura) {
             materiaHijoInscrita = miHorario.find(m => m.asignatura.includes("(PRACTICA)"));
         }
     }
+
     let horarioSinMateriaActual = miHorario.filter(h => h.asignatura !== asignatura);
-    
-    let actsManual = actividadesExtra.filter(a => a.modo === 'manual');
+
     cursos.forEach(c => {
-        let conflictos = obtenerChoques(c, [...horarioSinMateriaActual, ...actsManual]);
+        let conflictos = obtenerChoques(c, [...horarioSinMateriaActual, ...actividadesExtra]);
         let choca = conflictos.length > 0;
         let yaInscrita = miHorario.some(h => h.id_unico === c.id_unico);
         let esPrevisualizada = materiasPendientes.some(p => p.curso.id_unico === c.id_unico);
@@ -1884,14 +1777,7 @@ function toggleCandidato(id, asignatura) {
 function renderBolsa() {
     let ul = document.getElementById('lista-bolsa'); ul.innerHTML = '';
     let keys = Object.keys(bolsa);
-    let actsAuto = actividadesExtra.filter(act => act.modo === 'auto');
-    let tieneActividades = actsAuto.length > 0;
-    
-    if (keys.length === 0 && !tieneActividades) { 
-        ul.innerHTML = '<li class="list-group-item text-muted text-center py-3 w-100 rounded border-0 bg-transparent">Aún no has seleccionado materias.</li>'; 
-        return; 
-    }
-    
+    if (keys.length === 0) { ul.innerHTML = '<li class="list-group-item text-muted text-center py-3 w-100 rounded border-0 bg-transparent">Aún no has seleccionado materias.</li>'; return; }
     keys.forEach(k => {
         let li = document.createElement('li'); li.className = 'list-group-item d-flex justify-content-between align-items-center py-2 px-3 rounded shadow-sm border border-secondary border-opacity-25 bg-white';
         li.style.width = "auto";
@@ -1899,17 +1785,6 @@ function renderBolsa() {
         li.style.minWidth = "220px";
         li.innerHTML = `<div class="misel-chip-name"><span class="fw-bold d-block text-truncate small" title="${escapeHtml(k)}">${escapeHtml(k)}</span></div><div class="misel-chip-meta"><span class="badge bg-secondary rounded-pill">${bolsa[k].length}</span><i class="bi bi-x-circle text-danger cursor-pointer fs-6"></i></div>`;
         li.querySelector('.bi-x-circle').onclick = () => delBolsa(k);
-        ul.appendChild(li);
-    });
-
-    actsAuto.forEach(act => {
-        let li = document.createElement('li'); 
-        li.className = 'list-group-item misel-chip--extra d-flex justify-content-between align-items-center py-2 px-3 rounded shadow-sm bg-white';
-        li.style.width = "auto";
-        li.style.flex = "1 1 auto";
-        li.style.minWidth = "220px";
-        li.innerHTML = `<div class="misel-chip-name"><span class="fw-bold d-block text-truncate small" title="${escapeHtml(act.asignatura)}">${escapeHtml(act.asignatura)} (Extra)</span></div><div class="misel-chip-meta"><span class="badge">1</span><i class="bi bi-x-circle text-danger cursor-pointer fs-6"></i></div>`;
-        li.querySelector('.bi-x-circle').onclick = () => eliminarActividad(act.id_unico);
         ul.appendChild(li);
     });
 }
@@ -2008,15 +1883,12 @@ async function generarCombinaciones() {
             }
 
             if (!hayChoqueCombo(comb) && esCombinacionValida(comb)) {
-                let actsAuto = actividadesExtra.filter(a => a.modo === 'auto');
-                let fullComb = [...comb, ...actsAuto];
-                
-                let creds = fullComb.reduce((a, b) => a + b.creditos, 0);
-                let diasSet = new Set(fullComb.flatMap(c => c.sesiones.map(s => s.dia)));
-                let huecos = calcularHuecos(fullComb);
+                let creds = comb.reduce((a, b) => a + b.creditos, 0);
+                let diasSet = new Set(comb.flatMap(c => c.sesiones.map(s => s.dia)));
+                let huecos = calcularHuecos(comb);
 
                 RESULTADOS_GLOBALES.push({
-                    cursos: fullComb,
+                    cursos: [...comb],
                     creditos: creds,
                     dias: diasSet.size,
                     huecos: huecos
@@ -2382,58 +2254,58 @@ function renderizarBatchResultados() {
         let rows = val.cursos.map(c => generarFilaSIAE(c, null, false)).join('');
         let item = document.createElement('div'); item.className = 'opcion-card';
         item.innerHTML = `
-        <div class="opcion-head" role="button" tabindex="0" onclick="toggleOpcionResultado(event, ${i})" onkeydown="if(event.key==='Enter'||event.key===' '){toggleOpcionResultado(event, ${i});}">
+      <div class="opcion-head" role="button" tabindex="0" onclick="toggleOpcionResultado(event, ${i})" onkeydown="if(event.key==='Enter'||event.key===' '){toggleOpcionResultado(event, ${i});}">
         <span class="opcion-num">Opción ${i + 1}</span>
         <div class="opcion-stats t-body">
-        <span class="stat"><i class="bi bi-calendar-week"></i> <b>${val.dias}</b> días</span>
-        <span class="div"></span>
-        <span class="stat"><i class="bi bi-mortarboard"></i> <b>${val.creditos}</b> créditos</span>
-        <span class="div"></span>
-        <span class="stat"><i class="bi bi-hourglass-split"></i> <b>${val.huecos}h</b> libres</span>
+          <span class="stat"><i class="bi bi-calendar-week"></i> <b>${val.dias}</b> días</span>
+          <span class="div"></span>
+          <span class="stat"><i class="bi bi-mortarboard"></i> <b>${val.creditos}</b> créditos</span>
+          <span class="div"></span>
+          <span class="stat"><i class="bi bi-hourglass-split"></i> <b>${val.huecos}h</b> libres</span>
         </div>
         <div class="opcion-actions">
-        <button id="btn-auto-${i}" class="ac-btn ac-btn--main" onclick="confirmarHorarioAuto(${i})">
+          <button class="ac-btn ac-btn--main" onclick="confirmarHorarioAuto(${i})">
             <i class="bi bi-mortarboard-fill"></i> Mi Opción Principal
-        </button>
-        <button class="ac-btn ac-btn--ghost" onclick="transferirAManual(${i})">
+          </button>
+          <button class="ac-btn ac-btn--ghost" onclick="transferirAManual(${i})">
             <i class="bi bi-arrow-left-right"></i> Transferir
-        </button>
-        <div class="dropdown d-inline-block">
+          </button>
+          <div class="dropdown d-inline-block">
             <button class="ac-btn ac-btn--neutral dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            <i class="bi bi-download"></i> Descargar
+              <i class="bi bi-download"></i> Descargar
             </button>
             <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 t-body">
-            <li><a class="dropdown-item py-2" href="#" onclick="event.preventDefault(); descargarAutoOpcion(${i}, 'pdf')"><i class="bi bi-file-earmark-pdf me-2 text-danger"></i> PDF</a></li>
-            <li><a class="dropdown-item py-2" href="#" onclick="event.preventDefault(); descargarAutoOpcion(${i}, 'png')"><i class="bi bi-image me-2 text-primary"></i> PNG</a></li>
-            <li><a class="dropdown-item py-2" href="#" onclick="event.preventDefault(); descargarAutoOpcion(${i}, 'excel')"><i class="bi bi-file-earmark-excel me-2 text-success"></i> Excel</a></li>
+              <li><a class="dropdown-item py-2" href="#" onclick="event.preventDefault(); descargarAutoOpcion(${i}, 'pdf')"><i class="bi bi-file-earmark-pdf me-2 text-danger"></i> PDF</a></li>
+              <li><a class="dropdown-item py-2" href="#" onclick="event.preventDefault(); descargarAutoOpcion(${i}, 'png')"><i class="bi bi-image me-2 text-primary"></i> PNG</a></li>
+              <li><a class="dropdown-item py-2" href="#" onclick="event.preventDefault(); descargarAutoOpcion(${i}, 'excel')"><i class="bi bi-file-earmark-excel me-2 text-success"></i> Excel</a></li>
             </ul>
-        </div>
-        <div class="dropdown d-inline-block">
+          </div>
+          <div class="dropdown d-inline-block">
             <button id="sort-auto-${i}" class="ac-btn ac-btn--neutral dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            <i class="bi bi-sort-alpha-down"></i> <span id="sort-auto-label-${i}">Ordenar</span>
+              <i class="bi bi-sort-alpha-down"></i> <span id="sort-auto-label-${i}">Ordenar</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 t-body">
-            <li><button class="dropdown-item py-2" onclick="ordenarTablaAuto(${i}, 'materia')">Por Materia (A-Z)</button></li>
-            <li><button class="dropdown-item py-2" onclick="ordenarTablaAuto(${i}, 'profesor')">Por Profe (A-Z)</button></li>
-            <li><button class="dropdown-item py-2" onclick="ordenarTablaAuto(${i}, 'grupo')">Por Grupo (1-15)</button></li>
-            <li><button class="dropdown-item py-2" onclick="ordenarTablaAuto(${i}, 'cronologico')">Por Hora (00-24)</button></li>
+              <li><button class="dropdown-item py-2" onclick="ordenarTablaAuto(${i}, 'materia')">Por Materia (A-Z)</button></li>
+              <li><button class="dropdown-item py-2" onclick="ordenarTablaAuto(${i}, 'profesor')">Por Profe (A-Z)</button></li>
+              <li><button class="dropdown-item py-2" onclick="ordenarTablaAuto(${i}, 'grupo')">Por Grupo (1-15)</button></li>
+              <li><button class="dropdown-item py-2" onclick="ordenarTablaAuto(${i}, 'cronologico')">Por Hora (00-24)</button></li>
             </ul>
-        </div>
-        <button class="ac-btn ac-btn--dark" onclick="let sw = document.getElementById('switch-auto-${i}'); sw.checked = !sw.checked; toggleVistaAuto(${i})">
+          </div>
+          <button class="ac-btn ac-btn--dark" onclick="let sw = document.getElementById('switch-auto-${i}'); sw.checked = !sw.checked; toggleVistaAuto(${i})">
             <i class="bi bi-grid-3x3-gap-fill"></i> Tabla dinámica
-        </button>
-        <button class="ac-btn ac-btn--neutral ms-1" data-bs-toggle="collapse" data-bs-target="#opcion-body-${i}" aria-expanded="false" title="Abrir opción">
+          </button>
+          <button class="ac-btn ac-btn--neutral ms-1" data-bs-toggle="collapse" data-bs-target="#opcion-body-${i}" aria-expanded="false" title="Abrir opción">
             <i class="bi bi-chevron-down"></i>
-        </button>
-        <input type="checkbox" id="switch-auto-${i}" style="display:none;" onchange="toggleVistaAuto(${i})">
+          </button>
+          <input type="checkbox" id="switch-auto-${i}" style="display:none;" onchange="toggleVistaAuto(${i})">
         </div>
-    </div>
-    <div class="opcion-body collapse t-body t-aa" id="opcion-body-${i}">
+      </div>
+      <div class="opcion-body collapse t-body t-aa" id="opcion-body-${i}">
         <div id="res-tabla-${i}" class="table-responsive">
             <table class="table table-bordered table-sm mb-0 tabla-siae"><thead class="table-light"><tr><th class="swatch-col"></th><th>Materia</th><th class="grupo-col">Gpo</th><th>Profesor</th><th class="col-dia">L</th><th class="col-dia">M</th><th class="col-dia">Mi</th><th class="col-dia">J</th><th class="col-dia">V</th><th class="col-dia">S</th><th class="num-col">Cr</th><th class="act-col"></th></tr></thead><tbody id="tbody-auto-${i}">${rows}</tbody></table>
         </div>
         <div id="res-visual-${i}" class="p-3 bg-white" style="display:none; overflow-x:auto;"></div>
-    </div>`;
+      </div>`;
         resDiv.appendChild(item);
     });
 
@@ -2671,10 +2543,15 @@ function confirmarHorarioManual() {
         btn.classList.remove('btn-outline-success');
         btn.classList.add('btn-success');
         btn.disabled = true;
+        setTimeout(() => {
+            btn.innerHTML = '<i class="bi bi-mortarboard me-1"></i> Este es mi horario final';
+            btn.classList.remove('btn-success');
+            btn.classList.add('btn-outline-success');
+            btn.disabled = false;
+        }, 5000);
     }
     mostrarEncuestaSatisfaccion();
 }
-
 
 async function descargarAutoOpcion(idx, formato) {
     if (!RESULTADOS_MOSTRADOS[idx]) return;
@@ -2779,12 +2656,16 @@ function confirmarHorarioAuto(idx) {
     if (!RESULTADOS_MOSTRADOS[idx]) return;
     let cursos = RESULTADOS_MOSTRADOS[idx].cursos;
     SadaAnalytics.saveSnapshot(cursos, actividadesExtra, document.getElementById('semestre-selector').value, 'auto', true);
-    let btn = document.getElementById('btn-auto-' + idx);
-    if (btn) {
-        btn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> ¡Registrado!';
-        btn.disabled = true;
-        btn.style.opacity = '0.6';
-        btn.style.cursor = 'not-allowed';
+
+    // Feedback visual: encontrar el botón por su contexto
+    let accordion = document.getElementById('acc-' + idx);
+    if (accordion) {
+        let btn = accordion.closest('.accordion-item').querySelector('.btn-outline-success, .btn-success');
+        if (btn) {
+            btn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i>¡Registrado!';
+            btn.classList.remove('btn-outline-success');
+            btn.classList.add('btn-success');
+        }
     }
     mostrarEncuestaSatisfaccion();
 }
@@ -2817,82 +2698,36 @@ function actualizarFiltrosUI() {
 let _encuestaTimer = null;
 
 function mostrarEncuestaSatisfaccion() {
+    // Eliminar encuesta anterior si existe
     let existing = document.getElementById('encuesta-satisfaccion');
     if (existing) existing.remove();
     if (_encuestaTimer) clearTimeout(_encuestaTimer);
 
     let div = document.createElement('div');
     div.id = 'encuesta-satisfaccion';
-    
-    // Glassmorphism, centrado, fuente Apple y Nueva Animación Exclusiva
-    div.style.cssText = `
-        position: fixed; 
-        bottom: 24px; 
-        left: 50%; 
-        z-index: 9999; 
-        background: rgba(255, 255, 255, 0.85); 
-        backdrop-filter: blur(12px); 
-        -webkit-backdrop-filter: blur(12px);
-        color: var(--c-label-primary, #000); 
-        padding: 24px 32px; 
-        border-radius: 20px; 
-        box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
-        border: 1px solid rgba(255, 182, 109, 0.3);
-        animation: slideUpCenter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
-        gap: 12px; 
-        font-family: var(--sf-text, -apple-system, sans-serif);
-        text-align: center;
-        min-width: 320px;
-    `;
-
+    div.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); z-index:9999; background:#1a1a2e; color:#e8e8f0; padding:16px 24px; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); animation:slideUpCookie 0.4s ease-out; display:flex; align-items:center; gap:16px; font-size:0.9rem;';
     div.innerHTML = `
-        <style>
-            @keyframes slideUpCenter {
-                from { transform: translate(-50%, 150%); opacity: 0; }
-                to { transform: translate(-50%, 0); opacity: 1; }
-            }
-        </style>
-        <div style="font-weight: 600; font-size: 15px; letter-spacing: -0.01em;">¿Qué tan satisfecho estás con esta página?</div>
-        
-        <div class="d-flex justify-content-center gap-2" id="estrellas-satisfaccion" style="margin: 4px 0;">
-            ${[1, 2, 3, 4, 5].map(n => `
-                <button class="star-btn" 
-                    style="font-size: 26px; color: #d2d2d7; background: none; border: none; padding: 0; cursor: pointer; transition: transform 0.2s, color 0.2s;" 
-                    onmouseenter="document.querySelectorAll('.star-btn').forEach((b, i) => b.style.color = i < ${n} ? '#ffb66d' : '#d2d2d7'); this.style.transform='scale(1.2)'" 
-                    onmouseleave="document.querySelectorAll('.star-btn').forEach(b => { b.style.color = '#d2d2d7'; b.style.transform='scale(1)'; })" 
-                    onclick="enviarSatisfaccion(${n})" title="${n} estrella${n > 1 ? 's' : ''}">
-                    <i class="bi bi-star-fill"></i>
-                </button>
-            `).join('')}
+        <div>
+            <div class="fw-bold mb-1" style="font-size:0.85rem;">¿Qué tan satisfecho estás con tu horario?</div>
+            <div class="d-flex gap-1" id="estrellas-satisfaccion">
+                ${[1, 2, 3, 4, 5].map(n => `<button class="btn btn-sm px-2 py-1" style="font-size:1.3rem; background:none; border:none; cursor:pointer; filter:grayscale(1); transition:filter 0.2s;" onmouseenter="this.style.filter='none'" onmouseleave="if(!this.dataset.selected) this.style.filter='grayscale(1)'" onclick="enviarSatisfaccion(${n})" title="${n} estrella${n > 1 ? 's' : ''}">★</button>`).join('')}
+            </div>
         </div>
-
-        <button style="background: none; border: none; color: var(--c-label-tertiary, #8e8e93); font-size: 12px; font-weight: 500; cursor: pointer; padding: 4px;" 
-            onclick="cerrarEncuesta()">Cerrar</button>
+        <button class="btn btn-sm" style="background:none; border:none; color:#7fb3f5; font-size:0.75rem; white-space:nowrap;" onclick="cerrarEncuesta()">Cerrar</button>
     `;
-    
     document.body.appendChild(div);
 
-    // Auto-cerrar exactamente a los 10 segundos
-    _encuestaTimer = setTimeout(() => cerrarEncuesta(), 10000);
+    // Auto-cerrar después de 8 segundos
+    _encuestaTimer = setTimeout(() => cerrarEncuesta(), 8000);
 }
-
 
 function enviarSatisfaccion(rating) {
     SadaAnalytics.updateSatisfaction(rating);
 
     let div = document.getElementById('encuesta-satisfaccion');
     if (div) {
-        // Pantalla de agradecimiento centrada y con tu Naranja Pastel
-        div.innerHTML = `
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0;">
-                <i class="bi bi-check-circle-fill" style="color: #ffb66d; font-size: 28px; margin-bottom: 8px;"></i> 
-                <span style="font-weight: 600; font-size: 15px;">¡Gracias por tu retroalimentación!</span>
-            </div>
-        `;
-        setTimeout(() => cerrarEncuesta(), 2500);
+        div.innerHTML = '<i class="bi bi-heart-fill" style="color:#ff6b6b;"></i> <span class="fw-bold">¡Gracias por tu respuesta!</span>';
+        setTimeout(() => cerrarEncuesta(), 2000);
     }
 }
 
@@ -2901,17 +2736,4 @@ function cerrarEncuesta() {
     let div = document.getElementById('encuesta-satisfaccion');
     if (div) { div.style.opacity = '0'; div.style.transition = 'opacity 0.3s'; setTimeout(() => div.remove(), 300); }
 }
-
-// --- INICIAR SELECTOR ---
-document.addEventListener("DOMContentLoaded", function() {
-    flatpickr(".actA__time", {
-        enableTime: true,
-        noCalendar: true,
-        dateFormat: "H:i",
-        altInput: true,
-        altFormat: "h:i K",
-        time_24hr: false,
-        disableMobile: "true"
-    });
-});
 

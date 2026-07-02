@@ -1,0 +1,1155 @@
+/* ==========================================================================
+   MODO AUTOMÁTICO (WORKSPACE)
+   Contiene los estilos de la barra de instrucciones, los pasos,
+   el panel izquierdo y las sobreescrituras de color morado del modo auto.
+   Los componentes grandes (misel-*, res-*, filtros, opcion-*)
+   siguen en apple-overrides.css por ahora.
+   ========================================================================== */
+
+/* ── 1. BARRA DE INSTRUCCIONES (Instruction Bar Auto) ── */
+
+.instruction-bar-auto {
+    background: linear-gradient(180deg, #faf0ff 0%, #f3e5f5 100%);
+    border: 1px solid #e1bee7;
+    border-radius: 20px;
+    box-shadow: 0 10px 28px rgba(106, 27, 154, 0.06);
+    font-family: var(--ff-text);
+}
+
+.instruction-bar-title-auto {
+    font-family: var(--ff-text);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.022em;
+    color: #4a148c;
+}
+
+/* ── 2. PASOS DE INSTRUCCIONES (Step badges y textos) ── */
+
+.step-badge-auto {
+    background-color: #6a1b9a;
+}
+
+.step-title-auto {
+    color: #6a1b9a;
+    font-size: 0.97rem;
+    font-weight: 700;
+    letter-spacing: -0.016em;
+}
+
+.step-text-auto {
+    font-family: var(--ff-text);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #4d4d52;
+    line-height: 1.46;
+    letter-spacing: -0.012em;
+}
+
+.steps-border-auto {
+    border-color: #e1bee7 !important;
+}
+
+/* ── 3. TOGGLE OPCIONES AVANZADAS ── */
+
+.opts-toggle-auto {
+    border-color: #e1bee7 !important;
+    cursor: pointer;
+    user-select: none;
+}
+
+.opts-toggle-title-auto {
+    color: #4a148c;
+    font-family: var(--ff-text);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.022em;
+}
+
+.opts-toggle-chevron-circle {
+    width: 28px;
+    height: 28px;
+    background-color: rgba(106, 27, 154, 0.08);
+    color: #6a1b9a;
+}
+
+
+/* ── 4. TARJETAS DE OPCIONES AVANZADAS (collapse) ── */
+
+.adv-card-h6 {
+    font-family: var(--ff-text);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    color: #1c1c1e;
+}
+
+.adv-card-p {
+    font-family: var(--ff-text);
+    font-size: 0.87rem;
+    font-weight: 400;
+    line-height: 1.47;
+    letter-spacing: -0.022em;
+    color: #6e6e73;
+}
+
+.adv-card-border-left-auto {
+    border-left: 4px solid #6a1b9a !important;
+}
+
+/* ── 5. TARJETA FILTROS (lista dentro del collapse) ── */
+
+.adv-card-ul {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.12px;
+    color: #6e6e73;
+}
+
+.adv-card-span-label {
+    font-weight: 600;
+    color: #3c3c3e;
+}
+
+/* ── 6. PANEL IZQUIERDO (overrides de color morado) ── */
+
+.ml-step-auto {
+    color: #6a1b9a;
+}
+
+.apple-prof-panel-typography h6.panel-prof-title-auto {
+    color: #6a1b9a;
+    font-weight: 700;
+}
+
+/* ── 3b. CHEVRON DEL TOGGLE ── */
+
+#opts-avanzados-toggle .opts-avanzados-chevron {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+#opts-avanzados-toggle.collapsed .opts-avanzados-chevron {
+    transform: rotate(-90deg);
+}
+
+.opts-expand-toggle .opts-avanzados-chevron {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.opts-expand-toggle.collapsed .opts-avanzados-chevron {
+    transform: rotate(-90deg);
+}
+
+/* ============================================================
+   MIS SELECCIONES · MODO AUTO  (.misel-*)
+   Porta exactamente mis-selecciones-redesign.html.
+   Tokens: var(--sf-text), var(--sf-display), var(--auto-purple*).
+   Capa de compatibilidad para .list-group-item inyectado por app.js.
+   ============================================================ */
+
+/* ── Frame ── */
+.misel-frame {
+    background: #fff;
+    border: 1px solid var(--c-separator);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+    font-family: var(--ff-text, var(--sf-text));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+}
+
+/* ── Header ── */
+.misel-header {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px 10px;
+    background: linear-gradient(180deg, #fff 0%, #faf6fc 100%);
+    border-bottom: 1px solid #e1bee7;
+}
+
+/* ── Título principal ── */
+.misel-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--auto-purple);
+    font-family: var(--ff-text); /* Misma fuente que Elige Materia */
+    font-weight: 700;
+    font-size: 1.05rem;          /* Mismo tamaño exacto */
+    letter-spacing: -0.016em;    /* Mismo espaciado exacto */
+    margin: 0;
+}
+
+.misel-title i {
+    font-size: 1.1rem;
+}
+
+
+
+/* ── Píldora conteo ── */
+.misel-counter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 28px;
+    padding: 0 11px;
+    background: rgba(106, 27, 154, 0.08);
+    border-radius: 999px;
+    font-family: var(--ff-text);
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #6a1b9a;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.misel-counter__item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.misel-counter b {
+    font-size: 0.85rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.misel-counter__sep {
+    color: rgba(106, 27, 154, 0.55);
+}
+
+/* ── Acciones ── */
+.misel-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.misel-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 9px;
+    font-family: var(--ff-text);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+    -webkit-font-smoothing: antialiased;
+}
+
+.misel-btn--ghost {
+    background: #fff;
+    color: #6e6e73;
+    border: 1px solid #d2d2d7;
+}
+
+.misel-btn--ghost:hover {
+    color: #d70015;
+    border-color: rgba(255, 59, 48, 0.4);
+    background: #fff5f5;
+}
+
+.misel-btn--cta {
+    background: #6a1b9a; /* Morado exacto */
+    color: #fff;
+    border: none;
+    height: 36px;
+    padding: 0 16px;
+    font-size: 0.85rem;
+    box-shadow: 0 6px 14px -4px rgba(106, 27, 154, 0.5);
+}
+
+.misel-btn--cta:hover {
+    background: #4a148c;
+}
+
+.misel-btn--cta:disabled {
+    background: #d2d2d7;
+    color: #fff;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* ── Body ── */
+.misel-body {
+    padding: 0.5rem 0.75rem 0.75rem;
+    background: #fafbfc;
+}
+
+@media (max-width: 900px) {
+    .misel-header {
+        grid-template-columns: 28px minmax(0, 1fr);
+    }
+
+    .misel-counter {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+
+    .misel-actions {
+        grid-column: 1 / -1;
+        justify-self: stretch;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .misel-actions .misel-btn {
+        flex: 1 1 0;
+        justify-content: center;
+    }
+}
+
+/* ── Grid container (también es #lista-bolsa) ── */
+.misel-grid {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    /* Override Bootstrap flex layout */
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 8px;
+    flex-direction: unset !important;
+    flex-wrap: unset !important;
+}
+
+/* ── Empty state (inyectado por app.js con .w-100) ── */
+.misel-grid>li.list-group-item.w-100 {
+    grid-column: 1 / -1;
+    text-align: center !important;
+    padding: 28px 16px !important;
+    color: var(--c-label-tertiary) !important;
+    font-size: 13px !important;
+    border: 1px dashed var(--c-separator) !important;
+    border-radius: 14px !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    transform: none !important;
+    flex: unset !important;
+    width: unset !important;
+    min-width: unset !important;
+}
+
+/* ── Chip (li inyectado por app.js, sin .w-100) ── */
+.misel-grid>li.list-group-item:not(.w-100) {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 10px 12px 10px 18px !important;
+    background: #fff !important;
+    border: 1px solid var(--c-separator) !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+    overflow: hidden;
+    transition: all .15s;
+    /* Override app.js inline styles */
+    flex: unset !important;
+    width: unset !important;
+    min-width: unset !important;
+    max-width: 100% !important;
+}
+
+.misel-grid>li.list-group-item:not(.w-100):hover {
+    border-color: #6a1b9a !important;
+    box-shadow: 0 6px 14px -4px rgba(106, 27, 154, 0.15) !important;
+    transform: translateY(-1px);
+}
+
+/* Stripe morada izquierda via ::before */
+.misel-grid>li.list-group-item:not(.w-100)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: #6a1b9a;
+}
+
+/* Nombre de materia (.fw-bold.small generado por app.js) */
+.misel-chip-name {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.misel-grid>li .fw-bold.small {
+    font-family: var(--sf-text) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: var(--c-label-primary) !important;
+    letter-spacing: -0.01em;
+    display: block !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    line-height: 1.2;
+}
+
+.misel-chip-meta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+    min-width: 62px;
+}
+
+/* Badge de opciones (.badge.bg-secondary generado por app.js) */
+.misel-grid>li .badge.bg-secondary {
+    background: rgba(106, 27, 154, 0.08) !important;
+color: #6a1b9a !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    font-variant-numeric: tabular-nums;
+    min-width: 26px;
+    height: 22px;
+    border-radius: 999px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+    flex-shrink: 0;
+}
+
+/* Botón quitar (.bi-x-circle generado por app.js) */
+.misel-grid>li .bi-x-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+    color: var(--c-label-tertiary) !important;
+    font-size: 16px;
+    transition: all .15s;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.misel-grid>li .bi-x-circle:hover {
+    background: rgba(255, 59, 48, 0.08);
+    color: #d70015 !important;
+}
+
+/* ── Hint inferior ── */
+.misel-hint {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed #e1bee7;
+    font-family: var(--ff-text);
+    font-size: 0.8rem;
+    color: #6e6e73;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.4;
+}
+
+.misel-hint i {
+    color: #6a1b9a;
+}
+
+/* ── Variante: Actividad Extra (Naranja) ── */
+/* Cambiar la rayita izquierda a naranja */
+.misel-grid>li.list-group-item.misel-chip--extra::before {
+    background: #d96600;
+}
+
+/* Borde y sombra hover en naranja */
+.misel-grid>li.list-group-item.misel-chip--extra:hover {
+    border-color: #d96600 !important;
+    box-shadow: 0 6px 14px -4px rgba(217, 102, 0, 0.15) !important;
+}
+
+/* Color del nombre de la actividad (naranja oscuro para buen contraste) */
+.misel-grid>li.list-group-item.misel-chip--extra .fw-bold.small {
+    color: #9c4a00 !important; 
+}
+
+/* Circulito (badge) del contador en naranja translúcido */
+.misel-grid>li.list-group-item.misel-chip--extra .badge {
+    background: rgba(217, 102, 0, 0.12) !important;
+    color: #d96600 !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    font-variant-numeric: tabular-nums;
+    min-width: 26px;
+    height: 22px;
+    border-radius: 999px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   RESULTADOS MODO AUTO
+   ============================================================ */
+
+:root {
+    --auto-purple: #6a1b9a;
+    --auto-purple-soft: #f3e5f5;
+    --auto-purple-tint: rgba(106, 27, 154, 0.08);
+    --auto-purple-border: rgba(106, 27, 154, 0.22);
+    --green: #16a34a;
+}
+
+/* === Botón "Volver a seleccionar" === */
+.back-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--auto-purple);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-family: var(--ff-text);
+    font-size: 14px;
+    font-weight: 650;
+    letter-spacing: -0.022em;
+    box-shadow: none; /* Adiós sombras */
+    transition: background .2s ease;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background: #52157a; /* Morado un poquito más oscuro al pasar el mouse */
+    color: #ffffff;
+}
+
+.back-btn .ico {
+    font-size: 16px;
+    color: #ffffff;
+    display: inline-flex;
+}
+
+/* === Tip verde (Mismo estilo que disclaimer-manual) === */
+.tip-bar {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 16px;
+    margin: 8px 4px 16px;
+    background: rgba(52, 199, 89, 0.12);
+    border: none;
+    border-radius: 12px;
+    font-family: var(--ff-text, var(--sf-text));
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--sada-fg-4, #3c3c3e);
+    text-align: left;
+}
+
+.tip-bar i {
+    font-size: 1.15rem;
+    color: #96be9f;
+    margin-top: 2px;
+    background: transparent;
+    padding: 0;
+}
+
+.tip-bar b {
+    font-weight: 600;
+    color: var(--sada-fg-1, #1c1c1e);
+}
+
+/* === Frame de resultados === */
+.res-frame {
+    background: #fff;
+    border: 1px solid var(--c-separator);
+    border-radius: 18px;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+    font-family: var(--sf-text);
+}
+
+/* Header del frame */
+.res-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eef0f4;
+    background: linear-gradient(180deg, #fff 0%, #faf6fc 100%);
+}
+
+.res-header .h-ico {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: var(--auto-purple);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.res-header h6 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--auto-purple);
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.res-header .conteo {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 24px;
+    padding: 0 10px;
+    background: var(--auto-purple-tint);
+    color: var(--auto-purple);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* === Filtros === */
+.res-frame .filtros {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    padding: 12px 14px;
+    background: #f5f5f7;
+    border-bottom: 1px solid #eef0f4;
+    font-family: var(--ff-text, var(--sf-text));
+}
+
+.res-frame .filtros-intro {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border: 1px solid rgba(106, 27, 154, 0.14);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.82);
+    color: var(--auto-purple);
+    font-family: var(--ff-text, var(--sf-text));
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.22;
+    letter-spacing: 0;
+}
+
+.res-frame .filtros-intro i {
+    font-size: 15px;
+    color: var(--auto-purple);
+}
+
+.res-frame .filtros>.filtro {
+    min-width: 0;
+    width: auto;
+    padding: 9px;
+    border: 1px solid rgba(60, 60, 67, 0.12);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.res-frame .filtros>.filtro.is-active {
+    border-color: rgba(106, 27, 154, 0.36);
+    background: #fcf8ff;
+    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.08);
+}
+
+@media (max-width: 720px) {
+    .res-frame .filtros {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+.filtro .lbl {
+    font-family: var(--ff-text, var(--sf-text));
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--c-label-primary);
+    margin-bottom: 2px;
+    display: block;
+}
+
+.filtro .hint {
+    display: block;
+    min-height: 26px;
+    margin: 0 0 6px;
+    color: var(--c-label-secondary);
+    font-family: var(--ff-text, var(--sf-text));
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: 0;
+}
+
+.filtro .ddown {
+    width: 100%;
+    height: 32px;
+    padding: 0 28px 0 10px;
+    background: #fff;
+    border: 1px solid var(--c-separator);
+    border-radius: 8px;
+    font-family: var(--ff-text, var(--sf-text));
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0;
+    color: var(--c-label-primary);
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 16 16' fill='%236e6e73'><path d='M3.204 5h9.592L8 10.481 3.204 5zm-.753.659l4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: all .15s;
+}
+
+.filtro .ddown:focus {
+    outline: none;
+    border-color: var(--auto-purple);
+    box-shadow: 0 0 0 3px var(--auto-purple-tint);
+}
+
+.filtro .ddown::after {
+    display: none;
+}
+
+.filtro-dropdown,
+.filtro .dropdown {
+    width: 100%;
+}
+
+.filtro-menu {
+    width: 100%;
+    min-width: 100%;
+    padding: 6px;
+    margin-top: 6px !important;
+    border: 1px solid rgba(60, 60, 67, 0.12);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12) !important;
+    font-family: var(--ff-text, var(--sf-text));
+}
+
+.filtro-menu .dropdown-item,
+.filtro-menu .form-check {
+    min-height: 30px;
+    border-radius: 8px;
+    color: var(--c-label-primary);
+    font-family: var(--ff-text, var(--sf-text));
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.15;
+}
+
+.filtro-menu .dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 7px 9px;
+}
+
+.filtro-menu .dropdown-item:hover,
+.filtro-menu .dropdown-item:focus {
+    background: var(--auto-purple-tint);
+    color: var(--auto-purple);
+}
+
+.filtro-menu--checks {
+    padding: 6px;
+}
+
+.filtro-menu--checks .form-check,
+.filtro-menu--profes .form-check {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 !important;
+    padding: 6px 8px 6px 30px;
+}
+
+.filtro-menu .form-check:hover {
+    background: #f5f5f7;
+}
+
+.filtro-menu .form-check-input {
+    margin-top: 0;
+    margin-left: -22px;
+    border-color: rgba(60, 60, 67, 0.28);
+}
+
+.filtro-menu .form-check-input:checked {
+    background-color: var(--auto-purple);
+    border-color: var(--auto-purple);
+}
+
+.filtro-menu .form-check-label {
+    min-width: 0;
+    color: var(--c-label-primary);
+    font-size: 12.5px !important;
+    font-weight: 600;
+}
+
+.filtro-menu--profes {
+    width: 270px;
+    min-width: 270px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.filtro-menu--profes .form-control {
+    height: 32px;
+    border-radius: 8px;
+    border-color: var(--c-separator);
+    font-family: var(--ff-text, var(--sf-text));
+    font-size: 12.5px;
+}
+
+.filtro-menu--profes .btn-link {
+    font-family: var(--ff-text, var(--sf-text));
+    font-size: 12px !important;
+    font-weight: 650;
+}
+
+/* === Tarjeta de Opción === */
+.opciones-lista {
+    display: flex;
+    flex-direction: column;
+}
+
+.opcion-card {
+    border-bottom: 1px solid #eef0f4;
+    background: #fff;
+}
+
+.opcion-card:last-child {
+    border-bottom: none;
+}
+
+.opcion-head {
+    display: grid;
+    grid-template-columns: auto minmax(220px, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .15s ease;
+}
+
+.opcion-head:hover {
+    background: #fbfbfd;
+}
+
+.opcion-head:focus-visible {
+    outline: 3px solid rgba(106, 27, 154, 0.18);
+    outline-offset: -3px;
+}
+
+.opcion-num {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 12px;
+    background: var(--auto-purple);
+    color: #fff;
+    border-radius: 999px;
+    font-family: var(--sf-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.opcion-stats {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 12px;
+    color: var(--c-label-secondary);
+    flex-wrap: wrap;
+}
+
+.opcion-stats .stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-variant-numeric: tabular-nums;
+}
+
+.opcion-stats .stat i {
+    color: var(--auto-purple);
+    font-size: 12px;
+}
+
+.opcion-stats .stat b {
+    color: var(--c-label-primary);
+    font-weight: 700;
+}
+
+.opcion-stats .div {
+    width: 1px;
+    height: 14px;
+    background: var(--c-separator);
+}
+
+/* Acciones */
+.opcion-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.ac-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 34px;
+    padding: 7px 13px;
+    border-radius: 9999px;
+    font-family: var(--ff-text, var(--sf-text));
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: 0;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+}
+
+.ac-btn--main {
+    background: linear-gradient(135deg, #198754, #0f6647);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.25);
+    font-weight: 800;
+}
+
+.ac-btn--main:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(25, 135, 84, 0.35);
+}
+
+.ac-btn--ghost {
+    background: #fff5f5;
+    color: #c92a2a;
+    border-color: #ffe3e3;
+}
+
+.ac-btn--ghost:hover {
+    background: #fff;
+    border-color: #dc3545;
+}
+
+.ac-btn--neutral {
+    background: #fff;
+    color: #002B7A;
+    border-color: #b8d2ff;
+}
+
+.ac-btn--neutral:hover {
+    background: #e7f1ff;
+    border-color: #b8d2ff;
+}
+
+.ac-btn--dark {
+    background: #f5f5f7;
+    color: var(--c-label-primary);
+    border-color: var(--c-separator);
+}
+
+.ac-btn--dark:hover {
+    background: #fff;
+    border-color: var(--c-label-secondary);
+}
+
+@media (max-width: 1180px) {
+    .opcion-head {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .opcion-actions {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 720px) {
+    .tip-bar {
+        align-items: flex-start;
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .opcion-actions .ac-btn {
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+}
+
+/* Empty state */
+.opcion-empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--c-label-tertiary);
+    font-size: 13px;
+    background: #fafbfc;
+}
+
+.opcion-empty i {
+    font-size: 28px;
+    color: var(--c-label-tertiary);
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* Body de la opción */
+.opcion-body {
+    padding: 14px 16px 16px;
+    background: #fafbfc;
+    border-top: 1px dashed #eef0f4;
+}
+
+.export-siae-sheet {
+    color: var(--c-label-primary);
+    font-family: var(--ff-text, var(--sf-text));
+}
+
+.export-siae-title {
+    margin: 0 0 14px;
+    color: var(--c-label-primary);
+    font-family: var(--ff-display, var(--sf-display));
+    font-size: 22px;
+    font-weight: 750;
+    letter-spacing: 0;
+}
+
+.export-siae-sheet .tabla-siae {
+    box-shadow: none !important;
+    border: 1px solid var(--c-separator);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.export-siae-sheet .accion-cell,
+.export-siae-sheet .act-col {
+    display: none !important;
+}
+
+/* Normalizacion tipografica de componentes recientes */
+.res-header h6 {
+    font-size: 15px;
+}
+
+.misel-subtitle,
+.misel-counter,
+.misel-grid>li .fw-bold.small,
+.opcion-stats,
+.filtro .hint,
+.filtro-menu .dropdown-item,
+.filtro-menu .form-check,
+.filtro-menu .form-check-label,
+.filtro-menu--profes .form-control {
+    font-size: 13px !important;
+}
+
+.res-frame .filtros-intro,
+.filtro .ddown,
+.ac-btn,
+.back-btn {
+    font-size: 14px;
+}
+
+.filtro .lbl {
+    font-size: 13px;
+}
+
+.opcion-num {
+    height: 30px;
+    font-size: 13px;
+}
+
+.opcion-stats .stat i {
+    font-size: 13px;
+}
+
+.res-header .conteo,
+.misel-counter b,
+.filtro-menu--profes .btn-link {
+    font-size: 13px !important;
+}
+
+.filtro .ddown {
+    height: 36px;
+}
+
+.filtro-menu .dropdown-item,
+.filtro-menu .form-check {
+    min-height: 34px;
+}
+
+/* --- RECORDATORIO FINAL (ESTILO APPLE TIPS) --- */
+.disclaimer-manual {
+    background: rgba(52, 199, 89, 0.12);
+    color: var(--sada-fg-4); 
+    font-family: var(--sf-text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    border: none; 
+    border-radius: 12px; 
+    padding: 10px 16px;
+    margin: 8px 4px 16px;
+}
+
+.disclaimer-manual i {
+    font-size: 1.15rem;
+    color: #96be9f;
+}
+
+.disclaimer-manual strong {
+    font-weight: 600;
+    color: var(--sada-fg-1);
+}

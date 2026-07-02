@@ -1,0 +1,158 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_card.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:8px; font-family:Inter; }
+  .group { background:#fafbfd; border:1px solid #eef0f4; border-radius:10px; padding:10px 12px; margin-top:10px; }
+  .group .gl { font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; color:#6c757d; margin-bottom:6px; }
+
+  /* HOMOGENEOUS TOOLBAR SIZING
+     - height: 36px exact
+     - padding-y: 0 (uses height + flex centering)
+     - padding-x: 14px (12px for icon-only)
+     - font-size: 0.82rem
+     - border-radius: 10px (pills use 9999px)
+     - icon-size: 0.92rem */
+  .tb { height:36px; padding:0 14px; font-size:0.82rem; font-weight:700; border-radius:10px;
+        display:inline-flex; align-items:center; gap:6px; cursor:pointer; line-height:1;
+        font-family:Inter; transition: all 0.18s; white-space:nowrap; box-sizing:border-box; }
+  .tb i { font-size:0.92rem; line-height:1; }
+  .tb .chev { font-size:0.7rem; opacity:0.6; }
+  .tb[disabled] { opacity:0.45; cursor:not-allowed; }
+
+  .btn-tool { background:#f8f9fa; color:#495057; border:1px solid #e9ecef; }
+  .btn-tool:hover:not([disabled]) { background:#fff; border-color:#002B7A; color:#002B7A; }
+
+  .cred-badge { background:#e7f1ff; color:#002B7A; border:1px solid #b8d2ff; font-weight:800; }
+  .cred-badge .num { background:#002B7A; color:#fff; padding:0 8px; border-radius:9999px; font-size:0.76rem; height:20px; display:inline-flex; align-items:center; }
+
+  /* Undo/redo segmented — height matches .tb exactly */
+  .icn-pair { display:inline-flex; height:36px; border:1px solid #e9ecef; border-radius:10px; overflow:hidden; background:#f8f9fa; box-sizing:border-box; vertical-align:middle; }
+  .icn-pair button { background:transparent; border:0; padding:0; width:36px; height:34px; color:#495057; font-size:0.95rem; cursor:pointer; border-right:1px solid #e9ecef; line-height:1; display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; }
+  .icn-pair button:last-child { border-right:0; }
+  .icn-pair button i { font-size:0.95rem; line-height:1; }
+  .icn-pair button:hover:not([disabled]) { background:#fff; color:#002B7A; }
+  .icn-pair button[disabled] { opacity:0.4; cursor:not-allowed; }
+
+  .btn-danger-ghost { background:#fff5f5; color:#c92a2a; border:1px solid #ffe3e3; }
+  .btn-danger-ghost:hover { background:#fff; border-color:#dc3545; }
+
+  .btn-download { background:#fff; color:#002B7A; border:1px solid #b8d2ff; }
+  .btn-download:hover { background:#e7f1ff; }
+
+  /* Confirmar — same 36px, pill radius, gradient */
+  .btn-success { background:linear-gradient(135deg,#198754,#0f6647); color:#fff; border:1px solid transparent; border-radius:9999px; box-shadow:0 4px 12px rgba(25,135,84,0.25); font-weight:800; }
+  .btn-success:hover:not([disabled]) { transform: translateY(-1px); box-shadow:0 6px 16px rgba(25,135,84,0.35); }
+
+  .visual-pill { background:#fff; border:1.5px solid #dee2e6; color:#6c757d; border-radius:9999px; }
+  .visual-pill .dot { width:8px; height:8px; border-radius:50%; background:#dee2e6; }
+  .visual-pill.on { background:#002B7A; color:#fff; border-color:#002B7A; box-shadow:0 4px 10px rgba(0,43,122,0.2); }
+  .visual-pill.on .dot { background:#D59F0F; box-shadow:0 0 6px #D59F0F; }
+
+  .btn-show-visual { background:#fff; color:#002B7A; border:1.5px dashed #002B7A; }
+  .btn-show-visual:hover { background:#002B7A; color:#fff; border-style:solid; }
+
+  /* Toolbar mock — single line, no wrap */
+  .toolbar-mock { display:flex; align-items:center; gap:8px; flex-wrap:nowrap; background:#fff; padding:10px 12px; border:1px solid #e9ecef; border-radius:12px; box-shadow:0 1px 3px rgba(0,0,0,0.04); margin-top:10px; overflow-x:auto; }
+  .toolbar-mock .spacer { flex:1; min-width:8px; }
+</style>
+</head><body><div class="card-root">
+
+<div class="label">Toolbar buttons · rediseño</div>
+
+<div class="group">
+  <div class="gl">Toolbar completo · contexto</div>
+  <div class="toolbar-mock">
+    <button class="tb btn-tool"><i class="bi bi-sort-down"></i> Materia <i class="bi bi-chevron-down chev"></i></button>
+    <span class="tb cred-badge"><i class="bi bi-mortarboard"></i> Créditos <span class="num">42</span></span>
+    <div class="icn-pair">
+      <button title="Deshacer"><i class="bi bi-arrow-counterclockwise"></i></button>
+      <button title="Rehacer" disabled><i class="bi bi-arrow-clockwise"></i></button>
+    </div>
+    <button class="tb btn-danger-ghost"><i class="bi bi-trash3"></i> Limpiar</button>
+    <button class="tb btn-download"><i class="bi bi-download"></i> Descargar <i class="bi bi-chevron-down chev"></i></button>
+    <div class="spacer"></div>
+    <button class="tb btn-show-visual"><i class="bi bi-layout-text-window-reverse"></i> Tabla Dinámica</button>
+    <button class="tb btn-success"><i class="bi bi-mortarboard-fill"></i> Horario final</button>
+  </div>
+</div>
+
+<div class="group">
+  <div class="gl">1 · Ordenar (Materia) — dropdown</div>
+  <div class="row">
+    <button class="tb btn-tool"><i class="bi bi-sort-down"></i> Materia <i class="bi bi-chevron-down chev"></i></button>
+    <button class="tb btn-tool"><i class="bi bi-sort-down"></i> Profesor (A-Z) <i class="bi bi-chevron-down chev"></i></button>
+    <button class="tb btn-tool"><i class="bi bi-clock"></i> Cronológico <i class="bi bi-chevron-down chev"></i></button>
+    <span style="font-size:0.75rem;color:#6c757d">Trigger neutro · ícono cambia con la opción seleccionada</span>
+  </div>
+</div>
+
+<div class="group">
+  <div class="gl">2 · Créditos — chip informativo (no es botón)</div>
+  <div class="row">
+    <span class="tb cred-badge"><i class="bi bi-mortarboard"></i> Créditos <span class="num">42</span></span>
+    <span class="tb cred-badge" style="background:#fff9e6;color:#856404;border-color:#ffe082"><i class="bi bi-exclamation-circle"></i> Créditos <span class="num" style="background:#D59F0F;color:#002B7A">12</span></span>
+    <span class="tb cred-badge" style="background:#fff5f5;color:#c92a2a;border-color:#ffc9c9"><i class="bi bi-x-octagon"></i> Créditos <span class="num" style="background:#dc3545">58</span></span>
+    <span style="font-size:0.75rem;color:#6c757d">Default · advertencia (poco) · alerta (excede)</span>
+  </div>
+</div>
+
+<div class="group">
+  <div class="gl">3 · Deshacer / Rehacer — par segmentado</div>
+  <div class="row">
+    <div class="icn-pair">
+      <button title="Deshacer"><i class="bi bi-arrow-counterclockwise"></i></button>
+      <button title="Rehacer"><i class="bi bi-arrow-clockwise"></i></button>
+    </div>
+    <div class="icn-pair">
+      <button title="Deshacer"><i class="bi bi-arrow-counterclockwise"></i></button>
+      <button title="Rehacer" disabled><i class="bi bi-arrow-clockwise"></i></button>
+    </div>
+    <div class="icn-pair">
+      <button title="Deshacer" disabled><i class="bi bi-arrow-counterclockwise"></i></button>
+      <button title="Rehacer" disabled><i class="bi bi-arrow-clockwise"></i></button>
+    </div>
+    <span style="font-size:0.75rem;color:#6c757d">Pareja unida · ahorra espacio · estados disabled claros</span>
+  </div>
+</div>
+
+<div class="group">
+  <div class="gl">4 · Limpiar — destructivo ghost</div>
+  <div class="row">
+    <button class="tb btn-danger-ghost"><i class="bi bi-trash3"></i> Limpiar</button>
+    <button class="tb btn-danger-ghost" style="background:#dc3545;color:#fff;border-color:#dc3545"><i class="bi bi-trash3-fill"></i> Limpiar todo</button>
+    <span style="font-size:0.75rem;color:#6c757d">Estado normal · estado de confirmación (modal)</span>
+  </div>
+</div>
+
+<div class="group">
+  <div class="gl">5 · Descargar — split con menú</div>
+  <div class="row">
+    <button class="tb btn-download"><i class="bi bi-download"></i> Descargar <i class="bi bi-chevron-down chev"></i></button>
+    <button class="tb btn-download" style="background:#e7f1ff"><i class="bi bi-download"></i> Descargar <i class="bi bi-chevron-up chev"></i></button>
+    <span style="font-size:0.75rem;color:#6c757d">Cerrado · abierto (PDF / PNG / Excel / CSV)</span>
+  </div>
+</div>
+
+<div class="group">
+  <div class="gl">6 · Este es mi horario final — CTA de éxito</div>
+  <div class="row">
+    <button class="tb btn-success"><i class="bi bi-mortarboard-fill"></i> Este es mi horario final</button>
+    <button class="tb btn-success" style="opacity:0.5;cursor:not-allowed"><i class="bi bi-mortarboard"></i> Agrega al menos una materia</button>
+    <span style="font-size:0.75rem;color:#6c757d">Activo · disabled cuando no hay inscritas</span>
+  </div>
+</div>
+
+<div class="group">
+  <div class="gl">7 · Tabla Dinámica — toggle de vista</div>
+  <div class="row">
+    <button class="tb btn-show-visual"><i class="bi bi-layout-text-window-reverse"></i> Tabla Dinámica</button>
+    <button class="tb btn-show-visual" style="background:#002B7A;color:#fff;border-style:solid"><i class="bi bi-layout-text-window-reverse"></i> Tabla Dinámica</button>
+    <span style="font-size:0.75rem;color:#6c757d">Toggle: cambia entre tabla SIAE y tabla dinámica semanal</span>
+  </div>
+</div>
+
+
+
+</div></body></html>

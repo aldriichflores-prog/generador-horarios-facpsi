@@ -1,0 +1,47 @@
+/* Preview card shared styles */
+@import url('../colors_and_type.css');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css');
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #fafbfc;
+  font-family: var(--sada-font-body);
+  color: var(--sada-fg-1);
+}
+.card-root {
+  padding: 20px;
+  min-height: 100vh;
+}
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+.col { flex: 1; min-width: 0; }
+.swatch {
+  border-radius: 10px;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 8px 10px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.swatch .name {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.swatch .hex {
+  font-size: 10px;
+  font-family: var(--sada-font-mono);
+  opacity: 0.85;
+}
+.meta { font-size: 11px; color: var(--sada-fg-4); margin-top: 4px; }
+.label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--sada-fg-5);
+  margin-bottom: 8px;
+}

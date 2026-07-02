@@ -1,0 +1,172 @@
+/* =========================================================================
+   =================== MODO DE SELECCIÓN (MANUAL/AUTO) =====================
+   ========================================================================= 
+   Archivo exclusivo para la pantalla "¿Cómo quieres generar tu horario?".
+   Contiene el diseño de las tarjetas principales y sus botones.
+   ========================================================================= */
+
+/* ==========================================================================
+   1. CONTENEDOR Y TÍTULO PRINCIPAL
+   ========================================================================== */
+
+#mode-cards-container {
+    transition: opacity 0.2s ease;
+}
+
+body.mode-workspace #mode-cards-container {
+    transition: opacity 0.2s ease;
+}
+
+#mode-cards-container .modes-section-title {
+    font-family: var(--ff-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.1;
+    letter-spacing: -0.022em;
+    color: #040e2e;
+    margin-top: 20px;
+    margin-bottom: 28px;
+}
+
+/* ==========================================================================
+   2. TARJETAS DE MODO (Esqueleto y Hover)
+   ========================================================================== */
+
+#mode-cards-container .mode-card {
+    border-radius: 20px !important;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: #ffffff;
+    cursor: pointer; /* <--- Movido aquí de forma limpia para evitar estilos en línea */
+}
+
+#mode-cards-container .mode-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.14) !important;
+}
+
+/* Bordes superiores de colores */
+#mode-cards-container .mode-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#mode-cards-container .mode-card-manual::before {
+    background: #00695c;
+}
+
+#mode-cards-container .mode-card-auto::before {
+    background: #6a1b9a;
+}
+
+/* ==========================================================================
+   3. ICONOS DENTRO DE LAS TARJETAS
+   ========================================================================== */
+
+#mode-cards-container .mode-icon {
+    width: 72px;
+    height: 72px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+}
+
+#mode-cards-container .mode-icon-manual {
+    background-color: #e0f2f1;
+    color: #00695c;
+}
+
+#mode-cards-container .mode-icon-auto {
+    background-color: #f3e5f5;
+    color: #6a1b9a;
+}
+
+#mode-cards-container .mode-icon .display-5 {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+/* ==========================================================================
+   4. TIPOGRAFÍA DE LAS TARJETAS (Títulos y Subtítulos)
+   ========================================================================== */
+
+#mode-cards-container .mode-title {
+    font-family: var(--ff-display);
+    font-weight: 700;
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    line-height: 1.2;
+    letter-spacing: -0.014em;
+    color: #1d1d1f !important;
+    margin-top: 6px;
+}
+
+#mode-cards-container .mode-subtitle {
+    font-family: var(--ff-text);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 1.47;
+    letter-spacing: -0.004em;
+    color: #6e6e73 !important;
+    max-width: 38ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ==========================================================================
+   5. BOTONES DE ACCIÓN (Llamados a la acción)
+   ========================================================================== */
+
+#mode-cards-container .mode-cta {
+    font-family: var(--ff-text);
+    font-size: 14px !important;
+    font-weight: 700 !important; /* <--- Actualizado a 700 por reglas de Apple */
+    letter-spacing: -0.008em;
+    padding: 10px 22px !important;
+    border-radius: 9999px !important;
+}
+
+#mode-cards-container .mode-cta i {
+    margin-left: 4px;
+    font-size: 0.95em;
+}
+
+/* Estilos de Botón Manual */
+.btn-custom-manual {
+    font-family: var(--ff-text); 
+    font-weight: 700;
+    background-color: #00695c !important;
+    border-color: #00695c !important;
+    color: white !important;
+    transition: all 0.3s;
+}
+
+.btn-custom-manual:hover {
+    background-color: #004d40 !important;
+    border-color: #004d40 !important;
+    transform: scale(1.05);
+}
+
+/* Estilos de Botón Automático */
+.btn-custom-auto {
+    font-family: var(--ff-text);
+    font-weight: 700;
+    background-color: #6a1b9a !important;
+    border-color: #6a1b9a !important;
+    color: white !important;
+    transition: all 0.3s;
+}
+
+.btn-custom-auto:hover {
+    background-color: #4a148c !important;
+    border-color: #4a148c !important;
+    transform: scale(1.05);
+}
