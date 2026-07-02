@@ -41,7 +41,7 @@ let horariosGuardados = {};      // Persistencia de multiples horarios
 let activeScheduleId = "default";
 let actividadesExtra = [];       // Actividades extracurriculares del usuario
 
-const DB_FILE = 'Horarios_Impares_Completo_UNAM.json';
+const DB_FILE = 'Horarios_Todos_UNAM.json';
 
 // Paleta de colores pastel para los bloques
 const PALETA_ENTERA = [
