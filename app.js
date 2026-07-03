@@ -326,13 +326,15 @@ function procesarDatosCrudos() {
 // 6. PERSISTENCIA Y GESTION DE HORARIOS
 // ==========================================
 
-function guardarEstado() {
+function guardarEstado(silencioso = false) {
     horariosGuardados[activeScheduleId].cursos = miHorario;
     localStorage.setItem('unam_schedules_v3', JSON.stringify(horariosGuardados));
     localStorage.setItem('unam_active_id_v3', activeScheduleId);
     localStorage.setItem('unam_b_v3', JSON.stringify(bolsa));
     localStorage.setItem('unam_colors_v3', JSON.stringify(MAPA_COLORES_ASIGNADOS));
-    mostrarToast();
+    if (!silencioso) {
+        mostrarToast();
+    }
 }
 
 function cargarEstado() {
@@ -651,7 +653,7 @@ function cambiarSemestre(resetear = true) {
         activeScheduleId = "default";
         materiasPendientes = [];
         historial = []; futuro = []; actualizarBotonesUndo();
-        guardarEstado();
+        guardarEstado(true);
         actualizarUIHorarios();
         actualizarTablaHorario();
         _modoAutoInicializado = false;
@@ -794,9 +796,9 @@ function enfocarInicioModo(modo) {
 
     let objetivo = null;
     if (modo === 'manual') {
-        objetivo = document.getElementById('manual-start-anchor');
+        objetivo = document.getElementById('manual-left-col');
     } else if (modo === 'auto') {
-        objetivo = document.getElementById('auto-start-anchor');
+        objetivo = document.getElementById('auto-left-col');
     }
 
     if (!objetivo) return;

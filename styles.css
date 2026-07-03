@@ -571,24 +571,7 @@ body.mode-workspace .header-hero .d-inline-flex {
         display: none !important;
     }
 
-    body:not([data-mobile-tab="1"]) #mobile-header-toggle {
-        display: block !important;
-    }
 
-    body:not([data-mobile-tab="1"]):not(.show-mobile-header) .header-hero {
-        display: none !important;
-    }
-
-    body:not([data-mobile-tab="1"]).show-mobile-header .header-hero {
-        display: block !important;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-        z-index: 1050;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-        animation: slideDownHeader 0.2s ease-out forwards;
-    }
 
     /* Utility: Bottom Padding Buffer for Mobile */
     .pb-mobile-buffer {
@@ -694,3 +677,6 @@ body.mode-workspace .header-hero .header-semestre-title {
     font-family: var(--ff-text);
     font-weight: 700;
 }
+@media (max-width: 767.98px) { .tabla-siae { min-width: 900px !important; } .tabla-visual { min-width: 600px !important; } }
+
+@media (max-width: 767.98px) { body[data-mobile-tab="4"] #panel-mis-selecciones { display: none !important; } body[data-mobile-tab="6"] #vista-auto { display: block !important; } body[data-mobile-tab="6"] #auto-left-col, body[data-mobile-tab="6"] #contenedor-panel-auto, body[data-mobile-tab="6"] #opcionesAvanzadasAuto { display: none !important; } body[data-mobile-tab="6"] #panel-mis-selecciones { display: block !important; margin-top: 20px !important; } }

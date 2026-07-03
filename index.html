@@ -879,7 +879,7 @@
             </div>
             <div class="row g-3">
 
-                <div class="col-lg-3 col-md-4 d-flex flex-column gap-3 pb-mobile-buffer">
+                <div class="col-lg-3 col-md-4 d-flex flex-column gap-3 pb-mobile-buffer" id="auto-left-col">
 
                     <div class="apple-subject-panel-shell ml-panel">
                         <div class="ml-step ml-step-auto">
@@ -1324,23 +1324,15 @@
 
 <!-- Mobile Bottom Navigation -->
 <nav id="mobile-bottom-nav"
-    class="d-md-none fixed-bottom bg-white border-top shadow-sm d-flex justify-content-around py-2"
+    class="d-md-none fixed-bottom bg-white border-top shadow-sm d-none justify-content-around py-2"
     style="z-index: 1050;">
-    <button class="btn btn-link text-decoration-none text-secondary d-flex flex-column align-items-center"
-        onclick="switchToMobileTab(5)" id="nav-tab-5">
-        <i class="bi bi-layout-text-sidebar-reverse fs-4 mb-1"></i>
-        <span style="font-size: 0.7rem; font-weight: 600;">Resultados</span>
-    </button>
-    <button class="btn btn-link text-decoration-none text-secondary d-flex flex-column align-items-center"
-        onclick="switchToMobileTab(4)" id="nav-tab-4">
-        <i class="bi bi-cpu fs-4 mb-1"></i>
-        <span style="font-size: 0.7rem; font-weight: 600;">Automático</span>
-    </button>
     <button class="btn btn-link text-decoration-none text-dark d-flex flex-column align-items-center"
         onclick="switchToMobileTab(1)" id="nav-tab-1">
         <i class="bi bi-house-door-fill fs-4 mb-1"></i>
         <span style="font-size: 0.7rem; font-weight: 600;">Inicio</span>
     </button>
+    
+    <!-- Manual Mode -->
     <button class="btn btn-link text-decoration-none text-secondary d-flex flex-column align-items-center"
         onclick="switchToMobileTab(2)" id="nav-tab-2">
         <i class="bi bi-search fs-4 mb-1"></i>
@@ -1350,6 +1342,23 @@
         onclick="switchToMobileTab(3)" id="nav-tab-3">
         <i class="bi bi-calendar3 fs-4 mb-1"></i>
         <span style="font-size: 0.7rem; font-weight: 600;">Horario</span>
+    </button>
+
+    <!-- Auto Mode -->
+    <button class="btn btn-link text-decoration-none text-secondary d-flex flex-column align-items-center"
+        onclick="switchToMobileTab(4)" id="nav-tab-4">
+        <i class="bi bi-search fs-4 mb-1"></i>
+        <span style="font-size: 0.7rem; font-weight: 600;">Seleccionar</span>
+    </button>
+    <button class="btn btn-link text-decoration-none text-secondary d-flex flex-column align-items-center"
+        onclick="switchToMobileTab(6)" id="nav-tab-6">
+        <i class="bi bi-ui-checks-grid fs-4 mb-1"></i>
+        <span style="font-size: 0.7rem; font-weight: 600;">Generar</span>
+    </button>
+    <button class="btn btn-link text-decoration-none text-secondary d-flex flex-column align-items-center"
+        onclick="switchToMobileTab(5)" id="nav-tab-5">
+        <i class="bi bi-layout-text-sidebar-reverse fs-4 mb-1"></i>
+        <span style="font-size: 0.7rem; font-weight: 600;">Resultados</span>
     </button>
 </nav>
 
@@ -1437,6 +1446,40 @@
             }
         }
         document.body.classList.remove('show-mobile-header');
+
+        // Show/hide specific buttons based on mode
+        let btn2 = document.getElementById('nav-tab-2');
+        let btn3 = document.getElementById('nav-tab-3');
+        let btn4 = document.getElementById('nav-tab-4');
+        let btn5 = document.getElementById('nav-tab-5');
+        let btn6 = document.getElementById('nav-tab-6');
+
+        if (tabId === 2 || tabId === 3) {
+            if (btn2) { btn2.classList.remove('d-none'); btn2.classList.add('d-flex'); }
+            if (btn3) { btn3.classList.remove('d-none'); btn3.classList.add('d-flex'); }
+            if (btn4) { btn4.classList.add('d-none'); btn4.classList.remove('d-flex'); }
+            if (btn5) { btn5.classList.add('d-none'); btn5.classList.remove('d-flex'); }
+            if (btn6) { btn6.classList.add('d-none'); btn6.classList.remove('d-flex'); }
+        } else if (tabId === 4 || tabId === 5 || tabId === 6) {
+            if (btn2) { btn2.classList.add('d-none'); btn2.classList.remove('d-flex'); }
+            if (btn3) { btn3.classList.add('d-none'); btn3.classList.remove('d-flex'); }
+            if (btn4) { btn4.classList.remove('d-none'); btn4.classList.add('d-flex'); }
+            if (btn5) { btn5.classList.remove('d-none'); btn5.classList.add('d-flex'); }
+            if (btn6) { btn6.classList.remove('d-none'); btn6.classList.add('d-flex'); }
+        }
+
+        // Toggle visibility of bottom nav
+        const navBar = document.getElementById('mobile-bottom-nav');
+        if (navBar) {
+            if (tabId == 1) {
+                navBar.classList.add('d-none');
+                navBar.classList.remove('d-flex');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                navBar.classList.remove('d-none');
+                navBar.classList.add('d-flex');
+            }
+        }
 
         setTimeout(updateMobileLayoutVars, 50);
     }

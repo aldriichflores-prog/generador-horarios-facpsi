@@ -518,3 +518,5 @@ footer.mt-auto button {
         padding: 8px 14px;
     }
 }
+
+@media (max-width: 767.98px) { .landing-header { margin-top: 3rem; } }
