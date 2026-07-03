@@ -1168,6 +1168,14 @@ function toggleSeleccionManual(id, asignatura) {
     renderizarHorarioVisual();
     filtrarMaterias();
     cargarPanelGrupos(asignatura);
+
+    if (!yaEsta) {
+        // Collapse the professor panel on mobile so it "goes down"
+        let panelManual = document.getElementById('contenedor-panel-manual');
+        if (panelManual) {
+            panelManual.classList.remove('expanded');
+        }
+    }
 }
 
 function ordenarMiHorario(criterioInput = null) {

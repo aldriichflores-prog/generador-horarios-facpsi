@@ -680,3 +680,5 @@ body.mode-workspace .header-hero .header-semestre-title {
 @media (max-width: 767.98px) { .tabla-siae { min-width: 900px !important; } .tabla-visual { min-width: 600px !important; } }
 
 @media (max-width: 767.98px) { body[data-mobile-tab="4"] #panel-mis-selecciones { display: none !important; } body[data-mobile-tab="6"] #vista-auto { display: block !important; } body[data-mobile-tab="6"] #auto-left-col, body[data-mobile-tab="6"] #contenedor-panel-auto, body[data-mobile-tab="6"] #opcionesAvanzadasAuto { display: none !important; } body[data-mobile-tab="6"] #panel-mis-selecciones { display: block !important; margin-top: 20px !important; } }
+
+
